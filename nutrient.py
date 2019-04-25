@@ -60,6 +60,12 @@ class Person:
     def remove_nut(self, nut_to_delete):
         self.nut = [n for n in self.nut if n[1] not in nut_to_delete] 
 
+    '''
+    def change_nut(self, nut_to_change, new_value):
+        remove_nut
+        add_nut
+    '''
+    
     def add_foods(self, food_ids):
         for food in food_ids:
             if food not in self.food_ids:
@@ -175,6 +181,28 @@ def list_foods(food_ids):
     for f in food_ids:
         print( str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + name_food(f) )
 
+'''
+
+def get_food_nutrient_amount(food_name, nutrient_name):
+con = sql.connect('usda.sql3')
+cur = con.cursor()
+
+cur.execute(
+select amount 
+from nutrition
+where food_id = (select id 
+				from food
+				where long_desc = "?")
+and
+nutrient_id = (select id 
+				from nutrient
+				where name = "?")
+, food_name, nutrient)
+
+data = cur.fetchall()
+return data[0]
+'''
+
 import random 
 
 def main():
@@ -195,18 +223,17 @@ def main():
     list_foods(food_ids)
     josh.add_foods(food_ids)
 
-    #josh.remove_nut(req_data.vit_nut_names + req_data.min_nut_names)
+    #josh.remove_nut(req_data.mac_nut_names + req_data.vit_nut_names + req_data.min_nut_names)
     josh.remove_nut(['fl'])
     #josh.remove_nut(['lin'])
     #josh.remove_nut(['alpha-lin'])
-    #josh.remove_nut(req_data.nut_names)
-    #josh.add_nut(618, 'lin', 20, 'upper')
-    #josh.add_nut(619, 'alpha-lin', 5, 'lower')
-    josh.add_nut(621, 'DHA', 2, 'lower')
-    josh.add_nut(629, 'EPA', 2, 'lower')
-    
-    josh.add_nut(208, 'energy', 1800, 'upper')
-    josh.add_nut(606, 'sat', 40, 'upper')
+    #josh.add_nut(618, 'lin', 20, 'equality')
+    #josh.add_nut(619, 'alpha-lin', 7, 'equality')
+    josh.add_nut(621, 'DHA', 1.2, 'lower')
+    josh.add_nut(629, 'EPA', 1.2, 'lower')
+    #josh.add_nut(309, 'zinc', 9.5, 'lower')
+    josh.add_nut(208, 'energy', 2000, 'upper')
+    #josh.add_nut(606, 'sat', 27, 'upper')
     
     prob = josh.optimize_diet()
   
@@ -214,11 +241,8 @@ def main():
         if (v.varValue != 0):
             print(name_food(josh.food_ids[i]), "=", 100 * v.varValue)
 
-    print("Total Cost of Food = ", 100 * value(prob.objective)) 
+    print(100 * value(prob.objective), "total grams of food") 
+
     
-    
-    # PulP giving worse solutions with inclusion of more food vhoices. Try adding lettuce, cos or romaine and seeing resukt
-    # Changing calories to upper constraint instead of equality gave gave same sol.
-    # However, still not meeting daily requirments for several nutrients like vit b12. Why salmon reccomend so low?
 if __name__ == '__main__':
     main()
