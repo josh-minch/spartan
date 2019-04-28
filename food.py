@@ -1,13 +1,21 @@
-# Each Nutrient for a given Person has a short name, id, and optional requirements.
-# req_eq is a requirement that must be satisfied to equality. For example, a diet with Calories = 2000
-# req_min is a minumum requirement. For example, a diet with Calcium >= 1000 mg
-# req_max is a maximum requirement. This corresponds to tolerable upper intakes as specified in the DRI.
-# For example, a diet with Calcium <= 3000 mg
+class Food:
+    def __init__(self, name, id, nutrition):
+        self.name = name
+        self.id = id
+        self.nutrition = self.get_nutrition()
 
-class Nutrient:
-        def __init__(self, name, id, req_eq, req_min, req_max):
-            self.name = name
-            self.id = id
-            self.req_eq = req_eq
-            self.req_min = req_min
-            self.req_max = req_max
+    def get_nutrition(self):
+        con = sql.connect('sr28.db')
+        cur = con.cursor()
+        cur.execute("SELECT nut_value FROM nut_data where food_id = ?", [self.id])
+        nut_values = cur.fetchall()
+
+        for i in range(len(nut_values)):
+            nut_values[i] = nut_values[i][0]
+
+        return nut_values
+
+
+from collections import namedtuple
+
+Food = namedtuple('Food', 'name id nutrition')

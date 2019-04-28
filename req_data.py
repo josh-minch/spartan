@@ -1,3 +1,5 @@
+import sqlite3
+
 mac_nut_names = ["water", "carbs", "fiber", "fat", "lin", "alpha-lin", "protein"]
 min_nut_names = ["ca", "cu", "fl", "fe", "mg", "mn", "p", "se", "zn", "k", "na"]
 vit_nut_names = ["vita", "vitc", "vitd", "vite", "vitk", "thia", "ribo", "nia", "vitb6", "fol", "vitb12", "pant", "chol" ]
@@ -28,7 +30,7 @@ age_range = [
 # TODO: Resort to match db order or sort when adding nut. 
 # Replace nut ordered dict with something else, like a list of tuples 
 # (list of tuples like nut = (name, id, req) ?)
-req = {
+lower_req = {
 ( 0, 'c') : [0.7,60,0,31,4.4,0.5,9.1,200,0.2,10,0.27,30,0.003,100,15,2,400,120,400,40,10,4,2,0.2,0.3,2,0.1,65,0.4,1.7,125],
 (0.5, 'c'): [0.8,95,0,30,4.6,0.5,11,260,0.22,500,11,75,0.6,275,20,3,700,370,500,50,10,5,3,0.3,0.4,4,0.3,80,0.5,1.8,150],
 ( 1, 'c') : [1.3,130,19,0,7,0.7,13,700,0.34,700,7,80,1.2,460,20,3,3000,1000,300,15,15,6,30,1,0.5,6,0.5,150,0.9,2,200],
@@ -53,6 +55,12 @@ req = {
 (31, 'l') : [3.8,210,29,0,13,1.3,71,1000,1,3000,9,320,2.6,700,70,12,5100,1500,1300,120,15,19,90,1.4,1.6,17,2,500,2.8,7,550]
 }
    
-
 if __name__ == '__main__':
-    main()
+    db = sqlite3.connect('dri.db')
+    db.execute('DROP table if exists requirements')
+    db.execute('''
+    CREATE table requirements (lifestage text, \
+    water int, carbs int, fiber int, fat int, lin int, alphalin int, prote int, \
+    ca int, cu int, fl int, fe int, mg int, mn int, p int, se int, zn int, k int, na int, \
+    vita int, vitc int, vitd int, vite int, vitk int, thia int, ribo int, nia int, vitb6 int, fol int, vitb12 int, pant int, chol int)''')
+    db.close()
