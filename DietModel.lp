@@ -1,717 +1,1610 @@
 \* Diet *\
 Minimize
-Total_cost_of_foods: food_01077 + food_01123 + food_05027 + food_05039
- + food_05043 + food_08144 + food_09003 + food_09021 + food_09040 + food_09042
- + food_09050 + food_09148 + food_09191 + food_09202 + food_09236 + food_09252
- + food_09279 + food_09316 + food_10072 + food_11011 + food_11080 + food_11086
- + food_11090 + food_11098 + food_11109 + food_11112 + food_11116 + food_11124
- + food_11135 + food_11143 + food_11147 + food_11167 + food_11192 + food_11205
- + food_11209 + food_11213 + food_11215 + food_11233 + food_11250 + food_11251
- + food_11253 + food_11257 + food_11282 + food_11291 + food_11298 + food_11333
- + food_11352 + food_11429 + food_11435 + food_11457 + food_11467 + food_11475
- + food_11477 + food_11482 + food_11485 + food_11507 + food_11529 + food_11531
- + food_11601 + food_11641 + food_11643 + food_11677 + food_11821 + food_11951
- + food_11955 + food_11959 + food_11977 + food_11979 + food_12006 + food_12014
- + food_12036 + food_12155 + food_12220 + food_13815 + food_15001 + food_15170
- + food_15265 + food_16042 + food_16050 + food_16069 + food_17199 + food_20011
- + food_20036 + food_20038 + food_20080
+Total_cost_of_foods: Apples,_raw,_with_skin + Apricots,_raw + Arugula,_raw
+ + Asparagus,_raw + Bananas,_raw + Beans,_pinto,_mature_seeds,_raw
+ + Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + Beet_greens,_raw + Beets,_raw + Blackberries,_raw + Blueberries,_raw
+ + Broccoli,_raw + Brussels_sprouts,_raw + Buckwheat_flour,_whole_groat
+ + Cabbage,_chinese_(pak_choi),_raw + Cabbage,_raw + Cabbage,_red,_raw
+ + Carrots,_raw + Cauliflower,_raw + Celery,_raw
+ + Cereals,_whole_wheat_hot_natural_cereal,_dry + Chard,_swiss,_raw
+ + Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + Chicken,_liver,_all_classes,_raw + Corn,_sweet,_yellow,_raw
+ + Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + Cucumber,_with_peel,_raw + Egg,_whole,_raw,_fresh + Eggplant,_raw
+ + Endive,_raw
+ + Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + Fish,_anchovy,_european,_raw + Garlic,_raw + Kale,_raw
+ + Kiwifruit,_green,_raw + Lamb,_variety_meats_and_by_products,_liver,_raw
+ + Lentils,_raw + Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + Lettuce,_cos_or_romaine,_raw + Lettuce,_green_leaf,_raw
+ + Lettuce,_red_leaf,_raw + Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + Mollusks,_oyster,_eastern,_canned + Nectarines,_raw
+ + Nuts,_walnuts,_english + Oats + Onions,_raw
+ + Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + Oranges,_raw,_navels + Parsnips,_raw + Peaches,_yellow,_raw + Pears,_raw
+ + Peppers,_jalapeno,_raw + Peppers,_serrano,_raw + Peppers,_sweet,_green,_raw
+ + Peppers,_sweet,_red,_raw + Peppers,_sweet,_yellow,_raw + Plums,_raw
+ + Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + Potatoes,_flesh_and_skin,_raw + Radishes,_raw
+ + Rice,_brown,_long_grain,_raw + Rutabagas,_raw + Seeds,_chia_seeds,_dried
+ + Seeds,_flaxseed + Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + Seeds,_sunflower_seed_kernels,_dried + Shallots,_raw + Spinach,_raw
+ + Squash,_summer,_all_varieties,_raw
+ + Squash,_summer,_crookneck_and_straightneck,_raw
+ + Squash,_summer,_scallop,_raw + Squash,_summer,_zucchini,_includes_skin,_raw
+ + Squash,_winter,_acorn,_raw + Squash,_winter,_all_varieties,_raw
+ + Squash,_winter,_butternut,_raw + Strawberries,_raw
+ + Sweet_potato,_raw,_unprepared
+ + Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + Tomatoes,_red,_ripe,_raw,_year_round_average + Tomatoes,_sun_dried
+ + Wheat_flour,_whole_grain + Yam,_raw
 Subject To
-_C1: 3.15 food_01077 + 12.56 food_01123 + 16.92 food_05027 + 23.2 food_05039
- + 20.08 food_05043 + 11.2 food_08144 + 0.26 food_09003 + 1.4 food_09021
- + 1.09 food_09040 + 1.39 food_09042 + 0.74 food_09050 + 1.14 food_09148
- + 1.06 food_09191 + 0.91 food_09202 + 0.91 food_09236 + 0.36 food_09252
- + 0.7 food_09279 + 0.67 food_09316 + 19.55 food_10072 + 2.2 food_11011
- + 1.61 food_11080 + 2.2 food_11086 + 2.82 food_11090 + 3.38 food_11098
- + 1.28 food_11109 + 1.43 food_11112 + 1.5 food_11116 + 0.93 food_11124
- + 1.92 food_11135 + 0.69 food_11143 + 1.8 food_11147 + 3.27 food_11167
- + 3.17 food_11192 + 0.65 food_11205 + 0.98 food_11209 + 1.25 food_11213
- + 6.36 food_11215 + 4.28 food_11233 + 1.35 food_11250 + 1.23 food_11251
- + 1.36 food_11253 + 1.33 food_11257 + 1.1 food_11282 + 1.83 food_11291
- + 1.2 food_11298 + 0.86 food_11333 + 2.05 food_11352 + 0.68 food_11429
- + 1.08 food_11435 + 2.86 food_11457 + 1.01 food_11467 + 1.2 food_11475
- + 1.21 food_11477 + 0.8 food_11482 + food_11485 + 1.57 food_11507
- + 0.88 food_11529 + 0.79 food_11531 + 1.53 food_11601 + 1.21 food_11641
- + 0.95 food_11643 + 2.5 food_11677 + 0.99 food_11821 + food_11951
- + 14.11 food_11955 + 2.58 food_11959 + 1.74 food_11977 + 0.91 food_11979
- + 16.54 food_12006 + 30.23 food_12014 + 20.78 food_12036 + 15.23 food_12155
- + 18.29 food_12220 + 17.16 food_13815 + 20.35 food_15001 + 7.06 food_15170
- + 24.62 food_15265 + 21.42 food_16042 + 9.73 food_16050 + 24.63 food_16069
- + 20.38 food_17199 + 12.62 food_20011 + 7.54 food_20036 + 16.89 food_20038
- + 13.21 food_20080 >= 56
-_C10: 84 food_01077 + 198 food_01123 + 297 food_05027 + 187 food_05039
- + 162 food_05043 + 379 food_08144 + 11 food_09003 + 23 food_09021
- + 22 food_09040 + 22 food_09042 + 12 food_09050 + 34 food_09148
- + 26 food_09191 + 23 food_09202 + 20 food_09236 + 12 food_09252
- + 16 food_09279 + 24 food_09316 + 202 food_10072 + 52 food_11011
- + 40 food_11080 + 41 food_11086 + 66 food_11090 + 69 food_11098
- + 26 food_11109 + 30 food_11112 + 37 food_11116 + 35 food_11124
- + 44 food_11135 + 24 food_11143 + 46 food_11147 + 89 food_11167
- + 51 food_11192 + 24 food_11205 + 24 food_11209 + 28 food_11213
- + 153 food_11215 + 92 food_11233 + 33 food_11250 + 30 food_11251
- + 29 food_11253 + 28 food_11257 + 29 food_11282 + 37 food_11291
- + 71 food_11298 + 20 food_11333 + 57 food_11352 + 20 food_11429
- + 53 food_11435 + 49 food_11457 + 32 food_11467 + 36 food_11475
- + 38 food_11477 + 36 food_11482 + 33 food_11485 + 47 food_11507
- + 24 food_11529 + 17 food_11531 + 55 food_11601 + 38 food_11641
- + 23 food_11643 + 60 food_11677 + 26 food_11821 + 24 food_11951
- + 356 food_11955 + 52 food_11959 + 40 food_11977 + 26 food_11979
- + 860 food_12006 + 1233 food_12014 + 660 food_12036 + 346 food_12155
- + 642 food_12220 + 162 food_13815 + 174 food_15001 + 139 food_15170
- + 253 food_15265 + 411 food_16042 + 113 food_16050 + 281 food_16069
- + 364 food_17199 + 337 food_20011 + 311 food_20036 + 523 food_20038
- + 357 food_20080 >= 700
-_C100: food_11977 >= 0
-_C101: food_11979 >= 0
-_C102: food_12006 >= 0
-_C103: food_12014 >= 0
-_C104: food_12036 >= 0
-_C105: food_12155 >= 0
-_C106: food_12220 >= 0
-_C107: food_13815 >= 0
-_C108: food_15001 >= 0
-_C109: food_15170 >= 0
-_C11: 132 food_01077 + 138 food_01123 + 230 food_05027 + 239 food_05039
- + 222 food_05043 + 389 food_08144 + 107 food_09003 + 259 food_09021
- + 358 food_09040 + 162 food_09042 + 77 food_09050 + 312 food_09148
- + 201 food_09191 + 166 food_09202 + 190 food_09236 + 116 food_09252
- + 157 food_09279 + 153 food_09316 + 341 food_10072 + 202 food_11011
- + 325 food_11080 + 762 food_11086 + 316 food_11090 + 389 food_11098
- + 170 food_11109 + 243 food_11112 + 252 food_11116 + 320 food_11124
- + 299 food_11135 + 260 food_11143 + 379 food_11147 + 270 food_11167
- + 418 food_11192 + 147 food_11205 + 229 food_11209 + 314 food_11213
- + 401 food_11215 + 491 food_11233 + 238 food_11250 + 247 food_11251
- + 194 food_11253 + 187 food_11257 + 146 food_11282 + 276 food_11291
- + 375 food_11298 + 175 food_11333 + 425 food_11352 + 233 food_11429
- + 305 food_11435 + 558 food_11457 + 222 food_11467 + 182 food_11475
- + 261 food_11477 + 347 food_11482 + 352 food_11485 + 337 food_11507
- + 237 food_11529 + 191 food_11531 + 816 food_11601 + 262 food_11641
- + 350 food_11643 + 334 food_11677 + 211 food_11821 + 212 food_11951
- + 3427 food_11955 + 369 food_11959 + 305 food_11977 + 248 food_11979
- + 407 food_12006 + 809 food_12014 + 645 food_12036 + 441 food_12155
- + 813 food_12220 + 271 food_13815 + 383 food_15001 + 229 food_15170
- + 326 food_15265 + 1393 food_16042 + 561 food_16050 + 677 food_16069
- + 313 food_17199 + 577 food_20011 + 250 food_20036 + 429 food_20038
- + 363 food_20080 >= 4700
-_C110: food_15265 >= 0
-_C111: food_16042 >= 0
-_C112: food_16050 >= 0
-_C113: food_16069 >= 0
-_C114: food_17199 >= 0
-_C115: food_20011 >= 0
-_C116: food_20036 >= 0
-_C117: food_20038 >= 0
-_C118: food_20080 >= 0
-_C12: 43 food_01077 + 142 food_01123 + 71 food_05027 + 68 food_05039
- + 85 food_05043 + 2 food_08144 + food_09003 + food_09021 + food_09040
- + food_09042 + food_09050 + 3 food_09148 + food_09202 + food_09252
- + food_09316 + 76 food_10072 + 2 food_11011 + 78 food_11080 + 226 food_11086
- + 33 food_11090 + 25 food_11098 + 18 food_11109 + 27 food_11112
- + 65 food_11116 + 69 food_11124 + 30 food_11135 + 80 food_11143
- + 213 food_11147 + 15 food_11167 + 4 food_11192 + 2 food_11205 + 2 food_11209
- + 22 food_11213 + 17 food_11215 + 38 food_11233 + 5 food_11250 + 8 food_11251
- + 28 food_11253 + 25 food_11257 + 4 food_11282 + 16 food_11291
- + 10 food_11298 + 3 food_11333 + 6 food_11352 + 39 food_11429 + 12 food_11435
- + 79 food_11457 + 2 food_11467 + food_11475 + 8 food_11477 + 3 food_11482
- + 4 food_11485 + 55 food_11507 + 5 food_11529 + 115 food_11531 + 9 food_11601
- + 2 food_11641 + 4 food_11643 + 12 food_11677 + 4 food_11821 + 2 food_11951
- + 107 food_11955 + 27 food_11959 + 10 food_11977 + 3 food_11979
- + 16 food_12006 + 7 food_12014 + 9 food_12036 + 2 food_12155 + 30 food_12220
- + 68 food_13815 + 104 food_15001 + 112 food_15170 + 378 food_15265
- + 12 food_16042 + 6 food_16050 + 6 food_16069 + 70 food_17199 + 11 food_20011
- + 5 food_20036 + 2 food_20038 + 2 food_20080 >= 1500
-_C13: 0.37 food_01077 + 1.29 food_01123 + 2.67 food_05027 + 0.97 food_05039
- + 2 food_05043 + 2.66 food_08144 + 0.04 food_09003 + 0.2 food_09021
- + 0.15 food_09040 + 0.53 food_09042 + 0.16 food_09050 + 0.14 food_09148
- + 0.17 food_09191 + 0.08 food_09202 + 0.17 food_09236 + 0.1 food_09252
- + 0.1 food_09279 + 0.14 food_09316 + 3.14 food_10072 + 0.54 food_11011
- + 0.35 food_11080 + 0.38 food_11086 + 0.41 food_11090 + 0.42 food_11098
- + 0.18 food_11109 + 0.22 food_11112 + 0.19 food_11116 + 0.24 food_11124
- + 0.27 food_11135 + 0.13 food_11143 + 0.36 food_11147 + 0.46 food_11167
- + 1.03 food_11192 + 0.2 food_11205 + 0.16 food_11209 + 0.79 food_11213
- + 1.16 food_11215 + 0.56 food_11233 + 0.2 food_11250 + 0.23 food_11251
- + 0.18 food_11253 + 0.2 food_11257 + 0.17 food_11282 + 0.39 food_11291
- + 0.59 food_11298 + 0.13 food_11333 + 0.3 food_11352 + 0.28 food_11429
- + 0.24 food_11435 + 0.53 food_11457 + 0.29 food_11467 + 0.29 food_11475
- + 0.32 food_11477 + 0.13 food_11482 + 0.15 food_11485 + 0.3 food_11507
- + 0.17 food_11529 + 0.12 food_11531 + 0.24 food_11601 + 0.29 food_11641
- + 0.21 food_11643 + 0.4 food_11677 + 0.25 food_11821 + 0.17 food_11951
- + 1.99 food_11955 + 0.47 food_11959 + 0.26 food_11977 + 0.14 food_11979
- + 4.58 food_12006 + 7.81 food_12014 + 5 food_12036 + 3.09 food_12155
- + 4.34 food_12220 + 4.98 food_13815 + 1.72 food_15001 + 90.95 food_15170
- + 0.65 food_15265 + 2.28 food_16042 + 1.38 food_16050 + 3.27 food_16069
- + 4.66 food_17199 + 3.12 food_20011 + 2.13 food_20036 + 3.97 food_20038
- + 2.6 food_20080 >= 11
-_C14: 0.025 food_01077 + 0.072 food_01123 + 0.492 food_05027 + 0.04 food_05039
- + 0.063 food_05043 + 0.458 food_08144 + 0.027 food_09003 + 0.078 food_09021
- + 0.078 food_09040 + 0.165 food_09042 + 0.057 food_09050 + 0.13 food_09148
- + 0.086 food_09191 + 0.039 food_09202 + 0.068 food_09236 + 0.082 food_09252
- + 0.057 food_09279 + 0.048 food_09316 + 0.097 food_10072 + 0.189 food_11011
- + 0.075 food_11080 + 0.191 food_11086 + 0.049 food_11090 + 0.07 food_11098
- + 0.019 food_11109 + 0.017 food_11112 + 0.021 food_11116 + 0.045 food_11124
- + 0.039 food_11135 + 0.035 food_11143 + 0.179 food_11147 + 0.054 food_11167
- + 0.133 food_11192 + 0.041 food_11205 + 0.081 food_11209 + 0.099 food_11213
- + 0.299 food_11215 + 1.499 food_11233 + 0.016 food_11250 + 0.048 food_11251
- + 0.029 food_11253 + 0.028 food_11257 + 0.039 food_11282 + 0.083 food_11291
- + 0.12 food_11298 + 0.066 food_11333 + 0.11 food_11352 + 0.05 food_11429
- + 0.032 food_11435 + 0.13 food_11457 + 0.092 food_11467 + 0.102 food_11475
- + 0.053 food_11477 + 0.065 food_11482 + 0.072 food_11485 + 0.151 food_11507
- + 0.059 food_11529 + 0.052 food_11531 + 0.178 food_11601 + 0.051 food_11641
- + 0.071 food_11643 + 0.088 food_11677 + 0.017 food_11821 + 0.107 food_11951
- + 1.423 food_11955 + 0.076 food_11959 + 0.129 food_11977 + 0.046 food_11979
- + 0.924 food_12006 + 1.343 food_12014 + 1.8 food_12036 + 1.586 food_12155
- + 1.22 food_12220 + 0.073 food_13815 + 0.211 food_15001 + 4.461 food_15170
- + 0.077 food_15265 + 0.893 food_16042 + 0.287 food_16050 + 0.754 food_16069
- + 6.979 food_17199 + 0.515 food_20011 + 0.302 food_20036 + 0.626 food_20038
- + 0.41 food_20080 >= 0.9
-_C15: 0.004 food_01077 + 0.028 food_01123 + 0.255 food_05027
- + 0.018 food_05039 + 0.021 food_05043 + 3.2 food_08144 + 0.035 food_09003
- + 0.077 food_09021 + 0.27 food_09040 + 0.646 food_09042 + 0.336 food_09050
- + 0.098 food_09148 + 0.054 food_09191 + 0.029 food_09202 + 0.061 food_09236
- + 0.048 food_09252 + 0.052 food_09279 + 0.386 food_09316 + 0.012 food_10072
- + 0.158 food_11011 + 0.329 food_11080 + 0.391 food_11086 + 0.21 food_11090
- + 0.337 food_11098 + 0.16 food_11109 + 0.243 food_11112 + 0.159 food_11116
- + 0.143 food_11124 + 0.155 food_11135 + 0.103 food_11143 + 0.366 food_11147
- + 0.163 food_11167 + 0.572 food_11192 + 0.079 food_11205 + 0.232 food_11209
- + 0.42 food_11213 + 1.672 food_11215 + 0.659 food_11233 + 0.179 food_11250
- + 0.155 food_11251 + 0.25 food_11253 + 0.203 food_11257 + 0.129 food_11282
- + 0.16 food_11291 + 0.56 food_11298 + 0.122 food_11333 + 0.153 food_11352
- + 0.069 food_11429 + 0.131 food_11435 + 0.897 food_11457 + 0.172 food_11467
- + 0.157 food_11475 + 0.177 food_11477 + 0.167 food_11482 + 0.202 food_11485
- + 0.258 food_11507 + 0.114 food_11529 + 0.068 food_11531 + 0.397 food_11601
- + 0.175 food_11641 + 0.163 food_11643 + 0.292 food_11677 + 0.112 food_11821
- + 0.117 food_11951 + 1.846 food_11955 + 0.321 food_11959 + 0.187 food_11977
- + 0.097 food_11979 + 2.723 food_12006 + 4.543 food_12014 + 1.95 food_12036
- + 3.414 food_12155 + 2.482 food_12220 + 0.012 food_13815 + 0.07 food_15001
- + 0.45 food_15170 + 0.011 food_15265 + 1.148 food_16042 + 0.636 food_16050
- + 1.393 food_16069 + 0.184 food_17199 + 2.03 food_20011 + 2.853 food_20036
- + 4.916 food_20038 + 4.067 food_20080 >= 2.3
-_C16: 3.7 food_01077 + 30.7 food_01123 + 54.6 food_05027 + 17.8 food_05039
- + 13.5 food_05043 + 70.7 food_08144 + 0.1 food_09021 + food_09040
- + 0.4 food_09042 + 0.1 food_09050 + 0.2 food_09148 + 0.1 food_09236
- + 0.1 food_09252 + 0.4 food_09316 + 29.5 food_10072 + 2.3 food_11011
- + 0.7 food_11080 + 0.9 food_11086 + 2.5 food_11090 + 1.6 food_11098
- + 0.3 food_11109 + 0.6 food_11112 + 0.5 food_11116 + 0.1 food_11124
- + 0.6 food_11135 + 0.4 food_11143 + 0.9 food_11147 + 0.6 food_11167
- + 2.5 food_11192 + 0.3 food_11205 + 0.3 food_11209 + 0.2 food_11213
- + 14.2 food_11215 + 0.9 food_11233 + 0.6 food_11250 + 0.4 food_11251
- + 0.6 food_11253 + 1.5 food_11257 + 0.5 food_11282 + 0.6 food_11291
- + 1.8 food_11298 + 0.4 food_11352 + 0.6 food_11429 + 0.7 food_11435
- + food_11457 + 0.2 food_11467 + 0.2 food_11475 + 0.2 food_11477
- + 0.5 food_11482 + 0.5 food_11485 + 0.6 food_11507 + 0.7 food_11531
- + 0.7 food_11601 + 0.2 food_11641 + 0.4 food_11643 + 1.2 food_11677
- + 0.1 food_11821 + 0.3 food_11951 + 5.5 food_11955 + 0.3 food_11959
- + 0.4 food_11977 + 0.4 food_11979 + 55.2 food_12006 + 9.4 food_12014
- + 53 food_12036 + 4.9 food_12155 + 25.4 food_12220 + 16.2 food_13815
- + 36.5 food_15001 + 35.8 food_15170 + 39.6 food_15265 + 27.9 food_16042
- + 1.3 food_16050 + 0.1 food_16069 + 82.4 food_17199 + 5.7 food_20011
- + 17.1 food_20036 + 61.8 food_20080 >= 55
-_C17: 46 food_01077 + 160 food_01123 + 3296 food_05027 + 8 food_05039
- + 22 food_05043 + 3 food_09003 + 96 food_09021 + 3 food_09040 + 11 food_09042
- + 3 food_09050 + 4 food_09148 + 17 food_09191 + 12 food_09202 + 16 food_09236
- + food_09252 + 17 food_09279 + food_09316 + 2 food_10072 + 38 food_11011
- + 2 food_11080 + 316 food_11086 + 31 food_11090 + 38 food_11098
- + 5 food_11109 + 56 food_11112 + 223 food_11116 + 835 food_11124
- + 22 food_11143 + 306 food_11147 + 9 food_11167 + 40 food_11192
- + 5 food_11205 + food_11209 + 108 food_11213 + 500 food_11233
- + 166 food_11250 + 436 food_11251 + 370 food_11253 + 375 food_11257
- + 50 food_11291 + 18 food_11333 + 469 food_11457 + 8 food_11467
- + 11 food_11475 + 10 food_11477 + 18 food_11482 + 532 food_11485
- + 709 food_11507 + 42 food_11529 + 20 food_11531 + 7 food_11601
- + 10 food_11641 + 68 food_11643 + 157 food_11821 + 10 food_11951
- + 44 food_11955 + 119 food_11959 + 47 food_11977 + 54 food_11979 + food_12014
- + 3 food_12036 + food_12155 + 15 food_15001 + 90 food_15170 + 20 food_15265
- + 2 food_16069 + 7391 food_17199 >= 900
-_C18: 0.07 food_01077 + 1.05 food_01123 + 0.7 food_05027 + 0.22 food_05039
- + 0.21 food_05043 + 1.31 food_08144 + 0.18 food_09003 + 0.89 food_09021
- + 0.1 food_09040 + 1.17 food_09042 + 0.57 food_09050 + 1.46 food_09148
- + 0.77 food_09191 + 0.15 food_09202 + 0.73 food_09236 + 0.12 food_09252
- + 0.26 food_09279 + 0.29 food_09316 + 1.13 food_11011 + 0.04 food_11080
- + 1.5 food_11086 + 0.78 food_11090 + 0.88 food_11098 + 0.15 food_11109
- + 0.11 food_11112 + 0.09 food_11116 + 0.66 food_11124 + 0.08 food_11135
- + 0.27 food_11143 + 1.89 food_11147 + 0.07 food_11167 + 0.22 food_11192
- + 0.03 food_11205 + 0.3 food_11209 + 0.44 food_11213 + 0.08 food_11215
- + 1.54 food_11233 + 0.18 food_11250 + 0.13 food_11251 + 0.22 food_11253
- + 0.15 food_11257 + 0.02 food_11282 + 0.55 food_11291 + 1.49 food_11298
- + 0.37 food_11333 + 0.01 food_11352 + 0.3 food_11435 + 2.03 food_11457
- + 0.13 food_11467 + 0.13 food_11475 + 0.12 food_11477 + 1.44 food_11485
- + 0.26 food_11507 + 0.54 food_11529 + 0.59 food_11531 + 0.35 food_11601
- + 0.12 food_11641 + 0.12 food_11643 + 0.04 food_11677 + 1.58 food_11821
- + 0.01 food_11955 + 0.43 food_11959 + 0.69 food_11977 + 3.58 food_11979
- + 0.5 food_12006 + 2.18 food_12014 + 35.17 food_12036 + 0.7 food_12155
- + 0.31 food_12220 + 0.57 food_15001 + 0.85 food_15170 + 1.28 food_15265
- + 0.21 food_16042 + 0.94 food_16050 + 0.49 food_16069 + 0.32 food_20011
- + 0.6 food_20036 + 0.71 food_20080 >= 15
-_C19: 51 food_01077 + 82 food_01123 + food_15170 + 563 food_15265 >= 15
-_C2: 3.25 food_01077 + 9.51 food_01123 + 4.83 food_05027 + 1.65 food_05039
- + 4.31 food_05043 + 2 food_08144 + 0.17 food_09003 + 0.39 food_09021
- + 0.33 food_09040 + 0.49 food_09042 + 0.33 food_09050 + 0.52 food_09148
- + 0.32 food_09191 + 0.15 food_09202 + 0.25 food_09236 + 0.14 food_09252
- + 0.28 food_09279 + 0.3 food_09316 + 7.14 food_10072 + 0.12 food_11011
- + 0.17 food_11080 + 0.13 food_11086 + 0.37 food_11090 + 0.3 food_11098
- + 0.1 food_11109 + 0.16 food_11112 + 0.2 food_11116 + 0.24 food_11124
- + 0.28 food_11135 + 0.17 food_11143 + 0.2 food_11147 + 1.35 food_11167
- + 0.38 food_11192 + 0.11 food_11205 + 0.18 food_11209 + 0.2 food_11213
- + 0.5 food_11215 + 0.93 food_11233 + 0.22 food_11250 + 0.3 food_11251
- + 0.15 food_11253 + 0.22 food_11257 + 0.1 food_11282 + 0.19 food_11291
- + 0.3 food_11298 + 0.17 food_11333 + 0.09 food_11352 + 0.1 food_11429
- + 0.16 food_11435 + 0.39 food_11457 + 0.27 food_11467 + 0.2 food_11475
- + 0.32 food_11477 + 0.1 food_11482 + 0.1 food_11485 + 0.05 food_11507
- + 0.2 food_11529 + 0.25 food_11531 + 0.17 food_11601 + 0.18 food_11641
- + 0.13 food_11643 + 0.1 food_11677 + 0.3 food_11821 + 0.21 food_11951
- + 2.97 food_11955 + 0.66 food_11959 + 0.44 food_11977 + 0.37 food_11979
- + 30.74 food_12006 + 49.05 food_12014 + 51.46 food_12036 + 65.21 food_12155
- + 42.16 food_12220 + 19.41 food_13815 + 4.84 food_15001 + 2.47 food_15170
- + 4.21 food_15265 + 1.23 food_16042 + 0.35 food_16050 + 1.06 food_16069
- + 5.02 food_17199 + 3.1 food_20011 + 3.2 food_20036 + 6.9 food_20038
- + 2.5 food_20080 >= 0
-_C20: 17.9 food_05027 + 3.1 food_05043 + 4.6 food_09003 + 10 food_09021
- + 8.7 food_09040 + 21 food_09042 + 9.7 food_09050 + 92.7 food_09148
- + 5.4 food_09191 + 59.1 food_09202 + 6.6 food_09236 + 4.3 food_09252
- + 9.5 food_09279 + 58.8 food_09316 + 0.8 food_10072 + 5.6 food_11011
- + 4.9 food_11080 + 30 food_11086 + 89.2 food_11090 + 85 food_11098
- + 36.6 food_11109 + 57 food_11112 + 45 food_11116 + 5.9 food_11124
- + 48.2 food_11135 + 3.1 food_11143 + 30 food_11147 + 6.8 food_11167
- + 2.2 food_11192 + 2.8 food_11205 + 2.2 food_11209 + 6.5 food_11213
- + 31.2 food_11215 + 120 food_11233 + 3.7 food_11250 + 4 food_11251
- + 9.2 food_11253 + 3.7 food_11257 + 7.4 food_11282 + 18.8 food_11291
- + 17 food_11298 + 80.4 food_11333 + 19.7 food_11352 + 14.8 food_11429
- + 25 food_11435 + 28.1 food_11457 + 19.3 food_11467 + 18 food_11475
- + 17.9 food_11477 + 11 food_11482 + 21 food_11485 + 2.4 food_11507
- + 13.7 food_11529 + 12.6 food_11531 + 17.1 food_11601 + 17 food_11641
- + 12.3 food_11643 + 8 food_11677 + 127.7 food_11821 + 183.5 food_11951
- + 39.2 food_11955 + 15 food_11959 + 44.9 food_11977 + 118.6 food_11979
- + 1.6 food_12006 + 1.9 food_12014 + 1.4 food_12036 + 1.3 food_12155
- + 0.6 food_12220 + 5 food_15170 + 6.3 food_16042 + 4.5 food_16069
- + 4 food_17199 >= 90
-_C21: 0.046 food_01077 + 0.04 food_01123 + 0.305 food_05027 + 0.068 food_05039
- + 0.077 food_05043 + 0.4 food_08144 + 0.017 food_09003 + 0.03 food_09021
- + 0.031 food_09040 + 0.02 food_09042 + 0.037 food_09050 + 0.027 food_09148
- + 0.034 food_09191 + 0.068 food_09202 + 0.024 food_09236 + 0.012 food_09252
- + 0.028 food_09279 + 0.024 food_09316 + 0.884 food_10072 + 0.143 food_11011
- + 0.031 food_11080 + 0.1 food_11086 + 0.071 food_11090 + 0.139 food_11098
- + 0.061 food_11109 + 0.064 food_11112 + 0.04 food_11116 + 0.066 food_11124
- + 0.05 food_11135 + 0.021 food_11143 + 0.04 food_11147 + 0.155 food_11167
- + 0.101 food_11192 + 0.027 food_11205 + 0.039 food_11209 + 0.08 food_11213
- + 0.2 food_11215 + 0.11 food_11233 + 0.057 food_11250 + 0.072 food_11251
- + 0.07 food_11253 + 0.064 food_11257 + 0.046 food_11282 + 0.055 food_11291
- + 0.09 food_11298 + 0.057 food_11333 + 0.081 food_11352 + 0.012 food_11429
- + 0.09 food_11435 + 0.078 food_11457 + 0.051 food_11467 + 0.07 food_11475
- + 0.045 food_11477 + 0.14 food_11482 + 0.1 food_11485 + 0.078 food_11507
- + 0.037 food_11529 + 0.575 food_11531 + 0.112 food_11601 + 0.048 food_11641
- + 0.03 food_11643 + 0.06 food_11677 + 0.054 food_11821 + 0.028 food_11951
- + 0.528 food_11955 + 0.044 food_11959 + 0.054 food_11977 + 0.04 food_11979
- + 0.62 food_12006 + 0.273 food_12014 + 1.48 food_12036 + 0.341 food_12155
- + 1.644 food_12220 + 0.1 food_13815 + 0.055 food_15001 + 0.15 food_15170
- + 0.027 food_15265 + 0.713 food_16042 + 0.118 food_16050 + 0.873 food_16069
- + 0.34 food_17199 + 0.417 food_20011 + 0.541 food_20036 + 0.763 food_20038
- + 0.502 food_20080 >= 1.2
-_C22: 0.169 food_01077 + 0.457 food_01123 + 1.778 food_05027
- + 0.092 food_05039 + 0.184 food_05043 + 0.3 food_08144 + 0.026 food_09003
- + 0.04 food_09021 + 0.073 food_09040 + 0.026 food_09042 + 0.041 food_09050
- + 0.025 food_09148 + 0.027 food_09191 + 0.051 food_09202 + 0.031 food_09236
- + 0.026 food_09252 + 0.026 food_09279 + 0.022 food_09316 + 0.314 food_10072
- + 0.141 food_11011 + 0.04 food_11080 + 0.22 food_11086 + 0.117 food_11090
- + 0.09 food_11098 + 0.04 food_11109 + 0.069 food_11112 + 0.07 food_11116
- + 0.058 food_11124 + 0.06 food_11135 + 0.057 food_11143 + 0.09 food_11147
- + 0.055 food_11167 + 0.148 food_11192 + 0.033 food_11205 + 0.037 food_11209
- + 0.075 food_11213 + 0.11 food_11215 + 0.13 food_11233 + 0.062 food_11250
- + 0.067 food_11251 + 0.08 food_11253 + 0.077 food_11257 + 0.027 food_11282
- + 0.08 food_11291 + 0.05 food_11298 + 0.028 food_11333 + 0.032 food_11352
- + 0.039 food_11429 + 0.04 food_11435 + 0.189 food_11457 + 0.041 food_11467
- + 0.03 food_11475 + 0.094 food_11477 + 0.01 food_11482 + 0.02 food_11485
- + 0.061 food_11507 + 0.019 food_11529 + 0.055 food_11531 + 0.032 food_11601
- + 0.142 food_11641 + 0.062 food_11643 + 0.02 food_11677 + 0.085 food_11821
- + 0.025 food_11951 + 0.489 food_11955 + 0.086 food_11959 + 0.081 food_11977
- + 0.07 food_11979 + 0.17 food_12006 + 0.153 food_12014 + 0.355 food_12036
- + 0.15 food_12155 + 0.161 food_12220 + 0.17 food_13815 + 0.256 food_15001
- + 0.166 food_15170 + 0.203 food_15265 + 0.212 food_16042 + 0.046 food_16050
- + 0.211 food_16069 + 3.63 food_17199 + 0.19 food_20011 + 0.095 food_20036
- + 0.139 food_20038 + 0.165 food_20080 >= 1.3
-_C23: 0.089 food_01077 + 0.075 food_01123 + 9.728 food_05027
- + 10.604 food_05039 + 6.246 food_05043 + 4.9 food_08144 + 0.091 food_09003
- + 0.6 food_09021 + 0.665 food_09040 + 0.646 food_09042 + 0.418 food_09050
- + 0.341 food_09148 + 1.125 food_09191 + 0.425 food_09202 + 0.806 food_09236
- + 0.161 food_09252 + 0.417 food_09279 + 0.386 food_09316 + 4.275 food_10072
- + 0.978 food_11011 + 0.334 food_11080 + 0.4 food_11086 + 0.639 food_11090
- + 0.745 food_11098 + 0.234 food_11109 + 0.418 food_11112 + 0.5 food_11116
- + 0.983 food_11124 + 0.507 food_11135 + 0.32 food_11143 + 0.4 food_11147
- + 1.77 food_11167 + 1.403 food_11192 + 0.098 food_11205 + 0.649 food_11209
- + 0.4 food_11213 + 0.7 food_11215 + food_11233 + 0.357 food_11250
- + 0.313 food_11251 + 0.375 food_11253 + 0.321 food_11257 + 0.116 food_11282
- + 0.525 food_11291 + 0.7 food_11298 + 0.48 food_11333 + 1.061 food_11352
- + 0.254 food_11429 + 0.7 food_11435 + 0.724 food_11457 + 0.448 food_11467
- + 0.6 food_11475 + 0.451 food_11477 + 0.7 food_11482 + 1.2 food_11485
- + 0.557 food_11507 + 0.594 food_11529 + 0.712 food_11531 + 0.552 food_11601
- + 0.487 food_11641 + 0.5 food_11643 + 0.2 food_11677 + 0.979 food_11821
- + 0.89 food_11951 + 9.05 food_11955 + 0.305 food_11959 + 1.537 food_11977
- + 1.28 food_11979 + 8.83 food_12006 + 4.987 food_12014 + 8.335 food_12036
- + 1.125 food_12155 + 3.08 food_12220 + 2.18 food_13815 + 14.024 food_15001
- + 1.244 food_15170 + 7.43 food_15265 + 1.174 food_16042 + 0.14 food_16050
- + 2.605 food_16069 + 16.11 food_17199 + 6.15 food_20011 + 6.494 food_20036
- + 0.961 food_20038 + 4.957 food_20080 >= 16
-_C24: 0.373 food_01077 + 1.533 food_01123 + 6.233 food_05027
- + 0.822 food_05039 + 1.249 food_05043 + 0.915 food_08144 + 0.061 food_09003
- + 0.24 food_09021 + 0.334 food_09040 + 0.276 food_09042 + 0.124 food_09050
- + 0.183 food_09148 + 0.185 food_09191 + 0.261 food_09202 + 0.153 food_09236
- + 0.049 food_09252 + 0.135 food_09279 + 0.125 food_09316 + 0.822 food_10072
- + 0.274 food_11011 + 0.155 food_11080 + 0.25 food_11086 + 0.573 food_11090
- + 0.309 food_11098 + 0.212 food_11109 + 0.147 food_11112 + 0.088 food_11116
- + 0.273 food_11124 + 0.667 food_11135 + 0.246 food_11143 + 0.172 food_11147
- + 0.717 food_11167 + 0.154 food_11192 + 0.259 food_11205 + 0.281 food_11209
- + 0.9 food_11213 + 0.596 food_11215 + 0.091 food_11233 + 0.15 food_11250
- + 0.142 food_11251 + 0.134 food_11253 + 0.144 food_11257 + 0.123 food_11282
- + 0.075 food_11291 + 0.6 food_11298 + 0.099 food_11333 + 0.295 food_11352
- + 0.165 food_11429 + 0.16 food_11435 + 0.065 food_11457 + 0.16 food_11467
- + 0.102 food_11475 + 0.204 food_11477 + 0.4 food_11482 + 0.4 food_11485
- + 0.8 food_11507 + 0.089 food_11529 + 0.117 food_11531 + 0.314 food_11601
- + 0.155 food_11641 + 0.188 food_11643 + 0.29 food_11677 + 0.317 food_11821
- + 0.168 food_11951 + 2.087 food_11955 + 0.437 food_11959 + 0.2 food_11977
- + 0.315 food_11979 + 0.75 food_12014 + 1.13 food_12036 + 0.57 food_12155
- + 0.985 food_12220 + 0.29 food_13815 + 0.645 food_15001 + 0.18 food_15170
- + 0.785 food_16042 + 0.229 food_16050 + 2.14 food_16069 + 6.13 food_17199
- + 0.44 food_20011 + 1.065 food_20036 + 1.349 food_20038 + 0.603 food_20080
- >= 5
-_C25: 0.036 food_01077 + 0.17 food_01123 + 0.853 food_05027 + 0.54 food_05039
- + 0.33 food_05043 + 0.391 food_08144 + 0.041 food_09003 + 0.054 food_09021
- + 0.367 food_09040 + 0.03 food_09042 + 0.052 food_09050 + 0.063 food_09148
- + 0.025 food_09191 + 0.079 food_09202 + 0.025 food_09236 + 0.029 food_09252
- + 0.029 food_09279 + 0.047 food_09316 + 0.415 food_10072 + 0.091 food_11011
- + 0.067 food_11080 + 0.106 food_11086 + 0.175 food_11090 + 0.219 food_11098
- + 0.124 food_11109 + 0.209 food_11112 + 0.194 food_11116 + 0.138 food_11124
- + 0.184 food_11135 + 0.074 food_11143 + 0.099 food_11147 + 0.093 food_11167
- + 0.065 food_11192 + 0.04 food_11205 + 0.084 food_11209 + 0.02 food_11213
- + 1.235 food_11215 + 0.271 food_11233 + 0.082 food_11250 + 0.074 food_11251
- + 0.09 food_11253 + 0.1 food_11257 + 0.12 food_11282 + 0.061 food_11291
- + 0.09 food_11298 + 0.224 food_11333 + 0.298 food_11352 + 0.071 food_11429
- + 0.1 food_11435 + 0.195 food_11457 + 0.104 food_11467 + 0.109 food_11475
- + 0.163 food_11477 + 0.154 food_11482 + 0.154 food_11485 + 0.209 food_11507
- + 0.08 food_11529 + 0.111 food_11531 + 0.293 food_11601 + 0.218 food_11641
- + 0.156 food_11643 + 0.345 food_11677 + 0.291 food_11821 + 0.168 food_11951
- + 0.332 food_11955 + 0.073 food_11959 + 0.505 food_11977 + 0.419 food_11979
- + 0.143 food_12014 + 1.345 food_12036 + 0.537 food_12155 + 0.473 food_12220
- + 0.36 food_13815 + 0.143 food_15001 + 0.095 food_15170 + 0.105 food_15265
- + 0.474 food_16042 + 0.093 food_16050 + 0.54 food_16069 + 0.9 food_17199
- + 0.582 food_20011 + 0.477 food_20036 + 0.119 food_20038 + 0.407 food_20080
+_C1: 0.26 Apples,_raw,_with_skin + 1.4 Apricots,_raw + 2.58 Arugula,_raw
+ + 2.2 Asparagus,_raw + 1.09 Bananas,_raw
+ + 21.42 Beans,_pinto,_mature_seeds,_raw
+ + 9.73 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 17.16 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 2.2 Beet_greens,_raw + 1.61 Beets,_raw + 1.39 Blackberries,_raw
+ + 0.74 Blueberries,_raw + 2.82 Broccoli,_raw + 3.38 Brussels_sprouts,_raw
+ + 12.62 Buckwheat_flour,_whole_groat + 1.5 Cabbage,_chinese_(pak_choi),_raw
+ + 1.28 Cabbage,_raw + 1.43 Cabbage,_red,_raw + 0.93 Carrots,_raw
+ + 1.92 Cauliflower,_raw + 0.69 Celery,_raw
+ + 11.2 Cereals,_whole_wheat_hot_natural_cereal,_dry + 1.8 Chard,_swiss,_raw
+ + 20.08 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 23.2 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 16.92 Chicken,_liver,_all_classes,_raw + 3.27 Corn,_sweet,_yellow,_raw
+ + 3.17 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.65 Cucumber,_with_peel,_raw + 12.56 Egg,_whole,_raw,_fresh
+ + 0.98 Eggplant,_raw + 1.25 Endive,_raw
+ + 24.62 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 20.35 Fish,_anchovy,_european,_raw + 6.36 Garlic,_raw + 4.28 Kale,_raw
+ + 1.14 Kiwifruit,_green,_raw
+ + 20.38 Lamb,_variety_meats_and_by_products,_liver,_raw + 24.63 Lentils,_raw
+ + 1.35 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 1.23 Lettuce,_cos_or_romaine,_raw + 1.36 Lettuce,_green_leaf,_raw
+ + 1.33 Lettuce,_red_leaf,_raw
+ + 3.15 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 7.06 Mollusks,_oyster,_eastern,_canned + 1.06 Nectarines,_raw
+ + 15.23 Nuts,_walnuts,_english + 16.89 Oats + 1.1 Onions,_raw
+ + 1.83 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.91 Oranges,_raw,_navels + 1.2 Parsnips,_raw + 0.91 Peaches,_yellow,_raw
+ + 0.36 Pears,_raw + 0.91 Peppers,_jalapeno,_raw + 1.74 Peppers,_serrano,_raw
+ + 0.86 Peppers,_sweet,_green,_raw + 0.99 Peppers,_sweet,_red,_raw
+ + Peppers,_sweet,_yellow,_raw + 0.7 Plums,_raw
+ + 19.55 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 2.05 Potatoes,_flesh_and_skin,_raw + 0.68 Radishes,_raw
+ + 7.54 Rice,_brown,_long_grain,_raw + 1.08 Rutabagas,_raw
+ + 16.54 Seeds,_chia_seeds,_dried + 18.29 Seeds,_flaxseed
+ + 30.23 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 20.78 Seeds,_sunflower_seed_kernels,_dried + 2.5 Shallots,_raw
+ + 2.86 Spinach,_raw + 1.21 Squash,_summer,_all_varieties,_raw
+ + 1.01 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 1.2 Squash,_summer,_scallop,_raw
+ + 1.21 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.8 Squash,_winter,_acorn,_raw + 0.95 Squash,_winter,_all_varieties,_raw
+ + Squash,_winter,_butternut,_raw + 0.67 Strawberries,_raw
+ + 1.57 Sweet_potato,_raw,_unprepared
+ + 0.79 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.88 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 14.11 Tomatoes,_sun_dried + 13.21 Wheat_flour,_whole_grain + 1.53 Yam,_raw
+ >= 56
+_C10: 5 Apples,_raw,_with_skin + 10 Apricots,_raw + 47 Arugula,_raw
+ + 14 Asparagus,_raw + 27 Bananas,_raw + 176 Beans,_pinto,_mature_seeds,_raw
+ + 63 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 17 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 70 Beet_greens,_raw + 23 Beets,_raw + 20 Blackberries,_raw
+ + 6 Blueberries,_raw + 21 Broccoli,_raw + 23 Brussels_sprouts,_raw
+ + 251 Buckwheat_flour,_whole_groat + 19 Cabbage,_chinese_(pak_choi),_raw
+ + 12 Cabbage,_raw + 16 Cabbage,_red,_raw + 12 Carrots,_raw
+ + 15 Cauliflower,_raw + 11 Celery,_raw
+ + 122 Cereals,_whole_wheat_hot_natural_cereal,_dry + 81 Chard,_swiss,_raw
+ + 23 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 27 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 19 Chicken,_liver,_all_classes,_raw + 37 Corn,_sweet,_yellow,_raw
+ + 52 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 13 Cucumber,_with_peel,_raw + 12 Egg,_whole,_raw,_fresh + 14 Eggplant,_raw
+ + 15 Endive,_raw
+ + 24 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 41 Fish,_anchovy,_european,_raw + 25 Garlic,_raw + 47 Kale,_raw
+ + 17 Kiwifruit,_green,_raw
+ + 19 Lamb,_variety_meats_and_by_products,_liver,_raw + 47 Lentils,_raw
+ + 13 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 14 Lettuce,_cos_or_romaine,_raw + 13 Lettuce,_green_leaf,_raw
+ + 12 Lettuce,_red_leaf,_raw
+ + 10 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 54 Mollusks,_oyster,_eastern,_canned + 9 Nectarines,_raw
+ + 158 Nuts,_walnuts,_english + 177 Oats + 10 Onions,_raw
+ + 20 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 11 Oranges,_raw,_navels + 29 Parsnips,_raw + 9 Peaches,_yellow,_raw
+ + 7 Pears,_raw + 15 Peppers,_jalapeno,_raw + 22 Peppers,_serrano,_raw
+ + 10 Peppers,_sweet,_green,_raw + 12 Peppers,_sweet,_red,_raw
+ + 12 Peppers,_sweet,_yellow,_raw + 7 Plums,_raw
+ + 21 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 23 Potatoes,_flesh_and_skin,_raw + 10 Radishes,_raw
+ + 116 Rice,_brown,_long_grain,_raw + 20 Rutabagas,_raw
+ + 335 Seeds,_chia_seeds,_dried + 392 Seeds,_flaxseed
+ + 592 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 325 Seeds,_sunflower_seed_kernels,_dried + 21 Shallots,_raw
+ + 79 Spinach,_raw + 17 Squash,_summer,_all_varieties,_raw
+ + 20 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 23 Squash,_summer,_scallop,_raw
+ + 18 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 32 Squash,_winter,_acorn,_raw + 14 Squash,_winter,_all_varieties,_raw
+ + 34 Squash,_winter,_butternut,_raw + 13 Strawberries,_raw
+ + 25 Sweet_potato,_raw,_unprepared
+ + 10 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 11 Tomatoes,_red,_ripe,_raw,_year_round_average + 194 Tomatoes,_sun_dried
+ + 137 Wheat_flour,_whole_grain + 21 Yam,_raw >= 400
+_C100: Tomatoes,_sun_dried >= 0
+_C101: Arugula,_raw >= 0
+_C102: Peppers,_serrano,_raw >= 0
+_C103: Peppers,_jalapeno,_raw >= 0
+_C104: Seeds,_chia_seeds,_dried >= 0
+_C105: Seeds,_pumpkin_and_squash_seed_kernels,_dried >= 0
+_C106: Seeds,_sunflower_seed_kernels,_dried >= 0
+_C107: Nuts,_walnuts,_english >= 0
+_C108: Seeds,_flaxseed >= 0
+_C109:
+ Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ >= 0
+_C11: 11 Apples,_raw,_with_skin + 23 Apricots,_raw + 52 Arugula,_raw
+ + 52 Asparagus,_raw + 22 Bananas,_raw + 411 Beans,_pinto,_mature_seeds,_raw
+ + 113 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 162 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 41 Beet_greens,_raw + 40 Beets,_raw + 22 Blackberries,_raw
+ + 12 Blueberries,_raw + 66 Broccoli,_raw + 69 Brussels_sprouts,_raw
+ + 337 Buckwheat_flour,_whole_groat + 37 Cabbage,_chinese_(pak_choi),_raw
+ + 26 Cabbage,_raw + 30 Cabbage,_red,_raw + 35 Carrots,_raw
+ + 44 Cauliflower,_raw + 24 Celery,_raw
+ + 379 Cereals,_whole_wheat_hot_natural_cereal,_dry + 46 Chard,_swiss,_raw
+ + 162 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 187 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 297 Chicken,_liver,_all_classes,_raw + 89 Corn,_sweet,_yellow,_raw
+ + 51 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 24 Cucumber,_with_peel,_raw + 198 Egg,_whole,_raw,_fresh + 24 Eggplant,_raw
+ + 28 Endive,_raw
+ + 253 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 174 Fish,_anchovy,_european,_raw + 153 Garlic,_raw + 92 Kale,_raw
+ + 34 Kiwifruit,_green,_raw
+ + 364 Lamb,_variety_meats_and_by_products,_liver,_raw + 281 Lentils,_raw
+ + 33 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 30 Lettuce,_cos_or_romaine,_raw + 29 Lettuce,_green_leaf,_raw
+ + 28 Lettuce,_red_leaf,_raw
+ + 84 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 139 Mollusks,_oyster,_eastern,_canned + 26 Nectarines,_raw
+ + 346 Nuts,_walnuts,_english + 523 Oats + 29 Onions,_raw
+ + 37 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 23 Oranges,_raw,_navels + 71 Parsnips,_raw + 20 Peaches,_yellow,_raw
+ + 12 Pears,_raw + 26 Peppers,_jalapeno,_raw + 40 Peppers,_serrano,_raw
+ + 20 Peppers,_sweet,_green,_raw + 26 Peppers,_sweet,_red,_raw
+ + 24 Peppers,_sweet,_yellow,_raw + 16 Plums,_raw
+ + 202 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 57 Potatoes,_flesh_and_skin,_raw + 20 Radishes,_raw
+ + 311 Rice,_brown,_long_grain,_raw + 53 Rutabagas,_raw
+ + 860 Seeds,_chia_seeds,_dried + 642 Seeds,_flaxseed
+ + 1233 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 660 Seeds,_sunflower_seed_kernels,_dried + 60 Shallots,_raw
+ + 49 Spinach,_raw + 38 Squash,_summer,_all_varieties,_raw
+ + 32 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 36 Squash,_summer,_scallop,_raw
+ + 38 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 36 Squash,_winter,_acorn,_raw + 23 Squash,_winter,_all_varieties,_raw
+ + 33 Squash,_winter,_butternut,_raw + 24 Strawberries,_raw
+ + 47 Sweet_potato,_raw,_unprepared
+ + 17 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 24 Tomatoes,_red,_ripe,_raw,_year_round_average + 356 Tomatoes,_sun_dried
+ + 357 Wheat_flour,_whole_grain + 55 Yam,_raw >= 700
+_C110: Fish,_anchovy,_european,_raw >= 0
+_C111: Mollusks,_oyster,_eastern,_canned >= 0
+_C112: Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones >= 0
+_C113: Beans,_pinto,_mature_seeds,_raw >= 0
+_C114: Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt >= 0
+_C115: Lentils,_raw >= 0
+_C116: Lamb,_variety_meats_and_by_products,_liver,_raw >= 0
+_C117: Buckwheat_flour,_whole_groat >= 0
+_C118: Rice,_brown,_long_grain,_raw >= 0
+_C119: Oats >= 0
+_C12: 107 Apples,_raw,_with_skin + 259 Apricots,_raw + 369 Arugula,_raw
+ + 202 Asparagus,_raw + 358 Bananas,_raw
+ + 1393 Beans,_pinto,_mature_seeds,_raw
+ + 561 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 271 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 762 Beet_greens,_raw + 325 Beets,_raw + 162 Blackberries,_raw
+ + 77 Blueberries,_raw + 316 Broccoli,_raw + 389 Brussels_sprouts,_raw
+ + 577 Buckwheat_flour,_whole_groat + 252 Cabbage,_chinese_(pak_choi),_raw
+ + 170 Cabbage,_raw + 243 Cabbage,_red,_raw + 320 Carrots,_raw
+ + 299 Cauliflower,_raw + 260 Celery,_raw
+ + 389 Cereals,_whole_wheat_hot_natural_cereal,_dry + 379 Chard,_swiss,_raw
+ + 222 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 239 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 230 Chicken,_liver,_all_classes,_raw + 270 Corn,_sweet,_yellow,_raw
+ + 418 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 147 Cucumber,_with_peel,_raw + 138 Egg,_whole,_raw,_fresh
+ + 229 Eggplant,_raw + 314 Endive,_raw
+ + 326 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 383 Fish,_anchovy,_european,_raw + 401 Garlic,_raw + 491 Kale,_raw
+ + 312 Kiwifruit,_green,_raw
+ + 313 Lamb,_variety_meats_and_by_products,_liver,_raw + 677 Lentils,_raw
+ + 238 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 247 Lettuce,_cos_or_romaine,_raw + 194 Lettuce,_green_leaf,_raw
+ + 187 Lettuce,_red_leaf,_raw
+ + 132 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 229 Mollusks,_oyster,_eastern,_canned + 201 Nectarines,_raw
+ + 441 Nuts,_walnuts,_english + 429 Oats + 146 Onions,_raw
+ + 276 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 166 Oranges,_raw,_navels + 375 Parsnips,_raw + 190 Peaches,_yellow,_raw
+ + 116 Pears,_raw + 248 Peppers,_jalapeno,_raw + 305 Peppers,_serrano,_raw
+ + 175 Peppers,_sweet,_green,_raw + 211 Peppers,_sweet,_red,_raw
+ + 212 Peppers,_sweet,_yellow,_raw + 157 Plums,_raw
+ + 341 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 425 Potatoes,_flesh_and_skin,_raw + 233 Radishes,_raw
+ + 250 Rice,_brown,_long_grain,_raw + 305 Rutabagas,_raw
+ + 407 Seeds,_chia_seeds,_dried + 813 Seeds,_flaxseed
+ + 809 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 645 Seeds,_sunflower_seed_kernels,_dried + 334 Shallots,_raw
+ + 558 Spinach,_raw + 262 Squash,_summer,_all_varieties,_raw
+ + 222 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 182 Squash,_summer,_scallop,_raw
+ + 261 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 347 Squash,_winter,_acorn,_raw + 350 Squash,_winter,_all_varieties,_raw
+ + 352 Squash,_winter,_butternut,_raw + 153 Strawberries,_raw
+ + 337 Sweet_potato,_raw,_unprepared
+ + 191 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 237 Tomatoes,_red,_ripe,_raw,_year_round_average + 3427 Tomatoes,_sun_dried
+ + 363 Wheat_flour,_whole_grain + 816 Yam,_raw >= 4700
+_C120: Wheat_flour,_whole_grain >= 0
+_C13: Apples,_raw,_with_skin + Apricots,_raw + 27 Arugula,_raw
+ + 2 Asparagus,_raw + Bananas,_raw + 12 Beans,_pinto,_mature_seeds,_raw
+ + 6 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 68 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 226 Beet_greens,_raw + 78 Beets,_raw + Blackberries,_raw + Blueberries,_raw
+ + 33 Broccoli,_raw + 25 Brussels_sprouts,_raw
+ + 11 Buckwheat_flour,_whole_groat + 65 Cabbage,_chinese_(pak_choi),_raw
+ + 18 Cabbage,_raw + 27 Cabbage,_red,_raw + 69 Carrots,_raw
+ + 30 Cauliflower,_raw + 80 Celery,_raw
+ + 2 Cereals,_whole_wheat_hot_natural_cereal,_dry + 213 Chard,_swiss,_raw
+ + 85 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 68 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 71 Chicken,_liver,_all_classes,_raw + 15 Corn,_sweet,_yellow,_raw
+ + 4 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 2 Cucumber,_with_peel,_raw + 142 Egg,_whole,_raw,_fresh + 2 Eggplant,_raw
+ + 22 Endive,_raw
+ + 378 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 104 Fish,_anchovy,_european,_raw + 17 Garlic,_raw + 38 Kale,_raw
+ + 3 Kiwifruit,_green,_raw
+ + 70 Lamb,_variety_meats_and_by_products,_liver,_raw + 6 Lentils,_raw
+ + 5 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 8 Lettuce,_cos_or_romaine,_raw + 28 Lettuce,_green_leaf,_raw
+ + 25 Lettuce,_red_leaf,_raw
+ + 43 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 112 Mollusks,_oyster,_eastern,_canned + 2 Nuts,_walnuts,_english + 2 Oats
+ + 4 Onions,_raw
+ + 16 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + Oranges,_raw,_navels + 10 Parsnips,_raw + Pears,_raw
+ + 3 Peppers,_jalapeno,_raw + 10 Peppers,_serrano,_raw
+ + 3 Peppers,_sweet,_green,_raw + 4 Peppers,_sweet,_red,_raw
+ + 2 Peppers,_sweet,_yellow,_raw
+ + 76 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 6 Potatoes,_flesh_and_skin,_raw + 39 Radishes,_raw
+ + 5 Rice,_brown,_long_grain,_raw + 12 Rutabagas,_raw
+ + 16 Seeds,_chia_seeds,_dried + 30 Seeds,_flaxseed
+ + 7 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 9 Seeds,_sunflower_seed_kernels,_dried + 12 Shallots,_raw + 79 Spinach,_raw
+ + 2 Squash,_summer,_all_varieties,_raw
+ + 2 Squash,_summer,_crookneck_and_straightneck,_raw
+ + Squash,_summer,_scallop,_raw
+ + 8 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 3 Squash,_winter,_acorn,_raw + 4 Squash,_winter,_all_varieties,_raw
+ + 4 Squash,_winter,_butternut,_raw + Strawberries,_raw
+ + 55 Sweet_potato,_raw,_unprepared
+ + 115 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 5 Tomatoes,_red,_ripe,_raw,_year_round_average + 107 Tomatoes,_sun_dried
+ + 2 Wheat_flour,_whole_grain + 9 Yam,_raw >= 1500
+_C14: 0.04 Apples,_raw,_with_skin + 0.2 Apricots,_raw + 0.47 Arugula,_raw
+ + 0.54 Asparagus,_raw + 0.15 Bananas,_raw
+ + 2.28 Beans,_pinto,_mature_seeds,_raw
+ + 1.38 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 4.98 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.38 Beet_greens,_raw + 0.35 Beets,_raw + 0.53 Blackberries,_raw
+ + 0.16 Blueberries,_raw + 0.41 Broccoli,_raw + 0.42 Brussels_sprouts,_raw
+ + 3.12 Buckwheat_flour,_whole_groat + 0.19 Cabbage,_chinese_(pak_choi),_raw
+ + 0.18 Cabbage,_raw + 0.22 Cabbage,_red,_raw + 0.24 Carrots,_raw
+ + 0.27 Cauliflower,_raw + 0.13 Celery,_raw
+ + 2.66 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.36 Chard,_swiss,_raw
+ + 2 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.97 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 2.67 Chicken,_liver,_all_classes,_raw + 0.46 Corn,_sweet,_yellow,_raw
+ + 1.03 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.2 Cucumber,_with_peel,_raw + 1.29 Egg,_whole,_raw,_fresh
+ + 0.16 Eggplant,_raw + 0.79 Endive,_raw
+ + 0.65 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 1.72 Fish,_anchovy,_european,_raw + 1.16 Garlic,_raw + 0.56 Kale,_raw
+ + 0.14 Kiwifruit,_green,_raw
+ + 4.66 Lamb,_variety_meats_and_by_products,_liver,_raw + 3.27 Lentils,_raw
+ + 0.2 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.23 Lettuce,_cos_or_romaine,_raw + 0.18 Lettuce,_green_leaf,_raw
+ + 0.2 Lettuce,_red_leaf,_raw
+ + 0.37 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 90.95 Mollusks,_oyster,_eastern,_canned + 0.17 Nectarines,_raw
+ + 3.09 Nuts,_walnuts,_english + 3.97 Oats + 0.17 Onions,_raw
+ + 0.39 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.08 Oranges,_raw,_navels + 0.59 Parsnips,_raw + 0.17 Peaches,_yellow,_raw
+ + 0.1 Pears,_raw + 0.14 Peppers,_jalapeno,_raw + 0.26 Peppers,_serrano,_raw
+ + 0.13 Peppers,_sweet,_green,_raw + 0.25 Peppers,_sweet,_red,_raw
+ + 0.17 Peppers,_sweet,_yellow,_raw + 0.1 Plums,_raw
+ + 3.14 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.3 Potatoes,_flesh_and_skin,_raw + 0.28 Radishes,_raw
+ + 2.13 Rice,_brown,_long_grain,_raw + 0.24 Rutabagas,_raw
+ + 4.58 Seeds,_chia_seeds,_dried + 4.34 Seeds,_flaxseed
+ + 7.81 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 5 Seeds,_sunflower_seed_kernels,_dried + 0.4 Shallots,_raw
+ + 0.53 Spinach,_raw + 0.29 Squash,_summer,_all_varieties,_raw
+ + 0.29 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.29 Squash,_summer,_scallop,_raw
+ + 0.32 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.13 Squash,_winter,_acorn,_raw + 0.21 Squash,_winter,_all_varieties,_raw
+ + 0.15 Squash,_winter,_butternut,_raw + 0.14 Strawberries,_raw
+ + 0.3 Sweet_potato,_raw,_unprepared
+ + 0.12 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.17 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 1.99 Tomatoes,_sun_dried + 2.6 Wheat_flour,_whole_grain + 0.24 Yam,_raw
+ >= 11
+_C15: 0.027 Apples,_raw,_with_skin + 0.078 Apricots,_raw + 0.076 Arugula,_raw
+ + 0.189 Asparagus,_raw + 0.078 Bananas,_raw
+ + 0.893 Beans,_pinto,_mature_seeds,_raw
+ + 0.287 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.073 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.191 Beet_greens,_raw + 0.075 Beets,_raw + 0.165 Blackberries,_raw
+ + 0.057 Blueberries,_raw + 0.049 Broccoli,_raw + 0.07 Brussels_sprouts,_raw
+ + 0.515 Buckwheat_flour,_whole_groat + 0.021 Cabbage,_chinese_(pak_choi),_raw
+ + 0.019 Cabbage,_raw + 0.017 Cabbage,_red,_raw + 0.045 Carrots,_raw
+ + 0.039 Cauliflower,_raw + 0.035 Celery,_raw
+ + 0.458 Cereals,_whole_wheat_hot_natural_cereal,_dry
+ + 0.179 Chard,_swiss,_raw
+ + 0.063 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.04 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.492 Chicken,_liver,_all_classes,_raw + 0.054 Corn,_sweet,_yellow,_raw
+ + 0.133 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.041 Cucumber,_with_peel,_raw + 0.072 Egg,_whole,_raw,_fresh
+ + 0.081 Eggplant,_raw + 0.099 Endive,_raw
+ + 0.077 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.211 Fish,_anchovy,_european,_raw + 0.299 Garlic,_raw + 1.499 Kale,_raw
+ + 0.13 Kiwifruit,_green,_raw
+ + 6.979 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.754 Lentils,_raw
+ + 0.016 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.048 Lettuce,_cos_or_romaine,_raw + 0.029 Lettuce,_green_leaf,_raw
+ + 0.028 Lettuce,_red_leaf,_raw
+ + 0.025 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 4.461 Mollusks,_oyster,_eastern,_canned + 0.086 Nectarines,_raw
+ + 1.586 Nuts,_walnuts,_english + 0.626 Oats + 0.039 Onions,_raw
+ + 0.083 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.039 Oranges,_raw,_navels + 0.12 Parsnips,_raw
+ + 0.068 Peaches,_yellow,_raw + 0.082 Pears,_raw
+ + 0.046 Peppers,_jalapeno,_raw + 0.129 Peppers,_serrano,_raw
+ + 0.066 Peppers,_sweet,_green,_raw + 0.017 Peppers,_sweet,_red,_raw
+ + 0.107 Peppers,_sweet,_yellow,_raw + 0.057 Plums,_raw
+ + 0.097 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.11 Potatoes,_flesh_and_skin,_raw + 0.05 Radishes,_raw
+ + 0.302 Rice,_brown,_long_grain,_raw + 0.032 Rutabagas,_raw
+ + 0.924 Seeds,_chia_seeds,_dried + 1.22 Seeds,_flaxseed
+ + 1.343 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 1.8 Seeds,_sunflower_seed_kernels,_dried + 0.088 Shallots,_raw
+ + 0.13 Spinach,_raw + 0.051 Squash,_summer,_all_varieties,_raw
+ + 0.092 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.102 Squash,_summer,_scallop,_raw
+ + 0.053 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.065 Squash,_winter,_acorn,_raw + 0.071 Squash,_winter,_all_varieties,_raw
+ + 0.072 Squash,_winter,_butternut,_raw + 0.048 Strawberries,_raw
+ + 0.151 Sweet_potato,_raw,_unprepared
+ + 0.052 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.059 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 1.423 Tomatoes,_sun_dried + 0.41 Wheat_flour,_whole_grain + 0.178 Yam,_raw
+ >= 0.9
+_C16: 0.035 Apples,_raw,_with_skin + 0.077 Apricots,_raw + 0.321 Arugula,_raw
+ + 0.158 Asparagus,_raw + 0.27 Bananas,_raw
+ + 1.148 Beans,_pinto,_mature_seeds,_raw
+ + 0.636 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.012 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.391 Beet_greens,_raw + 0.329 Beets,_raw + 0.646 Blackberries,_raw
+ + 0.336 Blueberries,_raw + 0.21 Broccoli,_raw + 0.337 Brussels_sprouts,_raw
+ + 2.03 Buckwheat_flour,_whole_groat + 0.159 Cabbage,_chinese_(pak_choi),_raw
+ + 0.16 Cabbage,_raw + 0.243 Cabbage,_red,_raw + 0.143 Carrots,_raw
+ + 0.155 Cauliflower,_raw + 0.103 Celery,_raw
+ + 3.2 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.366 Chard,_swiss,_raw
+ + 0.021 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.018 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.255 Chicken,_liver,_all_classes,_raw + 0.163 Corn,_sweet,_yellow,_raw
+ + 0.572 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.079 Cucumber,_with_peel,_raw + 0.028 Egg,_whole,_raw,_fresh
+ + 0.232 Eggplant,_raw + 0.42 Endive,_raw
+ + 0.011 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.07 Fish,_anchovy,_european,_raw + 1.672 Garlic,_raw + 0.659 Kale,_raw
+ + 0.098 Kiwifruit,_green,_raw
+ + 0.184 Lamb,_variety_meats_and_by_products,_liver,_raw + 1.393 Lentils,_raw
+ + 0.179 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.155 Lettuce,_cos_or_romaine,_raw + 0.25 Lettuce,_green_leaf,_raw
+ + 0.203 Lettuce,_red_leaf,_raw
+ + 0.004 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.45 Mollusks,_oyster,_eastern,_canned + 0.054 Nectarines,_raw
+ + 3.414 Nuts,_walnuts,_english + 4.916 Oats + 0.129 Onions,_raw
+ + 0.16 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.029 Oranges,_raw,_navels + 0.56 Parsnips,_raw
+ + 0.061 Peaches,_yellow,_raw + 0.048 Pears,_raw
+ + 0.097 Peppers,_jalapeno,_raw + 0.187 Peppers,_serrano,_raw
+ + 0.122 Peppers,_sweet,_green,_raw + 0.112 Peppers,_sweet,_red,_raw
+ + 0.117 Peppers,_sweet,_yellow,_raw + 0.052 Plums,_raw
+ + 0.012 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.153 Potatoes,_flesh_and_skin,_raw + 0.069 Radishes,_raw
+ + 2.853 Rice,_brown,_long_grain,_raw + 0.131 Rutabagas,_raw
+ + 2.723 Seeds,_chia_seeds,_dried + 2.482 Seeds,_flaxseed
+ + 4.543 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 1.95 Seeds,_sunflower_seed_kernels,_dried + 0.292 Shallots,_raw
+ + 0.897 Spinach,_raw + 0.175 Squash,_summer,_all_varieties,_raw
+ + 0.172 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.157 Squash,_summer,_scallop,_raw
+ + 0.177 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.167 Squash,_winter,_acorn,_raw + 0.163 Squash,_winter,_all_varieties,_raw
+ + 0.202 Squash,_winter,_butternut,_raw + 0.386 Strawberries,_raw
+ + 0.258 Sweet_potato,_raw,_unprepared
+ + 0.068 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.114 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 1.846 Tomatoes,_sun_dried + 4.067 Wheat_flour,_whole_grain + 0.397 Yam,_raw
+ >= 2.3
+_C17: 0.1 Apricots,_raw + 0.3 Arugula,_raw + 2.3 Asparagus,_raw + Bananas,_raw
+ + 27.9 Beans,_pinto,_mature_seeds,_raw
+ + 1.3 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 16.2 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.9 Beet_greens,_raw + 0.7 Beets,_raw + 0.4 Blackberries,_raw
+ + 0.1 Blueberries,_raw + 2.5 Broccoli,_raw + 1.6 Brussels_sprouts,_raw
+ + 5.7 Buckwheat_flour,_whole_groat + 0.5 Cabbage,_chinese_(pak_choi),_raw
+ + 0.3 Cabbage,_raw + 0.6 Cabbage,_red,_raw + 0.1 Carrots,_raw
+ + 0.6 Cauliflower,_raw + 0.4 Celery,_raw
+ + 70.7 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.9 Chard,_swiss,_raw
+ + 13.5 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 17.8 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 54.6 Chicken,_liver,_all_classes,_raw + 0.6 Corn,_sweet,_yellow,_raw
+ + 2.5 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.3 Cucumber,_with_peel,_raw + 30.7 Egg,_whole,_raw,_fresh
+ + 0.3 Eggplant,_raw + 0.2 Endive,_raw
+ + 39.6 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 36.5 Fish,_anchovy,_european,_raw + 14.2 Garlic,_raw + 0.9 Kale,_raw
+ + 0.2 Kiwifruit,_green,_raw
+ + 82.4 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.1 Lentils,_raw
+ + 0.6 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.4 Lettuce,_cos_or_romaine,_raw + 0.6 Lettuce,_green_leaf,_raw
+ + 1.5 Lettuce,_red_leaf,_raw
+ + 3.7 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 35.8 Mollusks,_oyster,_eastern,_canned + 4.9 Nuts,_walnuts,_english
+ + 0.5 Onions,_raw
+ + 0.6 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 1.8 Parsnips,_raw + 0.1 Peaches,_yellow,_raw + 0.1 Pears,_raw
+ + 0.4 Peppers,_jalapeno,_raw + 0.4 Peppers,_serrano,_raw
+ + 0.1 Peppers,_sweet,_red,_raw + 0.3 Peppers,_sweet,_yellow,_raw
+ + 29.5 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.4 Potatoes,_flesh_and_skin,_raw + 0.6 Radishes,_raw
+ + 17.1 Rice,_brown,_long_grain,_raw + 0.7 Rutabagas,_raw
+ + 55.2 Seeds,_chia_seeds,_dried + 25.4 Seeds,_flaxseed
+ + 9.4 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 53 Seeds,_sunflower_seed_kernels,_dried + 1.2 Shallots,_raw + Spinach,_raw
+ + 0.2 Squash,_summer,_all_varieties,_raw
+ + 0.2 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.2 Squash,_summer,_scallop,_raw
+ + 0.2 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.5 Squash,_winter,_acorn,_raw + 0.4 Squash,_winter,_all_varieties,_raw
+ + 0.5 Squash,_winter,_butternut,_raw + 0.4 Strawberries,_raw
+ + 0.6 Sweet_potato,_raw,_unprepared
+ + 0.7 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 5.5 Tomatoes,_sun_dried + 61.8 Wheat_flour,_whole_grain + 0.7 Yam,_raw
+ >= 55
+_C18: 3 Apples,_raw,_with_skin + 96 Apricots,_raw + 119 Arugula,_raw
+ + 38 Asparagus,_raw + 3 Bananas,_raw + 316 Beet_greens,_raw + 2 Beets,_raw
+ + 11 Blackberries,_raw + 3 Blueberries,_raw + 31 Broccoli,_raw
+ + 38 Brussels_sprouts,_raw + 223 Cabbage,_chinese_(pak_choi),_raw
+ + 5 Cabbage,_raw + 56 Cabbage,_red,_raw + 835 Carrots,_raw + 22 Celery,_raw
+ + 306 Chard,_swiss,_raw
+ + 22 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 8 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 3296 Chicken,_liver,_all_classes,_raw + 9 Corn,_sweet,_yellow,_raw
+ + 40 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 5 Cucumber,_with_peel,_raw + 160 Egg,_whole,_raw,_fresh + Eggplant,_raw
+ + 108 Endive,_raw
+ + 20 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 15 Fish,_anchovy,_european,_raw + 500 Kale,_raw + 4 Kiwifruit,_green,_raw
+ + 7391 Lamb,_variety_meats_and_by_products,_liver,_raw + 2 Lentils,_raw
+ + 166 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 436 Lettuce,_cos_or_romaine,_raw + 370 Lettuce,_green_leaf,_raw
+ + 375 Lettuce,_red_leaf,_raw
+ + 46 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 90 Mollusks,_oyster,_eastern,_canned + 17 Nectarines,_raw
+ + Nuts,_walnuts,_english
+ + 50 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 12 Oranges,_raw,_navels + 16 Peaches,_yellow,_raw + Pears,_raw
+ + 54 Peppers,_jalapeno,_raw + 47 Peppers,_serrano,_raw
+ + 18 Peppers,_sweet,_green,_raw + 157 Peppers,_sweet,_red,_raw
+ + 10 Peppers,_sweet,_yellow,_raw + 17 Plums,_raw
+ + 2 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 3 Seeds,_sunflower_seed_kernels,_dried + 469 Spinach,_raw
+ + 10 Squash,_summer,_all_varieties,_raw
+ + 8 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 11 Squash,_summer,_scallop,_raw
+ + 10 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 18 Squash,_winter,_acorn,_raw + 68 Squash,_winter,_all_varieties,_raw
+ + 532 Squash,_winter,_butternut,_raw + Strawberries,_raw
+ + 709 Sweet_potato,_raw,_unprepared
+ + 20 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 42 Tomatoes,_red,_ripe,_raw,_year_round_average + 44 Tomatoes,_sun_dried
+ + 7 Yam,_raw >= 900
+_C19: 0.18 Apples,_raw,_with_skin + 0.89 Apricots,_raw + 0.43 Arugula,_raw
+ + 1.13 Asparagus,_raw + 0.1 Bananas,_raw
+ + 0.21 Beans,_pinto,_mature_seeds,_raw
+ + 0.94 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 1.5 Beet_greens,_raw + 0.04 Beets,_raw + 1.17 Blackberries,_raw
+ + 0.57 Blueberries,_raw + 0.78 Broccoli,_raw + 0.88 Brussels_sprouts,_raw
+ + 0.32 Buckwheat_flour,_whole_groat + 0.09 Cabbage,_chinese_(pak_choi),_raw
+ + 0.15 Cabbage,_raw + 0.11 Cabbage,_red,_raw + 0.66 Carrots,_raw
+ + 0.08 Cauliflower,_raw + 0.27 Celery,_raw
+ + 1.31 Cereals,_whole_wheat_hot_natural_cereal,_dry + 1.89 Chard,_swiss,_raw
+ + 0.21 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.22 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.7 Chicken,_liver,_all_classes,_raw + 0.07 Corn,_sweet,_yellow,_raw
+ + 0.22 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.03 Cucumber,_with_peel,_raw + 1.05 Egg,_whole,_raw,_fresh
+ + 0.3 Eggplant,_raw + 0.44 Endive,_raw
+ + 1.28 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.57 Fish,_anchovy,_european,_raw + 0.08 Garlic,_raw + 1.54 Kale,_raw
+ + 1.46 Kiwifruit,_green,_raw + 0.49 Lentils,_raw
+ + 0.18 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.13 Lettuce,_cos_or_romaine,_raw + 0.22 Lettuce,_green_leaf,_raw
+ + 0.15 Lettuce,_red_leaf,_raw
+ + 0.07 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.85 Mollusks,_oyster,_eastern,_canned + 0.77 Nectarines,_raw
+ + 0.7 Nuts,_walnuts,_english + 0.02 Onions,_raw
+ + 0.55 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.15 Oranges,_raw,_navels + 1.49 Parsnips,_raw + 0.73 Peaches,_yellow,_raw
+ + 0.12 Pears,_raw + 3.58 Peppers,_jalapeno,_raw + 0.69 Peppers,_serrano,_raw
+ + 0.37 Peppers,_sweet,_green,_raw + 1.58 Peppers,_sweet,_red,_raw
+ + 0.26 Plums,_raw + 0.01 Potatoes,_flesh_and_skin,_raw
+ + 0.6 Rice,_brown,_long_grain,_raw + 0.3 Rutabagas,_raw
+ + 0.5 Seeds,_chia_seeds,_dried + 0.31 Seeds,_flaxseed
+ + 2.18 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 35.17 Seeds,_sunflower_seed_kernels,_dried + 0.04 Shallots,_raw
+ + 2.03 Spinach,_raw + 0.12 Squash,_summer,_all_varieties,_raw
+ + 0.13 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.13 Squash,_summer,_scallop,_raw
+ + 0.12 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.12 Squash,_winter,_all_varieties,_raw
+ + 1.44 Squash,_winter,_butternut,_raw + 0.29 Strawberries,_raw
+ + 0.26 Sweet_potato,_raw,_unprepared
+ + 0.59 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.54 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 0.01 Tomatoes,_sun_dried + 0.71 Wheat_flour,_whole_grain + 0.35 Yam,_raw
+ >= 15
+_C2: 0.17 Apples,_raw,_with_skin + 0.39 Apricots,_raw + 0.66 Arugula,_raw
+ + 0.12 Asparagus,_raw + 0.33 Bananas,_raw
+ + 1.23 Beans,_pinto,_mature_seeds,_raw
+ + 0.35 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 19.41 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.13 Beet_greens,_raw + 0.17 Beets,_raw + 0.49 Blackberries,_raw
+ + 0.33 Blueberries,_raw + 0.37 Broccoli,_raw + 0.3 Brussels_sprouts,_raw
+ + 3.1 Buckwheat_flour,_whole_groat + 0.2 Cabbage,_chinese_(pak_choi),_raw
+ + 0.1 Cabbage,_raw + 0.16 Cabbage,_red,_raw + 0.24 Carrots,_raw
+ + 0.28 Cauliflower,_raw + 0.17 Celery,_raw
+ + 2 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.2 Chard,_swiss,_raw
+ + 4.31 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 1.65 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 4.83 Chicken,_liver,_all_classes,_raw + 1.35 Corn,_sweet,_yellow,_raw
+ + 0.38 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.11 Cucumber,_with_peel,_raw + 9.51 Egg,_whole,_raw,_fresh
+ + 0.18 Eggplant,_raw + 0.2 Endive,_raw
+ + 4.21 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 4.84 Fish,_anchovy,_european,_raw + 0.5 Garlic,_raw + 0.93 Kale,_raw
+ + 0.52 Kiwifruit,_green,_raw
+ + 5.02 Lamb,_variety_meats_and_by_products,_liver,_raw + 1.06 Lentils,_raw
+ + 0.22 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.3 Lettuce,_cos_or_romaine,_raw + 0.15 Lettuce,_green_leaf,_raw
+ + 0.22 Lettuce,_red_leaf,_raw
+ + 3.25 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 2.47 Mollusks,_oyster,_eastern,_canned + 0.32 Nectarines,_raw
+ + 65.21 Nuts,_walnuts,_english + 6.9 Oats + 0.1 Onions,_raw
+ + 0.19 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.15 Oranges,_raw,_navels + 0.3 Parsnips,_raw + 0.25 Peaches,_yellow,_raw
+ + 0.14 Pears,_raw + 0.37 Peppers,_jalapeno,_raw + 0.44 Peppers,_serrano,_raw
+ + 0.17 Peppers,_sweet,_green,_raw + 0.3 Peppers,_sweet,_red,_raw
+ + 0.21 Peppers,_sweet,_yellow,_raw + 0.28 Plums,_raw
+ + 7.14 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.09 Potatoes,_flesh_and_skin,_raw + 0.1 Radishes,_raw
+ + 3.2 Rice,_brown,_long_grain,_raw + 0.16 Rutabagas,_raw
+ + 30.74 Seeds,_chia_seeds,_dried + 42.16 Seeds,_flaxseed
+ + 49.05 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 51.46 Seeds,_sunflower_seed_kernels,_dried + 0.1 Shallots,_raw
+ + 0.39 Spinach,_raw + 0.18 Squash,_summer,_all_varieties,_raw
+ + 0.27 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.2 Squash,_summer,_scallop,_raw
+ + 0.32 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.1 Squash,_winter,_acorn,_raw + 0.13 Squash,_winter,_all_varieties,_raw
+ + 0.1 Squash,_winter,_butternut,_raw + 0.3 Strawberries,_raw
+ + 0.05 Sweet_potato,_raw,_unprepared
+ + 0.25 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.2 Tomatoes,_red,_ripe,_raw,_year_round_average + 2.97 Tomatoes,_sun_dried
+ + 2.5 Wheat_flour,_whole_grain + 0.17 Yam,_raw >= 0
+_C20: 82 Egg,_whole,_raw,_fresh
+ + 563 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 51 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + Mollusks,_oyster,_eastern,_canned >= 15
+_C21: 4.6 Apples,_raw,_with_skin + 10 Apricots,_raw + 15 Arugula,_raw
+ + 5.6 Asparagus,_raw + 8.7 Bananas,_raw + 6.3 Beans,_pinto,_mature_seeds,_raw
+ + 30 Beet_greens,_raw + 4.9 Beets,_raw + 21 Blackberries,_raw
+ + 9.7 Blueberries,_raw + 89.2 Broccoli,_raw + 85 Brussels_sprouts,_raw
+ + 45 Cabbage,_chinese_(pak_choi),_raw + 36.6 Cabbage,_raw
+ + 57 Cabbage,_red,_raw + 5.9 Carrots,_raw + 48.2 Cauliflower,_raw
+ + 3.1 Celery,_raw + 30 Chard,_swiss,_raw
+ + 3.1 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 17.9 Chicken,_liver,_all_classes,_raw + 6.8 Corn,_sweet,_yellow,_raw
+ + 2.2 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 2.8 Cucumber,_with_peel,_raw + 2.2 Eggplant,_raw + 6.5 Endive,_raw
+ + 31.2 Garlic,_raw + 120 Kale,_raw + 92.7 Kiwifruit,_green,_raw
+ + 4 Lamb,_variety_meats_and_by_products,_liver,_raw + 4.5 Lentils,_raw
+ + 3.7 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 4 Lettuce,_cos_or_romaine,_raw + 9.2 Lettuce,_green_leaf,_raw
+ + 3.7 Lettuce,_red_leaf,_raw + 5 Mollusks,_oyster,_eastern,_canned
+ + 5.4 Nectarines,_raw + 1.3 Nuts,_walnuts,_english + 7.4 Onions,_raw
+ + 18.8 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 59.1 Oranges,_raw,_navels + 17 Parsnips,_raw + 6.6 Peaches,_yellow,_raw
+ + 4.3 Pears,_raw + 118.6 Peppers,_jalapeno,_raw + 44.9 Peppers,_serrano,_raw
+ + 80.4 Peppers,_sweet,_green,_raw + 127.7 Peppers,_sweet,_red,_raw
+ + 183.5 Peppers,_sweet,_yellow,_raw + 9.5 Plums,_raw
+ + 0.8 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 19.7 Potatoes,_flesh_and_skin,_raw + 14.8 Radishes,_raw + 25 Rutabagas,_raw
+ + 1.6 Seeds,_chia_seeds,_dried + 0.6 Seeds,_flaxseed
+ + 1.9 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 1.4 Seeds,_sunflower_seed_kernels,_dried + 8 Shallots,_raw
+ + 28.1 Spinach,_raw + 17 Squash,_summer,_all_varieties,_raw
+ + 19.3 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 18 Squash,_summer,_scallop,_raw
+ + 17.9 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 11 Squash,_winter,_acorn,_raw + 12.3 Squash,_winter,_all_varieties,_raw
+ + 21 Squash,_winter,_butternut,_raw + 58.8 Strawberries,_raw
+ + 2.4 Sweet_potato,_raw,_unprepared
+ + 12.6 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 13.7 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 39.2 Tomatoes,_sun_dried + 17.1 Yam,_raw >= 90
+_C22: 0.017 Apples,_raw,_with_skin + 0.03 Apricots,_raw + 0.044 Arugula,_raw
+ + 0.143 Asparagus,_raw + 0.031 Bananas,_raw
+ + 0.713 Beans,_pinto,_mature_seeds,_raw
+ + 0.118 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.1 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.1 Beet_greens,_raw + 0.031 Beets,_raw + 0.02 Blackberries,_raw
+ + 0.037 Blueberries,_raw + 0.071 Broccoli,_raw + 0.139 Brussels_sprouts,_raw
+ + 0.417 Buckwheat_flour,_whole_groat + 0.04 Cabbage,_chinese_(pak_choi),_raw
+ + 0.061 Cabbage,_raw + 0.064 Cabbage,_red,_raw + 0.066 Carrots,_raw
+ + 0.05 Cauliflower,_raw + 0.021 Celery,_raw
+ + 0.4 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.04 Chard,_swiss,_raw
+ + 0.077 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.068 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.305 Chicken,_liver,_all_classes,_raw + 0.155 Corn,_sweet,_yellow,_raw
+ + 0.101 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.027 Cucumber,_with_peel,_raw + 0.04 Egg,_whole,_raw,_fresh
+ + 0.039 Eggplant,_raw + 0.08 Endive,_raw
+ + 0.027 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.055 Fish,_anchovy,_european,_raw + 0.2 Garlic,_raw + 0.11 Kale,_raw
+ + 0.027 Kiwifruit,_green,_raw
+ + 0.34 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.873 Lentils,_raw
+ + 0.057 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.072 Lettuce,_cos_or_romaine,_raw + 0.07 Lettuce,_green_leaf,_raw
+ + 0.064 Lettuce,_red_leaf,_raw
+ + 0.046 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.15 Mollusks,_oyster,_eastern,_canned + 0.034 Nectarines,_raw
+ + 0.341 Nuts,_walnuts,_english + 0.763 Oats + 0.046 Onions,_raw
+ + 0.055 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.068 Oranges,_raw,_navels + 0.09 Parsnips,_raw
+ + 0.024 Peaches,_yellow,_raw + 0.012 Pears,_raw + 0.04 Peppers,_jalapeno,_raw
+ + 0.054 Peppers,_serrano,_raw + 0.057 Peppers,_sweet,_green,_raw
+ + 0.054 Peppers,_sweet,_red,_raw + 0.028 Peppers,_sweet,_yellow,_raw
+ + 0.028 Plums,_raw
+ + 0.884 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.081 Potatoes,_flesh_and_skin,_raw + 0.012 Radishes,_raw
+ + 0.541 Rice,_brown,_long_grain,_raw + 0.09 Rutabagas,_raw
+ + 0.62 Seeds,_chia_seeds,_dried + 1.644 Seeds,_flaxseed
+ + 0.273 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 1.48 Seeds,_sunflower_seed_kernels,_dried + 0.06 Shallots,_raw
+ + 0.078 Spinach,_raw + 0.048 Squash,_summer,_all_varieties,_raw
+ + 0.051 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.07 Squash,_summer,_scallop,_raw
+ + 0.045 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.14 Squash,_winter,_acorn,_raw + 0.03 Squash,_winter,_all_varieties,_raw
+ + 0.1 Squash,_winter,_butternut,_raw + 0.024 Strawberries,_raw
+ + 0.078 Sweet_potato,_raw,_unprepared
+ + 0.575 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.037 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 0.528 Tomatoes,_sun_dried + 0.502 Wheat_flour,_whole_grain + 0.112 Yam,_raw
+ >= 1.2
+_C23: 0.026 Apples,_raw,_with_skin + 0.04 Apricots,_raw + 0.086 Arugula,_raw
+ + 0.141 Asparagus,_raw + 0.073 Bananas,_raw
+ + 0.212 Beans,_pinto,_mature_seeds,_raw
+ + 0.046 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.17 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.22 Beet_greens,_raw + 0.04 Beets,_raw + 0.026 Blackberries,_raw
+ + 0.041 Blueberries,_raw + 0.117 Broccoli,_raw + 0.09 Brussels_sprouts,_raw
+ + 0.19 Buckwheat_flour,_whole_groat + 0.07 Cabbage,_chinese_(pak_choi),_raw
+ + 0.04 Cabbage,_raw + 0.069 Cabbage,_red,_raw + 0.058 Carrots,_raw
+ + 0.06 Cauliflower,_raw + 0.057 Celery,_raw
+ + 0.3 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.09 Chard,_swiss,_raw
+ + 0.184 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.092 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 1.778 Chicken,_liver,_all_classes,_raw + 0.055 Corn,_sweet,_yellow,_raw
+ + 0.148 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.033 Cucumber,_with_peel,_raw + 0.457 Egg,_whole,_raw,_fresh
+ + 0.037 Eggplant,_raw + 0.075 Endive,_raw
+ + 0.203 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.256 Fish,_anchovy,_european,_raw + 0.11 Garlic,_raw + 0.13 Kale,_raw
+ + 0.025 Kiwifruit,_green,_raw
+ + 3.63 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.211 Lentils,_raw
+ + 0.062 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.067 Lettuce,_cos_or_romaine,_raw + 0.08 Lettuce,_green_leaf,_raw
+ + 0.077 Lettuce,_red_leaf,_raw
+ + 0.169 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.166 Mollusks,_oyster,_eastern,_canned + 0.027 Nectarines,_raw
+ + 0.15 Nuts,_walnuts,_english + 0.139 Oats + 0.027 Onions,_raw
+ + 0.08 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.051 Oranges,_raw,_navels + 0.05 Parsnips,_raw
+ + 0.031 Peaches,_yellow,_raw + 0.026 Pears,_raw + 0.07 Peppers,_jalapeno,_raw
+ + 0.081 Peppers,_serrano,_raw + 0.028 Peppers,_sweet,_green,_raw
+ + 0.085 Peppers,_sweet,_red,_raw + 0.025 Peppers,_sweet,_yellow,_raw
+ + 0.026 Plums,_raw
+ + 0.314 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.032 Potatoes,_flesh_and_skin,_raw + 0.039 Radishes,_raw
+ + 0.095 Rice,_brown,_long_grain,_raw + 0.04 Rutabagas,_raw
+ + 0.17 Seeds,_chia_seeds,_dried + 0.161 Seeds,_flaxseed
+ + 0.153 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 0.355 Seeds,_sunflower_seed_kernels,_dried + 0.02 Shallots,_raw
+ + 0.189 Spinach,_raw + 0.142 Squash,_summer,_all_varieties,_raw
+ + 0.041 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.03 Squash,_summer,_scallop,_raw
+ + 0.094 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.01 Squash,_winter,_acorn,_raw + 0.062 Squash,_winter,_all_varieties,_raw
+ + 0.02 Squash,_winter,_butternut,_raw + 0.022 Strawberries,_raw
+ + 0.061 Sweet_potato,_raw,_unprepared
+ + 0.055 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.019 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 0.489 Tomatoes,_sun_dried + 0.165 Wheat_flour,_whole_grain + 0.032 Yam,_raw
  >= 1.3
-_C26: 5 food_01077 + 47 food_01123 + 588 food_05027 + 4 food_05039
- + 10 food_05043 + 78 food_08144 + 3 food_09003 + 9 food_09021 + 20 food_09040
- + 25 food_09042 + 6 food_09050 + 25 food_09148 + 5 food_09191 + 34 food_09202
- + 4 food_09236 + 7 food_09252 + 5 food_09279 + 24 food_09316 + 5 food_10072
- + 52 food_11011 + 109 food_11080 + 15 food_11086 + 63 food_11090
- + 61 food_11098 + 43 food_11109 + 18 food_11112 + 66 food_11116
- + 19 food_11124 + 57 food_11135 + 36 food_11143 + 14 food_11147
- + 42 food_11167 + 127 food_11192 + 7 food_11205 + 22 food_11209
- + 142 food_11213 + 3 food_11215 + 141 food_11233 + 73 food_11250
- + 136 food_11251 + 38 food_11253 + 36 food_11257 + 19 food_11282
- + 64 food_11291 + 67 food_11298 + 10 food_11333 + 15 food_11352
- + 25 food_11429 + 21 food_11435 + 194 food_11457 + 19 food_11467
- + 30 food_11475 + 24 food_11477 + 17 food_11482 + 27 food_11485
- + 11 food_11507 + 15 food_11529 + 8 food_11531 + 23 food_11601
- + 29 food_11641 + 24 food_11643 + 34 food_11677 + 46 food_11821
- + 26 food_11951 + 68 food_11955 + 97 food_11959 + 23 food_11977
- + 27 food_11979 + 49 food_12006 + 58 food_12014 + 227 food_12036
- + 98 food_12155 + 87 food_12220 + 5 food_13815 + 9 food_15001 + 9 food_15170
- + 4 food_15265 + 525 food_16042 + 81 food_16050 + 479 food_16069
- + 230 food_17199 + 54 food_20011 + 23 food_20036 + 56 food_20038
- + 44 food_20080 >= 400
-_C27: 0.45 food_01077 + 0.89 food_01123 + 16.58 food_05027 + 0.38 food_05039
- + 0.36 food_05043 + 0.84 food_10072 + 3.4 food_13815 + 0.62 food_15001
- + 19.13 food_15170 + 4.96 food_15265 + 90.05 food_17199 >= 2.4
-_C28: 14.3 food_01077 + 293.8 food_01123 + 194.4 food_05027 + 23.1 food_08144
- + 3.4 food_09003 + 2.8 food_09021 + 9.8 food_09040 + 8.5 food_09042
- + 6 food_09050 + 7.8 food_09148 + 6.2 food_09191 + 8.4 food_09202
- + 6.1 food_09236 + 5.1 food_09252 + 1.9 food_09279 + 5.7 food_09316
- + 16 food_11011 + 6 food_11080 + 0.4 food_11086 + 18.7 food_11090
- + 19.1 food_11098 + 10.7 food_11109 + 17.1 food_11112 + 6.4 food_11116
- + 8.8 food_11124 + 44.3 food_11135 + 6.1 food_11143 + 18 food_11147
- + 23 food_11167 + 32.9 food_11192 + 6 food_11205 + 6.9 food_11209
- + 16.8 food_11213 + 23.2 food_11215 + 0.8 food_11233 + 8.4 food_11250
- + 9.9 food_11251 + 13.6 food_11253 + 11.8 food_11257 + 6.1 food_11282
- + 5.7 food_11291 + 5.5 food_11333 + 12.1 food_11352 + 6.5 food_11429
- + 14.1 food_11435 + 19.3 food_11457 + 7.1 food_11467 + 7.3 food_11475
- + 9.5 food_11477 + 12.3 food_11507 + 6.7 food_11529 + 6.4 food_11531
- + 16.5 food_11601 + 6.7 food_11641 + 10 food_11643 + 11.3 food_11677
- + 5.6 food_11821 + 104.6 food_11955 + 15.3 food_11959 + 8.9 food_11977
- + 7.5 food_11979 + 63 food_12014 + 55.1 food_12036 + 39.2 food_12155
- + 78.7 food_12220 + 71.7 food_13815 + 81 food_15170 + 88 food_15265
- + 66.2 food_16042 + 35.1 food_16050 + 96.4 food_16069 + 54.2 food_20011
- + 21.5 food_20036 + 31.2 food_20080 >= 550
-_C29: 0.3 food_01077 + 0.3 food_01123 + 2.4 food_05039 + 2.4 food_05043
- + 2.4 food_08144 + 2.2 food_09003 + 3.3 food_09021 + 0.5 food_09040
- + 19.8 food_09042 + 19.3 food_09050 + 40.3 food_09148 + 2.2 food_09191
- + 2.6 food_09236 + 4.4 food_09252 + 6.4 food_09279 + 2.2 food_09316
- + 41.6 food_11011 + 0.2 food_11080 + 400 food_11086 + 101.6 food_11090
- + 177 food_11098 + 76 food_11109 + 38.2 food_11112 + 45.5 food_11116
- + 13.2 food_11124 + 15.5 food_11135 + 29.3 food_11143 + 830 food_11147
- + 0.3 food_11167 + 26.6 food_11192 + 16.4 food_11205 + 3.5 food_11209
- + 231 food_11213 + 1.7 food_11215 + 704.8 food_11233 + 102.3 food_11250
- + 102.5 food_11251 + 126.3 food_11253 + 140.3 food_11257 + 0.4 food_11282
- + 207 food_11291 + 22.5 food_11298 + 7.4 food_11333 + 2 food_11352
- + 1.3 food_11429 + 0.3 food_11435 + 482.9 food_11457 + 3.2 food_11467
- + 3.3 food_11475 + 4.3 food_11477 + 1.1 food_11485 + 1.8 food_11507
- + 7.9 food_11529 + 2.6 food_11531 + 2.3 food_11601 + 3 food_11641
- + 1.1 food_11643 + 0.8 food_11677 + 4.9 food_11821 + 43 food_11955
- + 108.6 food_11959 + 11.8 food_11977 + 18.5 food_11979 + 7.3 food_12014
- + 2.7 food_12155 + 4.3 food_12220 + 0.1 food_15001 + 0.1 food_15170
- + 0.1 food_15265 + 5.6 food_16042 + 3.5 food_16050 + 5 food_16069
- + 7 food_20011 + 0.6 food_20036 + 1.9 food_20080 >= 120
-_C3: 4.8 food_01077 + 0.72 food_01123 + 0.73 food_05027 + 75.2 food_08144
- + 13.81 food_09003 + 11.12 food_09021 + 22.84 food_09040 + 9.61 food_09042
- + 14.49 food_09050 + 14.66 food_09148 + 10.55 food_09191 + 12.54 food_09202
- + 9.54 food_09236 + 15.23 food_09252 + 11.42 food_09279 + 7.68 food_09316
- + 3.88 food_11011 + 9.56 food_11080 + 4.33 food_11086 + 6.64 food_11090
- + 8.95 food_11098 + 5.8 food_11109 + 7.37 food_11112 + 2.18 food_11116
- + 9.58 food_11124 + 4.97 food_11135 + 2.97 food_11143 + 3.74 food_11147
- + 18.7 food_11167 + 20.32 food_11192 + 3.63 food_11205 + 5.88 food_11209
- + 3.35 food_11213 + 33.06 food_11215 + 8.75 food_11233 + 2.23 food_11250
- + 3.29 food_11251 + 2.87 food_11253 + 2.26 food_11257 + 9.34 food_11282
- + 7.34 food_11291 + 17.99 food_11298 + 4.64 food_11333 + 17.49 food_11352
- + 3.4 food_11429 + 8.62 food_11435 + 3.63 food_11457 + 3.88 food_11467
- + 3.84 food_11475 + 3.11 food_11477 + 10.42 food_11482 + 11.69 food_11485
- + 20.12 food_11507 + 3.89 food_11529 + 3.47 food_11531 + 27.88 food_11601
- + 3.35 food_11641 + 8.59 food_11643 + 16.8 food_11677 + 6.03 food_11821
- + 6.32 food_11951 + 55.76 food_11955 + 3.65 food_11959 + 6.7 food_11977
- + 6.5 food_11979 + 42.12 food_12006 + 10.71 food_12014 + 20 food_12036
- + 13.71 food_12155 + 28.88 food_12220 + 3.91 food_15170 + 62.55 food_16042
- + 25.09 food_16050 + 63.35 food_16069 + 1.78 food_17199 + 70.59 food_20011
- + 76.25 food_20036 + 66.27 food_20038 + 71.97 food_20080 >= 130
-_C30: 0.12 food_01077 + 1.555 food_01123 + 0.475 food_05027 + 0.22 food_05039
- + 0.82 food_05043 + 0.933 food_08144 + 0.043 food_09003 + 0.077 food_09021
- + 0.046 food_09040 + 0.186 food_09042 + 0.088 food_09050 + 0.246 food_09148
- + 0.111 food_09191 + 0.023 food_09202 + 0.084 food_09236 + 0.093 food_09252
- + 0.044 food_09279 + 0.09 food_09316 + 0.62 food_10072 + 0.04 food_11011
- + 0.055 food_11080 + 0.041 food_11086 + 0.017 food_11090 + 0.045 food_11098
- + 0.017 food_11109 + 0.034 food_11112 + 0.042 food_11116 + 0.115 food_11124
- + 0.016 food_11135 + 0.079 food_11143 + 0.063 food_11147 + 0.472 food_11167
- + 0.093 food_11192 + 0.028 food_11205 + 0.063 food_11209 + 0.075 food_11213
- + 0.229 food_11215 + 0.138 food_11233 + 0.034 food_11250 + 0.047 food_11251
- + 0.024 food_11253 + 0.021 food_11257 + 0.013 food_11282 + 0.07 food_11291
- + 0.041 food_11298 + 0.054 food_11333 + 0.032 food_11352 + 0.017 food_11429
- + 0.035 food_11435 + 0.026 food_11457 + 0.039 food_11467 + 0.031 food_11475
- + 0.03 food_11477 + 0.016 food_11482 + 0.016 food_11485 + 0.013 food_11507
- + 0.08 food_11529 + 0.097 food_11531 + 0.064 food_11601 + 0.033 food_11641
- + 0.021 food_11643 + 0.037 food_11677 + 0.045 food_11821 + 1.104 food_11955
- + 0.13 food_11959 + 0.216 food_11977 + 0.062 food_11979 + 5.835 food_12006
- + 20.71 food_12014 + 23.05 food_12036 + 38.093 food_12155 + 5.903 food_12220
- + 0.47 food_13815 + 0.097 food_15001 + 0.049 food_15170 + 0.071 food_15265
- + 0.17 food_16042 + 0.083 food_16050 + 0.414 food_16069 + 0.32 food_17199
- + 0.877 food_20011 + 0.968 food_20036 + 2.424 food_20038 + 1.093 food_20080
+_C24: 0.091 Apples,_raw,_with_skin + 0.6 Apricots,_raw + 0.305 Arugula,_raw
+ + 0.978 Asparagus,_raw + 0.665 Bananas,_raw
+ + 1.174 Beans,_pinto,_mature_seeds,_raw
+ + 0.14 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 2.18 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.4 Beet_greens,_raw + 0.334 Beets,_raw + 0.646 Blackberries,_raw
+ + 0.418 Blueberries,_raw + 0.639 Broccoli,_raw + 0.745 Brussels_sprouts,_raw
+ + 6.15 Buckwheat_flour,_whole_groat + 0.5 Cabbage,_chinese_(pak_choi),_raw
+ + 0.234 Cabbage,_raw + 0.418 Cabbage,_red,_raw + 0.983 Carrots,_raw
+ + 0.507 Cauliflower,_raw + 0.32 Celery,_raw
+ + 4.9 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.4 Chard,_swiss,_raw
+ + 6.246 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 10.604 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 9.728 Chicken,_liver,_all_classes,_raw + 1.77 Corn,_sweet,_yellow,_raw
+ + 1.403 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.098 Cucumber,_with_peel,_raw + 0.075 Egg,_whole,_raw,_fresh
+ + 0.649 Eggplant,_raw + 0.4 Endive,_raw
+ + 7.43 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 14.024 Fish,_anchovy,_european,_raw + 0.7 Garlic,_raw + Kale,_raw
+ + 0.341 Kiwifruit,_green,_raw
+ + 16.11 Lamb,_variety_meats_and_by_products,_liver,_raw + 2.605 Lentils,_raw
+ + 0.357 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.313 Lettuce,_cos_or_romaine,_raw + 0.375 Lettuce,_green_leaf,_raw
+ + 0.321 Lettuce,_red_leaf,_raw
+ + 0.089 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 1.244 Mollusks,_oyster,_eastern,_canned + 1.125 Nectarines,_raw
+ + 1.125 Nuts,_walnuts,_english + 0.961 Oats + 0.116 Onions,_raw
+ + 0.525 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.425 Oranges,_raw,_navels + 0.7 Parsnips,_raw + 0.806 Peaches,_yellow,_raw
+ + 0.161 Pears,_raw + 1.28 Peppers,_jalapeno,_raw
+ + 1.537 Peppers,_serrano,_raw + 0.48 Peppers,_sweet,_green,_raw
+ + 0.979 Peppers,_sweet,_red,_raw + 0.89 Peppers,_sweet,_yellow,_raw
+ + 0.417 Plums,_raw
+ + 4.275 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 1.061 Potatoes,_flesh_and_skin,_raw + 0.254 Radishes,_raw
+ + 6.494 Rice,_brown,_long_grain,_raw + 0.7 Rutabagas,_raw
+ + 8.83 Seeds,_chia_seeds,_dried + 3.08 Seeds,_flaxseed
+ + 4.987 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 8.335 Seeds,_sunflower_seed_kernels,_dried + 0.2 Shallots,_raw
+ + 0.724 Spinach,_raw + 0.487 Squash,_summer,_all_varieties,_raw
+ + 0.448 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.6 Squash,_summer,_scallop,_raw
+ + 0.451 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.7 Squash,_winter,_acorn,_raw + 0.5 Squash,_winter,_all_varieties,_raw
+ + 1.2 Squash,_winter,_butternut,_raw + 0.386 Strawberries,_raw
+ + 0.557 Sweet_potato,_raw,_unprepared
+ + 0.712 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.594 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 9.05 Tomatoes,_sun_dried + 4.957 Wheat_flour,_whole_grain + 0.552 Yam,_raw
+ >= 16
+_C25: 0.061 Apples,_raw,_with_skin + 0.24 Apricots,_raw + 0.437 Arugula,_raw
+ + 0.274 Asparagus,_raw + 0.334 Bananas,_raw
+ + 0.785 Beans,_pinto,_mature_seeds,_raw
+ + 0.229 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.29 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.25 Beet_greens,_raw + 0.155 Beets,_raw + 0.276 Blackberries,_raw
+ + 0.124 Blueberries,_raw + 0.573 Broccoli,_raw + 0.309 Brussels_sprouts,_raw
+ + 0.44 Buckwheat_flour,_whole_groat + 0.088 Cabbage,_chinese_(pak_choi),_raw
+ + 0.212 Cabbage,_raw + 0.147 Cabbage,_red,_raw + 0.273 Carrots,_raw
+ + 0.667 Cauliflower,_raw + 0.246 Celery,_raw
+ + 0.915 Cereals,_whole_wheat_hot_natural_cereal,_dry
+ + 0.172 Chard,_swiss,_raw
+ + 1.249 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.822 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 6.233 Chicken,_liver,_all_classes,_raw + 0.717 Corn,_sweet,_yellow,_raw
+ + 0.154 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.259 Cucumber,_with_peel,_raw + 1.533 Egg,_whole,_raw,_fresh
+ + 0.281 Eggplant,_raw + 0.9 Endive,_raw + 0.645 Fish,_anchovy,_european,_raw
+ + 0.596 Garlic,_raw + 0.091 Kale,_raw + 0.183 Kiwifruit,_green,_raw
+ + 6.13 Lamb,_variety_meats_and_by_products,_liver,_raw + 2.14 Lentils,_raw
+ + 0.15 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.142 Lettuce,_cos_or_romaine,_raw + 0.134 Lettuce,_green_leaf,_raw
+ + 0.144 Lettuce,_red_leaf,_raw
+ + 0.373 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.18 Mollusks,_oyster,_eastern,_canned + 0.185 Nectarines,_raw
+ + 0.57 Nuts,_walnuts,_english + 1.349 Oats + 0.123 Onions,_raw
+ + 0.075 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.261 Oranges,_raw,_navels + 0.6 Parsnips,_raw + 0.153 Peaches,_yellow,_raw
+ + 0.049 Pears,_raw + 0.315 Peppers,_jalapeno,_raw + 0.2 Peppers,_serrano,_raw
+ + 0.099 Peppers,_sweet,_green,_raw + 0.317 Peppers,_sweet,_red,_raw
+ + 0.168 Peppers,_sweet,_yellow,_raw + 0.135 Plums,_raw
+ + 0.822 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.295 Potatoes,_flesh_and_skin,_raw + 0.165 Radishes,_raw
+ + 1.065 Rice,_brown,_long_grain,_raw + 0.16 Rutabagas,_raw
+ + 0.985 Seeds,_flaxseed + 0.75 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 1.13 Seeds,_sunflower_seed_kernels,_dried + 0.29 Shallots,_raw
+ + 0.065 Spinach,_raw + 0.155 Squash,_summer,_all_varieties,_raw
+ + 0.16 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.102 Squash,_summer,_scallop,_raw
+ + 0.204 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.4 Squash,_winter,_acorn,_raw + 0.188 Squash,_winter,_all_varieties,_raw
+ + 0.4 Squash,_winter,_butternut,_raw + 0.125 Strawberries,_raw
+ + 0.8 Sweet_potato,_raw,_unprepared
+ + 0.117 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.089 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 2.087 Tomatoes,_sun_dried + 0.603 Wheat_flour,_whole_grain + 0.314 Yam,_raw
+ >= 5
+_C26: 0.041 Apples,_raw,_with_skin + 0.054 Apricots,_raw + 0.073 Arugula,_raw
+ + 0.091 Asparagus,_raw + 0.367 Bananas,_raw
+ + 0.474 Beans,_pinto,_mature_seeds,_raw
+ + 0.093 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.36 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.106 Beet_greens,_raw + 0.067 Beets,_raw + 0.03 Blackberries,_raw
+ + 0.052 Blueberries,_raw + 0.175 Broccoli,_raw + 0.219 Brussels_sprouts,_raw
+ + 0.582 Buckwheat_flour,_whole_groat + 0.194 Cabbage,_chinese_(pak_choi),_raw
+ + 0.124 Cabbage,_raw + 0.209 Cabbage,_red,_raw + 0.138 Carrots,_raw
+ + 0.184 Cauliflower,_raw + 0.074 Celery,_raw
+ + 0.391 Cereals,_whole_wheat_hot_natural_cereal,_dry
+ + 0.099 Chard,_swiss,_raw
+ + 0.33 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.54 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.853 Chicken,_liver,_all_classes,_raw + 0.093 Corn,_sweet,_yellow,_raw
+ + 0.065 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.04 Cucumber,_with_peel,_raw + 0.17 Egg,_whole,_raw,_fresh
+ + 0.084 Eggplant,_raw + 0.02 Endive,_raw
+ + 0.105 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.143 Fish,_anchovy,_european,_raw + 1.235 Garlic,_raw + 0.271 Kale,_raw
+ + 0.063 Kiwifruit,_green,_raw
+ + 0.9 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.54 Lentils,_raw
+ + 0.082 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.074 Lettuce,_cos_or_romaine,_raw + 0.09 Lettuce,_green_leaf,_raw
+ + 0.1 Lettuce,_red_leaf,_raw
+ + 0.036 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.095 Mollusks,_oyster,_eastern,_canned + 0.025 Nectarines,_raw
+ + 0.537 Nuts,_walnuts,_english + 0.119 Oats + 0.12 Onions,_raw
+ + 0.061 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.079 Oranges,_raw,_navels + 0.09 Parsnips,_raw
+ + 0.025 Peaches,_yellow,_raw + 0.029 Pears,_raw
+ + 0.419 Peppers,_jalapeno,_raw + 0.505 Peppers,_serrano,_raw
+ + 0.224 Peppers,_sweet,_green,_raw + 0.291 Peppers,_sweet,_red,_raw
+ + 0.168 Peppers,_sweet,_yellow,_raw + 0.029 Plums,_raw
+ + 0.415 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.298 Potatoes,_flesh_and_skin,_raw + 0.071 Radishes,_raw
+ + 0.477 Rice,_brown,_long_grain,_raw + 0.1 Rutabagas,_raw
+ + 0.473 Seeds,_flaxseed + 0.143 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 1.345 Seeds,_sunflower_seed_kernels,_dried + 0.345 Shallots,_raw
+ + 0.195 Spinach,_raw + 0.218 Squash,_summer,_all_varieties,_raw
+ + 0.104 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.109 Squash,_summer,_scallop,_raw
+ + 0.163 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.154 Squash,_winter,_acorn,_raw + 0.156 Squash,_winter,_all_varieties,_raw
+ + 0.154 Squash,_winter,_butternut,_raw + 0.047 Strawberries,_raw
+ + 0.209 Sweet_potato,_raw,_unprepared
+ + 0.111 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.08 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 0.332 Tomatoes,_sun_dried + 0.407 Wheat_flour,_whole_grain + 0.293 Yam,_raw
+ >= 1.3
+_C27: 3 Apples,_raw,_with_skin + 9 Apricots,_raw + 97 Arugula,_raw
+ + 52 Asparagus,_raw + 20 Bananas,_raw + 525 Beans,_pinto,_mature_seeds,_raw
+ + 81 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 5 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 15 Beet_greens,_raw + 109 Beets,_raw + 25 Blackberries,_raw
+ + 6 Blueberries,_raw + 63 Broccoli,_raw + 61 Brussels_sprouts,_raw
+ + 54 Buckwheat_flour,_whole_groat + 66 Cabbage,_chinese_(pak_choi),_raw
+ + 43 Cabbage,_raw + 18 Cabbage,_red,_raw + 19 Carrots,_raw
+ + 57 Cauliflower,_raw + 36 Celery,_raw
+ + 78 Cereals,_whole_wheat_hot_natural_cereal,_dry + 14 Chard,_swiss,_raw
+ + 10 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 4 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 588 Chicken,_liver,_all_classes,_raw + 42 Corn,_sweet,_yellow,_raw
+ + 127 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 7 Cucumber,_with_peel,_raw + 47 Egg,_whole,_raw,_fresh + 22 Eggplant,_raw
+ + 142 Endive,_raw
+ + 4 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 9 Fish,_anchovy,_european,_raw + 3 Garlic,_raw + 141 Kale,_raw
+ + 25 Kiwifruit,_green,_raw
+ + 230 Lamb,_variety_meats_and_by_products,_liver,_raw + 479 Lentils,_raw
+ + 73 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 136 Lettuce,_cos_or_romaine,_raw + 38 Lettuce,_green_leaf,_raw
+ + 36 Lettuce,_red_leaf,_raw
+ + 5 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 9 Mollusks,_oyster,_eastern,_canned + 5 Nectarines,_raw
+ + 98 Nuts,_walnuts,_english + 56 Oats + 19 Onions,_raw
+ + 64 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 34 Oranges,_raw,_navels + 67 Parsnips,_raw + 4 Peaches,_yellow,_raw
+ + 7 Pears,_raw + 27 Peppers,_jalapeno,_raw + 23 Peppers,_serrano,_raw
+ + 10 Peppers,_sweet,_green,_raw + 46 Peppers,_sweet,_red,_raw
+ + 26 Peppers,_sweet,_yellow,_raw + 5 Plums,_raw
+ + 5 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 15 Potatoes,_flesh_and_skin,_raw + 25 Radishes,_raw
+ + 23 Rice,_brown,_long_grain,_raw + 21 Rutabagas,_raw
+ + 49 Seeds,_chia_seeds,_dried + 87 Seeds,_flaxseed
+ + 58 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 227 Seeds,_sunflower_seed_kernels,_dried + 34 Shallots,_raw
+ + 194 Spinach,_raw + 29 Squash,_summer,_all_varieties,_raw
+ + 19 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 30 Squash,_summer,_scallop,_raw
+ + 24 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 17 Squash,_winter,_acorn,_raw + 24 Squash,_winter,_all_varieties,_raw
+ + 27 Squash,_winter,_butternut,_raw + 24 Strawberries,_raw
+ + 11 Sweet_potato,_raw,_unprepared
+ + 8 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 15 Tomatoes,_red,_ripe,_raw,_year_round_average + 68 Tomatoes,_sun_dried
+ + 44 Wheat_flour,_whole_grain + 23 Yam,_raw >= 400
+_C28:
+ 3.4 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.36 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.38 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 16.58 Chicken,_liver,_all_classes,_raw + 0.89 Egg,_whole,_raw,_fresh
+ + 4.96 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.62 Fish,_anchovy,_european,_raw
+ + 90.05 Lamb,_variety_meats_and_by_products,_liver,_raw
+ + 0.45 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 19.13 Mollusks,_oyster,_eastern,_canned
+ + 0.84 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw >= 2.4
+_C29: 3.4 Apples,_raw,_with_skin + 2.8 Apricots,_raw + 15.3 Arugula,_raw
+ + 16 Asparagus,_raw + 9.8 Bananas,_raw + 66.2 Beans,_pinto,_mature_seeds,_raw
+ + 35.1 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 71.7 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.4 Beet_greens,_raw + 6 Beets,_raw + 8.5 Blackberries,_raw
+ + 6 Blueberries,_raw + 18.7 Broccoli,_raw + 19.1 Brussels_sprouts,_raw
+ + 54.2 Buckwheat_flour,_whole_groat + 6.4 Cabbage,_chinese_(pak_choi),_raw
+ + 10.7 Cabbage,_raw + 17.1 Cabbage,_red,_raw + 8.8 Carrots,_raw
+ + 44.3 Cauliflower,_raw + 6.1 Celery,_raw
+ + 23.1 Cereals,_whole_wheat_hot_natural_cereal,_dry + 18 Chard,_swiss,_raw
+ + 194.4 Chicken,_liver,_all_classes,_raw + 23 Corn,_sweet,_yellow,_raw
+ + 32.9 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 6 Cucumber,_with_peel,_raw + 293.8 Egg,_whole,_raw,_fresh
+ + 6.9 Eggplant,_raw + 16.8 Endive,_raw
+ + 88 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 23.2 Garlic,_raw + 0.8 Kale,_raw + 7.8 Kiwifruit,_green,_raw
+ + 96.4 Lentils,_raw
+ + 8.4 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 9.9 Lettuce,_cos_or_romaine,_raw + 13.6 Lettuce,_green_leaf,_raw
+ + 11.8 Lettuce,_red_leaf,_raw
+ + 14.3 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 81 Mollusks,_oyster,_eastern,_canned + 6.2 Nectarines,_raw
+ + 39.2 Nuts,_walnuts,_english + 6.1 Onions,_raw
+ + 5.7 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 8.4 Oranges,_raw,_navels + 6.1 Peaches,_yellow,_raw + 5.1 Pears,_raw
+ + 7.5 Peppers,_jalapeno,_raw + 8.9 Peppers,_serrano,_raw
+ + 5.5 Peppers,_sweet,_green,_raw + 5.6 Peppers,_sweet,_red,_raw
+ + 1.9 Plums,_raw + 12.1 Potatoes,_flesh_and_skin,_raw + 6.5 Radishes,_raw
+ + 21.5 Rice,_brown,_long_grain,_raw + 14.1 Rutabagas,_raw
+ + 78.7 Seeds,_flaxseed + 63 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 55.1 Seeds,_sunflower_seed_kernels,_dried + 11.3 Shallots,_raw
+ + 19.3 Spinach,_raw + 6.7 Squash,_summer,_all_varieties,_raw
+ + 7.1 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 7.3 Squash,_summer,_scallop,_raw
+ + 9.5 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 10 Squash,_winter,_all_varieties,_raw + 5.7 Strawberries,_raw
+ + 12.3 Sweet_potato,_raw,_unprepared
+ + 6.4 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 6.7 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 104.6 Tomatoes,_sun_dried + 31.2 Wheat_flour,_whole_grain + 16.5 Yam,_raw
+ >= 550
+_C3: 13.81 Apples,_raw,_with_skin + 11.12 Apricots,_raw + 3.65 Arugula,_raw
+ + 3.88 Asparagus,_raw + 22.84 Bananas,_raw
+ + 62.55 Beans,_pinto,_mature_seeds,_raw
+ + 25.09 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 4.33 Beet_greens,_raw + 9.56 Beets,_raw + 9.61 Blackberries,_raw
+ + 14.49 Blueberries,_raw + 6.64 Broccoli,_raw + 8.95 Brussels_sprouts,_raw
+ + 70.59 Buckwheat_flour,_whole_groat + 2.18 Cabbage,_chinese_(pak_choi),_raw
+ + 5.8 Cabbage,_raw + 7.37 Cabbage,_red,_raw + 9.58 Carrots,_raw
+ + 4.97 Cauliflower,_raw + 2.97 Celery,_raw
+ + 75.2 Cereals,_whole_wheat_hot_natural_cereal,_dry + 3.74 Chard,_swiss,_raw
+ + 0.73 Chicken,_liver,_all_classes,_raw + 18.7 Corn,_sweet,_yellow,_raw
+ + 20.32 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 3.63 Cucumber,_with_peel,_raw + 0.72 Egg,_whole,_raw,_fresh
+ + 5.88 Eggplant,_raw + 3.35 Endive,_raw + 33.06 Garlic,_raw + 8.75 Kale,_raw
+ + 14.66 Kiwifruit,_green,_raw
+ + 1.78 Lamb,_variety_meats_and_by_products,_liver,_raw + 63.35 Lentils,_raw
+ + 2.23 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 3.29 Lettuce,_cos_or_romaine,_raw + 2.87 Lettuce,_green_leaf,_raw
+ + 2.26 Lettuce,_red_leaf,_raw
+ + 4.8 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 3.91 Mollusks,_oyster,_eastern,_canned + 10.55 Nectarines,_raw
+ + 13.71 Nuts,_walnuts,_english + 66.27 Oats + 9.34 Onions,_raw
+ + 7.34 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 12.54 Oranges,_raw,_navels + 17.99 Parsnips,_raw
+ + 9.54 Peaches,_yellow,_raw + 15.23 Pears,_raw + 6.5 Peppers,_jalapeno,_raw
+ + 6.7 Peppers,_serrano,_raw + 4.64 Peppers,_sweet,_green,_raw
+ + 6.03 Peppers,_sweet,_red,_raw + 6.32 Peppers,_sweet,_yellow,_raw
+ + 11.42 Plums,_raw + 17.49 Potatoes,_flesh_and_skin,_raw + 3.4 Radishes,_raw
+ + 76.25 Rice,_brown,_long_grain,_raw + 8.62 Rutabagas,_raw
+ + 42.12 Seeds,_chia_seeds,_dried + 28.88 Seeds,_flaxseed
+ + 10.71 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 20 Seeds,_sunflower_seed_kernels,_dried + 16.8 Shallots,_raw
+ + 3.63 Spinach,_raw + 3.35 Squash,_summer,_all_varieties,_raw
+ + 3.88 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 3.84 Squash,_summer,_scallop,_raw
+ + 3.11 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 10.42 Squash,_winter,_acorn,_raw + 8.59 Squash,_winter,_all_varieties,_raw
+ + 11.69 Squash,_winter,_butternut,_raw + 7.68 Strawberries,_raw
+ + 20.12 Sweet_potato,_raw,_unprepared
+ + 3.47 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 3.89 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 55.76 Tomatoes,_sun_dried + 71.97 Wheat_flour,_whole_grain + 27.88 Yam,_raw
+ >= 130
+_C30: 2.2 Apples,_raw,_with_skin + 3.3 Apricots,_raw + 108.6 Arugula,_raw
+ + 41.6 Asparagus,_raw + 0.5 Bananas,_raw
+ + 5.6 Beans,_pinto,_mature_seeds,_raw
+ + 3.5 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 400 Beet_greens,_raw + 0.2 Beets,_raw + 19.8 Blackberries,_raw
+ + 19.3 Blueberries,_raw + 101.6 Broccoli,_raw + 177 Brussels_sprouts,_raw
+ + 7 Buckwheat_flour,_whole_groat + 45.5 Cabbage,_chinese_(pak_choi),_raw
+ + 76 Cabbage,_raw + 38.2 Cabbage,_red,_raw + 13.2 Carrots,_raw
+ + 15.5 Cauliflower,_raw + 29.3 Celery,_raw
+ + 2.4 Cereals,_whole_wheat_hot_natural_cereal,_dry + 830 Chard,_swiss,_raw
+ + 2.4 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 2.4 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.3 Corn,_sweet,_yellow,_raw
+ + 26.6 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 16.4 Cucumber,_with_peel,_raw + 0.3 Egg,_whole,_raw,_fresh
+ + 3.5 Eggplant,_raw + 231 Endive,_raw
+ + 0.1 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.1 Fish,_anchovy,_european,_raw + 1.7 Garlic,_raw + 704.8 Kale,_raw
+ + 40.3 Kiwifruit,_green,_raw + 5 Lentils,_raw
+ + 102.3 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 102.5 Lettuce,_cos_or_romaine,_raw + 126.3 Lettuce,_green_leaf,_raw
+ + 140.3 Lettuce,_red_leaf,_raw
+ + 0.3 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.1 Mollusks,_oyster,_eastern,_canned + 2.2 Nectarines,_raw
+ + 2.7 Nuts,_walnuts,_english + 0.4 Onions,_raw
+ + 207 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 22.5 Parsnips,_raw + 2.6 Peaches,_yellow,_raw + 4.4 Pears,_raw
+ + 18.5 Peppers,_jalapeno,_raw + 11.8 Peppers,_serrano,_raw
+ + 7.4 Peppers,_sweet,_green,_raw + 4.9 Peppers,_sweet,_red,_raw
+ + 6.4 Plums,_raw + 2 Potatoes,_flesh_and_skin,_raw + 1.3 Radishes,_raw
+ + 0.6 Rice,_brown,_long_grain,_raw + 0.3 Rutabagas,_raw + 4.3 Seeds,_flaxseed
+ + 7.3 Seeds,_pumpkin_and_squash_seed_kernels,_dried + 0.8 Shallots,_raw
+ + 482.9 Spinach,_raw + 3 Squash,_summer,_all_varieties,_raw
+ + 3.2 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 3.3 Squash,_summer,_scallop,_raw
+ + 4.3 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 1.1 Squash,_winter,_all_varieties,_raw + 1.1 Squash,_winter,_butternut,_raw
+ + 2.2 Strawberries,_raw + 1.8 Sweet_potato,_raw,_unprepared
+ + 2.6 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 7.9 Tomatoes,_red,_ripe,_raw,_year_round_average + 43 Tomatoes,_sun_dried
+ + 1.9 Wheat_flour,_whole_grain + 2.3 Yam,_raw >= 120
+_C31: 0.028 Apples,_raw,_with_skin + 0.027 Apricots,_raw + 0.086 Arugula,_raw
+ + 0.04 Asparagus,_raw + 0.112 Bananas,_raw
+ + 0.235 Beans,_pinto,_mature_seeds,_raw
+ + 0.091 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 7.82 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.02 Beet_greens,_raw + 0.027 Beets,_raw + 0.014 Blackberries,_raw
+ + 0.028 Blueberries,_raw + 0.039 Broccoli,_raw + 0.062 Brussels_sprouts,_raw
+ + 0.677 Buckwheat_flour,_whole_groat + 0.027 Cabbage,_chinese_(pak_choi),_raw
+ + 0.034 Cabbage,_raw + 0.021 Cabbage,_red,_raw + 0.037 Carrots,_raw
+ + 0.13 Cauliflower,_raw + 0.042 Celery,_raw
+ + 0.3 Cereals,_whole_wheat_hot_natural_cereal,_dry + 0.03 Chard,_swiss,_raw
+ + 1.1 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.44 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 1.563 Chicken,_liver,_all_classes,_raw + 0.325 Corn,_sweet,_yellow,_raw
+ + 0.096 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.037 Cucumber,_with_peel,_raw + 3.126 Egg,_whole,_raw,_fresh
+ + 0.034 Eggplant,_raw + 0.048 Endive,_raw
+ + 0.749 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 1.282 Fish,_anchovy,_european,_raw + 0.089 Garlic,_raw + 0.091 Kale,_raw
+ + 0.029 Kiwifruit,_green,_raw
+ + 1.94 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.154 Lentils,_raw
+ + 0.029 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.039 Lettuce,_cos_or_romaine,_raw + 0.02 Lettuce,_green_leaf,_raw
+ + 0.017 Lettuce,_red_leaf,_raw
+ + 1.865 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.631 Mollusks,_oyster,_eastern,_canned + 0.025 Nectarines,_raw
+ + 6.126 Nuts,_walnuts,_english + 1.217 Oats + 0.042 Onions,_raw
+ + 0.032 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.017 Oranges,_raw,_navels + 0.05 Parsnips,_raw
+ + 0.019 Peaches,_yellow,_raw + 0.022 Pears,_raw
+ + 0.092 Peppers,_jalapeno,_raw + 0.059 Peppers,_serrano,_raw
+ + 0.058 Peppers,_sweet,_green,_raw + 0.027 Peppers,_sweet,_red,_raw
+ + 0.031 Peppers,_sweet,_yellow,_raw + 0.017 Plums,_raw
+ + 2.47 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.025 Potatoes,_flesh_and_skin,_raw + 0.032 Radishes,_raw
+ + 0.591 Rice,_brown,_long_grain,_raw + 0.027 Rutabagas,_raw
+ + 3.33 Seeds,_chia_seeds,_dried + 3.663 Seeds,_flaxseed
+ + 8.659 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 4.455 Seeds,_sunflower_seed_kernels,_dried + 0.017 Shallots,_raw
+ + 0.063 Spinach,_raw + 0.044 Squash,_summer,_all_varieties,_raw
+ + 0.093 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.041 Squash,_summer,_scallop,_raw
+ + 0.084 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.021 Squash,_winter,_acorn,_raw + 0.027 Squash,_winter,_all_varieties,_raw
+ + 0.021 Squash,_winter,_butternut,_raw + 0.015 Strawberries,_raw
+ + 0.018 Sweet_potato,_raw,_unprepared
+ + 0.034 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.028 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 0.426 Tomatoes,_sun_dried + 0.43 Wheat_flour,_whole_grain + 0.037 Yam,_raw
+ <= 27
+_C32: 0.043 Apples,_raw,_with_skin + 0.077 Apricots,_raw + 0.13 Arugula,_raw
+ + 0.04 Asparagus,_raw + 0.046 Bananas,_raw
+ + 0.17 Beans,_pinto,_mature_seeds,_raw
+ + 0.083 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.47 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.041 Beet_greens,_raw + 0.055 Beets,_raw + 0.186 Blackberries,_raw
+ + 0.088 Blueberries,_raw + 0.017 Broccoli,_raw + 0.045 Brussels_sprouts,_raw
+ + 0.877 Buckwheat_flour,_whole_groat + 0.042 Cabbage,_chinese_(pak_choi),_raw
+ + 0.017 Cabbage,_raw + 0.034 Cabbage,_red,_raw + 0.115 Carrots,_raw
+ + 0.016 Cauliflower,_raw + 0.079 Celery,_raw
+ + 0.933 Cereals,_whole_wheat_hot_natural_cereal,_dry
+ + 0.063 Chard,_swiss,_raw
+ + 0.82 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.22 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.475 Chicken,_liver,_all_classes,_raw + 0.472 Corn,_sweet,_yellow,_raw
+ + 0.093 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.028 Cucumber,_with_peel,_raw + 1.555 Egg,_whole,_raw,_fresh
+ + 0.063 Eggplant,_raw + 0.075 Endive,_raw
+ + 0.071 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.097 Fish,_anchovy,_european,_raw + 0.229 Garlic,_raw + 0.138 Kale,_raw
+ + 0.246 Kiwifruit,_green,_raw
+ + 0.32 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.414 Lentils,_raw
+ + 0.034 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.047 Lettuce,_cos_or_romaine,_raw + 0.024 Lettuce,_green_leaf,_raw
+ + 0.021 Lettuce,_red_leaf,_raw
+ + 0.12 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.049 Mollusks,_oyster,_eastern,_canned + 0.111 Nectarines,_raw
+ + 38.093 Nuts,_walnuts,_english + 2.424 Oats + 0.013 Onions,_raw
+ + 0.07 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.023 Oranges,_raw,_navels + 0.041 Parsnips,_raw
+ + 0.084 Peaches,_yellow,_raw + 0.093 Pears,_raw
+ + 0.062 Peppers,_jalapeno,_raw + 0.216 Peppers,_serrano,_raw
+ + 0.054 Peppers,_sweet,_green,_raw + 0.045 Peppers,_sweet,_red,_raw
+ + 0.044 Plums,_raw
+ + 0.62 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.032 Potatoes,_flesh_and_skin,_raw + 0.017 Radishes,_raw
+ + 0.968 Rice,_brown,_long_grain,_raw + 0.035 Rutabagas,_raw
+ + 5.835 Seeds,_chia_seeds,_dried + 5.903 Seeds,_flaxseed
+ + 20.71 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 23.05 Seeds,_sunflower_seed_kernels,_dried + 0.037 Shallots,_raw
+ + 0.026 Spinach,_raw + 0.033 Squash,_summer,_all_varieties,_raw
+ + 0.039 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.031 Squash,_summer,_scallop,_raw
+ + 0.03 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.016 Squash,_winter,_acorn,_raw + 0.021 Squash,_winter,_all_varieties,_raw
+ + 0.016 Squash,_winter,_butternut,_raw + 0.09 Strawberries,_raw
+ + 0.013 Sweet_potato,_raw,_unprepared
+ + 0.097 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.08 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 1.104 Tomatoes,_sun_dried + 1.093 Wheat_flour,_whole_grain + 0.064 Yam,_raw
  >= 17
-_C31: 0.075 food_01077 + 0.048 food_01123 + 0.012 food_05027 + 0.01 food_05039
- + 0.04 food_05043 + 0.075 food_08144 + 0.009 food_09003 + 0.027 food_09040
- + 0.094 food_09042 + 0.058 food_09050 + 0.042 food_09148 + 0.002 food_09191
- + 0.009 food_09202 + 0.002 food_09236 + 0.001 food_09252 + 0.065 food_09316
- + 0.03 food_10072 + 0.01 food_11011 + 0.005 food_11080 + 0.004 food_11086
- + 0.021 food_11090 + 0.099 food_11098 + 0.045 food_11112 + 0.055 food_11116
- + 0.002 food_11124 + 0.015 food_11135 + 0.007 food_11147 + 0.014 food_11167
- + 0.068 food_11192 + 0.005 food_11205 + 0.013 food_11209 + 0.013 food_11213
- + 0.02 food_11215 + 0.18 food_11233 + 0.083 food_11250 + 0.113 food_11251
- + 0.058 food_11253 + 0.051 food_11257 + 0.004 food_11282 + 0.004 food_11291
- + 0.003 food_11298 + 0.008 food_11333 + 0.01 food_11352 + 0.031 food_11429
- + 0.053 food_11435 + 0.138 food_11457 + 0.043 food_11467 + 0.052 food_11475
- + 0.061 food_11477 + 0.026 food_11482 + 0.026 food_11485 + 0.001 food_11507
- + 0.003 food_11529 + 0.004 food_11531 + 0.012 food_11601 + 0.056 food_11641
- + 0.035 food_11643 + 0.002 food_11677 + 0.025 food_11821 + 0.011 food_11955
- + 0.17 food_11959 + 0.006 food_11977 + 0.05 food_11979 + 17.83 food_12006
- + 0.12 food_12014 + 0.06 food_12036 + 9.08 food_12155 + 22.813 food_12220
- + 0.22 food_13815 + 0.037 food_15170 + 0.042 food_15265 + 0.237 food_16042
- + 0.069 food_16050 + 0.112 food_16069 + 0.07 food_17199 + 0.071 food_20011
- + 0.032 food_20036 + 0.111 food_20038 + 0.073 food_20080 >= 1.6
-_C32: 0.058 food_01123 + 0.02 food_05039 + 0.04 food_05043 + 0.911 food_15001
- + 0.228 food_15170 + 0.681 food_15265 >= 1.2
-_C33: 0.01 food_05039 + 0.01 food_05043 + 0.014 food_12036 + 0.538 food_15001
- + 0.211 food_15170 + 0.274 food_15265 >= 1.2
-_C34: food_01077 >= 0
-_C35: food_01123 >= 0
-_C36: food_05027 >= 0
-_C37: food_05039 >= 0
-_C38: food_05043 >= 0
-_C39: food_08144 >= 0
-_C4: 61 food_01077 + 143 food_01123 + 119 food_05027 + 114 food_05039
- + 125 food_05043 + 342 food_08144 + 52 food_09003 + 48 food_09021
- + 89 food_09040 + 43 food_09042 + 57 food_09050 + 61 food_09148
- + 44 food_09191 + 49 food_09202 + 39 food_09236 + 57 food_09252
- + 46 food_09279 + 32 food_09316 + 148 food_10072 + 20 food_11011
- + 43 food_11080 + 22 food_11086 + 34 food_11090 + 43 food_11098
- + 25 food_11109 + 31 food_11112 + 13 food_11116 + 41 food_11124
- + 25 food_11135 + 16 food_11143 + 19 food_11147 + 86 food_11167
- + 97 food_11192 + 15 food_11205 + 25 food_11209 + 17 food_11213
- + 149 food_11215 + 49 food_11233 + 13 food_11250 + 17 food_11251
- + 15 food_11253 + 16 food_11257 + 40 food_11282 + 32 food_11291
- + 75 food_11298 + 20 food_11333 + 77 food_11352 + 16 food_11429
- + 37 food_11435 + 23 food_11457 + 19 food_11467 + 18 food_11475
- + 17 food_11477 + 40 food_11482 + 45 food_11485 + 86 food_11507
- + 18 food_11529 + 16 food_11531 + 118 food_11601 + 16 food_11641
- + 34 food_11643 + 72 food_11677 + 31 food_11821 + 27 food_11951
- + 258 food_11955 + 25 food_11959 + 32 food_11977 + 29 food_11979
- + 486 food_12006 + 559 food_12014 + 584 food_12036 + 654 food_12155
- + 534 food_12220 + 248 food_13815 + 131 food_15001 + 68 food_15170
- + 136 food_15265 + 347 food_16042 + 139 food_16050 + 352 food_16069
- + 139 food_17199 + 335 food_20011 + 367 food_20036 + 389 food_20038
- + 340 food_20080 <= 2000
-_C40: food_09003 >= 0
-_C41: food_09021 >= 0
-_C42: food_09040 >= 0
-_C43: food_09042 >= 0
-_C44: food_09050 >= 0
-_C45: food_09148 >= 0
-_C46: food_09191 >= 0
-_C47: food_09202 >= 0
-_C48: food_09236 >= 0
-_C49: food_09252 >= 0
-_C5: 88.13 food_01077 + 76.15 food_01123 + 76.46 food_05027 + 74.86 food_05039
- + 75.99 food_05043 + 9.9 food_08144 + 85.56 food_09003 + 86.35 food_09021
- + 74.91 food_09040 + 88.15 food_09042 + 84.21 food_09050 + 83.07 food_09148
- + 87.59 food_09191 + 85.97 food_09202 + 88.87 food_09236 + 83.96 food_09252
- + 87.23 food_09279 + 90.95 food_09316 + 72.63 food_10072 + 93.22 food_11011
- + 87.58 food_11080 + 91.02 food_11086 + 89.3 food_11090 + 86 food_11098
- + 92.18 food_11109 + 90.39 food_11112 + 95.32 food_11116 + 88.29 food_11124
- + 92.07 food_11135 + 95.43 food_11143 + 92.66 food_11147 + 76.05 food_11167
- + 75.48 food_11192 + 95.23 food_11205 + 92.3 food_11209 + 93.79 food_11213
- + 58.58 food_11215 + 84.04 food_11233 + 95.63 food_11250 + 94.61 food_11251
- + 94.98 food_11253 + 95.64 food_11257 + 89.11 food_11282 + 89.83 food_11291
- + 79.53 food_11298 + 93.89 food_11333 + 79.25 food_11352 + 95.27 food_11429
- + 89.43 food_11435 + 91.4 food_11457 + 94.28 food_11467 + 94.18 food_11475
- + 94.79 food_11477 + 87.78 food_11482 + 86.41 food_11485 + 77.28 food_11507
- + 94.52 food_11529 + 94.75 food_11531 + 69.6 food_11601 + 94.64 food_11641
- + 89.76 food_11643 + 79.8 food_11677 + 92.21 food_11821 + 92.02 food_11951
- + 14.56 food_11955 + 91.71 food_11959 + 90.25 food_11977 + 91.69 food_11979
- + 5.8 food_12006 + 5.23 food_12014 + 4.73 food_12036 + 4.07 food_12155
- + 6.96 food_12220 + 61.23 food_13815 + 73.37 food_15001 + 85.14 food_15170
- + 70.63 food_15265 + 11.33 food_16042 + 63.08 food_16050 + 8.26 food_16069
- + 71.37 food_17199 + 11.15 food_20011 + 11.8 food_20036 + 8.22 food_20038
- + 10.74 food_20080 >= 3.7
-_C50: food_09279 >= 0
-_C51: food_09316 >= 0
-_C52: food_10072 >= 0
-_C53: food_11011 >= 0
-_C54: food_11080 >= 0
-_C55: food_11086 >= 0
-_C56: food_11090 >= 0
-_C57: food_11098 >= 0
-_C58: food_11109 >= 0
-_C59: food_11112 >= 0
-_C6: 9.5 food_08144 + 2.4 food_09003 + 2 food_09021 + 2.6 food_09040
- + 5.3 food_09042 + 2.4 food_09050 + 3 food_09148 + 1.7 food_09191
- + 2.2 food_09202 + 1.5 food_09236 + 3.1 food_09252 + 1.4 food_09279
- + 2 food_09316 + 2.1 food_11011 + 2.8 food_11080 + 3.7 food_11086
- + 2.6 food_11090 + 3.8 food_11098 + 2.5 food_11109 + 2.1 food_11112
- + food_11116 + 2.8 food_11124 + 2 food_11135 + 1.6 food_11143
- + 1.6 food_11147 + 2 food_11167 + 5 food_11192 + 0.5 food_11205
- + 3 food_11209 + 3.1 food_11213 + 2.1 food_11215 + 3.6 food_11233
- + 1.1 food_11250 + 2.1 food_11251 + 1.3 food_11253 + 0.9 food_11257
- + 1.7 food_11282 + 2.6 food_11291 + 4.9 food_11298 + 1.7 food_11333
- + 2.1 food_11352 + 1.6 food_11429 + 2.3 food_11435 + 2.2 food_11457
- + food_11467 + 1.2 food_11475 + food_11477 + 1.5 food_11482 + 2 food_11485
- + 3 food_11507 + 1.2 food_11529 + 1.9 food_11531 + 4.1 food_11601
- + 1.1 food_11641 + 1.5 food_11643 + 3.2 food_11677 + 2.1 food_11821
- + 0.9 food_11951 + 12.3 food_11955 + 1.6 food_11959 + 3.7 food_11977
- + 2.8 food_11979 + 34.4 food_12006 + 6 food_12014 + 8.6 food_12036
- + 6.7 food_12155 + 27.3 food_12220 + 15.5 food_16042 + 6.3 food_16050
- + 10.7 food_16069 + 10 food_20011 + 3.6 food_20036 + 10.6 food_20038
- + 10.7 food_20080 >= 38
-_C60: food_11116 >= 0
-_C61: food_11124 >= 0
-_C62: food_11135 >= 0
-_C63: food_11143 >= 0
-_C64: food_11147 >= 0
-_C65: food_11167 >= 0
-_C66: food_11192 >= 0
-_C67: food_11205 >= 0
-_C68: food_11209 >= 0
-_C69: food_11213 >= 0
-_C7: 113 food_01077 + 56 food_01123 + 8 food_05027 + 12 food_05039
- + 12 food_05043 + 40 food_08144 + 6 food_09003 + 13 food_09021 + 5 food_09040
- + 29 food_09042 + 6 food_09050 + 34 food_09148 + 6 food_09191 + 43 food_09202
- + 6 food_09236 + 9 food_09252 + 6 food_09279 + 16 food_09316 + 14 food_10072
- + 24 food_11011 + 16 food_11080 + 117 food_11086 + 47 food_11090
- + 42 food_11098 + 40 food_11109 + 45 food_11112 + 105 food_11116
- + 33 food_11124 + 22 food_11135 + 40 food_11143 + 51 food_11147
- + 2 food_11167 + 128 food_11192 + 16 food_11205 + 9 food_11209
- + 52 food_11213 + 181 food_11215 + 150 food_11233 + 35 food_11250
- + 33 food_11251 + 36 food_11253 + 33 food_11257 + 23 food_11282
- + 72 food_11291 + 36 food_11298 + 10 food_11333 + 12 food_11352
- + 25 food_11429 + 43 food_11435 + 99 food_11457 + 21 food_11467
- + 19 food_11475 + 16 food_11477 + 33 food_11482 + 48 food_11485
- + 30 food_11507 + 10 food_11529 + 33 food_11531 + 17 food_11601
- + 15 food_11641 + 28 food_11643 + 37 food_11677 + 7 food_11821
- + 11 food_11951 + 110 food_11955 + 160 food_11959 + 11 food_11977
- + 12 food_11979 + 631 food_12006 + 46 food_12014 + 78 food_12036
- + 98 food_12155 + 255 food_12220 + 10 food_13815 + 147 food_15001
- + 45 food_15170 + 60 food_15265 + 113 food_16042 + 90 food_16050
- + 35 food_16069 + 7 food_17199 + 41 food_20011 + 9 food_20036 + 54 food_20038
- + 34 food_20080 >= 1000
-_C70: food_11215 >= 0
-_C71: food_11233 >= 0
-_C72: food_11250 >= 0
-_C73: food_11251 >= 0
-_C74: food_11253 >= 0
-_C75: food_11257 >= 0
-_C76: food_11282 >= 0
-_C77: food_11291 >= 0
-_C78: food_11298 >= 0
-_C79: food_11333 >= 0
-_C8: 0.03 food_01077 + 1.75 food_01123 + 8.99 food_05027 + 0.73 food_05039
- + 1.03 food_05043 + 3.39 food_08144 + 0.12 food_09003 + 0.39 food_09021
- + 0.26 food_09040 + 0.62 food_09042 + 0.28 food_09050 + 0.31 food_09148
- + 0.28 food_09191 + 0.13 food_09202 + 0.25 food_09236 + 0.18 food_09252
- + 0.17 food_09279 + 0.41 food_09316 + 1.22 food_10072 + 2.14 food_11011
- + 0.8 food_11080 + 2.57 food_11086 + 0.73 food_11090 + 1.4 food_11098
- + 0.47 food_11109 + 0.8 food_11112 + 0.8 food_11116 + 0.3 food_11124
- + 0.42 food_11135 + 0.2 food_11143 + 1.8 food_11147 + 0.52 food_11167
- + 1.12 food_11192 + 0.28 food_11205 + 0.23 food_11209 + 0.83 food_11213
- + 1.7 food_11215 + 1.47 food_11233 + 1.24 food_11250 + 0.97 food_11251
- + 0.86 food_11253 + 1.2 food_11257 + 0.21 food_11282 + 1.48 food_11291
- + 0.59 food_11298 + 0.34 food_11333 + 0.81 food_11352 + 0.34 food_11429
- + 0.44 food_11435 + 2.71 food_11457 + 0.44 food_11467 + 0.4 food_11475
- + 0.37 food_11477 + 0.7 food_11482 + 0.7 food_11485 + 0.61 food_11507
- + 0.27 food_11529 + 0.57 food_11531 + 0.54 food_11601 + 0.35 food_11641
- + 0.58 food_11643 + 1.2 food_11677 + 0.43 food_11821 + 0.46 food_11951
- + 9.09 food_11955 + 1.46 food_11959 + 0.86 food_11977 + 0.25 food_11979
- + 7.72 food_12006 + 8.82 food_12014 + 5.25 food_12036 + 2.91 food_12155
- + 5.73 food_12220 + 2.04 food_13815 + 3.25 food_15001 + 6.7 food_15170
- + 0.57 food_15265 + 5.07 food_16042 + 3.7 food_16050 + 6.51 food_16069
- + 7.37 food_17199 + 4.06 food_20011 + 1.29 food_20036 + 4.72 food_20038
- + 3.6 food_20080 >= 8
-_C80: food_11352 >= 0
-_C81: food_11429 >= 0
-_C82: food_11435 >= 0
-_C83: food_11457 >= 0
-_C84: food_11467 >= 0
-_C85: food_11475 >= 0
-_C86: food_11477 >= 0
-_C87: food_11482 >= 0
-_C88: food_11485 >= 0
-_C89: food_11507 >= 0
-_C9: 10 food_01077 + 12 food_01123 + 19 food_05027 + 27 food_05039
- + 23 food_05043 + 122 food_08144 + 5 food_09003 + 10 food_09021
- + 27 food_09040 + 20 food_09042 + 6 food_09050 + 17 food_09148 + 9 food_09191
- + 11 food_09202 + 9 food_09236 + 7 food_09252 + 7 food_09279 + 13 food_09316
- + 21 food_10072 + 14 food_11011 + 23 food_11080 + 70 food_11086
- + 21 food_11090 + 23 food_11098 + 12 food_11109 + 16 food_11112
- + 19 food_11116 + 12 food_11124 + 15 food_11135 + 11 food_11143
- + 81 food_11147 + 37 food_11167 + 52 food_11192 + 13 food_11205
- + 14 food_11209 + 15 food_11213 + 25 food_11215 + 47 food_11233
- + 13 food_11250 + 14 food_11251 + 13 food_11253 + 12 food_11257
- + 10 food_11282 + 20 food_11291 + 29 food_11298 + 10 food_11333
- + 23 food_11352 + 10 food_11429 + 20 food_11435 + 79 food_11457
- + 20 food_11467 + 23 food_11475 + 18 food_11477 + 32 food_11482
- + 34 food_11485 + 25 food_11507 + 11 food_11529 + 10 food_11531
- + 21 food_11601 + 17 food_11641 + 14 food_11643 + 21 food_11677
- + 12 food_11821 + 12 food_11951 + 194 food_11955 + 47 food_11959
- + 22 food_11977 + 15 food_11979 + 335 food_12006 + 592 food_12014
- + 325 food_12036 + 158 food_12155 + 392 food_12220 + 17 food_13815
- + 41 food_15001 + 54 food_15170 + 24 food_15265 + 176 food_16042
- + 63 food_16050 + 47 food_16069 + 19 food_17199 + 251 food_20011
- + 116 food_20036 + 177 food_20038 + 137 food_20080 >= 400
-_C90: food_11529 >= 0
-_C91: food_11531 >= 0
-_C92: food_11601 >= 0
-_C93: food_11641 >= 0
-_C94: food_11643 >= 0
-_C95: food_11677 >= 0
-_C96: food_11821 >= 0
-_C97: food_11951 >= 0
-_C98: food_11955 >= 0
-_C99: food_11959 >= 0
+_C33: 0.009 Apples,_raw,_with_skin + 0.17 Arugula,_raw + 0.01 Asparagus,_raw
+ + 0.027 Bananas,_raw + 0.237 Beans,_pinto,_mature_seeds,_raw
+ + 0.069 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 0.22 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 0.004 Beet_greens,_raw + 0.005 Beets,_raw + 0.094 Blackberries,_raw
+ + 0.058 Blueberries,_raw + 0.021 Broccoli,_raw + 0.099 Brussels_sprouts,_raw
+ + 0.071 Buckwheat_flour,_whole_groat + 0.055 Cabbage,_chinese_(pak_choi),_raw
+ + 0.045 Cabbage,_red,_raw + 0.002 Carrots,_raw + 0.015 Cauliflower,_raw
+ + 0.075 Cereals,_whole_wheat_hot_natural_cereal,_dry
+ + 0.007 Chard,_swiss,_raw
+ + 0.04 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.01 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.012 Chicken,_liver,_all_classes,_raw + 0.014 Corn,_sweet,_yellow,_raw
+ + 0.068 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.005 Cucumber,_with_peel,_raw + 0.048 Egg,_whole,_raw,_fresh
+ + 0.013 Eggplant,_raw + 0.013 Endive,_raw
+ + 0.042 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.02 Garlic,_raw + 0.18 Kale,_raw + 0.042 Kiwifruit,_green,_raw
+ + 0.07 Lamb,_variety_meats_and_by_products,_liver,_raw + 0.112 Lentils,_raw
+ + 0.083 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.113 Lettuce,_cos_or_romaine,_raw + 0.058 Lettuce,_green_leaf,_raw
+ + 0.051 Lettuce,_red_leaf,_raw
+ + 0.075 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 0.037 Mollusks,_oyster,_eastern,_canned + 0.002 Nectarines,_raw
+ + 9.08 Nuts,_walnuts,_english + 0.111 Oats + 0.004 Onions,_raw
+ + 0.004 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.009 Oranges,_raw,_navels + 0.003 Parsnips,_raw
+ + 0.002 Peaches,_yellow,_raw + 0.001 Pears,_raw + 0.05 Peppers,_jalapeno,_raw
+ + 0.006 Peppers,_serrano,_raw + 0.008 Peppers,_sweet,_green,_raw
+ + 0.025 Peppers,_sweet,_red,_raw
+ + 0.03 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.01 Potatoes,_flesh_and_skin,_raw + 0.031 Radishes,_raw
+ + 0.032 Rice,_brown,_long_grain,_raw + 0.053 Rutabagas,_raw
+ + 17.83 Seeds,_chia_seeds,_dried + 22.813 Seeds,_flaxseed
+ + 0.12 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 0.06 Seeds,_sunflower_seed_kernels,_dried + 0.002 Shallots,_raw
+ + 0.138 Spinach,_raw + 0.056 Squash,_summer,_all_varieties,_raw
+ + 0.043 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.052 Squash,_summer,_scallop,_raw
+ + 0.061 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.026 Squash,_winter,_acorn,_raw + 0.035 Squash,_winter,_all_varieties,_raw
+ + 0.026 Squash,_winter,_butternut,_raw + 0.065 Strawberries,_raw
+ + 0.001 Sweet_potato,_raw,_unprepared
+ + 0.004 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.003 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 0.011 Tomatoes,_sun_dried + 0.073 Wheat_flour,_whole_grain + 0.012 Yam,_raw
+ >= 1.6
+_C34: 0.01 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.01 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.274 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.538 Fish,_anchovy,_european,_raw
+ + 0.211 Mollusks,_oyster,_eastern,_canned
+ + 0.014 Seeds,_sunflower_seed_kernels,_dried >= 0.3
+_C35: 0.02 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.01 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 0.007 Egg,_whole,_raw,_fresh
+ + 0.074 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 0.029 Fish,_anchovy,_european,_raw + 0.05 Mollusks,_oyster,_eastern,_canned
+ >= 0.3
+_C36: Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D >= 0
+_C37: Egg,_whole,_raw,_fresh >= 0
+_C38: Chicken,_liver,_all_classes,_raw >= 0
+_C39: Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw >= 0
+_C4: 52 Apples,_raw,_with_skin + 48 Apricots,_raw + 25 Arugula,_raw
+ + 20 Asparagus,_raw + 89 Bananas,_raw + 347 Beans,_pinto,_mature_seeds,_raw
+ + 139 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 248 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 22 Beet_greens,_raw + 43 Beets,_raw + 43 Blackberries,_raw
+ + 57 Blueberries,_raw + 34 Broccoli,_raw + 43 Brussels_sprouts,_raw
+ + 335 Buckwheat_flour,_whole_groat + 13 Cabbage,_chinese_(pak_choi),_raw
+ + 25 Cabbage,_raw + 31 Cabbage,_red,_raw + 41 Carrots,_raw
+ + 25 Cauliflower,_raw + 16 Celery,_raw
+ + 342 Cereals,_whole_wheat_hot_natural_cereal,_dry + 19 Chard,_swiss,_raw
+ + 125 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 114 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 119 Chicken,_liver,_all_classes,_raw + 86 Corn,_sweet,_yellow,_raw
+ + 97 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 15 Cucumber,_with_peel,_raw + 143 Egg,_whole,_raw,_fresh + 25 Eggplant,_raw
+ + 17 Endive,_raw
+ + 136 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 131 Fish,_anchovy,_european,_raw + 149 Garlic,_raw + 49 Kale,_raw
+ + 61 Kiwifruit,_green,_raw
+ + 139 Lamb,_variety_meats_and_by_products,_liver,_raw + 352 Lentils,_raw
+ + 13 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 17 Lettuce,_cos_or_romaine,_raw + 15 Lettuce,_green_leaf,_raw
+ + 16 Lettuce,_red_leaf,_raw
+ + 61 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 68 Mollusks,_oyster,_eastern,_canned + 44 Nectarines,_raw
+ + 654 Nuts,_walnuts,_english + 389 Oats + 40 Onions,_raw
+ + 32 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 49 Oranges,_raw,_navels + 75 Parsnips,_raw + 39 Peaches,_yellow,_raw
+ + 57 Pears,_raw + 29 Peppers,_jalapeno,_raw + 32 Peppers,_serrano,_raw
+ + 20 Peppers,_sweet,_green,_raw + 31 Peppers,_sweet,_red,_raw
+ + 27 Peppers,_sweet,_yellow,_raw + 46 Plums,_raw
+ + 148 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 77 Potatoes,_flesh_and_skin,_raw + 16 Radishes,_raw
+ + 367 Rice,_brown,_long_grain,_raw + 37 Rutabagas,_raw
+ + 486 Seeds,_chia_seeds,_dried + 534 Seeds,_flaxseed
+ + 559 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 584 Seeds,_sunflower_seed_kernels,_dried + 72 Shallots,_raw
+ + 23 Spinach,_raw + 16 Squash,_summer,_all_varieties,_raw
+ + 19 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 18 Squash,_summer,_scallop,_raw
+ + 17 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 40 Squash,_winter,_acorn,_raw + 34 Squash,_winter,_all_varieties,_raw
+ + 45 Squash,_winter,_butternut,_raw + 32 Strawberries,_raw
+ + 86 Sweet_potato,_raw,_unprepared
+ + 16 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 18 Tomatoes,_red,_ripe,_raw,_year_round_average + 258 Tomatoes,_sun_dried
+ + 340 Wheat_flour,_whole_grain + 118 Yam,_raw >= 2000
+_C40: Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw >= 0
+_C41: Cereals,_whole_wheat_hot_natural_cereal,_dry >= 0
+_C42: Apples,_raw,_with_skin >= 0
+_C43: Apricots,_raw >= 0
+_C44: Bananas,_raw >= 0
+_C45: Blackberries,_raw >= 0
+_C46: Blueberries,_raw >= 0
+_C47: Kiwifruit,_green,_raw >= 0
+_C48: Nectarines,_raw >= 0
+_C49: Oranges,_raw,_navels >= 0
+_C5: 52 Apples,_raw,_with_skin + 48 Apricots,_raw + 25 Arugula,_raw
+ + 20 Asparagus,_raw + 89 Bananas,_raw + 347 Beans,_pinto,_mature_seeds,_raw
+ + 139 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 248 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 22 Beet_greens,_raw + 43 Beets,_raw + 43 Blackberries,_raw
+ + 57 Blueberries,_raw + 34 Broccoli,_raw + 43 Brussels_sprouts,_raw
+ + 335 Buckwheat_flour,_whole_groat + 13 Cabbage,_chinese_(pak_choi),_raw
+ + 25 Cabbage,_raw + 31 Cabbage,_red,_raw + 41 Carrots,_raw
+ + 25 Cauliflower,_raw + 16 Celery,_raw
+ + 342 Cereals,_whole_wheat_hot_natural_cereal,_dry + 19 Chard,_swiss,_raw
+ + 125 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 114 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 119 Chicken,_liver,_all_classes,_raw + 86 Corn,_sweet,_yellow,_raw
+ + 97 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 15 Cucumber,_with_peel,_raw + 143 Egg,_whole,_raw,_fresh + 25 Eggplant,_raw
+ + 17 Endive,_raw
+ + 136 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 131 Fish,_anchovy,_european,_raw + 149 Garlic,_raw + 49 Kale,_raw
+ + 61 Kiwifruit,_green,_raw
+ + 139 Lamb,_variety_meats_and_by_products,_liver,_raw + 352 Lentils,_raw
+ + 13 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 17 Lettuce,_cos_or_romaine,_raw + 15 Lettuce,_green_leaf,_raw
+ + 16 Lettuce,_red_leaf,_raw
+ + 61 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 68 Mollusks,_oyster,_eastern,_canned + 44 Nectarines,_raw
+ + 654 Nuts,_walnuts,_english + 389 Oats + 40 Onions,_raw
+ + 32 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 49 Oranges,_raw,_navels + 75 Parsnips,_raw + 39 Peaches,_yellow,_raw
+ + 57 Pears,_raw + 29 Peppers,_jalapeno,_raw + 32 Peppers,_serrano,_raw
+ + 20 Peppers,_sweet,_green,_raw + 31 Peppers,_sweet,_red,_raw
+ + 27 Peppers,_sweet,_yellow,_raw + 46 Plums,_raw
+ + 148 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 77 Potatoes,_flesh_and_skin,_raw + 16 Radishes,_raw
+ + 367 Rice,_brown,_long_grain,_raw + 37 Rutabagas,_raw
+ + 486 Seeds,_chia_seeds,_dried + 534 Seeds,_flaxseed
+ + 559 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 584 Seeds,_sunflower_seed_kernels,_dried + 72 Shallots,_raw
+ + 23 Spinach,_raw + 16 Squash,_summer,_all_varieties,_raw
+ + 19 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 18 Squash,_summer,_scallop,_raw
+ + 17 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 40 Squash,_winter,_acorn,_raw + 34 Squash,_winter,_all_varieties,_raw
+ + 45 Squash,_winter,_butternut,_raw + 32 Strawberries,_raw
+ + 86 Sweet_potato,_raw,_unprepared
+ + 16 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 18 Tomatoes,_red,_ripe,_raw,_year_round_average + 258 Tomatoes,_sun_dried
+ + 340 Wheat_flour,_whole_grain + 118 Yam,_raw <= 2200
+_C50: Peaches,_yellow,_raw >= 0
+_C51: Pears,_raw >= 0
+_C52: Plums,_raw >= 0
+_C53: Strawberries,_raw >= 0
+_C54: Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw >= 0
+_C55: Asparagus,_raw >= 0
+_C56: Beets,_raw >= 0
+_C57: Beet_greens,_raw >= 0
+_C58: Broccoli,_raw >= 0
+_C59: Brussels_sprouts,_raw >= 0
+_C6: 85.56 Apples,_raw,_with_skin + 86.35 Apricots,_raw + 91.71 Arugula,_raw
+ + 93.22 Asparagus,_raw + 74.91 Bananas,_raw
+ + 11.33 Beans,_pinto,_mature_seeds,_raw
+ + 63.08 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 61.23 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 91.02 Beet_greens,_raw + 87.58 Beets,_raw + 88.15 Blackberries,_raw
+ + 84.21 Blueberries,_raw + 89.3 Broccoli,_raw + 86 Brussels_sprouts,_raw
+ + 11.15 Buckwheat_flour,_whole_groat + 95.32 Cabbage,_chinese_(pak_choi),_raw
+ + 92.18 Cabbage,_raw + 90.39 Cabbage,_red,_raw + 88.29 Carrots,_raw
+ + 92.07 Cauliflower,_raw + 95.43 Celery,_raw
+ + 9.9 Cereals,_whole_wheat_hot_natural_cereal,_dry + 92.66 Chard,_swiss,_raw
+ + 75.99 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 74.86 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 76.46 Chicken,_liver,_all_classes,_raw + 76.05 Corn,_sweet,_yellow,_raw
+ + 75.48 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 95.23 Cucumber,_with_peel,_raw + 76.15 Egg,_whole,_raw,_fresh
+ + 92.3 Eggplant,_raw + 93.79 Endive,_raw
+ + 70.63 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 73.37 Fish,_anchovy,_european,_raw + 58.58 Garlic,_raw + 84.04 Kale,_raw
+ + 83.07 Kiwifruit,_green,_raw
+ + 71.37 Lamb,_variety_meats_and_by_products,_liver,_raw + 8.26 Lentils,_raw
+ + 95.63 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 94.61 Lettuce,_cos_or_romaine,_raw + 94.98 Lettuce,_green_leaf,_raw
+ + 95.64 Lettuce,_red_leaf,_raw
+ + 88.13 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 85.14 Mollusks,_oyster,_eastern,_canned + 87.59 Nectarines,_raw
+ + 4.07 Nuts,_walnuts,_english + 8.22 Oats + 89.11 Onions,_raw
+ + 89.83 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 85.97 Oranges,_raw,_navels + 79.53 Parsnips,_raw
+ + 88.87 Peaches,_yellow,_raw + 83.96 Pears,_raw
+ + 91.69 Peppers,_jalapeno,_raw + 90.25 Peppers,_serrano,_raw
+ + 93.89 Peppers,_sweet,_green,_raw + 92.21 Peppers,_sweet,_red,_raw
+ + 92.02 Peppers,_sweet,_yellow,_raw + 87.23 Plums,_raw
+ + 72.63 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 79.25 Potatoes,_flesh_and_skin,_raw + 95.27 Radishes,_raw
+ + 11.8 Rice,_brown,_long_grain,_raw + 89.43 Rutabagas,_raw
+ + 5.8 Seeds,_chia_seeds,_dried + 6.96 Seeds,_flaxseed
+ + 5.23 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 4.73 Seeds,_sunflower_seed_kernels,_dried + 79.8 Shallots,_raw
+ + 91.4 Spinach,_raw + 94.64 Squash,_summer,_all_varieties,_raw
+ + 94.28 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 94.18 Squash,_summer,_scallop,_raw
+ + 94.79 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 87.78 Squash,_winter,_acorn,_raw + 89.76 Squash,_winter,_all_varieties,_raw
+ + 86.41 Squash,_winter,_butternut,_raw + 90.95 Strawberries,_raw
+ + 77.28 Sweet_potato,_raw,_unprepared
+ + 94.75 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 94.52 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 14.56 Tomatoes,_sun_dried + 10.74 Wheat_flour,_whole_grain + 69.6 Yam,_raw
+ >= 3.7
+_C60: Cabbage,_raw >= 0
+_C61: Cabbage,_red,_raw >= 0
+_C62: Cabbage,_chinese_(pak_choi),_raw >= 0
+_C63: Carrots,_raw >= 0
+_C64: Cauliflower,_raw >= 0
+_C65: Celery,_raw >= 0
+_C66: Chard,_swiss,_raw >= 0
+_C67: Corn,_sweet,_yellow,_raw >= 0
+_C68:
+ Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ >= 0
+_C69: Cucumber,_with_peel,_raw >= 0
+_C7: 2.4 Apples,_raw,_with_skin + 2 Apricots,_raw + 1.6 Arugula,_raw
+ + 2.1 Asparagus,_raw + 2.6 Bananas,_raw
+ + 15.5 Beans,_pinto,_mature_seeds,_raw
+ + 6.3 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 3.7 Beet_greens,_raw + 2.8 Beets,_raw + 5.3 Blackberries,_raw
+ + 2.4 Blueberries,_raw + 2.6 Broccoli,_raw + 3.8 Brussels_sprouts,_raw
+ + 10 Buckwheat_flour,_whole_groat + Cabbage,_chinese_(pak_choi),_raw
+ + 2.5 Cabbage,_raw + 2.1 Cabbage,_red,_raw + 2.8 Carrots,_raw
+ + 2 Cauliflower,_raw + 1.6 Celery,_raw
+ + 9.5 Cereals,_whole_wheat_hot_natural_cereal,_dry + 1.6 Chard,_swiss,_raw
+ + 2 Corn,_sweet,_yellow,_raw
+ + 5 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.5 Cucumber,_with_peel,_raw + 3 Eggplant,_raw + 3.1 Endive,_raw
+ + 2.1 Garlic,_raw + 3.6 Kale,_raw + 3 Kiwifruit,_green,_raw
+ + 10.7 Lentils,_raw
+ + 1.1 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 2.1 Lettuce,_cos_or_romaine,_raw + 1.3 Lettuce,_green_leaf,_raw
+ + 0.9 Lettuce,_red_leaf,_raw + 1.7 Nectarines,_raw
+ + 6.7 Nuts,_walnuts,_english + 10.6 Oats + 1.7 Onions,_raw
+ + 2.6 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 2.2 Oranges,_raw,_navels + 4.9 Parsnips,_raw + 1.5 Peaches,_yellow,_raw
+ + 3.1 Pears,_raw + 2.8 Peppers,_jalapeno,_raw + 3.7 Peppers,_serrano,_raw
+ + 1.7 Peppers,_sweet,_green,_raw + 2.1 Peppers,_sweet,_red,_raw
+ + 0.9 Peppers,_sweet,_yellow,_raw + 1.4 Plums,_raw
+ + 2.1 Potatoes,_flesh_and_skin,_raw + 1.6 Radishes,_raw
+ + 3.6 Rice,_brown,_long_grain,_raw + 2.3 Rutabagas,_raw
+ + 34.4 Seeds,_chia_seeds,_dried + 27.3 Seeds,_flaxseed
+ + 6 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 8.6 Seeds,_sunflower_seed_kernels,_dried + 3.2 Shallots,_raw
+ + 2.2 Spinach,_raw + 1.1 Squash,_summer,_all_varieties,_raw
+ + Squash,_summer,_crookneck_and_straightneck,_raw
+ + 1.2 Squash,_summer,_scallop,_raw
+ + Squash,_summer,_zucchini,_includes_skin,_raw
+ + 1.5 Squash,_winter,_acorn,_raw + 1.5 Squash,_winter,_all_varieties,_raw
+ + 2 Squash,_winter,_butternut,_raw + 2 Strawberries,_raw
+ + 3 Sweet_potato,_raw,_unprepared
+ + 1.9 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 1.2 Tomatoes,_red,_ripe,_raw,_year_round_average + 12.3 Tomatoes,_sun_dried
+ + 10.7 Wheat_flour,_whole_grain + 4.1 Yam,_raw >= 38
+_C70: Eggplant,_raw >= 0
+_C71: Endive,_raw >= 0
+_C72: Garlic,_raw >= 0
+_C73: Kale,_raw >= 0
+_C74: Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw >= 0
+_C75: Lettuce,_cos_or_romaine,_raw >= 0
+_C76: Lettuce,_green_leaf,_raw >= 0
+_C77: Lettuce,_red_leaf,_raw >= 0
+_C78: Onions,_raw >= 0
+_C79: Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw >= 0
+_C8: 6 Apples,_raw,_with_skin + 13 Apricots,_raw + 160 Arugula,_raw
+ + 24 Asparagus,_raw + 5 Bananas,_raw + 113 Beans,_pinto,_mature_seeds,_raw
+ + 90 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 10 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 117 Beet_greens,_raw + 16 Beets,_raw + 29 Blackberries,_raw
+ + 6 Blueberries,_raw + 47 Broccoli,_raw + 42 Brussels_sprouts,_raw
+ + 41 Buckwheat_flour,_whole_groat + 105 Cabbage,_chinese_(pak_choi),_raw
+ + 40 Cabbage,_raw + 45 Cabbage,_red,_raw + 33 Carrots,_raw
+ + 22 Cauliflower,_raw + 40 Celery,_raw
+ + 40 Cereals,_whole_wheat_hot_natural_cereal,_dry + 51 Chard,_swiss,_raw
+ + 12 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 12 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 8 Chicken,_liver,_all_classes,_raw + 2 Corn,_sweet,_yellow,_raw
+ + 128 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 16 Cucumber,_with_peel,_raw + 56 Egg,_whole,_raw,_fresh + 9 Eggplant,_raw
+ + 52 Endive,_raw
+ + 60 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 147 Fish,_anchovy,_european,_raw + 181 Garlic,_raw + 150 Kale,_raw
+ + 34 Kiwifruit,_green,_raw
+ + 7 Lamb,_variety_meats_and_by_products,_liver,_raw + 35 Lentils,_raw
+ + 35 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 33 Lettuce,_cos_or_romaine,_raw + 36 Lettuce,_green_leaf,_raw
+ + 33 Lettuce,_red_leaf,_raw
+ + 113 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 45 Mollusks,_oyster,_eastern,_canned + 6 Nectarines,_raw
+ + 98 Nuts,_walnuts,_english + 54 Oats + 23 Onions,_raw
+ + 72 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 43 Oranges,_raw,_navels + 36 Parsnips,_raw + 6 Peaches,_yellow,_raw
+ + 9 Pears,_raw + 12 Peppers,_jalapeno,_raw + 11 Peppers,_serrano,_raw
+ + 10 Peppers,_sweet,_green,_raw + 7 Peppers,_sweet,_red,_raw
+ + 11 Peppers,_sweet,_yellow,_raw + 6 Plums,_raw
+ + 14 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 12 Potatoes,_flesh_and_skin,_raw + 25 Radishes,_raw
+ + 9 Rice,_brown,_long_grain,_raw + 43 Rutabagas,_raw
+ + 631 Seeds,_chia_seeds,_dried + 255 Seeds,_flaxseed
+ + 46 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 78 Seeds,_sunflower_seed_kernels,_dried + 37 Shallots,_raw
+ + 99 Spinach,_raw + 15 Squash,_summer,_all_varieties,_raw
+ + 21 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 19 Squash,_summer,_scallop,_raw
+ + 16 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 33 Squash,_winter,_acorn,_raw + 28 Squash,_winter,_all_varieties,_raw
+ + 48 Squash,_winter,_butternut,_raw + 16 Strawberries,_raw
+ + 30 Sweet_potato,_raw,_unprepared
+ + 33 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 10 Tomatoes,_red,_ripe,_raw,_year_round_average + 110 Tomatoes,_sun_dried
+ + 34 Wheat_flour,_whole_grain + 17 Yam,_raw >= 1000
+_C80: Parsnips,_raw >= 0
+_C81: Peppers,_sweet,_green,_raw >= 0
+_C82: Potatoes,_flesh_and_skin,_raw >= 0
+_C83: Radishes,_raw >= 0
+_C84: Rutabagas,_raw >= 0
+_C85: Spinach,_raw >= 0
+_C86: Squash,_summer,_crookneck_and_straightneck,_raw >= 0
+_C87: Squash,_summer,_scallop,_raw >= 0
+_C88: Squash,_summer,_zucchini,_includes_skin,_raw >= 0
+_C89: Squash,_winter,_acorn,_raw >= 0
+_C9: 0.12 Apples,_raw,_with_skin + 0.39 Apricots,_raw + 1.46 Arugula,_raw
+ + 2.14 Asparagus,_raw + 0.26 Bananas,_raw
+ + 5.07 Beans,_pinto,_mature_seeds,_raw
+ + 3.7 Beans,_white,_mature_seeds,_cooked,_boiled,_without_salt
+ + 2.04 Beef,_chuck,_blade_roast,_separable_lean_and_fat,_trimmed_to_1_8"_fat,_all_grades,_raw
+ + 2.57 Beet_greens,_raw + 0.8 Beets,_raw + 0.62 Blackberries,_raw
+ + 0.28 Blueberries,_raw + 0.73 Broccoli,_raw + 1.4 Brussels_sprouts,_raw
+ + 4.06 Buckwheat_flour,_whole_groat + 0.8 Cabbage,_chinese_(pak_choi),_raw
+ + 0.47 Cabbage,_raw + 0.8 Cabbage,_red,_raw + 0.3 Carrots,_raw
+ + 0.42 Cauliflower,_raw + 0.2 Celery,_raw
+ + 3.39 Cereals,_whole_wheat_hot_natural_cereal,_dry + 1.8 Chard,_swiss,_raw
+ + 1.03 Chicken,_broilers_or_fryers,_dark_meat,_meat_only,_raw
+ + 0.73 Chicken,_broilers_or_fryers,_light_meat,_meat_only,_raw
+ + 8.99 Chicken,_liver,_all_classes,_raw + 0.52 Corn,_sweet,_yellow,_raw
+ + 1.12 Cowpeas_(blackeyes),_immature_seeds,_cooked,_boiled,_drained,_without_salt
+ + 0.28 Cucumber,_with_peel,_raw + 1.75 Egg,_whole,_raw,_fresh
+ + 0.23 Eggplant,_raw + 0.83 Endive,_raw
+ + 0.57 Fish,_Salmon,_pink,_canned,_drained_solids,_without_skin_and_bones
+ + 3.25 Fish,_anchovy,_european,_raw + 1.7 Garlic,_raw + 1.47 Kale,_raw
+ + 0.31 Kiwifruit,_green,_raw
+ + 7.37 Lamb,_variety_meats_and_by_products,_liver,_raw + 6.51 Lentils,_raw
+ + 1.24 Lettuce,_butterhead_(includes_boston_and_bibb_types),_raw
+ + 0.97 Lettuce,_cos_or_romaine,_raw + 0.86 Lettuce,_green_leaf,_raw
+ + 1.2 Lettuce,_red_leaf,_raw
+ + 0.03 Milk,_whole,_3.25%_milkfat,_with_added_vitamin_D
+ + 6.7 Mollusks,_oyster,_eastern,_canned + 0.28 Nectarines,_raw
+ + 2.91 Nuts,_walnuts,_english + 4.72 Oats + 0.21 Onions,_raw
+ + 1.48 Onions,_spring_or_scallions_(includes_tops_and_bulb),_raw
+ + 0.13 Oranges,_raw,_navels + 0.59 Parsnips,_raw + 0.25 Peaches,_yellow,_raw
+ + 0.18 Pears,_raw + 0.25 Peppers,_jalapeno,_raw + 0.86 Peppers,_serrano,_raw
+ + 0.34 Peppers,_sweet,_green,_raw + 0.43 Peppers,_sweet,_red,_raw
+ + 0.46 Peppers,_sweet,_yellow,_raw + 0.17 Plums,_raw
+ + 1.22 Pork,_fresh,_shoulder,_whole,_separable_lean_only,_raw
+ + 0.81 Potatoes,_flesh_and_skin,_raw + 0.34 Radishes,_raw
+ + 1.29 Rice,_brown,_long_grain,_raw + 0.44 Rutabagas,_raw
+ + 7.72 Seeds,_chia_seeds,_dried + 5.73 Seeds,_flaxseed
+ + 8.82 Seeds,_pumpkin_and_squash_seed_kernels,_dried
+ + 5.25 Seeds,_sunflower_seed_kernels,_dried + 1.2 Shallots,_raw
+ + 2.71 Spinach,_raw + 0.35 Squash,_summer,_all_varieties,_raw
+ + 0.44 Squash,_summer,_crookneck_and_straightneck,_raw
+ + 0.4 Squash,_summer,_scallop,_raw
+ + 0.37 Squash,_summer,_zucchini,_includes_skin,_raw
+ + 0.7 Squash,_winter,_acorn,_raw + 0.58 Squash,_winter,_all_varieties,_raw
+ + 0.7 Squash,_winter,_butternut,_raw + 0.41 Strawberries,_raw
+ + 0.61 Sweet_potato,_raw,_unprepared
+ + 0.57 Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice
+ + 0.27 Tomatoes,_red,_ripe,_raw,_year_round_average
+ + 9.09 Tomatoes,_sun_dried + 3.6 Wheat_flour,_whole_grain + 0.54 Yam,_raw
+ >= 8
+_C90: Squash,_winter,_butternut,_raw >= 0
+_C91: Sweet_potato,_raw,_unprepared >= 0
+_C92: Tomatoes,_red,_ripe,_raw,_year_round_average >= 0
+_C93: Tomatoes,_red,_ripe,_canned,_packed_in_tomato_juice >= 0
+_C94: Yam,_raw >= 0
+_C95: Squash,_summer,_all_varieties,_raw >= 0
+_C96: Squash,_winter,_all_varieties,_raw >= 0
+_C97: Shallots,_raw >= 0
+_C98: Peppers,_sweet,_red,_raw >= 0
+_C99: Peppers,_sweet,_yellow,_raw >= 0
 End

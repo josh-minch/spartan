@@ -9,7 +9,7 @@ vit_nut_ids = [320, 401, 324, 323, 430, 404, 405, 406, 415, 417, 418, 410, 421]
 nut_names = mac_nut_names + min_nut_names + vit_nut_names
 nut_ids = mac_nut_ids + min_nut_ids + vit_nut_ids
 
-# Possible life stages, a combination of age, sex, and whether or not a person is pregnant or lactating.\
+# Possible life stages, a combination of age, sex, and whether or not a person is pregnant or lactating.
 life_stage = [
 '0-6 mo', '6–12 mo', '1–3', '4–8', 
 '9–13 m', '14–18 m', '19–30 m', '31–50 m', '51–70 m', '>70 m',
