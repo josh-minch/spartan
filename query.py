@@ -1,4 +1,5 @@
 import sqlite3 as sql
+from food import Food
 MAX_FOOD_ID_LEN = 5
 
 def search_food(food_name):
@@ -48,10 +49,6 @@ def get_food_id(food_name):
         food_name = food_name[i][0]
 
     return food_name
-
-def list_foods(food_ids):
-    for f in food_ids:
-        print( str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + name_food(f) )
 
 '''
 

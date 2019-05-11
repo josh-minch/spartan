@@ -24,13 +24,14 @@ def main():
     food_ids = [f[0] for f in food_list]
 
     food_ids = basic_foods.food
-    query.list_foods(food_ids)
+    for f in food_ids:
+        print( str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + name_food(f) )
     josh.add_foods(food_ids)
 
     josh.remove_nut(['fl'])
 
-    josh.add_nut(Nutrient('DHA', 631, lower_req= 0.3))
-    josh.add_nut(Nutrient('EPA', 629, lower_req= 0.3))
+    josh.add_nut(Nutrient('DHA', 631, lower_req = 0.3))
+    josh.add_nut(Nutrient('EPA', 629, lower_req = 0.3))
     josh.add_nut(Nutrient('energy', 208, lower_req=2000, upper_req= 2200))
     josh.add_nut(Nutrient('sat', 606, upper_req=27))
 
