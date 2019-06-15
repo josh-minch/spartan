@@ -1,21 +1,32 @@
+'''
+Search database for food, get a food's nutrients, get food name from its id
+'''
+
 import sqlite3 as sql
-from food import Food
-MAX_FOOD_ID_LEN = 5
+import re
+import time
+import pprint
 
 def search_food(food_name):
     con = sql.connect('sr28.db')
     cur = con.cursor()
-    cur.execute("SELECT food_name FROM food_des where food_name LIKE ? ", [food_name + '%'])
-    food_list = cur.fetchall()
-    cur.execute("SELECT food_name FROM food_des where food_name LIKE ? ", ['%' + food_name])
-    food_list += cur.fetchall()
-    cur.execute("SELECT food_name FROM food_des where food_name LIKE ? ", ['%' + food_name + '%'])
-    food_list += cur.fetchall()
 
-    for i in range(len(food_list)):
-        food_list[i] = food_list[i][0]
+    cur.execute("SELECT food_name FROM food_des WHERE food_name LIKE ? \
+                    ORDER BY INSTR(UPPER(food_name), UPPER(?)) ASC", 
+                    ['%' + food_name + '%', food_name])
 
-    return food_list
+
+    '''
+    SELECT food_name FROM food_des 
+    WHERE food_name LIKE '%chocolate%' AND food_name LIKE '%milk%'
+    ORDER BY INSTR(UPPER(food_name), ("chocolate")) + INSTR(UPPER(food_name), UPPER('milk')) ASC 
+    '''
+    food_data = cur.fetchall()
+
+    food_data = [food[0] for food in food_data]
+
+    return food_data
+
 
 def describe_food(food_id):
     con = sql.connect('sr28.db')
@@ -28,21 +39,12 @@ def describe_food(food_id):
 
     return nut_values
 
-def get_food_name(food_id):
-    con = sql.connect('sr28.db')
-    cur = con.cursor()
-    cur.execute("SELECT food_name FROM food_des where food_id = ?", [food_id])
-    food_name = cur.fetchall()
 
-    for i in range(len(food_name)):
-        food_name = food_name[i][0]
-
-    return food_name
-    
 def get_food_id(food_name):
     con = sql.connect('sr28.db')
     cur = con.cursor()
-    cur.execute("SELECT food_id FROM food_des where food_name = ?", [food_id])
+    cur.execute(
+        "SELECT food_id FROM food_des where food_name = ?", [food_name])
     food_name = cur.fetchall()
 
     for i in range(len(food_name)):
@@ -50,24 +52,18 @@ def get_food_id(food_name):
 
     return food_name
 
-'''
 
-def get_food_nutrient_amount(food_name, nutrient_name):
-con = sql.connect('usda.sql3')
-cur = con.cursor()
+def main():
 
-cur.execute(
-select amount 
-from nutrition
-where food_id = (select id 
-				from food
-				where long_desc = "?")
-and
-nutrient_id = (select id 
-				from nutrient
-				where name = "?")
-, food_name, nutrient)
+    start_time = time.time()
+    results = search_food('milk')
+    end_time = time.time()
 
-data = cur.fetchall()
-return data[0]
-'''
+    pp = pprint.PrettyPrinter(indent=4)
+    pp.pprint(results)
+    pp.pprint(len(results))
+    print("--- %s seconds     ---" % (end_time - start_time))
+
+
+if __name__ == '__main__':
+    main()

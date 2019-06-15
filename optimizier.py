@@ -43,7 +43,7 @@ def optimize_diet(formatted_data, Person, prices):
     prob = LpProblem("Diet", sense=LpMinimize)
 
     food_amount = np.array(
-        [LpVariable(query.name_food(id), 0, None, LpContinuous) for id in food_ids])
+       [LpVariable(str(id), 0, None, LpContinuous) for id in food_ids])
 
     prob += lpSum(prices * food_amount), "Total cost of foods"
     for i in range(len(formatted_data)):
@@ -57,6 +57,17 @@ def optimize_diet(formatted_data, Person, prices):
     for i in range(len(food_amount)):
         prob += food_amount[i] >= 0
 
+     # Add food quantity constraint
+    food_constraints = [f for f in food_amount if f.name in ['1077', '15265']]
+    for food in food_constraints:
+        prob += food == 2
+
+    # Add cost constraint
+    #prob += lpSum(prices * food_amount) >= 1000 / 100
+
+    # Add food quantity constraint
+    #prob += food_amount[0] >= 100 / 100
+
     prob.writeLP("DietModel.lp")
     prob.solve()
 
@@ -67,8 +78,8 @@ def describe_solution(prob, Person):
 
     print("Status: " + LpStatus[prob.solve()])
 
-    for i, v in enumerate(prob.variables()):
+    for v in prob.variables():
         if (v.varValue != 0):
-            print(query.name_food(Person.food_ids[i]), "=", 100 * v.varValue)
+            print(query.get_food_name(v.name), "=", 100 * v.varValue)
 
     print(100 * value(prob.objective), "total grams of food")

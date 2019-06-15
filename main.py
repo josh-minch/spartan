@@ -10,22 +10,31 @@ import req_data
 import basic_foods
 import query
 import random
+import time
+
+MAX_FOOD_ID_LEN = 5
 
 def main():
-    josh = Person(24, 'm', 'light')
+    josh = Person(25, 'm', 'light')
     
     # Add random foods
     con = sql.connect('sr28.db')
     cur = con.cursor()
     cur.execute("SELECT food_id FROM food_des")
     food_list = cur.fetchall()
-    food_list = random.sample(food_list, 950)
+    food_list = random.sample(food_list, 300)
 
     food_ids = [f[0] for f in food_list]
 
     food_ids = basic_foods.food
-    for f in food_ids:
-        print( str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + name_food(f) )
+    food_ids.sort()
+    '''for f in food_ids:
+        print( str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + query.get_food_name(f) )'''
+
+    with open('fridge.txt', 'w') as file:
+        for f in food_ids:
+            file.write(str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + query.get_food_name(f) + '\n')
+
     josh.add_foods(food_ids)
 
     josh.remove_nut(['fl'])
@@ -37,12 +46,23 @@ def main():
 
     prices =  1 * np.ones(len(josh.food_ids))
 
+    query_time = time.time()
     unformatted_data = query_database(josh)
+    print("--- %s seconds query ---" % (time.time() - query_time))
+    
     formatted_data = shape_data(unformatted_data, josh)
+
+    opt_time = time.time()
     prob = optimize_diet(formatted_data, josh, prices)
+    print("--- %s seconds opt ---" % (time.time() - opt_time))
 
     describe_solution(prob, josh)
 
+
+if __name__ == '__main__':
+    start_time = time.time()
+    main()
+    print("--- %s seconds ---" % (time.time() - start_time))
 
 '''
 Structure I'm thinking of
@@ -63,6 +83,3 @@ Structure I'm thinking of
     formatted_data = format_data(unformatted_data, fridge, user)
     optimize_diet(formatted_data, fridge, user)
 '''
-
-if __name__ == '__main__':
-    main()

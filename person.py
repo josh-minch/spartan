@@ -8,9 +8,10 @@ class Person:
         self.age = age
         self.sex = sex
         self.activity_level = activity_level
+
         self.age_range = self.set_age_range()
-        
         self.nuts = self.set_nuts()
+        self.foods = []
 
         # List of foods available to user 
         # TODO: Make tuple with associated price
@@ -22,7 +23,6 @@ class Person:
                 return req_data.age_range[i-1]
 
     def set_nuts(self):
-
         nuts = [ Nutrient(name, id, lower_req) for (id, name, lower_req) 
         in zip(req_data.nut_ids, req_data.nut_names, req_data.lower_req[ (self.age_range, self.sex)]) ]
         
@@ -32,7 +32,6 @@ class Person:
     # Add or remove nutrients by which to optimize diet
     
     def add_nut(self, Nutrient):
-
         if (Nutrient.id == None):
             nut_index = req_data.nut_names.index(Nutrient.name)
             Nutrient.id = req_data.nut_ids[nut_index]
