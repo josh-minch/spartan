@@ -1,7 +1,6 @@
 import sqlite3 as sql
 import numpy as np
 from pulp import *
-from person import Person
 import query
 
 
@@ -13,6 +12,8 @@ def query_database(Person):
     cur = con.cursor()
 
     # Get nutritional values for each of the nutrients for each user's food.
+    # The len(food_ids)-1 are to programmatically generate a SQL statement with 
+    # a variable length number of parameters, since food_ids and nut_ids vary depending on user settings
     cur.execute('''select nut_value from nut_data where food_id in \
     (''' + (len(food_ids) - 1) * '?, ' + '?) and nut_id in \
     (''' + (len(nut_ids) - 1) * '?, ' + '?) order by food_id, nut_id''', food_ids + nut_ids)
@@ -43,7 +44,7 @@ def optimize_diet(formatted_data, Person, prices):
     prob = LpProblem("Diet", sense=LpMinimize)
 
     food_amount = np.array(
-       [LpVariable(str(id), 0, None, LpContinuous) for id in food_ids])
+        [LpVariable(str(id), 0, None, LpContinuous) for id in food_ids])
 
     prob += lpSum(prices * food_amount), "Total cost of foods"
     for i in range(len(formatted_data)):
@@ -57,10 +58,10 @@ def optimize_diet(formatted_data, Person, prices):
     for i in range(len(food_amount)):
         prob += food_amount[i] >= 0
 
-     # Add food quantity constraint
-    food_constraints = [f for f in food_amount if f.name in ['1077', '15265']]
-    for food in food_constraints:
-        prob += food == 2
+    # Add food quantity constraint
+    #food_constraints = [f for f in food_amount if f.name in ['1077', '15265']]
+    # for food in food_constraints:
+    #    prob += food == 2
 
     # Add cost constraint
     #prob += lpSum(prices * food_amount) >= 1000 / 100
@@ -80,6 +81,6 @@ def describe_solution(prob, Person):
 
     for v in prob.variables():
         if (v.varValue != 0):
-            print(query.get_food_name(v.name), "=", 100 * v.varValue)
+            print(Food.get_food_name(Food(v.name)), "=", 100 * v.varValue)
 
     print(100 * value(prob.objective), "total grams of food")
