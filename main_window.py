@@ -3,6 +3,11 @@ from spartan import Person, Optimizier
 from PySide2.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QAbstractItemView
 from ui_mainwindow import Ui_MainWindow
 
+PRICE_COL = 1
+MIN_COL = 2
+MAX_COL = 3
+TARGET_COL = 4
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -13,13 +18,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.show()
 
-        self.person = Person(25, 'm')
-        self.optimizier = Optimizier()
+        self.person = Person('josh', 25, 'm')
+        
 
     def search_food(self):
         self.search_list.clear()
         search_result = query.search_food(self.search_box.text())
-        print(search_result)
         self.search_list.addItems(search_result)
 
     def add_to_fridge(self):
@@ -30,7 +34,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.fridge_table.insertRow(current_row)
             self.fridge_table.setItem(current_row, 0, QTableWidgetItem(item))
 
-        self.person.add_foods(food_names = selected_items)
+        self.person.add_foods(food_names=selected_items)
 
     def remove_from_fridge(self):
         pass
@@ -39,20 +43,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_table.setHorizontalHeaderLabels(['Food', 'Price', 'Minimum', 'Maximum', 'Target'])
 
     def update_persons_food_constraints(self, item):
-        food_name = self.fridge_table.item(item.row(), 0).text()
-        if (item.column() == 1):
-            self.person.set_food_price(item.text(), food_name=food_name)
-        if (item.column() == 2):
-            self.person.set_food_min(item.text(), food_name=food_name)
-        if (item.column() == 3):
-            self.person.set_food_max(item.text(), food_name=food_name)
-        if (item.column() == 4):
-            self.person.set_food_target(item.text(), food_name=food_name)
+        col_to_constraint = {PRICE_COL: 'price',
+                             MIN_COL: 'min', MAX_COL: 'max', TARGET_COL: 'target'}
+        if (item.column() in col_to_constraint.keys()):
+            food_name = self.fridge_table.item(item.row(), 0).text()
+            constraint = col_to_constraint[item.column()]
+            self.person.set_food_constraint(constraint, item.text(), food_name=food_name)
 
-        for food in self.person.foods:
-            print(vars(food))
-        
     def optimize(self):
+        self.optimizier = Optimizier()
         self.optimizier.optimize_diet(self.person)
         self.optimizier.describe_solution()
 
@@ -70,7 +69,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print([str(x.text()) for x in self.search_list.selectedItems()])
         print([str(x.text()) for x in self.fridge_table.selectedItems()])
         print("table row count is ", self.fridge_table.rowCount())
-        print("table items are ",  self.fridge_table.items())
+        for food in self.person.foods:
+            print(vars(food))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -7,17 +7,36 @@ from timeit import default_timer as timer
 MAX_FOOD_ID_LEN = 5
 
 class Person:
-    def __init__(self, age, sex):
+    def __init__(self, name, age, sex):
         assert isinstance(age, (int, float)), "Age must be a number"
         assert sex in {'f', 'm', 'c', 'l', 'p'}, "Select female, male, child, lactating, or pregnant"
+        self.name = name
         self.age = age
         self.sex = sex
         #self.activity_level = activity_level
 
         self.age_range = self.set_age_range()
-        self.nuts = self.set_nuts()
+        self.nuts = []
         self.foods = []
 
+        self.set_nuts()
+
+    def create_user_db(self):
+        con = sql.connect(self.name)
+        cur = con.cursor()
+        cur.execute("CREATE TABLE foods (food_id INT)")
+
+        con.commit()
+        con.close()
+
+    def add_food_to_db(self, food_id):
+        con = sql.connect(self.name)
+        cur = con.cursor()
+        cur.execute("INSERT INTO table (food_id) VALUES (?)", [food_id])
+
+    def remove_food_from_db(self, food_id):
+        pass
+        
     def set_age_range(self):
         for i, ar in enumerate(req_data.age_range):
             if self.age < ar: 
@@ -26,12 +45,14 @@ class Person:
     def set_nuts(self):
         nuts = [ Nutrient(name, id, min) for (id, name, min) 
         in zip(req_data.nut_ids, req_data.nut_names, req_data.min[(self.age_range, self.sex)])]
-        
+  
         nuts.sort(key=lambda nut: nut.nut_id)
-        return nuts
+        self.nuts = nuts
+        self.remove_nut('fl')
+        self.add_nut(Nutrient('energy', 208, min=2000, max=2200))
 
     def add_nut(self, nutrient):
-        if (nutrient.id == None):
+        if (nutrient.nut_id == None):
             nut_index = req_data.nut_names.index(nutrient.name)
             nutrient.id = req_data.nut_ids[nut_index]
 
@@ -39,7 +60,7 @@ class Person:
         self.nuts.sort(key=lambda nut: nut.nut_id)
         
     def remove_nut(self, nut_name):
-        self.nuts = [nut for nut in self.nuts if nut.name not in nut_name] 
+        self.nuts = [nut for nut in self.nuts if nut.name not in nut_name]
    
     def add_foods(self, food_names=None, food_ids=None):
         if food_names is not None:
@@ -53,22 +74,6 @@ class Person:
     def remove_foods(self, food_name):
         self.foods = [food for food in self.foods if food.name not in food_name] 
 
-    def set_food_price(self, price, food_name=None, food_id=None):
-        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
-        food.price = price
-
-    def set_food_min(self, min, food_name=None, food_id=None):
-        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
-        food.min = min
-    
-    def set_food_max(self, max, food_name=None, food_id=None):
-        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
-        food.max = max
-
-    def set_food_target(self, target, food_name=None, food_id=None):
-        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
-        food.target = target
-
     def get_food_from_id_or_name(self, food_name=None, food_id=None):
         if food_name is not None:
             food = next(food for food in self.foods if food.name == food_name)
@@ -78,7 +83,7 @@ class Person:
     
     def set_food_constraint(self, constraint, constraint_value, food_name=None, food_id=None):
         food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
-        food.constraint = constraint_value
+        setattr(food, constraint, constraint_value)
         
 class Food:
     def __init__(self, food_id=None,  name=None, price=1, min=None, target=None, max=None):
@@ -125,11 +130,6 @@ class Nutrient:
         self.max = max
 
 class Optimizier:
-    def __init__(self):
-        self.lp_prob = LpProblem("Diet", sense=LpMinimize)
-        self.food_quantity_vector = None
-        self.nutrition_matrix = None
-        self.optimum_solution = None
     
     def make_nutrition_matrix(self, person):
         nut_ids = [nut.nut_id for nut in person.nuts]
@@ -157,12 +157,13 @@ class Optimizier:
         return formatted_data
 
     def construct_lp_problem(self, person):
-    
+        self.lp_prob = LpProblem("Diet", sense=LpMinimize)
+
         food_ids = [food.food_id for food in person.foods]
         prices = [food.price for food in person.foods]
 
         self.food_quantity_vector = np.array(
-        [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
+            [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
 
         self.lp_prob += lpSum(prices * self.food_quantity_vector), "Total cost of foods"
 
@@ -215,8 +216,10 @@ class Optimizier:
 
         print("Status: " + LpStatus[self.lp_prob.status])
 
+        #if LpStatus[self.lp_prob.status] == 'Feasible':
+        
         for v in self.lp_prob.variables():
-            if (v.varValue != 0):
+            if (v.varValue is not None and v.varValue > 0):
                 print(query.get_food_name(v.name), "=", 100 * v.varValue)
 
         print(100 * value(self.lp_prob.objective), "total grams of food")
