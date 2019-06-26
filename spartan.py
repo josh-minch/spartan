@@ -24,8 +24,8 @@ class Person:
                 return req_data.age_range[i-1]
 
     def set_nuts(self):
-        nuts = [ Nutrient(name, id, lower_req) for (id, name, lower_req) 
-        in zip(req_data.nut_ids, req_data.nut_names, req_data.lower_req[(self.age_range, self.sex)])]
+        nuts = [ Nutrient(name, id, min) for (id, name, min) 
+        in zip(req_data.nut_ids, req_data.nut_names, req_data.min[(self.age_range, self.sex)])]
         
         nuts.sort(key=lambda nut: nut.nut_id)
         return nuts
@@ -48,25 +48,46 @@ class Person:
         elif food_ids is not None:
             for food_id in food_ids:
                 self.foods.append(Food(food_id=food_id))
-       
         self.foods.sort(key = lambda f: f.food_id)
-
-    def set_food_price(self, food_id, price):
-        food = next(food for food in self.foods if food.id == food_id)
-        food.price = price
 
     def remove_foods(self, food_name):
         self.foods = [food for food in self.foods if food.name not in food_name] 
 
+    def set_food_price(self, price, food_name=None, food_id=None):
+        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
+        food.price = price
 
+    def set_food_min(self, min, food_name=None, food_id=None):
+        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
+        food.min = min
+    
+    def set_food_max(self, max, food_name=None, food_id=None):
+        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
+        food.max = max
+
+    def set_food_target(self, target, food_name=None, food_id=None):
+        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
+        food.target = target
+
+    def get_food_from_id_or_name(self, food_name=None, food_id=None):
+        if food_name is not None:
+            food = next(food for food in self.foods if food.name == food_name)
+        elif food_id is not None:    
+            food = next(food for food in self.foods if food.food_id == food_id)
+        return food
+    
+    def set_food_constraint(self, constraint, constraint_value, food_name=None, food_id=None):
+        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
+        food.constraint = constraint_value
+        
 class Food:
-    def __init__(self, food_id=None,  name=None, price=None, lower_req=None, target_req=None, upper_req=None):
+    def __init__(self, food_id=None,  name=None, price=1, min=None, target=None, max=None):
         self.food_id = food_id or self.get_food_id(name)
         self.name = name or self.get_food_name(food_id)
         self.price = price
-        self.lower_req = lower_req
-        self.target_req = target_req
-        self.upper_req = upper_req
+        self.min = min
+        self.target = target
+        self.max = max
 
     def get_nutrition(self):
         con = sql.connect('sr28.db')
@@ -91,28 +112,28 @@ class Food:
         con = sql.connect('sr28.db')
         cur = con.cursor()
         cur.execute("SELECT food_id FROM food_des WHERE food_name = ?", [food_name])
-        food_id = cur.fetchall()[0]
+        food_id = cur.fetchall()[0][0]
 
         return food_id
 
 class Nutrient:
-    def __init__(self, name, nut_id=None, lower_req=None, target_req=None, upper_req=None):
+    def __init__(self, name, nut_id=None, min=None, target=None, max=None):
         self.name = name
         self.nut_id = nut_id
-        self.lower_req = lower_req
-        self.target_req = target_req
-        self.upper_req = upper_req
+        self.min = min
+        self.target = target
+        self.max = max
 
 class Optimizier:
     def __init__(self):
-        self.lp_prob = None
+        self.lp_prob = LpProblem("Diet", sense=LpMinimize)
         self.food_quantity_vector = None
         self.nutrition_matrix = None
         self.optimum_solution = None
     
     def make_nutrition_matrix(self, person):
-        nut_ids = [nut.id for nut in person.nuts]
-        food_ids = [food.id for food in person.foods]
+        nut_ids = [nut.nut_id for nut in person.nuts]
+        food_ids = [food.food_id for food in person.foods]
 
         con = sql.connect('sr28.db')
         cur = con.cursor()
@@ -136,13 +157,12 @@ class Optimizier:
         return formatted_data
 
     def construct_lp_problem(self, person):
-        self.lp_prob = LpProblem("Diet", sense=LpMinimize)
-
-        food_ids = [food.id for food in person.foods]
+    
+        food_ids = [food.food_id for food in person.foods]
         prices = [food.price for food in person.foods]
 
         self.food_quantity_vector = np.array(
-        [LpVariable(str(id), 0, None, LpContinuous) for id in food_ids])
+        [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
 
         self.lp_prob += lpSum(prices * self.food_quantity_vector), "Total cost of foods"
 
@@ -161,25 +181,25 @@ class Optimizier:
 
         for i, food in enumerate(person.foods):
             self.lp_prob += self.food_quantity_vector[i] >= 0
-            if food.lower_req is not None:
-                self.lp_prob += self.food_quantity_vector[i] >= food.lower_req
-            if food.target_req is not None:
-                self.lp_prob += self.food_quantity_vector[i] == food.target_req
-            if food.upper_req is not None:
-                self.lp_prob += self.food_quantity_vector[i] <= food.upper_req
+            if food.min is not None:
+                self.lp_prob += self.food_quantity_vector[i] >= food.min
+            if food.target is not None:
+                self.lp_prob += self.food_quantity_vector[i] == food.target
+            if food.max is not None:
+                self.lp_prob += self.food_quantity_vector[i] <= food.max
 
     def add_nutrient_constraints(self, person):
-        lower_reqs = [nut.lower_req for nut in person.nuts]
-        target_reqs = [nut.target_req for nut in person.nuts]
-        upper_reqs = [nut.upper_req for nut in person.nuts]
+        mins = [nut.min for nut in person.nuts]
+        targets = [nut.target for nut in person.nuts]
+        maxes = [nut.max for nut in person.nuts]
 
         for i in range(len(self.nutrition_matrix)):
-            if lower_reqs[i] is not None:
-                self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) >= lower_reqs[i]
-            if target_reqs[i] is not None:
-                self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) == target_reqs[i]
-            if upper_reqs[i] is not None:
-                self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) <= upper_reqs[i]
+            if mins[i] is not None:
+                self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) >= mins[i]
+            if targets[i] is not None:
+                self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) == targets[i]
+            if maxes[i] is not None:
+                self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) <= maxes[i]
 
     def optimize_diet(self, person):
         
@@ -227,14 +247,14 @@ def main():
         josh.set_food_price(food, 1)
     
     for food in josh.foods[:5]:
-        food.lower_req = 1
+        food.min = 1
 
     josh.remove_nut(['fl'])
 
-    josh.add_nut(Nutrient('DHA', 631, lower_req = 0.3))
-    josh.add_nut(Nutrient('EPA', 629, lower_req = 0.3))
-    josh.add_nut(Nutrient('energy', 208, lower_req=2000))
-    josh.add_nut(Nutrient('sat', 606, upper_req=27))
+    josh.add_nut(Nutrient('DHA', 631, min = 0.3))
+    josh.add_nut(Nutrient('EPA', 629, min = 0.3))
+    josh.add_nut(Nutrient('energy', 208, min=2000))
+    josh.add_nut(Nutrient('sat', 606, max=27))
 
     optimizier = Optimizier()
     start_time = time.time()
