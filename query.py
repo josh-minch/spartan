@@ -21,7 +21,7 @@ def search_food(food_name):
         sql_statement = ('SELECT food_name FROM food_des '
                          'WHERE food_name LIKE ?'
                          + (len(wildcard_padded_split_food_names)-1) * ' AND food_name LIKE ?' +
-                         ' ORDER BY INSTR(UPPER(food_name), (?))'
+                         ' ORDER BY INSTR(UPPER(food_name), UPPER(?))'
                          + (len(split_food_names)-1) * ' + INSTR(UPPER(food_name), UPPER(?))' + ' ASC')
 
         cur.execute(sql_statement, wildcard_padded_split_food_names + split_food_names)
