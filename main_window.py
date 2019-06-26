@@ -1,7 +1,6 @@
 import sys, query
-from spartan import Person
-from PySide2.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
-from PySide2.QtGui import QStandardItemModel
+from spartan import Person, Optimizier
+from PySide2.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QAbstractItemView
 from ui_mainwindow import Ui_MainWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -11,9 +10,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_connections()
         self.setup_fridge()
         self.search_box.setFocus()
+        self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.show()
 
         self.person = Person(25, 'm')
+        self.optimizier = Optimizier()
 
     def search_food(self):
         self.search_list.clear()
@@ -32,18 +33,37 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person.add_foods(food_names = selected_items)
 
     def remove_from_fridge(self):
-
-        self.person.remove_foods(current_item.text())
+        pass
 
     def setup_fridge(self):
         self.fridge_table.setHorizontalHeaderLabels(['Food', 'Price', 'Minimum', 'Maximum', 'Target'])
+
+    def update_persons_food_constraints(self, item):
+        food_name = self.fridge_table.item(item.row(), 0).text()
+        if (item.column() == 1):
+            self.person.set_food_price(item.text(), food_name=food_name)
+        if (item.column() == 2):
+            self.person.set_food_min(item.text(), food_name=food_name)
+        if (item.column() == 3):
+            self.person.set_food_max(item.text(), food_name=food_name)
+        if (item.column() == 4):
+            self.person.set_food_target(item.text(), food_name=food_name)
+
+        for food in self.person.foods:
+            print(vars(food))
+        
+    def optimize(self):
+        self.optimizier.optimize_diet(self.person)
+        self.optimizier.describe_solution()
 
     def setup_connections(self):
         self.search_box.returnPressed.connect(self.search_food)
         self.search_btn.clicked.connect(self.search_food)
         self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
         self.remove_btn.clicked.connect(self.remove_from_fridge)
-        
+        self.optimize_btn.clicked.connect(self.optimize)
+        self.fridge_table.itemChanged.connect(self.update_persons_food_constraints)
+
         self.debug_btn.clicked.connect(self.print_debug_info)
        
     def print_debug_info(self):
