@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Mon Jun 17 16:02:09 2019
+# Created: Tue Jun 25 20:08:48 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -69,19 +69,29 @@ class Ui_MainWindow(object):
         self.FridgeLabel.setFont(font)
         self.FridgeLabel.setObjectName("FridgeLabel")
         self.verticalLayout.addWidget(self.FridgeLabel)
+        self.fridge_table = QtWidgets.QTableWidget(self.centralwidget)
+        self.fridge_table.setShowGrid(False)
+        self.fridge_table.setGridStyle(QtCore.Qt.SolidLine)
+        self.fridge_table.setRowCount(0)
+        self.fridge_table.setColumnCount(5)
+        self.fridge_table.setObjectName("fridge_table")
+        self.fridge_table.setColumnCount(5)
+        self.fridge_table.setRowCount(0)
+        self.fridge_table.horizontalHeader().setVisible(True)
+        self.fridge_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.fridge_table.horizontalHeader().setSortIndicatorShown(True)
+        self.fridge_table.verticalHeader().setVisible(False)
+        self.verticalLayout.addWidget(self.fridge_table)
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.optimize_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.optimize_btn.setObjectName("optimize_btn")
-        self.gridLayout_2.addWidget(self.optimize_btn, 1, 2, 1, 1)
-        self.fridge_list = QtWidgets.QListWidget(self.centralwidget)
-        self.fridge_list.setObjectName("fridge_list")
-        self.gridLayout_2.addWidget(self.fridge_list, 0, 0, 1, 3)
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem1, 0, 1, 1, 1)
         self.remove_btn = QtWidgets.QPushButton(self.centralwidget)
         self.remove_btn.setObjectName("remove_btn")
-        self.gridLayout_2.addWidget(self.remove_btn, 1, 0, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem1, 1, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.remove_btn, 0, 0, 1, 1)
+        self.optimize_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.optimize_btn.setObjectName("optimize_btn")
+        self.gridLayout_2.addWidget(self.optimize_btn, 0, 2, 1, 1)
         self.verticalLayout.addLayout(self.gridLayout_2)
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
@@ -123,8 +133,8 @@ class Ui_MainWindow(object):
         self.search_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Search", None, -1))
         self.add_to_fridge_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add to Fridge", None, -1))
         self.FridgeLabel.setText(QtWidgets.QApplication.translate("MainWindow", "My Fridge", None, -1))
-        self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Optimize Diet", None, -1))
         self.remove_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Remove food", None, -1))
+        self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Optimize Diet", None, -1))
         self.NutriitonLabel.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))
         self.menuFile.setTitle(QtWidgets.QApplication.translate("MainWindow", "File", None, -1))
         self.actionSettings.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))
