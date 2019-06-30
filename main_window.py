@@ -13,8 +13,6 @@ TARGET_COL = 4
 col_to_attr = {NAME_COL: 'name', PRICE_COL: 'price',
                MIN_COL: 'min', MAX_COL: 'max', TARGET_COL: 'target'}
 
-food_attr_without_name = ['price', 'min', 'max', 'target']
-
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -65,16 +63,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 attr_val = getattr(food, attr)
 
                 self.fridge_table.blockSignals(True)
-                item.setData(Qt.DisplayRole, attr_val)
+                item.setData(Qt.EditRole, attr_val)
                 self.fridge_table.setItem(current_row, col, item)
                 self.fridge_table.blockSignals(False)
           
     def update_persons_food_attr(self, item):
-
-        if (item.text() in food_attr_without_name):
-            food_name = self.fridge_table.item(item.row(), 0).text()
-            attr = col_to_attr[item.column()]
-            self.person.set_food_attr(attr, attr_value=item.text(), food_name=food_name)
+        food_name = self.fridge_table.item(item.row(), 0).text()
+        attr = col_to_attr[item.column()]
+        self.person.set_food_attr(attr, attr_value=item.text(), food_name=food_name)
 
     def optimize(self):
         self.optimizier = Optimizier()
