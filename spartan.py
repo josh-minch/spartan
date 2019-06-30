@@ -153,8 +153,8 @@ class Person:
         con.close()
 
     def set_food_attr(self, attr, attr_value, food_name):
-        food = next(food for food in self.foods if food.name == food_name)
-        setattr(food, attr, attr_value)
+        food = [food for food in self.foods if food.name == food_name]
+        setattr(food[0], attr, attr_value)
         self.update_attr_in_db(food_name, attr, attr_value)
 
     def update_attr_in_db(self, food_name, attr, attr_value):

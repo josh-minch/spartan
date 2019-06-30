@@ -13,6 +13,8 @@ TARGET_COL = 4
 col_to_attr = {NAME_COL: 'name', PRICE_COL: 'price',
                MIN_COL: 'min', MAX_COL: 'max', TARGET_COL: 'target'}
 
+food_attr_without_name = ['price', 'min', 'max', 'target']
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -42,19 +44,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person.add_foods(food_names=selected_items)
 
     def remove_from_fridge(self):
-        food_names_to_remove = [str(x.text()) for x in self.fridge_table.selectedItems()]
-
+        food_names_to_remove = []
+        
         for item in self.fridge_table.selectedItems():
+            food_names_to_remove.append(str(item.text()))
             self.fridge_table.removeRow(item.row())
         
         self.person.remove_foods(food_names=food_names_to_remove)
 
+
     def setup_fridge(self):
         self.fridge_table.setHorizontalHeaderLabels(['Food', 'Price', 'Minimum', 'Maximum', 'Target'])
-        col_to_attr = {NAME_COL: 'name', PRICE_COL: 'price',
-                             MIN_COL: 'min', MAX_COL: 'max', TARGET_COL: 'target'}
-        attr = ['name', 'price', 'min', 'max', 'target']
-
+      
         for food in self.person.foods:
             current_row = self.fridge_table.rowCount()
             self.fridge_table.insertRow(current_row)
@@ -69,12 +70,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.fridge_table.blockSignals(False)
           
     def update_persons_food_attr(self, item):
-        col_to_attr = {NAME_COL: 'name', PRICE_COL: 'price',
-                             MIN_COL: 'min', MAX_COL: 'max', TARGET_COL: 'target'}
-        
-        food_name = self.fridge_table.item(item.row(), 0).text()
-        attr = col_to_attr[item.column()]
-        self.person.set_food_attr(attr, attr_value=item.text(), food_name=food_name)
+
+        if (item.text() in food_attr_without_name):
+            food_name = self.fridge_table.item(item.row(), 0).text()
+            attr = col_to_attr[item.column()]
+            self.person.set_food_attr(attr, attr_value=item.text(), food_name=food_name)
 
     def optimize(self):
         self.optimizier = Optimizier()
@@ -82,9 +82,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimizier.describe_solution()
 
     def setup_selection_modes(self):
-        self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
-
+        #self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        #self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        pass
+        
     def setup_connections(self):
         self.search_box.returnPressed.connect(self.search_food)
         self.search_btn.clicked.connect(self.search_food)
