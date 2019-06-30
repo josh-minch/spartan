@@ -3,9 +3,57 @@ import req_data, basic_foods, query, random, time
 import numpy as np
 from pulp import *
 from timeit import default_timer as timer
+import os.path
 
 MAX_FOOD_ID_LEN = 5
 
+def create_db():
+    if not os.path.isfile('spartan.db'):
+        con = sql.connect("spartan.db")
+        cur = con.cursor()
+        
+        users_stmt = (
+            'CREATE TABLE users ( '
+            'rowid	INTEGER NOT NULL, '
+            'name	TEXT, '
+            'age	INTEGER, '
+            'sex    INTEGER, '
+            'PRIMARY KEY(rowid))'
+        )
+
+        foods_stmt = (
+            'CREATE TABLE foods ( '
+            'user	    INTEGER, '
+            'id         INTEGER, '
+            'name	    TEXT, '
+            'price	    INTEGER, '
+            'min	    INTEGER, '
+            'max	    INTEGER, '
+            'target	    INTEGER, '
+            'PRIMARY KEY(id), '
+            'FOREIGN KEY(user) REFERENCES users(rowid))'
+        )
+
+        cur.execute(users_stmt)
+        cur.execute(foods_stmt)
+        con.commit()
+        con.close()
+    else:
+        print("spartan.db already exists")
+
+def add_user_to_db(person):
+    con = sql.connect("spartan.db")
+    cur = con.cursor()
+
+    sql_stmt = (
+        'INSERT INTO users(name, age, sex) '
+        'VALUES (?, ?, ?)'
+    )
+
+    cur.execute(sql_stmt, [person.name] + [person.age] + [person.sex])
+    con.commit()
+    con.close()
+        
 class Person:
     def __init__(self, name, age, sex):
         assert isinstance(age, (int, float)), "Age must be a number"
@@ -17,25 +65,12 @@ class Person:
 
         self.age_range = self.set_age_range()
         self.nuts = []
-        self.foods = []
-
         self.set_nuts()
+        self.foods = []
+        self.populate_foods_from_db()
 
-    def create_user_db(self):
-        con = sql.connect(self.name)
-        cur = con.cursor()
-        cur.execute("CREATE TABLE foods (food_id INT)")
-
-        con.commit()
-        con.close()
-
-    def add_food_to_db(self, food_id):
-        con = sql.connect(self.name)
-        cur = con.cursor()
-        cur.execute("INSERT INTO table (food_id) VALUES (?)", [food_id])
-
-    def remove_food_from_db(self, food_id):
-        pass
+    def __repr__(self):
+        return str(self.__dict__)
         
     def set_age_range(self):
         for i, ar in enumerate(req_data.age_range):
@@ -61,30 +96,83 @@ class Person:
         
     def remove_nut(self, nut_name):
         self.nuts = [nut for nut in self.nuts if nut.name not in nut_name]
+
+    def populate_foods_from_db(self):
+        con = sql.connect("spartan.db")
+        cur = con.cursor()
+
+        sql_stmt = (
+            'SELECT id, name, price, min, max, target '
+            'FROM foods'
+        )
+
+        for row in cur.execute(sql_stmt):
+            self.foods.append(
+                Food(food_id=row[0], name=row[1], price=row[2], min=row[3], max=row[4], target=row[5]))
+
+        con.commit()
+        con.close()
    
-    def add_foods(self, food_names=None, food_ids=None):
-        if food_names is not None:
-            for name in food_names:
-                self.foods.append(Food(name=name))
-        elif food_ids is not None:
-            for food_id in food_ids:
-                self.foods.append(Food(food_id=food_id))
+    def add_foods(self, food_names):
+        for name in food_names:
+            self.foods.append(Food(name=name))
+        self.add_foods_to_db(food_names)
         self.foods.sort(key = lambda f: f.food_id)
 
-    def remove_foods(self, food_name):
-        self.foods = [food for food in self.foods if food.name not in food_name] 
+    def add_foods_to_db(self, food_names):
+        con = sql.connect("spartan.db")
+        cur = con.cursor()
 
-    def get_food_from_id_or_name(self, food_name=None, food_id=None):
-        if food_name is not None:
-            food = next(food for food in self.foods if food.name == food_name)
-        elif food_id is not None:    
-            food = next(food for food in self.foods if food.food_id == food_id)
-        return food
-    
-    def set_food_constraint(self, constraint, constraint_value, food_name=None, food_id=None):
-        food = self.get_food_from_id_or_name(food_name=food_name, food_id=food_id)
-        setattr(food, constraint, constraint_value)
+        #TODO: One SQL statement to get food_id from food_name and insert it into user db
+        foods_tuple = [(food_name, query.get_food_id(food_name)) for food_name in food_names]
+        sql_stmt = (
+            'INSERT INTO foods(name, id) '
+            'VALUES (?, ?)'
+        )
+
+        cur.executemany(sql_stmt, foods_tuple)
+        con.commit()
+        con.close()
+
+    def remove_foods(self, food_names):
+        self.foods = [food for food in self.foods if food.name not in food_names] 
+        self.remove_foods_from_db(food_names)
+
+    def remove_foods_from_db(self, food_names):
+        con = sql.connect("spartan.db")
+        cur = con.cursor()
+
+        foods_tuple = [(food_name,) for food_name in food_names]
+        sql_stmt = (
+            'DELETE FROM foods '
+            'WHERE name = ?'
+        )
+
+        cur.executemany(sql_stmt, foods_tuple)
+        con.commit()
+        con.close()
+
+    def set_food_attr(self, attr, attr_value, food_name):
+        food = next(food for food in self.foods if food.name == food_name)
+        setattr(food, attr, attr_value)
+        self.update_attr_in_db(food_name, attr, attr_value)
+
+    def update_attr_in_db(self, food_name, attr, attr_value):
+        con = sql.connect("spartan.db")
+        cur = con.cursor()
         
+        # attr comes from our dict of attr strings, so no need to sanitize
+        sql_stmt = (
+            'UPDATE foods '
+            'SET ' + attr + ' = ?'
+            'WHERE name = ?'
+        )
+
+        cur.execute(sql_stmt, [attr_value] + [food_name])
+        con.commit()
+        con.close()
+
+## NOTE: Setting price = 1 by default for testing. Change later    
 class Food:
     def __init__(self, food_id=None,  name=None, price=1, min=None, target=None, max=None):
         self.food_id = food_id or self.get_food_id(name)
@@ -93,6 +181,9 @@ class Food:
         self.min = min
         self.target = target
         self.max = max
+
+    def __repr__(self):
+        return str(self.__dict__)
 
     def get_nutrition(self):
         con = sql.connect('sr28.db')
@@ -236,7 +327,7 @@ def add_random_foods():
     return food_ids.sort()
 
 def main():
-    josh = Person(25, 'm')
+    josh = Person(name="josh", age=25, sex='m')
 
     food_ids = basic_foods.food
 

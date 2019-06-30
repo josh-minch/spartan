@@ -18,11 +18,12 @@ def search_food(food_name):
     # We need to call UPPER because INSTR is not case-sensitive.
     # Order by the sum of how early each term appears in the search result strings.
     if (len(split_food_names) > 0):
-        sql_statement = ('SELECT food_name FROM food_des '
-                         'WHERE food_name LIKE ?'
-                         + (len(wildcard_padded_split_food_names)-1) * ' AND food_name LIKE ?' +
-                         ' ORDER BY INSTR(UPPER(food_name), UPPER(?))'
-                         + (len(split_food_names)-1) * ' + INSTR(UPPER(food_name), UPPER(?))' + ' ASC')
+        sql_statement = (
+            'SELECT food_name FROM food_des '
+            'WHERE food_name LIKE ?'
+            + (len(wildcard_padded_split_food_names)-1) * ' AND food_name LIKE ?' +
+            ' ORDER BY INSTR(UPPER(food_name), UPPER(?))'
+            + (len(split_food_names)-1) * ' + INSTR(UPPER(food_name), UPPER(?))' + ' ASC')
 
         cur.execute(sql_statement, wildcard_padded_split_food_names + split_food_names)
         
