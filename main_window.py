@@ -1,7 +1,7 @@
 import sys, query
-from spartan import Person, Optimizier, create_db
-from PySide2.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QAbstractItemView
-from PySide2.QtCore import Qt
+from spartan import Person, Nutrient, Optimizier, create_db
+from PySide2.QtWidgets import QApplication, QMainWindow, QListWidget, QListWidgetItem, QTableWidgetItem, QAbstractItemView
+from PySide2.QtCore import Qt, QObject, QEvent
 from ui_mainwindow import Ui_MainWindow
 
 NAME_COL = 0
@@ -17,11 +17,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.person = Person('josh', 25, 'm')
-
+        
         self.setupUi(self)
         self.setup_connections()
+        self.setup_filters()
         self.setup_selection_modes()
         self.setup_fridge()
+        
 
         self.search_box.setFocus()
         self.resize(1400, 800)
@@ -68,19 +70,39 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.fridge_table.blockSignals(False)
           
     def update_persons_food_attr(self, item):
-        food_name = self.fridge_table.item(item.row(), 0).text()
-        attr = col_to_attr[item.column()]
-        self.person.set_food_attr(attr, attr_value=item.text(), food_name=food_name)
+        if item.row() > 0:
+            food_name = self.fridge_table.item(item.row(), 0).text()
+            attr = col_to_attr[item.column()]
+            self.person.set_food_attr(attr, attr_value=item.text(), food_name=food_name)
 
     def optimize(self):
         self.optimizier = Optimizier()
         self.optimizier.optimize_diet(self.person)
         self.optimizier.describe_solution()
 
-    def setup_selection_modes(self):
-        #self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        #self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
+    def display_nutrition(self):
         pass
+
+    def setup_selection_modes(self):
+        self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        pass
+    
+    def setup_filters(self):
+        #return_pressed_filter = ReturnPressedFilter(self)
+        self.search_list.installEventFilter(self)
+
+    def eventFilter(self, obj, event):
+        # Search list return key to add to fridge
+        if isinstance(obj, QListWidget):
+            if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Return:
+                self.add_to_fridge()
+                return True
+            else:
+                return False
+        else:
+            # pass the event on to the parent class
+            return QMainWindow.eventFilter(self, obj, event)
         
     def setup_connections(self):
         self.search_box.returnPressed.connect(self.search_food)
@@ -98,7 +120,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print([str(x.text()) for x in self.fridge_table.selectedItems()])
         for food in self.person.foods:
             print(vars(food))
-
+'''
+class ReturnPressedFilter(QObject):
+    def eventFilter(self, obj, event):
+        if isinstance(obj, QListWidget):
+            if event.key() == Qt.Key_Return:
+                print("Ate key press", event.key())
+                return True
+        else:
+             # pass the event on to the parent class
+            return QObject.eventFilter(self, obj, event)
+'''
 if __name__ == "__main__":
     create_db()
     app = QApplication(sys.argv)
