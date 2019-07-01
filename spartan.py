@@ -84,7 +84,7 @@ class Person:
         nuts.sort(key=lambda nut: nut.nut_id)
         self.nuts = nuts
         self.remove_nut('fl')
-        self.add_nut(Nutrient('energy', 208, min=2000, max=2200))
+        self.add_nut(Nutrient('energy', 208, min=2000, max=2500))
 
     def add_nut(self, nutrient):
         if (nutrient.nut_id == None):
@@ -220,7 +220,13 @@ class Nutrient:
         self.target = target
         self.max = max
 
+    def __repr__(self):
+        return str(self.__dict__)
+
 class Optimizier:
+
+    def __init__(self):
+        self.lp_prob = LpProblem("Diet", sense=LpMinimize)
     
     def make_nutrition_matrix(self, person):
         nut_ids = [nut.nut_id for nut in person.nuts]
@@ -248,10 +254,10 @@ class Optimizier:
         return formatted_data
 
     def construct_lp_problem(self, person):
-        self.lp_prob = LpProblem("Diet", sense=LpMinimize)
-
+        
         food_ids = [food.food_id for food in person.foods]
-        prices = [food.price for food in person.foods]
+        ## TODO: Require prices on all foods? sETTING PRICE = 1TEMPORARY FOR TESTING T
+        prices = [food.price if food.price is not None else 1 for food in person.foods]
 
         self.food_quantity_vector = np.array(
             [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
@@ -259,18 +265,6 @@ class Optimizier:
         self.lp_prob += lpSum(prices * self.food_quantity_vector), "Total cost of foods"
 
     def add_food_constraints(self, person):
-
-        # Add food quantity constraint
-        #food_constraints = [f for f in food_amount if f.name in ['1077', '15265']]
-        #for food in food_constraints:
-        #    self.lp_prob += food == 2
-
-        # Add cost constraint
-        #self.lp_prob += lpSum(prices * food_amount) >= 1000 / 100
-
-        # Add food quantity constraint
-        #self.lp_prob += food_amount[0] >= 100 / 100
-
         for i, food in enumerate(person.foods):
             self.lp_prob += self.food_quantity_vector[i] >= 0
             if food.min is not None:
@@ -347,7 +341,7 @@ def main():
 
     josh.add_nut(Nutrient('DHA', 631, min = 0.3))
     josh.add_nut(Nutrient('EPA', 629, min = 0.3))
-    josh.add_nut(Nutrient('energy', 208, min=2000))
+    josh.add_nut(Nutrient('energy', 208, min=2000, max=2500))
     josh.add_nut(Nutrient('sat', 606, max=27))
 
     optimizier = Optimizier()
