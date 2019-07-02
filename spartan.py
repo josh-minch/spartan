@@ -299,7 +299,13 @@ class Optimizier:
         
         
     def describe_solution_status(self):
-        status_statement = "A diet that meets your current constraints " + LpStatus[self.lp_prob.status].lower()
+        status_statement = ""
+        
+        if (LpStatus[self.lp_prob.status] == LpStatusOptimal):
+            status_statement = "Optimum diet"
+        elif (LpStatus[self.lp_prob.status] == LpStatusInfeasible):
+            status_statement = "A diet that meets your current constraints infeasible"
+
         return status_statement
 
     def describe_solution(self):
