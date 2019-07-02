@@ -172,7 +172,7 @@ class Person:
         con.commit()
         con.close()
 
-## NOTE: Setting price = 1 by default for testing. Change later    
+##NOTE: Setting price = 1 by default for testing. Change later    
 class Food:
     def __init__(self, food_id=None,  name=None, price=1, min=None, target=None, max=None):
         self.food_id = food_id or self.get_food_id(name)
@@ -297,17 +297,27 @@ class Optimizier:
         self.lp_prob.writeLP("DietModel.lp")
         self.lp_prob.solve()
         
+        
+    def describe_solution_status(self):
+        status_statement = "A diet that meets your current constraints " + LpStatus[self.lp_prob.status].lower()
+        return status_statement
+
     def describe_solution(self):
 
         print("Status: " + LpStatus[self.lp_prob.status])
-
-        #if LpStatus[self.lp_prob.status] == 'Feasible':
         
         for v in self.lp_prob.variables():
             if (v.varValue is not None and v.varValue > 0):
                 print(query.get_food_name(v.name), "=", 100 * v.varValue)
 
         print(100 * value(self.lp_prob.objective), "total grams of food")
+
+    def get_totals(self):
+        total_number = len([v for v in self.lp_prob.variables() if v.varValue is not None and v.varValue > 0])
+        total_mass = 100 * value(self.lp_prob.objective)
+        #TODO: Add total price
+
+        return total_number, total_mass
 
 def add_random_foods():
     con = sql.connect('sr28.db')
@@ -350,28 +360,5 @@ def main():
     print("--- %s seconds ---" % (time.time() - start_time))
     optimizier.describe_solution()
    
-
 if __name__ == '__main__':
-   
     main()
-   
-
-'''
-Structure I'm thinking of
-
-    input = get_user_input()
-    user = Person()
-    user.name = input.name
-    user.lifestage = user.lifestage 
-    user.select_nutrients
-        user.calculate_req()
-    
-    groc_store = GroceryStore('stater_bros')
-    fridge = Fridge(Person)
-    groc_store.groceries = input.groceries
-    fridge.groceries = GroceryStore.groceries
-
-    unformatted_data = query_nutritional_database(fridge, user)  //
-    formatted_data = format_data(unformatted_data, fridge, user)
-    optimize_diet(formatted_data, fridge, user)
-'''
