@@ -54,7 +54,7 @@ def add_user_to_db(person):
     con.commit()
     con.close()
         
-class Person:
+class Person(object):
     def __init__(self, name, age, sex):
         assert isinstance(age, (int, float)), "Age must be a number"
         assert sex in {'f', 'm', 'c', 'l', 'p'}, "Select female, male, child, lactating, or pregnant"
@@ -160,7 +160,7 @@ class Person:
     def update_attr_in_db(self, food_name, attr, attr_value):
         con = sql.connect("spartan.db")
         cur = con.cursor()
-        
+       
         # attr comes from our dict of attr strings, so no need to sanitize
         sql_stmt = (
             'UPDATE foods '
@@ -174,7 +174,7 @@ class Person:
 
 ##NOTE: Setting price = 1 by default for testing. Change later    
 class Food:
-    def __init__(self, food_id=None,  name=None, price=1, min=None, target=None, max=None):
+    def __init__(self, food_id=None, name=None, price=1, min=None, target=None, max=None):
         self.food_id = food_id or self.get_food_id(name)
         self.name = name or self.get_food_name(food_id)
         self.price = price
@@ -185,16 +185,39 @@ class Food:
     def __repr__(self):
         return str(self.__dict__)
 
-    def get_nutrition(self):
+    def get_nutrition(self, person):
         con = sql.connect('sr28.db')
         cur = con.cursor()
-        cur.execute("SELECT nut_value FROM nut_data where food_id = ?", [self.food_id])
-        nut_values = cur.fetchall()
 
-        for i in range(len(nut_values)):
-            nut_values[i] = nut_values[i][0]
-
-        return nut_values
+        nut_ids = [nut.nut_id for nut in person.nuts]
+        nut_ids = tuple(nut_ids)
+        sql_stmt = (
+            'SELECT nut_id, nut_value '
+            'FROM nut_data WHERE food_id = ? AND nut_id IN '+ str(nut_ids)
+        )
+        #nutrition = []
+        
+        #for row in cur.execute(sql_stmt, [self.food_id]):
+        #    nutrition.append((req_data.nuts[row[0]], row[1]))
+        cur.execute(sql_stmt, [self.food_id])
+        start = timer()
+        nutrition = cur.fetchall()
+        end = timer()
+        print(len(nutrition), nutrition)
+        nutrition = [(req_data.nuts[n[0]], n[1]) for n in nutrition]
+        sql_stmt = (
+            'SELECT nut_id, nut_value '
+            'FROM nut_data WHERE food_id = ? AND nut_id = '+ str(nut_ids[-1])
+        )
+        #cur.execute(sql_stmt, [self.food_id])
+        
+        #last_nut = cur.fetchall()[0]
+       
+        #nutrition.append((req_data.nuts[last_nut[0]], last_nut[1]))
+        
+        print(end-start)
+        
+        return nutrition
 
     def get_food_name(self, food_id):
         con = sql.connect('sr28.db')
@@ -256,8 +279,8 @@ class Optimizier:
     def construct_lp_problem(self, person):
         
         food_ids = [food.food_id for food in person.foods]
-        ## TODO: Require prices on all foods? sETTING PRICE = 1TEMPORARY FOR TESTING T
-        prices = [food.price if food.price is not None else 1 for food in person.foods]
+        ## TODO: Require prices on all foods? SETTING PRICE = 1 TEMPORARY FOR TESTING
+        prices = [float(food.price) if food.price is not None else 1 for food in person.foods]
 
         self.food_quantity_vector = np.array(
             [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
@@ -301,10 +324,10 @@ class Optimizier:
     def describe_solution_status(self):
         status_statement = ""
         
-        if (LpStatus[self.lp_prob.status] == LpStatusOptimal):
+        if (self.lp_prob.status == LpStatusOptimal):
             status_statement = "Optimum diet"
-        elif (LpStatus[self.lp_prob.status] == LpStatusInfeasible):
-            status_statement = "A diet that meets your current constraints infeasible"
+        elif (self.lp_prob.status == LpStatusInfeasible):
+            status_statement = "A diet that meets your current constraints is infeasible"
 
         return status_statement
 
@@ -320,10 +343,13 @@ class Optimizier:
 
     def get_totals(self):
         total_number = len([v for v in self.lp_prob.variables() if v.varValue is not None and v.varValue > 0])
-        total_mass = 100 * value(self.lp_prob.objective)
-        #TODO: Add total price
+        total_cost = value(self.lp_prob.objective)
+        running_total_mass = 0
+        for var in self.lp_prob.variables():
+            if (var.varValue is not None and var.varValue > 0):
+                running_total_mass += 100 * var.varValue
 
-        return total_number, total_mass
+        return total_number, total_cost, running_total_mass
 
 def add_random_foods():
     con = sql.connect('sr28.db')
