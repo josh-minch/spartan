@@ -8,6 +8,42 @@ mac_nut_ids = [255, 205, 291, 204, 618, 619, 203]
 min_nut_ids = [301, 312, 313, 303, 304, 315, 305, 317, 309, 306, 307]
 vit_nut_ids = [320, 401, 324, 323, 430, 404, 405, 406, 415, 417, 418, 410, 421]
 
+nuts = {
+    203: 'Protein',
+    204: 'Total lipid (fat)',
+    205: 'Carbohydrate, by difference',
+    207: 'Ash',
+    208: 'Energy',
+    255: 'Water',
+    291: 'Fiber, total dietary',
+    301: 'Calcium, Ca',
+    303: 'Iron, Fe',
+    304: 'Magnesium, Mg',
+    305: 'Phosphorus, P',
+    306: 'Potassium, K',
+    307: 'Sodium, Na',
+    309: 'Zinc, Zn',
+    312: 'Copper, Cu',
+    313: 'Fluoride, F',
+    315: 'Manganese, Mn',
+    317: 'Selenium, Se',
+    320: 'Vitamin A, RAE',
+    323: 'Vitamin E (alpha-tocopherol)',
+    324: 'Vitamin D',
+    401: 'Vitamin C, total ascorbic acid',
+    404: 'Thiamin',
+    405: 'Riboflavin',
+    406: 'Niacin',
+    410: 'Pantothenic acid',
+    415: 'Vitamin B-6',
+    417: 'Folate, total',
+    418: 'Vitamin B-12',
+    421: 'Choline, total',
+    430: 'Vitamin K (phylloquinone)',
+    618: '18:2 undifferentiated',
+    619: '18:3 undifferentiated'}
+
+
 nut_names = mac_nut_names + min_nut_names + vit_nut_names
 nut_ids = mac_nut_ids + min_nut_ids + vit_nut_ids
 
