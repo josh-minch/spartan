@@ -1,10 +1,16 @@
 import sys, query
 from gui_constants import *
-from spartan import Person, Nutrient, Optimizier, create_db
-from PySide2.QtWidgets import QApplication, QMainWindow, QListWidget, QListWidgetItem, QTableWidgetItem, QAbstractItemView
-from PySide2.QtCore import Qt, QEvent
+from spartan import Person, Food, Nutrient, Optimizier, create_db
 from ui_mainwindow import Ui_MainWindow
 from ui_optimum_diet_window import Ui_OptimumDietWindow
+from PySide2.QtCore import Qt, QEvent
+from PySide2.QtGui import QFont, QKeySequence
+from PySide2.QtWidgets import (QApplication, QMainWindow, QListWidget, QTableWidget,
+    QListWidgetItem, QTableWidgetItem, QAbstractItemView, QHeaderView, QShortcut)
+
+from PySide2 import QtCore, QtWidgets, QtGui
+
+from timeit import default_timer as timer
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -16,9 +22,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_filters()
         self.setup_selection_modes()
         self.setup_fridge()
+        self.nutrition_table.setHorizontalHeaderLabels(['Nutrient', 'Quantity'])
         
         self.search_box.setFocus()
-        self.resize(1400, 800)
+        self.resize(1500, 700)
         self.show()
 
     def search_food(self):
@@ -39,21 +46,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         food_names_to_remove = []
         
         for item in self.fridge_table.selectedItems():
-            food_names_to_remove.append(str(item.text()))
+            food_names_to_remove.append(str(item.data(Qt.EditRole)))
             self.fridge_table.removeRow(item.row())
         
         self.person.remove_foods(food_names=food_names_to_remove)
 
-
     def setup_fridge(self):
-        self.fridge_table.setHorizontalHeaderLabels(['Food', 'Price', 'Minimum', 'Maximum', 'Target'])
-      
+        setup_table_header(self.fridge_table, labels=['Food', 'Price', 'Min', 'Max', 'Target'])
+       
         for food in self.person.foods:
             current_row = self.fridge_table.rowCount()
             self.fridge_table.insertRow(current_row)
 
             for col, attr in col_to_attr.items():
                 item = QTableWidgetItem()
+                if col == PRICE_COL:
+                    pass
                 attr_val = getattr(food, attr)
 
                 self.fridge_table.blockSignals(True)
@@ -62,32 +70,52 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.fridge_table.blockSignals(False)
           
     def update_persons_food_attr(self, item):
-        if item.row() > 0:
-            food_name = self.fridge_table.item(item.row(), 0).text()
+        # Update food attributes, not food name
+        if item.column() > NAME_COL:
+            food_name = self.fridge_table.item(item.row(), 0).data(Qt.EditRole)
             attr = col_to_attr[item.column()]
-            self.person.set_food_attr(attr, attr_value=item.text(), food_name=food_name)
+            self.person.set_food_attr(attr, attr_value=item.data(Qt.EditRole), food_name=food_name)
 
     def optimize(self):
         optimum_diet_window = OptimumDietWindow(self, person=self.person)
         optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
-    def display_nutrition(self):
-        pass
+    def display_nutrition(self, current, previous):
+        # Check if incoming item is from the search_list or Food name column in fridge_table
+        if isinstance(current, QListWidgetItem) or current.column() == NAME_COL:
+            self.nutrition_table.setRowCount(0)
+            
+            selected_food = Food(name=current.data(Qt.EditRole))
+            nutrition = selected_food.get_nutrition(self.person)
+            for nutrient in nutrition:
+                current_row = self.nutrition_table.rowCount()
+                self.nutrition_table.insertRow(current_row)
+                self.nutrition_table.setItem(current_row, 0, QTableWidgetItem(nutrient[0]))
 
+                nutrient_quantity = QTableWidgetItem()
+                nutrient_quantity.setData(Qt.EditRole, nutrient[1])
+                self.nutrition_table.setItem(current_row, 1, nutrient_quantity)
+        
     def setup_selection_modes(self):
-        self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        #self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        pass
     
     def setup_filters(self):
-        #return_pressed_filter = ReturnPressedFilter(self)
         self.search_list.installEventFilter(self)
+        self.fridge_table.installEventFilter(self)
 
     def eventFilter(self, obj, event):
-        # Search list return key to add to fridge
-        if isinstance(obj, QListWidget):
+        # Press return in search_list to add item selected item to fridge
+        if obj == self.search_list:
             if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Return:
                 self.add_to_fridge()
+                return True
+            else:
+                return False
+        # Press delete in fridge_table to remove selected 
+        elif obj == self.fridge_table:
+            if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Delete:
+                self.remove_from_fridge()
                 return True
             else:
                 return False
@@ -96,16 +124,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return QMainWindow.eventFilter(self, obj, event)
         
     def setup_connections(self):
+        # Database panel connections
         self.search_box.returnPressed.connect(self.search_food)
         self.search_btn.clicked.connect(self.search_food)
         self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
-
+       
+        # Fridge panel connections
         self.fridge_table.itemChanged.connect(self.update_persons_food_attr)
         self.remove_btn.clicked.connect(self.remove_from_fridge)
         self.optimize_btn.clicked.connect(self.optimize)
-        
+        optimize_shortcut = QShortcut(QKeySequence(Qt.Key_F5), self)
+        optimize_shortcut.activated.connect(self.optimize)
+
+        # Nutriton panel connections
+        self.search_list.currentItemChanged.connect(self.display_nutrition)
+        self.fridge_table.currentItemChanged.connect(self.display_nutrition)
+
         self.debug_btn.clicked.connect(self.print_debug_info)
-       
+        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
+        debug_shortcut.activated.connect(self.print_debug_info)
+
     def print_debug_info(self):
         print([str(x.text()) for x in self.search_list.selectedItems()])
         print([str(x.text()) for x in self.fridge_table.selectedItems()])
@@ -120,51 +158,67 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
         self.optimizier = Optimizier()
         self.optimizier.optimize_diet(person)
-        self.populate_optimum_diet_table()
+        self.populate_optimum_diet_table(person)
         self.populate_optimum_diet_totals()
         self.optimizier.describe_solution()
         self.show()       
 
-    def populate_optimum_diet_table(self):
-        self.optimum_diet_table.setHorizontalHeaderLabels(['Food', 'Price', 'Quantity'])
+    def populate_optimum_diet_table(self, person):
+        setup_table_header(self.optimum_diet_table, labels=['Food', 'Cost', 'Quantity'])
+
         self.diet_label.setText(self.optimizier.describe_solution_status())
 
-        for v in self.optimizier.lp_prob.variables():
-            if (v.varValue is not None and v.varValue > 0):
+        prices = [food.price for food in person.foods]
+
+        for i, var in enumerate(self.optimizier.lp_prob.variables()):
+            if (var.varValue is not None and var.varValue > 0):
                 current_row = self.optimum_diet_table.rowCount()
                 self.optimum_diet_table.insertRow(current_row)
 
                 food_name = QTableWidgetItem()
-                food_name.setData(Qt.EditRole, query.get_food_name(v.name))
+                food_name.setData(Qt.EditRole, query.get_food_name(var.name))
                 self.optimum_diet_table.setItem(current_row, NAME_COL, food_name)
 
+                price = QTableWidgetItem()
+                price.setData(Qt.EditRole, prices[i] * var.varValue)
+                self.optimum_diet_table.setItem(current_row, PRICE_COL, price)
+
                 quantity = QTableWidgetItem()
-                quantity.setData(Qt.EditRole, 100 * v.varValue)
+                quantity.setData(Qt.EditRole, 100 * var.varValue)
                 self.optimum_diet_table.setItem(current_row, QUANTITY_COL, quantity)
 
-        total_number, total_mass = self.optimizier.get_totals()
-        current_row = self.optimum_diet_table.rowCount()
-        self.optimum_diet_table.insertRow(current_row)
+    def populate_optimum_diet_totals(self):
+        for i in range(2):
+            current_row = self.optimum_diet_table.rowCount()
+            self.optimum_diet_table.insertRow(current_row)
+
+        totals_font = QFont()
+        totals_font.setBold(True)
+
+        num_value, cost_value, mass_value = self.optimizier.get_totals()
 
         number_item = QTableWidgetItem()
-        number_item.setData(Qt.EditRole, total_number)
+        number_item.setFont(totals_font)
+        number_item.setData(Qt.EditRole, str(num_value) + " items")
         self.optimum_diet_table.setItem(current_row, NAME_COL, number_item)
 
+        cost_item = QTableWidgetItem()
+        cost_item.setFont(totals_font)
+        cost_item.setData(Qt.EditRole, cost_value)
+        self.optimum_diet_table.setItem(current_row, PRICE_COL, cost_item)
+
         mass_item = QTableWidgetItem()
-        mass_item.setData(Qt.EditRole, total_mass)
+        mass_item.setFont(totals_font)
+        mass_item.setData(Qt.EditRole, mass_value)
         self.optimum_diet_table.setItem(current_row, QUANTITY_COL, mass_item)
 
-    def populate_optimum_diet_totals(self):
-        total_number, total_mass = self.optimizier.get_totals()
+def setup_table_header(table, labels):
+    header = table.horizontalHeader()    
+    table.setHorizontalHeaderLabels(labels)
+    header.setSectionResizeMode(0, QHeaderView.Stretch)
+    for i in range(1, len(labels)):
+        header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
 
-        number_item = QTableWidgetItem()
-        number_item.setData(Qt.EditRole, total_number)
-        self.optimum_diet_totals.setItem(0, NAME_COL, number_item)
-
-        mass_item = QTableWidgetItem()
-        mass_item.setData(Qt.EditRole, total_mass)
-        self.optimum_diet_totals.setItem(0, QUANTITY_COL, mass_item)
-    
 if __name__ == "__main__":
     create_db()
     app = QApplication(sys.argv)
