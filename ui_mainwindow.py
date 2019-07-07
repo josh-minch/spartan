@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Tue Jun 25 20:08:48 2019
+# Created: Sat Jul  6 14:43:55 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -103,8 +103,15 @@ class Ui_MainWindow(object):
         self.NutriitonLabel.setFont(font)
         self.NutriitonLabel.setObjectName("NutriitonLabel")
         self.verticalLayout_2.addWidget(self.NutriitonLabel)
-        self.nutrition_table = QtWidgets.QTableView(self.centralwidget)
+        self.nutrition_table = QtWidgets.QTableWidget(self.centralwidget)
+        self.nutrition_table.setColumnCount(2)
         self.nutrition_table.setObjectName("nutrition_table")
+        self.nutrition_table.setColumnCount(2)
+        self.nutrition_table.setRowCount(0)
+        self.nutrition_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.nutrition_table.horizontalHeader().setStretchLastSection(False)
+        self.nutrition_table.verticalHeader().setVisible(False)
+        self.nutrition_table.verticalHeader().setStretchLastSection(False)
         self.verticalLayout_2.addWidget(self.nutrition_table)
         self.horizontalLayout.addLayout(self.verticalLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -127,7 +134,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "Frugal Nutrition", None, -1))
-        self.debug_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Debug Search List", None, -1))
+        self.debug_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Debug", None, -1))
         self.DatabaseLabel.setText(QtWidgets.QApplication.translate("MainWindow", "Food Database", None, -1))
         self.add_custom_food_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add custom food", None, -1))
         self.search_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Search", None, -1))

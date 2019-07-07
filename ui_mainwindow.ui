@@ -20,7 +20,7 @@
       <item>
        <widget class="QPushButton" name="debug_btn">
         <property name="text">
-         <string>Debug Search List</string>
+         <string>Debug</string>
         </property>
        </widget>
       </item>
@@ -135,6 +135,9 @@
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>false</bool>
         </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
         <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
          <bool>true</bool>
         </attribute>
@@ -197,7 +200,25 @@
        </widget>
       </item>
       <item>
-       <widget class="QTableView" name="nutrition_table"/>
+       <widget class="QTableWidget" name="nutrition_table">
+        <property name="columnCount">
+         <number>2</number>
+        </property>
+        <attribute name="horizontalHeaderCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderStretchLastSection">
+         <bool>false</bool>
+        </attribute>
+        <column/>
+        <column/>
+       </widget>
       </item>
      </layout>
     </item>
