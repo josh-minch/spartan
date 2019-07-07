@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_optimum_diet_window.ui',
 # licensing of 'ui_optimum_diet_window.ui' applies.
 #
-# Created: Mon Jul  1 21:04:00 2019
+# Created: Sat Jul  6 14:43:42 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,6 +32,7 @@ class Ui_OptimumDietWindow(object):
         self.optimum_diet_table.setObjectName("optimum_diet_table")
         self.optimum_diet_table.setColumnCount(3)
         self.optimum_diet_table.setRowCount(0)
+        self.optimum_diet_table.verticalHeader().setVisible(False)
         self.verticalLayout.addWidget(self.optimum_diet_table)
         self.optimum_diet_totals = QtWidgets.QTableWidget(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
