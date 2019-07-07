@@ -22,7 +22,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_filters()
         self.setup_selection_modes()
         self.setup_fridge()
-        self.nutrition_table.setHorizontalHeaderLabels(['Nutrient', 'Quantity'])
+        self.setup_nutrition()
         
         self.search_box.setFocus()
         self.resize(1500, 700)
@@ -74,15 +74,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if item.column() > NAME_COL:
             food_name = self.fridge_table.item(item.row(), 0).data(Qt.EditRole)
             attr = col_to_attr[item.column()]
-            self.person.set_food_attr(attr, attr_value=item.data(Qt.EditRole), food_name=food_name)
+            if item.data(Qt.EditRole) == "":
+                self.person.set_food_attr(attr, attr_value=item.data(Qt.EditRole), food_name=food_name)
+            else:
+                self.person.set_food_attr(attr, attr_value=float(item.data(Qt.EditRole)), food_name=food_name)
 
     def optimize(self):
         optimum_diet_window = OptimumDietWindow(self, person=self.person)
         optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
+    def setup_nutrition(self):
+        setup_table_header(self.nutrition_table, ['Nutrient', 'Quantity', 'Percent'])
+
     def display_nutrition(self, current, previous):
         # Check if incoming item is from the search_list or Food name column in fridge_table
         if isinstance(current, QListWidgetItem) or current.column() == NAME_COL:
+            self.nutrition_label.setText("Nutrition of selected item")
+
             self.nutrition_table.setRowCount(0)
             
             selected_food = Food(name=current.data(Qt.EditRole))

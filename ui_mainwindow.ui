@@ -6,24 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>818</width>
+    <width>954</width>
     <height>745</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Frugal Nutrition</string>
+   <string>Spartan</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon_trimmed.png</normaloff>icon_trimmed.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,0">
+    <property name="spacing">
+     <number>9</number>
+    </property>
     <item>
      <layout class="QVBoxLayout" name="DatabaseLayout">
-      <item>
-       <widget class="QPushButton" name="debug_btn">
-        <property name="text">
-         <string>Debug</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QLabel" name="DatabaseLabel">
         <property name="sizePolicy">
@@ -35,13 +35,13 @@
         <property name="font">
          <font>
           <family>Segoe UI</family>
-          <pointsize>16</pointsize>
+          <pointsize>12</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
         </property>
         <property name="text">
-         <string>Food Database</string>
+         <string>Food database</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -107,11 +107,11 @@
         <property name="font">
          <font>
           <family>Segoe UI</family>
-          <pointsize>16</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>My Fridge</string>
+         <string>Pantry</string>
         </property>
        </widget>
       </item>
@@ -186,12 +186,12 @@
     </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="NutriitonLabel">
+      <item alignment="Qt::AlignLeft">
+       <widget class="QLabel" name="nutrition_label">
         <property name="font">
          <font>
           <family>Segoe UI</family>
-          <pointsize>16</pointsize>
+          <pointsize>12</pointsize>
          </font>
         </property>
         <property name="text">
@@ -202,7 +202,7 @@
       <item>
        <widget class="QTableWidget" name="nutrition_table">
         <property name="columnCount">
-         <number>2</number>
+         <number>3</number>
         </property>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>false</bool>
@@ -218,6 +218,14 @@
         </attribute>
         <column/>
         <column/>
+        <column/>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="debug_btn">
+        <property name="text">
+         <string>Debug</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -229,7 +237,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>818</width>
+     <width>954</width>
      <height>21</height>
     </rect>
    </property>

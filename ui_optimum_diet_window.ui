@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Optimum Diet</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon_trimmed.png</normaloff>icon_trimmed.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>

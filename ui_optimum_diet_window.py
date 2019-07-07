@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_optimum_diet_window.ui',
 # licensing of 'ui_optimum_diet_window.ui' applies.
 #
-# Created: Sat Jul  6 14:43:42 2019
+# Created: Sat Jul  6 18:51:10 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,6 +14,9 @@ class Ui_OptimumDietWindow(object):
     def setupUi(self, OptimumDietWindow):
         OptimumDietWindow.setObjectName("OptimumDietWindow")
         OptimumDietWindow.resize(800, 600)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        OptimumDietWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(OptimumDietWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.centralwidget)
