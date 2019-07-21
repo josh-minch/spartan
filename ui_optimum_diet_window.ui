@@ -36,6 +36,9 @@
       </item>
       <item>
        <widget class="QTableWidget" name="optimum_diet_table">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
         <property name="columnCount">
          <number>3</number>
         </property>

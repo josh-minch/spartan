@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Sat Jul  6 19:02:51 2019
+# Created: Wed Jul 17 16:25:26 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,6 +48,7 @@ class Ui_MainWindow(object):
         self.search_btn.setObjectName("search_btn")
         self.gridLayout.addWidget(self.search_btn, 0, 3, 1, 1)
         self.search_list = QtWidgets.QListWidget(self.centralwidget)
+        self.search_list.setAlternatingRowColors(True)
         self.search_list.setObjectName("search_list")
         self.gridLayout.addWidget(self.search_list, 1, 1, 1, 4)
         self.add_to_fridge_btn = QtWidgets.QPushButton(self.centralwidget)
@@ -71,6 +72,7 @@ class Ui_MainWindow(object):
         self.FridgeLabel.setObjectName("FridgeLabel")
         self.verticalLayout.addWidget(self.FridgeLabel)
         self.fridge_table = QtWidgets.QTableWidget(self.centralwidget)
+        self.fridge_table.setAlternatingRowColors(True)
         self.fridge_table.setShowGrid(False)
         self.fridge_table.setGridStyle(QtCore.Qt.SolidLine)
         self.fridge_table.setRowCount(0)

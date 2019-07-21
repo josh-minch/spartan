@@ -65,7 +65,11 @@
          </widget>
         </item>
         <item row="1" column="1" colspan="4">
-         <widget class="QListWidget" name="search_list"/>
+         <widget class="QListWidget" name="search_list">
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item row="4" column="3">
          <widget class="QPushButton" name="add_to_fridge_btn">
@@ -117,6 +121,9 @@
       </item>
       <item>
        <widget class="QTableWidget" name="fridge_table">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
         <property name="showGrid">
          <bool>false</bool>
         </property>
