@@ -172,7 +172,7 @@ class Person(object):
         con.commit()
         con.close()
 
-##NOTE: Setting price = 1 by default for testing. Change later    
+##NOTE: Setting price = 1 by default for testing.  
 class Food:
     def __init__(self, food_id=None, name=None, price=1, min=None, target=None, max=None):
         self.food_id = food_id or self.get_food_id(name)
