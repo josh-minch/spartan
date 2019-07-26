@@ -1,58 +1,11 @@
 import sqlite3 as sql
-import req_data, basic_foods, query, random, time
+import req, basic_foods, database, random, time
 import numpy as np
 from pulp import *
 from timeit import default_timer as timer
 import os.path
 
 MAX_FOOD_ID_LEN = 5
-
-def create_db():
-    if not os.path.isfile('spartan.db'):
-        con = sql.connect("spartan.db")
-        cur = con.cursor()
-        
-        users_stmt = (
-            'CREATE TABLE users ( '
-            'rowid	INTEGER NOT NULL, '
-            'name	TEXT, '
-            'age	INTEGER, '
-            'sex    INTEGER, '
-            'PRIMARY KEY(rowid))'
-        )
-
-        foods_stmt = (
-            'CREATE TABLE foods ( '
-            'user	    INTEGER, '
-            'id         INTEGER, '
-            'name	    TEXT, '
-            'price	    INTEGER, '
-            'min	    INTEGER, '
-            'max	    INTEGER, '
-            'target	    INTEGER, '
-            'PRIMARY KEY(id), '
-            'FOREIGN KEY(user) REFERENCES users(rowid))'
-        )
-
-        cur.execute(users_stmt)
-        cur.execute(foods_stmt)
-        con.commit()
-        con.close()
-    else:
-        print("spartan.db already exists")
-
-def add_user_to_db(person):
-    con = sql.connect("spartan.db")
-    cur = con.cursor()
-
-    sql_stmt = (
-        'INSERT INTO users(name, age, sex) '
-        'VALUES (?, ?, ?)'
-    )
-
-    cur.execute(sql_stmt, [person.name] + [person.age] + [person.sex])
-    con.commit()
-    con.close()
         
 class Person(object):
     def __init__(self, name, age, sex):
@@ -73,13 +26,13 @@ class Person(object):
         return str(self.__dict__)
         
     def set_age_range(self):
-        for i, ar in enumerate(req_data.age_range):
+        for i, ar in enumerate(req.age_range):
             if self.age < ar: 
-                return req_data.age_range[i-1]
+                return req.age_range[i-1]
 
     def set_nuts(self):
         nuts = [ Nutrient(name, id, min) for (id, name, min) 
-        in zip(req_data.nut_ids, req_data.nut_names, req_data.min[(self.age_range, self.sex)])]
+        in zip(req.nut_ids, req.nut_names, req.min[(self.age_range, self.sex)])]
   
         nuts.sort(key=lambda nut: nut.nut_id)
         self.nuts = nuts
@@ -88,8 +41,8 @@ class Person(object):
 
     def add_nut(self, nutrient):
         if (nutrient.nut_id == None):
-            nut_index = req_data.nut_names.index(nutrient.name)
-            nutrient.id = req_data.nut_ids[nut_index]
+            nut_index = req.nut_names.index(nutrient.name)
+            nutrient.id = req.nut_ids[nut_index]
 
         self.nuts.append(nutrient)
         self.nuts.sort(key=lambda nut: nut.nut_id)
@@ -124,7 +77,7 @@ class Person(object):
         cur = con.cursor()
 
         #TODO: One SQL statement to get food_id from food_name and insert it into user db
-        foods_tuple = [(food_name, query.get_food_id(food_name)) for food_name in food_names]
+        foods_tuple = [(food_name, database.get_food_id(food_name)) for food_name in food_names]
         sql_stmt = (
             'INSERT INTO foods(name, id) '
             'VALUES (?, ?)'
@@ -175,8 +128,8 @@ class Person(object):
 ##NOTE: Setting price = 1 by default for testing.  
 class Food:
     def __init__(self, food_id=None, name=None, price=1, min=None, target=None, max=None):
-        self.food_id = food_id or self.get_food_id(name)
-        self.name = name or self.get_food_name(food_id)
+        self.food_id = food_id or database.get_food_id(name)
+        self.name = name or database.get_food_name(food_id)
         self.price = price
         self.min = min
         self.target = target
@@ -186,54 +139,21 @@ class Food:
         return str(self.__dict__)
 
     def get_nutrition(self, person):
-        con = sql.connect('sr28.db')
+        con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
 
         nut_ids = [nut.nut_id for nut in person.nuts]
         nut_ids = tuple(nut_ids)
         sql_stmt = (
-            'SELECT nut_id, nut_value '
+            'SELECT nut_id, amount '
             'FROM nut_data WHERE food_id = ? AND nut_id IN '+ str(nut_ids)
         )
-        #nutrition = []
         
-        #for row in cur.execute(sql_stmt, [self.food_id]):
-        #    nutrition.append((req_data.nuts[row[0]], row[1]))
         cur.execute(sql_stmt, [self.food_id])
-        start = timer()
         nutrition = cur.fetchall()
-        end = timer()
-        print(len(nutrition), nutrition)
-        nutrition = [(req_data.nuts[n[0]], n[1]) for n in nutrition]
-        sql_stmt = (
-            'SELECT nut_id, nut_value '
-            'FROM nut_data WHERE food_id = ? AND nut_id = '+ str(nut_ids[-1])
-        )
-        #cur.execute(sql_stmt, [self.food_id])
-        
-        #last_nut = cur.fetchall()[0]
-       
-        #nutrition.append((req_data.nuts[last_nut[0]], last_nut[1]))
-        
-        print(end-start)
-        
+        nutrition = [(req.nuts[n[0]], n[1]) for n in nutrition]
+   
         return nutrition
-
-    def get_food_name(self, food_id):
-        con = sql.connect('sr28.db')
-        cur = con.cursor()
-        cur.execute("SELECT food_name FROM food_des WHERE food_id = ?", [food_id])
-        food_name = cur.fetchall()[0][0]
-
-        return food_name
-    
-    def get_food_id(self, food_name):
-        con = sql.connect('sr28.db')
-        cur = con.cursor()
-        cur.execute("SELECT food_id FROM food_des WHERE food_name = ?", [food_name])
-        food_id = cur.fetchall()[0][0]
-
-        return food_id
 
 class Nutrient:
     def __init__(self, name, nut_id=None, min=None, target=None, max=None):
@@ -255,22 +175,26 @@ class Optimizier:
         nut_ids = [nut.nut_id for nut in person.nuts]
         food_ids = [food.food_id for food in person.foods]
 
-        con = sql.connect('sr28.db')
+        con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
 
         # Get nutritional values for each of the nutrients for each user's food.
         # The len(food_ids)-1 are to programmatically generate a SQL statement with 
         # a variable length number of parameters, since food_ids and nut_ids vary depending on user settings
-        cur.execute('''select nut_value from nut_data where food_id in \
-        (''' + (len(food_ids) - 1) * '?, ' + '?) and nut_id in \
-        (''' + (len(nut_ids) - 1) * '?, ' + '?) order by food_id, nut_id''', food_ids + nut_ids)
 
-        unformatted_data = cur.fetchall()
-        self.nutrition_matrix = self.format_nutrition_matrix(unformatted_data, person)
-        
+        sql_stmnt = '''select amount from nut_data where food_id in \
+        (''' + (len(food_ids) - 1) * '?, ' + '?) and nut_id in \
+        (''' + (len(nut_ids) - 1) * '?, ' + '?) order by food_id, nut_id'''
+
+        cur.execute(sql_stmnt, food_ids + nut_ids)
+
+        data = cur.fetchall()
+        self.nutrition_matrix = self.format_nutrition_matrix(data, person)
+
     def format_nutrition_matrix(self, unformatted_data, person):
         # Construct formatted matrix where each row is a food and each col is a nutrient
-        unformatted_data = np.array([float(d[0]) for d in unformatted_data])
+        unformatted_data = np.array(unformatted_data)
+        unformatted_data[unformatted_data == None] = 0
         unformatted_data = unformatted_data.reshape(len(person.foods), len(person.nuts))
 
         formatted_data = np.transpose(unformatted_data)
@@ -337,7 +261,7 @@ class Optimizier:
         
         for v in self.lp_prob.variables():
             if (v.varValue is not None and v.varValue > 0):
-                print(query.get_food_name(v.name), "=", 100 * v.varValue)
+                print(database.get_food_name(v.name), "=", 100 * v.varValue)
 
         print(100 * value(self.lp_prob.objective), "total grams of food")
 
@@ -352,7 +276,7 @@ class Optimizier:
         return total_number, total_cost, running_total_mass
 
 def add_random_foods():
-    con = sql.connect('sr28.db')
+    con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
     cur.execute("SELECT food_id FROM food_des")
     food_list = cur.fetchall()
@@ -369,7 +293,7 @@ def main():
 
     with open('fridge.txt', 'w') as file:
         for f in food_ids:
-            file.write(str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + query.get_food_name(f) + '\n')
+            file.write(str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + database.get_food_name(f) + '\n')
     
     prices = len(food_ids) * [1]
     josh.add_foods(food_ids=food_ids)
