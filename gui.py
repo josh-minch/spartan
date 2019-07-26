@@ -1,7 +1,8 @@
 import sys
-import query
+import database
+import user_db
 from gui_constants import *
-from spartan import Person, Food, Nutrient, Optimizier, create_db
+from spartan import Person, Food, Nutrient, Optimizier
 from ui_mainwindow import Ui_MainWindow
 from ui_optimum_diet_window import Ui_OptimumDietWindow
 from PySide2.QtCore import Qt, QEvent
@@ -32,7 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def search_food(self):
         self.search_list.clear()
-        search_result = query.search_food(self.search_box.text())
+        search_result = database.search_food(self.search_box.text())
         self.search_list.addItems(search_result)
 
     def add_to_fridge(self):
@@ -96,7 +97,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def display_nutrition(self, current, previous):
         # Check if incoming item is from the search_list or Food name column in fridge_table
         if isinstance(current, QListWidgetItem) or current.column() == NAME_COL:
-            self.nutrition_label.setText("Nutrition of selected item")
+            #self.nutrition_label.setText("Nutrition of selected item")
 
             self.nutrition_table.setRowCount(0)
 
@@ -109,7 +110,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     current_row, 0, QTableWidgetItem(nutrient[0]))
 
                 nutrient_quantity = QTableWidgetItem()
-                nutrient_quantity.setData(Qt.EditRole, nutrient[1])
+                if nutrient[1] is not None:
+                    nutrient_quantity.setData(Qt.EditRole, nutrient[1])
+                else:
+                    nutrient_quantity.setData(Qt.EditRole, 'No data')
                 self.nutrition_table.setItem(current_row, 1, nutrient_quantity)
 
     def setup_selection_modes(self):
@@ -195,7 +199,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
                 self.optimum_diet_table.insertRow(current_row)
 
                 food_name = QTableWidgetItem()
-                food_name.setData(Qt.EditRole, query.get_food_name(var.name))
+                food_name.setData(Qt.EditRole, database.get_food_name(var.name))
                 self.optimum_diet_table.setItem(
                     current_row, NAME_COL, food_name)
 
@@ -243,7 +247,7 @@ def setup_table_header(table, labels):
 
 
 if __name__ == "__main__":
-    create_db()
+    user_db.create_user_db()
     app = QApplication(sys.argv)
     window = MainWindow()
     sys.exit(app.exec_())
