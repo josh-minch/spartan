@@ -27,8 +27,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_fridge()
         self.setup_nutrition()
 
+        self.fridge_table.setShowGrid(False)
+
         self.search_box.setFocus()
-        self.resize(1500, 700)
+        self.resize(1366, 768)
         self.show()
 
     def search_food(self):
@@ -116,10 +118,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     nutrient_quantity.setData(Qt.EditRole, 'No data')
                 self.nutrition_table.setItem(current_row, 1, nutrient_quantity)
 
+    def toggle_add_btn(self):
+        if self.search_selection_model.hasSelection():
+            self.add_to_fridge_btn.setEnabled(True)
+        else:
+            self.add_to_fridge_btn.setEnabled(False)
+
+    def toggle_remove_btn(self):
+        if self.fridge_selection_model.hasSelection():
+            self.remove_btn.setEnabled(True)
+        else:
+            self.remove_btn.setEnabled(False)
+
     def setup_selection_modes(self):
         # self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
-
+        #self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        pass
+        
     def setup_filters(self):
         self.search_list.installEventFilter(self)
         self.fridge_table.installEventFilter(self)
@@ -144,11 +159,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return QMainWindow.eventFilter(self, obj, event)
 
     def setup_connections(self):
-        # Database panel connections
+        # Search panel connections
         self.search_box.returnPressed.connect(self.search_food)
         self.search_btn.clicked.connect(self.search_food)
         self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
 
+        # Toggle add button
+        self.search_selection_model = self.search_list.selectionModel()
+        self.search_selection_model.selectionChanged.connect(self.toggle_add_btn)
+        
         # Fridge panel connections
         self.fridge_table.itemChanged.connect(self.update_persons_food_attr)
         self.remove_btn.clicked.connect(self.remove_from_fridge)
@@ -156,10 +175,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         optimize_shortcut = QShortcut(QKeySequence(Qt.Key_F5), self)
         optimize_shortcut.activated.connect(self.optimize)
 
+        # Toggle remove button
+        self.fridge_selection_model = self.fridge_table.selectionModel()
+        self.fridge_selection_model.selectionChanged.connect(self.toggle_remove_btn)
+
         # Nutriton panel connections
         self.search_list.currentItemChanged.connect(self.display_nutrition)
         self.fridge_table.currentItemChanged.connect(self.display_nutrition)
 
+        # Debug 
         self.debug_btn.clicked.connect(self.print_debug_info)
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
         debug_shortcut.activated.connect(self.print_debug_info)
@@ -244,6 +268,12 @@ def setup_table_header(table, labels):
     header.setSectionResizeMode(0, QHeaderView.Stretch)
     for i in range(1, len(labels)):
         header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
+
+    header.setDefaultAlignment(Qt.AlignLeft) 
+
+    header_font = QFont()
+    header_font.setWeight(QFont.DemiBold)
+    header.setFont(header_font)
 
 
 if __name__ == "__main__":
