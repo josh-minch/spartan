@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Fri Jul 26 15:57:52 2019
+# Created: Sat Jul 27 13:49:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -128,10 +128,13 @@ class Ui_MainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
         self.fridge_table.setPalette(palette)
-        self.fridge_table.setStyleSheet("QTableWidget #fridge_table{\n"
-"    outline: 0;\n"
+        self.fridge_table.setStyleSheet("QHeaderView::section{\n"
+"    border: 0px;\n"
+"    background-color: white;\n"
 "}\n"
-"")
+"\n"
+"QTableWidget::item:focus { \n"
+"}")
         self.fridge_table.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.fridge_table.setLineWidth(0)
         self.fridge_table.setAlternatingRowColors(True)
@@ -218,6 +221,10 @@ class Ui_MainWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
         self.nutrition_table.setPalette(palette)
+        self.nutrition_table.setStyleSheet("QHeaderView::section{\n"
+"    background-color: white;\n"
+"    border: 0px;\n"
+"}")
         self.nutrition_table.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.nutrition_table.setAlternatingRowColors(False)
         self.nutrition_table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
@@ -258,12 +265,12 @@ class Ui_MainWindow(object):
         self.add_custom_food_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add custom food", None, -1))
         self.add_to_fridge_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add to Fridge", None, -1))
         self.label_2.setText(QtWidgets.QApplication.translate("MainWindow", "My fridge", None, -1))
-        self.fridge_table.verticalHeaderItem(0).setText(QtWidgets.QApplication.translate("MainWindow", "sampleb", None, -1))
+        self.fridge_table.verticalHeaderItem(0).setText(QtWidgets.QApplication.translate("MainWindow", "New Row", None, -1))
         __sortingEnabled = self.fridge_table.isSortingEnabled()
         self.fridge_table.setSortingEnabled(False)
-        self.fridge_table.item(0, 0).setText(QtWidgets.QApplication.translate("MainWindow", "Long food name that may cause word wrap", None, -1))
-        self.fridge_table.item(0, 1).setText(QtWidgets.QApplication.translate("MainWindow", "$100", None, -1))
-        self.fridge_table.item(0, 2).setText(QtWidgets.QApplication.translate("MainWindow", "3 lb", None, -1))
+        self.fridge_table.item(0, 0).setText(QtWidgets.QApplication.translate("MainWindow", "data", None, -1))
+        self.fridge_table.item(0, 1).setText(QtWidgets.QApplication.translate("MainWindow", "data", None, -1))
+        self.fridge_table.item(0, 2).setText(QtWidgets.QApplication.translate("MainWindow", "data", None, -1))
         self.fridge_table.setSortingEnabled(__sortingEnabled)
         self.remove_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Remove food", None, -1))
         self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Optimize Diet", None, -1))

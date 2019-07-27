@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_optimum_diet_window.ui',
 # licensing of 'ui_optimum_diet_window.ui' applies.
 #
-# Created: Fri Jul 26 15:57:52 2019
+# Created: Sat Jul 27 13:49:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
