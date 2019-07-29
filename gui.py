@@ -1,6 +1,7 @@
 import sys
 import database
 import user_db
+
 from gui_constants import *
 from spartan import Person, Food, Nutrient, Optimizier
 from ui_mainwindow import Ui_MainWindow
@@ -22,21 +23,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person = Person('josh', 25, 'm')
 
         self.setup_connections()
-        self.setup_filters()
+        #self.setup_filters()
         self.setup_selection_modes()
         self.setup_fridge()
         self.setup_nutrition()
-
-        self.fridge_table.setShowGrid(False)
 
         self.search_box.setFocus()
         self.resize(1366, 768)
         self.show()
 
     def search_food(self):
-        self.search_list.clear()
         search_result = database.search_food(self.search_box.text())
-        self.search_list.addItems(search_result)
+        search_model = SearchModel(search_result)
+        self.search_list.setModel(search_model)
+        h_header = self.search_list.horizontalHeader()
+        h_header.setSectionResizeMode(0, QHeaderView.Stretch)
+
+        v_header = self.search_list.verticalHeader()
+        v_header.setSectionResizeMode(QHeaderView.Fixed)
+        v_header.setDefaultSectionSize(35)
+
+        #self.search_list.resizeRowsToContents()
+        self.search_list.show()
+      
 
     def add_to_fridge(self):
         selected_items = [str(x.text())
@@ -59,7 +68,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_fridge(self):
         setup_table_header(self.fridge_table, labels=[
-                           'Food', 'Price', 'Min', 'Max', 'Target'])
+                           'Food', 'Price', 'Min', 'Max', 'Tar'])
 
         for food in self.person.foods:
             current_row = self.fridge_table.rowCount()
@@ -94,7 +103,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_nutrition(self):
         setup_table_header(self.nutrition_table, [
-                           'Nutrient', 'Quantity', 'Percent'])
+                           'Nutrient', 'Quantity', 'Unit', 'Daily value'])
 
     def display_nutrition(self, current, previous):
         # Check if incoming item is from the search_list or Food name column in fridge_table
@@ -140,7 +149,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 # Set percentage daily value bar
                 percent_bar = QtWidgets.QProgressBar(self)
-                percent_bar.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
+                #percent_bar.setStyleSheet(open('qprogress_bar.css').read())
+                #percent_bar.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
                 if nut_amount is None:
                     percent_bar.setValue(0)
                 elif round(self.person.calculate_dv(nut_name, nut_amount)) > 100:
@@ -166,13 +176,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
         #self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
         pass
-        
+    
     def setup_filters(self):
         self.search_list.installEventFilter(self)
         self.fridge_table.installEventFilter(self)
 
+    
     def eventFilter(self, obj, event):
         # Press return in search_list to add item selected item to fridge
+        
         if obj == self.search_list:
             if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Return:
                 self.add_to_fridge()
@@ -189,16 +201,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             # pass the event on to the parent class
             return QMainWindow.eventFilter(self, obj, event)
+        
 
     def setup_connections(self):
         # Search panel connections
         self.search_box.returnPressed.connect(self.search_food)
         self.search_btn.clicked.connect(self.search_food)
         self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
+        self.search_box.textChanged.connect(self.search_food)
 
         # Toggle add button
         self.search_selection_model = self.search_list.selectionModel()
-        self.search_selection_model.selectionChanged.connect(self.toggle_add_btn)
+        #self.search_selection_model.selectionChanged.connect(self.toggle_add_btn)
         
         # Fridge panel connections
         self.fridge_table.itemChanged.connect(self.update_persons_food_attr)
@@ -212,7 +226,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_selection_model.selectionChanged.connect(self.toggle_remove_btn)
 
         # Nutriton panel connections
-        self.search_list.currentItemChanged.connect(self.display_nutrition)
+        #self.search_list.currentItemChanged.connect(self.display_nutrition)
         self.fridge_table.currentItemChanged.connect(self.display_nutrition)
 
         # Debug 
@@ -226,6 +240,32 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for food in self.person.foods:
             print(vars(food))
 
+
+class SearchModel(QtCore.QAbstractTableModel):
+    def __init__(self, search_result):
+        QtCore.QAbstractTableModel.__init__(self)
+        self.search_result = search_result
+
+    def rowCount(self, parent):
+        # How many rows are there?
+        return len(self.search_result)
+
+    def columnCount(self, parent):
+        return 1
+        #return len(SEARCH_COLS)
+
+    def data(self, index, role):
+        if role != Qt.DisplayRole:
+            return
+        return self.search_result[index.row()]
+
+    '''
+    def headerData(self, section, orientation, role):
+        if role != Qt.DisplayRole or orientation != Qt.Horizontal:
+            return QVariant()
+        # What's the header for the given column?
+        # return headers[section]
+    '''
 
 class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def __init__(self, parent=None, person=None):

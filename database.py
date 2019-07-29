@@ -1,11 +1,9 @@
 '''
-Functions related to querying and inserting missing nutrient values in sr_legacy.db
+Functions related to querying food sr_legacy.db
 '''
 
 import sqlite3 as sql
-import numpy as np
-from shutil import copyfile
-import time
+from timeit import default_timer as timer
 import pprint
 
 
@@ -71,6 +69,9 @@ def get_food_name(food_id):
     return food_name
 
 def main():
-    add_missing_nut_ids()
+    start = timer()
+    a = search_food('e')
+    end = timer()
+    print(end - start)
 if __name__ == '__main__':
     main()
