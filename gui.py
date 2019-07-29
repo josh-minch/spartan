@@ -271,7 +271,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def __init__(self, parent=None, person=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.resize(1300, 900)
+        self.resize(1366, 768)
 
         self.optimizier = Optimizier()
         self.optimizier.optimize_diet(person)
@@ -344,7 +344,7 @@ def setup_table_header(table, labels):
     header.setDefaultAlignment(Qt.AlignLeft) 
 
     header_font = QFont()
-    header_font.setWeight(QFont.DemiBold)
+    header_font.setWeight(70)
     header.setFont(header_font)
 
 
