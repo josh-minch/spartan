@@ -23,7 +23,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person = Person('josh', 25, 'm')
 
         self.setup_connections()
-        #self.setup_filters()
+        self.setup_filters()
         self.setup_selection_modes()
         self.setup_fridge()
         self.setup_nutrition()
@@ -34,8 +34,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def search_food(self):
         search_result = database.search_food(self.search_box.text())
-        search_model = SearchModel(search_result)
-        self.search_list.setModel(search_model)
+        self.search_model = SearchModel(search_result)
+        self.search_list.setModel(self.search_model)
         h_header = self.search_list.horizontalHeader()
         h_header.setSectionResizeMode(0, QHeaderView.Stretch)
 
@@ -43,19 +43,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(35)
 
-        #self.search_list.resizeRowsToContents()
+        self.search_selection_model = self.search_list.selectionModel()
         self.search_list.show()
       
 
     def add_to_fridge(self):
-        selected_items = [str(x.text())
-                          for x in self.search_list.selectedItems()]
+        selected_items = self.search_selection_model.selectedRows()
         for item in selected_items:
             current_row = self.fridge_table.rowCount()
             self.fridge_table.insertRow(current_row)
-            self.fridge_table.setItem(current_row, 0, QTableWidgetItem(item))
-
-        self.person.add_foods(food_names=selected_items)
+            self.fridge_table.setItem(current_row, 0, 
+                QTableWidgetItem(self.search_model.data(index=item, role=Qt.DisplayRole)))
+            #TODO: Pass data directly from search model to fridge model
+        
+        self.person.add_foods([self.search_model.data(index=item, role=Qt.DisplayRole)])
 
     def remove_from_fridge(self):
         food_names_to_remove = []
@@ -174,17 +175,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_selection_modes(self):
         # self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        #self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
         pass
     
     def setup_filters(self):
         self.search_list.installEventFilter(self)
         self.fridge_table.installEventFilter(self)
-
     
     def eventFilter(self, obj, event):
         # Press return in search_list to add item selected item to fridge
-        
+        '''
         if obj == self.search_list:
             if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Return:
                 self.add_to_fridge()
@@ -201,7 +201,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             # pass the event on to the parent class
             return QMainWindow.eventFilter(self, obj, event)
-        
+        '''
 
     def setup_connections(self):
         # Search panel connections
@@ -211,8 +211,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_box.textChanged.connect(self.search_food)
 
         # Toggle add button
-        self.search_selection_model = self.search_list.selectionModel()
-        #self.search_selection_model.selectionChanged.connect(self.toggle_add_btn)
+        #self.search_list.selectionModel().selectionChanged.connect(self.toggle_add_btn)
         
         # Fridge panel connections
         self.fridge_table.itemChanged.connect(self.update_persons_food_attr)
@@ -222,8 +221,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         optimize_shortcut.activated.connect(self.optimize)
 
         # Toggle remove button
-        self.fridge_selection_model = self.fridge_table.selectionModel()
-        self.fridge_selection_model.selectionChanged.connect(self.toggle_remove_btn)
+        #self.fridge_table.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
 
         # Nutriton panel connections
         #self.search_list.currentItemChanged.connect(self.display_nutrition)
@@ -256,22 +254,14 @@ class SearchModel(QtCore.QAbstractTableModel):
 
     def data(self, index, role):
         if role != Qt.DisplayRole:
-            return
+            return None
         return self.search_result[index.row()]
-
-    '''
-    def headerData(self, section, orientation, role):
-        if role != Qt.DisplayRole or orientation != Qt.Horizontal:
-            return QVariant()
-        # What's the header for the given column?
-        # return headers[section]
-    '''
 
 class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def __init__(self, parent=None, person=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.resize(1366, 768)
+        self.resize(800, 600)
 
         self.optimizier = Optimizier()
         self.optimizier.optimize_diet(person)

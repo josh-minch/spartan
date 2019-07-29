@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Mon Jul 29 14:03:06 2019
+# Created: Mon Jul 29 14:16:09 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.add_to_fridge_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.add_to_fridge_btn.setEnabled(False)
+        self.add_to_fridge_btn.setEnabled(True)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.add_to_fridge_btn.setFont(font)
@@ -203,7 +203,7 @@ class Ui_MainWindow(object):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem2, 0, 1, 1, 1)
         self.remove_btn = QtWidgets.QPushButton(self.centralwidget)
-        self.remove_btn.setEnabled(False)
+        self.remove_btn.setEnabled(True)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.remove_btn.setFont(font)

@@ -281,7 +281,7 @@
         <item>
          <widget class="QPushButton" name="add_to_fridge_btn">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="font">
            <font>
@@ -491,7 +491,7 @@
         <item row="0" column="0">
          <widget class="QPushButton" name="remove_btn">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="font">
            <font>
