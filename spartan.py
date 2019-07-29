@@ -36,8 +36,9 @@ class Person(object):
   
         nuts.sort(key=lambda nut: nut.nut_id)
         self.nuts = nuts
-        self.remove_nut('fl')
-        self.add_nut(Nutrient('energy', 208, min=2000, max=2500))
+        self.remove_nut('Fluoride, F')
+        self.remove_nut('Total lipid (fat)')
+        self.add_nut(Nutrient('Energy', 208, min=2300, max=2600))
 
     def add_nut(self, nutrient):
         if (nutrient.nut_id == None):
@@ -125,6 +126,13 @@ class Person(object):
         con.commit()
         con.close()
 
+    # Calculate the equivalent daily value percentage of a given nutrient amount
+    # based on a person's nutrient requirements. 
+    def calculate_dv(self, nutrient_name, nutrient_amount):
+        [min_value] = [nut.min for nut in self.nuts if nut.name == nutrient_name]
+
+        return round(100 * (nutrient_amount / min_value), 1)
+
 ##NOTE: Setting price = 1 by default for testing.  
 class Food:
     def __init__(self, food_id=None, name=None, price=1, min=None, target=None, max=None):
@@ -148,11 +156,18 @@ class Food:
             'SELECT nut_id, amount '
             'FROM nut_data WHERE food_id = ? AND nut_id IN '+ str(nut_ids)
         )
-        
         cur.execute(sql_stmt, [self.food_id])
         nutrition = cur.fetchall()
         nutrition = [(req.nuts[n[0]], n[1]) for n in nutrition]
-   
+
+        sql_stmt = (
+            'SELECT units '
+            'FROM nutr_def WHERE id IN '+ str(nut_ids)
+        )
+        cur.execute(sql_stmt)
+        units = cur.fetchall()
+
+        nutrition = [(n[0], n[1], u[0]) for (n, u) in zip(nutrition, units)]
         return nutrition
 
 class Nutrient:
@@ -274,6 +289,7 @@ class Optimizier:
                 running_total_mass += 100 * var.varValue
 
         return total_number, total_cost, running_total_mass
+
 
 def add_random_foods():
     con = sql.connect('sr_legacy/sr_legacy.db')

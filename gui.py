@@ -107,16 +107,48 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             nutrition = selected_food.get_nutrition(self.person)
             for nutrient in nutrition:
                 current_row = self.nutrition_table.rowCount()
+                nut_name = nutrient[0]
+                nut_amount = nutrient[1]
+                unit = nutrient[2]
+
+                # Set nutrient name
                 self.nutrition_table.insertRow(current_row)
                 self.nutrition_table.setItem(
-                    current_row, 0, QTableWidgetItem(nutrient[0]))
+                    current_row, 0, QTableWidgetItem(nut_name))
 
+                # Set nutrient quantity
                 nutrient_quantity = QTableWidgetItem()
-                if nutrient[1] is not None:
-                    nutrient_quantity.setData(Qt.EditRole, nutrient[1])
+                if nut_amount is not None:
+                    nutrient_quantity.setData(Qt.EditRole, nut_amount)
+                    nutrient_quantity.setTextAlignment(Qt.AlignRight | Qt.AlignVCenter)
+                    #nutrient_quantity.setTextAlignment(Qt.AlignVCenter)
                 else:
                     nutrient_quantity.setData(Qt.EditRole, 'No data')
                 self.nutrition_table.setItem(current_row, 1, nutrient_quantity)
+
+                # Set unit
+                self.nutrition_table.setItem(
+                    current_row, 2, QTableWidgetItem(unit))
+
+                # Set percent decimal for testing
+                percent_widget = QTableWidgetItem()
+                if nut_amount is None:
+                    percent_widget.setData(Qt.EditRole, 'No data')
+                else:
+                    percent_widget.setData(Qt.EditRole, self.person.calculate_dv(nut_name, nut_amount))
+                self.nutrition_table.setItem(current_row, 3, percent_widget)
+
+                # Set percentage daily value bar
+                percent_bar = QtWidgets.QProgressBar(self)
+                percent_bar.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
+                if nut_amount is None:
+                    percent_bar.setValue(0)
+                elif round(self.person.calculate_dv(nut_name, nut_amount)) > 100:
+                    percent_bar.setValue(100)
+                else:
+                    percent_bar.setValue(round(self.person.calculate_dv(nut_name, nut_amount)))
+                self.nutrition_table.setCellWidget(current_row, 4, percent_bar)
+                
 
     def toggle_add_btn(self):
         if self.search_selection_model.hasSelection():

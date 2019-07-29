@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>897</width>
+    <width>917</width>
     <height>693</height>
    </rect>
   </property>
@@ -63,11 +63,14 @@
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="2,3,0">
+   <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1,1">
     <property name="spacing">
      <number>10</number>
     </property>
@@ -86,6 +89,11 @@
             <height>25</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="placeholderText">
            <string>Search food database</string>
           </property>
@@ -98,6 +106,11 @@
             <width>79</width>
             <height>25</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="text">
            <string>Search</string>
@@ -144,6 +157,11 @@
       </item>
       <item>
        <widget class="QDeselectableListWidget" name="search_list">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="frameShape">
          <enum>QFrame::NoFrame</enum>
         </property>
@@ -315,6 +333,11 @@
           </disabled>
          </palette>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">QHeaderView::section{
 	border: 0px;
@@ -343,7 +366,7 @@ QTableWidget::item:focus {
          <enum>Qt::SolidLine</enum>
         </property>
         <property name="rowCount">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="columnCount">
          <number>5</number>
@@ -363,31 +386,11 @@ QTableWidget::item:focus {
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
         </attribute>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
         <column/>
         <column/>
         <column/>
         <column/>
         <column/>
-        <item row="0" column="0">
-         <property name="text">
-          <string>data</string>
-         </property>
-        </item>
-        <item row="0" column="1">
-         <property name="text">
-          <string>data</string>
-         </property>
-        </item>
-        <item row="0" column="2">
-         <property name="text">
-          <string>data</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item>
@@ -431,6 +434,19 @@ QTableWidget::item:focus {
     </item>
     <item>
      <layout class="QGridLayout" name="nutrition_layout">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="debug_btn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Debug</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
@@ -470,18 +486,6 @@ QTableWidget::item:focus {
       </item>
       <item row="1" column="0">
        <widget class="QDeselectableTableWidget" name="nutrition_table">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
         <property name="palette">
          <palette>
           <active>
@@ -546,6 +550,11 @@ QTableWidget::item:focus {
           </disabled>
          </palette>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">QHeaderView::section{
 	background-color: white;
@@ -565,7 +574,7 @@ QTableWidget::item:focus {
          <bool>false</bool>
         </property>
         <property name="columnCount">
-         <number>3</number>
+         <number>5</number>
         </property>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>false</bool>
@@ -582,19 +591,8 @@ QTableWidget::item:focus {
         <column/>
         <column/>
         <column/>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="debug_btn">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Debug</string>
-        </property>
+        <column/>
+        <column/>
        </widget>
       </item>
      </layout>
@@ -607,6 +605,11 @@ QTableWidget::item:focus {
    </property>
   </action>
   <action name="actionSettings_2">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionSettings_3">
    <property name="text">
     <string>Settings</string>
    </property>
