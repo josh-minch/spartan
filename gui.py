@@ -15,6 +15,10 @@ from PySide2 import QtCore, QtWidgets, QtGui
 
 from timeit import default_timer as timer
 
+import ctypes
+# Necessarry to get icon in Windows Taskbar
+myappid = u'spartan.0.5'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
