@@ -1,4 +1,5 @@
 import os
+import sqlite3 as sql
 
 def create_user_db():
     if not os.path.isfile('spartan.db'):

@@ -1,24 +1,20 @@
 import sys
-import database
-import user_db
+import ctypes
+from timeit import default_timer as timer
 
-from gui_constants import *
-from spartan import Person, Food, Nutrient, Optimizier
-from ui_mainwindow import Ui_MainWindow
-from ui_optimum_diet_window import Ui_OptimumDietWindow
+from PySide2 import QtCore, QtWidgets, QtGui
 from PySide2.QtCore import Qt, QEvent
 from PySide2.QtGui import QFont, QKeySequence
 from PySide2.QtWidgets import (QApplication, QMainWindow, QListWidget, QTableWidget,
                                QListWidgetItem, QTableWidgetItem, QAbstractItemView, QHeaderView, QShortcut)
 
-from PySide2 import QtCore, QtWidgets, QtGui
-
-from timeit import default_timer as timer
-
-import ctypes
-# Necessarry to get icon in Windows Taskbar
-myappid = u'spartan.0.5'
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+from spartan import Person, Food, Nutrient, Optimizier
+from gui_constants import *
+import database
+import user_db
+from ui_mainwindow import Ui_MainWindow
+from ui_optimum_diet_window import Ui_OptimumDietWindow
+from ui_searchwindow import Ui_SearchWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -27,40 +23,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person = Person('josh', 25, 'm')
 
         self.setup_connections()
-        self.setup_filters()
+        #self.setup_filters()
         self.setup_selection_modes()
         self.setup_fridge()
         self.setup_nutrition()
 
-        self.search_box.setFocus()
+        '''
+        pal = self.add_foods_btn.palette()
+        pal.setColor(QtGui.QPalette.Button, QtGui.QColor(Qt.white))
+        self.add_foods_btn.setAutoFillBackground(True)
+        self.add_foods_btn.setPalette(pal)
+        self.add_foods_btn.setFlat(True) 
+        self.add_foods_btn.update()
+        '''
+
+        #self.add_foods_btn.setFocus()
         self.resize(1366, 768)
         self.show()
-
-    def search_food(self):
-        search_result = database.search_food(self.search_box.text())
-        self.search_model = SearchModel(search_result)
-        self.search_list.setModel(self.search_model)
-        h_header = self.search_list.horizontalHeader()
-        h_header.setSectionResizeMode(0, QHeaderView.Stretch)
-
-        v_header = self.search_list.verticalHeader()
-        v_header.setSectionResizeMode(QHeaderView.Fixed)
-        v_header.setDefaultSectionSize(35)
-
-        self.search_selection_model = self.search_list.selectionModel()
-        self.search_list.show()
-      
-
-    def add_to_fridge(self):
-        selected_items = self.search_selection_model.selectedRows()
-        for item in selected_items:
-            current_row = self.fridge_table.rowCount()
-            self.fridge_table.insertRow(current_row)
-            self.fridge_table.setItem(current_row, 0, 
-                QTableWidgetItem(self.search_model.data(index=item, role=Qt.DisplayRole)))
-            #TODO: Pass data directly from search model to fridge model
-        
-        self.person.add_foods([self.search_model.data(index=item, role=Qt.DisplayRole)])
 
     def remove_from_fridge(self):
         food_names_to_remove = []
@@ -101,6 +80,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             else:
                 self.person.set_food_attr(attr, attr_value=float(
                     item.data(Qt.EditRole)), food_name=food_name)
+
+    def open_search_window(self):
+        search_window = SearchWindow(self)
+        search_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def optimize(self):
         optimum_diet_window = OptimumDietWindow(self, person=self.person)
@@ -178,17 +161,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.remove_btn.setEnabled(False)
 
     def setup_selection_modes(self):
-        # self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.fridge_table.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        pass
-    
+    '''
     def setup_filters(self):
-        self.search_list.installEventFilter(self)
         self.fridge_table.installEventFilter(self)
     
     def eventFilter(self, obj, event):
         # Press return in search_list to add item selected item to fridge
-        '''
+        
         if obj == self.search_list:
             if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Return:
                 self.add_to_fridge()
@@ -208,14 +188,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         '''
 
     def setup_connections(self):
-        # Search panel connections
-        self.search_box.returnPressed.connect(self.search_food)
-        self.search_btn.clicked.connect(self.search_food)
-        self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
-        self.search_box.textChanged.connect(self.search_food)
-
-        # Toggle add button
-        #self.search_list.selectionModel().selectionChanged.connect(self.toggle_add_btn)
         
         # Fridge panel connections
         self.fridge_table.itemChanged.connect(self.update_persons_food_attr)
@@ -223,6 +195,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimize_btn.clicked.connect(self.optimize)
         optimize_shortcut = QShortcut(QKeySequence(Qt.Key_F5), self)
         optimize_shortcut.activated.connect(self.optimize)
+
+        self.add_foods_btn.clicked.connect(self.open_search_window)
 
         # Toggle remove button
         #self.fridge_table.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
@@ -242,7 +216,62 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for food in self.person.foods:
             print(vars(food))
 
+class SearchWindow(QMainWindow, Ui_SearchWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+        self.setup_connections()
+        self.setup_filters()
+        self.setup_selection_modes()
 
+        self.search_box.setFocus()
+        self.resize(900, 600)
+        self.show()
+
+    def search_food(self):
+        search_result = database.search_food(self.search_box.text())
+
+        self.search_model = SearchModel(search_result)
+        self.search_list.setModel(self.search_model)
+
+        # Set horizontal header stretched table fills horizontal space
+        h_header = self.search_list.horizontalHeader()
+        h_header.setSectionResizeMode(0, QHeaderView.Stretch)
+
+        # Set vertical header height to determine table's row height
+        v_header = self.search_list.verticalHeader()
+        v_header.setSectionResizeMode(QHeaderView.Fixed)
+        v_header.setDefaultSectionSize(20)
+        self.search_selection_model = self.search_list.selectionModel()
+        self.search_list.show()
+      
+    def add_to_fridge(self):
+        selected_items = self.search_selection_model.selectedRows()
+        for item in selected_items:
+            current_row = self.fridge_table.rowCount()
+            self.fridge_table.insertRow(current_row)
+            self.fridge_table.setItem(current_row, 0, 
+                QTableWidgetItem(self.search_model.data(index=item, role=Qt.DisplayRole)))
+            #TODO: Pass data directly from search model to fridge model
+        
+        self.person.add_foods([self.search_model.data(index=item, role=Qt.DisplayRole)])
+    
+    def setup_connections(self):
+        # Search panel connections
+        self.search_box.returnPressed.connect(self.search_food)
+        self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
+        self.search_box.textChanged.connect(self.search_food)
+
+        # Toggle add button
+        #self.search_list.selectionModel().selectionChanged.connect(self.toggle_add_btn)
+
+    def setup_filters(self):
+        self.search_list.installEventFilter(self)
+
+    def setup_selection_modes(self):
+        # self.search_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        pass
+        
 class SearchModel(QtCore.QAbstractTableModel):
     def __init__(self, search_result):
         QtCore.QAbstractTableModel.__init__(self)
@@ -265,13 +294,14 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def __init__(self, parent=None, person=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.resize(800, 600)
-
+        
         self.optimizier = Optimizier()
         self.optimizier.optimize_diet(person)
         self.populate_optimum_diet_table(person)
         self.populate_optimum_diet_totals()
         self.optimizier.describe_solution()
+
+        self.resize(800, 600)
         self.show()
 
     def populate_optimum_diet_table(self, person):
@@ -328,6 +358,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.optimum_diet_table.setItem(current_row, QUANTITY_COL, mass_item)
 
 
+
 def setup_table_header(table, labels):
     header = table.horizontalHeader()
     table.setHorizontalHeaderLabels(labels)
@@ -343,7 +374,12 @@ def setup_table_header(table, labels):
 
 
 if __name__ == "__main__":
+    # Necessarry to get icon in Windows Taskbar
+    myappid = u'spartan.0.5'
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
     user_db.create_user_db()
     app = QApplication(sys.argv)
+    app.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
     window = MainWindow()
     sys.exit(app.exec_())
