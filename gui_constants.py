@@ -7,3 +7,5 @@ TARGET_COL = 4
 
 col_to_attr = {NAME_COL: 'name', PRICE_COL: 'price',
                MIN_COL: 'min', MAX_COL: 'max', TARGET_COL: 'target'}
+
+V_HEADER_SIZE = 25

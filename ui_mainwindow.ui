@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>924</width>
+    <width>979</width>
     <height>693</height>
    </rect>
   </property>
@@ -73,9 +73,15 @@
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0">
+    <property name="spacing">
+     <number>10</number>
+    </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>10</number>
+      </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
@@ -288,7 +294,7 @@
          <enum>Qt::SolidLine</enum>
         </property>
         <property name="rowCount">
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="columnCount">
          <number>5</number>
@@ -308,51 +314,11 @@
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
         </attribute>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
-        <row>
-         <property name="text">
-          <string>New Row</string>
-         </property>
-        </row>
         <column/>
         <column/>
         <column/>
         <column/>
         <column/>
-        <item row="0" column="0">
-         <property name="text">
-          <string>Longer food name, with commas, yes</string>
-         </property>
-        </item>
-        <item row="0" column="1">
-         <property name="text">
-          <string>$3</string>
-         </property>
-        </item>
-        <item row="0" column="2">
-         <property name="text">
-          <string>100 g</string>
-         </property>
-        </item>
-        <item row="1" column="0">
-         <property name="text">
-          <string>Short name</string>
-         </property>
-        </item>
-        <item row="1" column="1">
-         <property name="text">
-          <string>$2,300</string>
-         </property>
-        </item>
-        <item row="1" column="2">
-         <property name="text">
-          <string>3 lb</string>
-         </property>
-        </item>
        </widget>
       </item>
       <item>
@@ -469,6 +435,12 @@
       </item>
       <item row="1" column="0">
        <widget class="QDeselectableTableWidget" name="nutrition_table">
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>0</height>
+         </size>
+        </property>
         <property name="palette">
          <palette>
           <active>
@@ -539,6 +511,9 @@
           <pointsize>10</pointsize>
          </font>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
@@ -553,6 +528,9 @@
         </property>
         <property name="alternatingRowColors">
          <bool>false</bool>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::NoSelection</enum>
         </property>
         <property name="selectionBehavior">
          <enum>QAbstractItemView::SelectRows</enum>
