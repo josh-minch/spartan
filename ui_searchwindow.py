@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_searchwindow.ui',
 # licensing of 'ui_searchwindow.ui' applies.
 #
-# Created: Tue Jul 30 19:48:33 2019
+# Created: Tue Jul 30 23:34:18 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,8 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_SearchWindow(object):
     def setupUi(self, SearchWindow):
         SearchWindow.setObjectName("SearchWindow")
-        SearchWindow.resize(838, 588)
-        SearchWindow.setMinimumSize(QtCore.QSize(640, 480))
+        SearchWindow.resize(800, 600)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -40,8 +39,8 @@ class Ui_SearchWindow(object):
         SearchWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(SearchWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout.setObjectName("gridLayout")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -125,7 +124,7 @@ class Ui_SearchWindow(object):
         self.search_list.horizontalHeader().setStretchLastSection(True)
         self.search_list.verticalHeader().setVisible(False)
         self.verticalLayout.addWidget(self.search_list)
-        self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
+        self.horizontalLayout_2.addLayout(self.verticalLayout)
         SearchWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(SearchWindow)

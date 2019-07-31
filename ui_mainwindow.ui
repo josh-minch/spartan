@@ -53,6 +53,9 @@
     <italic>false</italic>
    </font>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>Spartan</string>
   </property>

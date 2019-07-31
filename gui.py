@@ -13,7 +13,7 @@ from gui_constants import *
 import database
 import user_db
 from ui_mainwindow import Ui_MainWindow
-from ui_optimum_diet_window import Ui_OptimumDietWindow
+from ui_optimumdietwindow import Ui_OptimumDietWindow
 from ui_searchwindow import Ui_SearchWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -79,12 +79,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     item.data(Qt.EditRole)), food_name=food_name)
 
     def open_search_window(self):
-        search_window = SearchWindow(self, person=self.person, fridge_table=self.fridge_table)
-        search_window.setAttribute(Qt.WA_DeleteOnClose)
+        self.search_window = SearchWindow(parent=None, person=self.person, fridge_table=self.fridge_table)
+        self.search_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def optimize(self):
-        optimum_diet_window = OptimumDietWindow(self, person=self.person)
-        optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
+        self.optimum_diet_window = OptimumDietWindow(parent=None, person=self.person)
+        self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def setup_nutrition(self):
         labels = ['Nutrient', 'Quantity', 'Unit', 'debug val', 'Daily value bar']
@@ -224,7 +224,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         #self.setup_selection_modes()
         
         self.search_box.setFocus()
-        self.resize(850, 500)
+        #self.resize(850, 500)
         self.show()
 
     def search_food(self):
@@ -303,7 +303,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.populate_optimum_diet_totals()
         self.optimizier.describe_solution()
 
-        self.resize(800, 600)
+        #self.resize(800, 600)
         self.show()
 
     def populate_optimum_diet_table(self, person):
