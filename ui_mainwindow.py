@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Tue Jul 30 19:42:56 2019
+# Created: Tue Jul 30 19:48:32 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -193,7 +193,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addWidget(self.label_7)
         self.nutrition_layout.addLayout(self.horizontalLayout_3, 0, 0, 1, 1)
         self.nutrition_table = QDeselectableTableWidget(self.centralwidget)
-        self.nutrition_table.setMinimumSize(QtCore.QSize(400, 0))
+        self.nutrition_table.setMinimumSize(QtCore.QSize(450, 0))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
