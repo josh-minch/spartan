@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow_tab.ui',
 # licensing of 'ui_mainwindow_tab.ui' applies.
 #
-# Created: Thu Aug  1 19:14:58 2019
+# Created: Thu Aug  1 22:40:41 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -178,9 +178,15 @@ class Ui_MainWindow(object):
         self.nutrition_table.verticalHeader().setVisible(False)
         self.nutrition_table.verticalHeader().setStretchLastSection(False)
         self.gridLayout.addWidget(self.nutrition_table, 1, 3, 1, 2)
-        self.fridge_view_1 = QtWidgets.QTableView(self.tab)
-        self.fridge_view_1.setObjectName("fridge_view_1")
-        self.gridLayout.addWidget(self.fridge_view_1, 1, 0, 1, 3)
+        self.fridge_view = QtWidgets.QTableView(self.tab)
+        self.fridge_view.setStyleSheet("QHeaderView::section{\n"
+"    background-color: white;\n"
+"    border: 0px;\n"
+"}")
+        self.fridge_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.fridge_view.setShowGrid(False)
+        self.fridge_view.setObjectName("fridge_view")
+        self.gridLayout.addWidget(self.fridge_view, 1, 0, 1, 3)
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap("images/fridge.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tab, icon5, "")
@@ -231,10 +237,15 @@ class Ui_MainWindow(object):
         self.label_9.setAutoFillBackground(False)
         self.label_9.setObjectName("label_9")
         self.gridLayout_3.addWidget(self.label_9, 0, 4, 1, 1)
-        self.fridge_view_2 = QtWidgets.QTableView(self.tab_2)
-        self.fridge_view_2.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.fridge_view_2.setObjectName("fridge_view_2")
-        self.gridLayout_3.addWidget(self.fridge_view_2, 1, 0, 1, 3)
+        self.constraints_view = QtWidgets.QTableView(self.tab_2)
+        self.constraints_view.setStyleSheet("QHeaderView::section{\n"
+"    background-color: white;\n"
+"    border: 0px;\n"
+"}")
+        self.constraints_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.constraints_view.setShowGrid(False)
+        self.constraints_view.setObjectName("constraints_view")
+        self.gridLayout_3.addWidget(self.constraints_view, 1, 0, 1, 3)
         self.nutrition_table_2 = QDeselectableTableWidget(self.tab_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -313,26 +324,30 @@ class Ui_MainWindow(object):
         self.actionSettings_3.setObjectName("actionSettings_3")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtWidgets.QApplication.translate("MainWindow", "Spartan", None, -1))
         self.pushButton.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))
+        self.pushButton.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F9", None, -1))
         self.optimize_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Generate optimum diet (F5)</p>", None, -1))
         self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Generate diet", None, -1))
         self.optimize_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F5", None, -1))
         self.add_foods_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add food", None, -1))
+        self.add_foods_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Ctrl+F", None, -1))
         self.remove_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Remove selected food (delete)</p>", None, -1))
         self.remove_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Remove food", None, -1))
         self.label_8.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtWidgets.QApplication.translate("MainWindow", "My fridge", None, -1))
         self.add_foods_btn_2.setText(QtWidgets.QApplication.translate("MainWindow", "Add food", None, -1))
+        self.add_foods_btn_2.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Ctrl+F", None, -1))
         self.remove_btn_2.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Remove selected food (delete)</p>", None, -1))
         self.remove_btn_2.setText(QtWidgets.QApplication.translate("MainWindow", "Remove food", None, -1))
         self.label_9.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtWidgets.QApplication.translate("MainWindow", "Constraints", None, -1))
         self.debug_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Debug", None, -1))
+        self.debug_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Ctrl+S", None, -1))
         self.actionSettings.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))
         self.actionSettings_2.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))
         self.actionSettings_3.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))

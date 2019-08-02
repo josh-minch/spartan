@@ -4,12 +4,13 @@ from timeit import default_timer as timer
 
 from PySide2 import QtCore, QtWidgets, QtGui
 from PySide2.QtCore import Qt, QEvent
-from PySide2.QtGui import QFont, QKeySequence
+from PySide2.QtGui import QFont, QKeySequence, QPalette
 from PySide2.QtWidgets import (QApplication, QMainWindow, QListWidget, QTableWidget,
                                QListWidgetItem, QTableWidgetItem, QAbstractItemView, QHeaderView, QShortcut)
 
 from spartan import Person, Food, Nutrient, Optimizier
 from gui_constants import *
+from gui_helpers import *
 import database
 import user_db
 from search_window import SearchWindow
@@ -24,7 +25,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.person = Person('josh', 25, 'm')
 
-        self.setup_fridge()
+        self.setup_fridge_view()
+        self.setup_constraints_view()
         self.setup_connections()
         self.setup_filters()
         self.setup_selection_modes()
@@ -39,63 +41,55 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def remove_from_fridge(self):
         food_names_to_remove = []
 
-        for item in self.fridge_view_1.selectedItems():
+        for item in self.fridge_view.selectedItems():
             food_names_to_remove.append(str(item.data(Qt.EditRole)))
-            self.fridge_view_1.removeRow(item.row())
+            self.fridge_view.removeRow(item.row())
 
         self.person.remove_foods(food_names=food_names_to_remove)
 
-    def setup_fridge(self):
-        
+    def setup_fridge_view(self):
         self.fridge_model = FridgeModel(foods=self.person.foods)
-        self.fridge_view_1.setModel(self.fridge_model)
+        self.fridge_view.setModel(self.fridge_model)
 
-        # Move to setup constraints view
-        self.fridge_view_2.setModel(self.fridge_model)
-
-        # Hide id column
-        #self.fridge_view_1.setColumnHidden(FOOD_ID_COL, True)
-        #self.fridge_view_2.setColumnHidden(FOOD_ID_COL, True)
+        # Hide col
+        cols_to_hide = [FOOD_ID_COL, MIN_COL, MAX_COL, TARGET_COL]
+        hide_view_cols(self.fridge_view, cols_to_hide)
 
         # Horizontal header
-        
-        header = self.fridge_view_1.horizontalHeader()
-        header.setSectionResizeMode(0, QHeaderView.ResizeToContents)
-        header.setSectionResizeMode(1, QHeaderView.ResizeToContents)
-        header.setSectionResizeMode(2, QHeaderView.ResizeToContents)
-        header.setSectionResizeMode(3, QHeaderView.ResizeToContents)
+        h_header = self.fridge_view.horizontalHeader()
+        h_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
+        h_header.setSectionResizeMode(PRICE_COL, QHeaderView.ResizeToContents)
 
-        header.setDefaultAlignment(Qt.AlignLeft) 
+        h_header.setDefaultAlignment(Qt.AlignLeft) 
 
-        header_font = QFont()
-        header_font.setWeight(QFont.DemiBold)
-        header.setFont(header_font)
+        set_header_weight(h_header, QFont.DemiBold)
 
         # Set vertical header height to determine table's row height
-        v_header = self.fridge_view_1.verticalHeader()
-        v_header.setSectionResizeMode(QHeaderView.Fixed)
-        v_header.setDefaultSectionSize(V_HEADER_SIZE)
+        set_v_header_height(self.fridge_view, V_HEADER_SIZE)
+    
+    def setup_constraints_view(self):
+        self.constraints_view.setModel(self.fridge_model)
+
+        cols_to_hide = [FOOD_ID_COL, PRICE_COL]
+        hide_view_cols(self.constraints_view, cols_to_hide)
         
-        '''
-        for food in self.person.foods:
+        # Horizontal header
+        h_header = self.constraints_view.horizontalHeader()
+        h_header.setDefaultSectionSize(100)
+        h_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
+        
+        h_header.setDefaultAlignment(Qt.AlignCenter) 
+    
+        set_header_weight(h_header, QFont.DemiBold)
 
-            for col, attr in col_to_attr.items():
-                item = QTableWidgetItem()
-                if col == PRICE_COL:
-                    pass
-                attr_val = getattr(food, attr)
-
-                self.fridge_view_1.blockSignals(True)
-                item.setData(Qt.EditRole, attr_val)
-                self.fridge_view_1.setItem(current_row, col, item)
-                self.fridge_view_1.blockSignals(False)
-        '''
+        set_v_header_height(self.constraints_view, V_HEADER_SIZE)
 
     def update_persons_food_attr(self, index):
         # Update food attributes, not food name
         if index.column() > NAME_COL:
             food_name = self.person.foods[index.row()].name
             attr = col_to_attr[index.column()]
+
             # User entering empty string stores NULL in database
             if index.data(Qt.EditRole) == "":
                 self.person.update_attr_in_db(
@@ -131,7 +125,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
 
     def display_nutrition(self, selected, deselected):
-        # Check if incoming item is from Food name column in fridge_view_1
+        # Check if incoming item is from Food name column in fridge_view
    
         if selected.indexes()[0].column() == NAME_COL:
             #self.nutrition_label.setText("Nutrition of selected item")
@@ -177,8 +171,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 # Set percentage daily value bar
                 percent_bar = QtWidgets.QProgressBar(self)
-                #percent_bar.setStyleSheet(open('qprogress_bar.css').read())
-                #percent_bar.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
+
+                # Change bar and text color
+                p = QPalette()
+                p.setColor(QPalette.Highlight, Qt.darkRed)
+                p.setColor(QPalette.HighlightedText, Qt.white)
+                percent_bar.setPalette(p)
+
                 if nut_amount is None:
                     percent_bar.setValue(0)
                 elif round(self.person.calculate_dv(nut_name, nut_amount)) > 100:
@@ -194,15 +193,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.remove_btn.setEnabled(False)
 
     def setup_selection_modes(self):
-        #self.fridge_view_1.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        #self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
         pass
 
     def setup_filters(self):
-        self.fridge_view_1.installEventFilter(self)
+        self.fridge_view.installEventFilter(self)
     
     def eventFilter(self, obj, event):
-        # Press delete in fridge_view_1 to remove selected
-        if obj == self.fridge_view_1:
+        # Press delete in fridge_view to remove selected
+        if obj == self.fridge_view:
             if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Delete:
                 self.remove_from_fridge()
                 return True
@@ -215,36 +214,38 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
         
-        # Fridge panel connections
         self.fridge_model.dataChanged.connect(self.update_persons_food_attr)
-        self.remove_btn.clicked.connect(self.remove_from_fridge)
-        self.optimize_btn.clicked.connect(self.optimize)
-        optimize_shortcut = QShortcut(QKeySequence(Qt.Key_F5), self)
-        optimize_shortcut.activated.connect(self.optimize)
-
+        
+        # Add to fridge button
         self.add_foods_btn.clicked.connect(self.open_search_window)
-        add_foods_shortcut = QShortcut(QKeySequence(Qt.Key_Control + Qt.Key_F), self)
+        self.add_foods_btn_2.clicked.connect(self.open_search_window)
+        add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
         add_foods_shortcut.activated.connect(self.open_search_window)
-
+        
+        # Remove button
+        self.remove_btn.clicked.connect(self.remove_from_fridge)
+        self.remove_btn_2.clicked.connect(self.remove_from_fridge)
 
         # Toggle remove button
-        #self.fridge_view_1.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
+        #self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
 
+        self.optimize_btn.clicked.connect(self.optimize)
+        # Optimize button shortcut set in Qt Designer
+       
         # Nutriton panel connections
         #self.search_list.currentItemChanged.connect(self.display_nutrition)
-        self.fridge_view_1.selectionModel().selectionChanged.connect(self.display_nutrition)
-        self.fridge_view_1.selectionModel().selectionChanged.connect(self.print_debug_info)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.print_debug_info)
         #self.fridge_view_2.currentItemChanged.connect(self.display_nutrition)
 
         # Debug 
         self.debug_btn.clicked.connect(self.print_debug_info)
-        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
-        debug_shortcut.activated.connect(self.print_debug_info)
+        add_foods_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
+        add_foods_shortcut.activated.connect(self.print_debug_info)
 
-    def print_debug_info(self, selected, deselected):
-        print(selected.indexes())
-
-
+    def print_debug_info(self):
+        print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) 🦄 ٩(◕‿◕)۶ ❤️
+                ｡^‿^｡ ❀◕ ‿ ◕❀   (ॢ˘⌣˘ ॢ⑅)   (´⌣`ʃƪ)  ''')
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
@@ -254,5 +255,6 @@ if __name__ == "__main__":
     user_db.create_user_db()
     app = QApplication(sys.argv)
     app.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
+
     window = MainWindow()
     sys.exit(app.exec_())

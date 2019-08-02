@@ -62,19 +62,6 @@ class FridgeModel(QAbstractTableModel):
             attr_str = col_to_attr[index.column()]
             return getattr(self.foods[index.row()], attr_str)
 
-            '''
-            name = self.foods[index.row()].name
-            price = self.foods[index.row()].price
-            
-            if index.column() == NAME_COL:
-                return self.foods[index.row()].name
-            elif index.column() == PRICE_COL: 
-                return price
-            #elif index.column == MIN_COL
-                #return min
-            #   return min
-            '''
-
         return None
     
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):

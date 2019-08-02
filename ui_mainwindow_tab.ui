@@ -98,6 +98,9 @@
         <height>20</height>
        </size>
       </property>
+      <property name="shortcut">
+       <string>F9</string>
+      </property>
      </widget>
     </item>
     <item row="1" column="5">
@@ -152,7 +155,7 @@
        <string notr="true">QTabWidget::pane { border: 0; }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
@@ -207,6 +210,9 @@
           <property name="icon">
            <iconset>
             <normaloff>images/add.png</normaloff>images/add.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+F</string>
           </property>
          </widget>
         </item>
@@ -419,7 +425,20 @@
          </widget>
         </item>
         <item row="1" column="0" colspan="3">
-         <widget class="QTableView" name="fridge_view_1"/>
+         <widget class="QTableView" name="fridge_view">
+          <property name="styleSheet">
+           <string notr="true">QHeaderView::section{
+	background-color: white;
+	border: 0px;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="showGrid">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -461,6 +480,9 @@
           <property name="icon">
            <iconset>
             <normaloff>images/add.png</normaloff>images/add.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+F</string>
           </property>
          </widget>
         </item>
@@ -537,9 +559,18 @@
          </widget>
         </item>
         <item row="1" column="0" colspan="3">
-         <widget class="QTableView" name="fridge_view_2">
+         <widget class="QTableView" name="constraints_view">
+          <property name="styleSheet">
+           <string notr="true">QHeaderView::section{
+	background-color: white;
+	border: 0px;
+}</string>
+          </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="showGrid">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -705,6 +736,9 @@
       </property>
       <property name="text">
        <string>Debug</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+S</string>
       </property>
      </widget>
     </item>
