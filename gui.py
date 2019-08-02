@@ -16,6 +16,7 @@ import user_db
 from search_window import SearchWindow
 from optimum_diet_window import OptimumDietWindow
 from fridge_model import FridgeModel
+from nutrition_model import NutritionTableModel
 
 from ui_mainwindow import Ui_MainWindow
 
@@ -31,21 +32,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_filters()
         self.setup_selection_modes()
         
-        self.setup_nutrition()
-
         self.add_foods_btn.setFocus()
         self.move(30,30)
         self.resize(1366, 768)
         self.show()
-
-    def remove_from_fridge(self):
-        food_names_to_remove = []
-
-        for item in self.fridge_view.selectedItems():
-            food_names_to_remove.append(str(item.data(Qt.EditRole)))
-            self.fridge_view.removeRow(item.row())
-
-        self.person.remove_foods(food_names=food_names_to_remove)
 
     def setup_fridge_view(self):
         self.fridge_model = FridgeModel(foods=self.person.foods)
@@ -60,7 +50,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         h_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
         h_header.setSectionResizeMode(PRICE_COL, QHeaderView.ResizeToContents)
 
-        h_header.setDefaultAlignment(Qt.AlignLeft) 
+        h_header.setDefaultAlignment(Qt.AlignLeft)
 
         set_header_weight(h_header, QFont.DemiBold)
 
@@ -84,6 +74,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         set_v_header_height(self.constraints_view, V_HEADER_SIZE)
 
+    def setup_nutrition(self):
+        h_header = self.nutrition_view_1.horizontalHeader()
+        
+        h_header.setDefaultAlignment(Qt.AlignLeft) 
+        for i in range(0, len(labels)-1):
+            h_header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
+
+        header_font = QFont()
+        header_font.setWeight(QFont.DemiBold)
+        h_header.setFont(header_font)
+
+        # Set vertical header height to determine table's row height
+        v_header = self.nutrition_view_1.verticalHeader()
+        v_header.setSectionResizeMode(QHeaderView.Fixed)
+        v_header.setDefaultSectionSize(V_HEADER_SIZE)
+        
+    def remove_from_fridge(self):
+        food_names_to_remove = []
+
+        for item in self.fridge_view.selectedItems():
+            food_names_to_remove.append(str(item.data(Qt.EditRole)))
+            self.fridge_view.removeRow(item.row())
+
+        self.person.remove_foods(food_names=food_names_to_remove)
+
     def update_persons_food_attr(self, index):
         # Update food attributes, not food name
         if index.column() > NAME_COL:
@@ -106,27 +121,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimum_diet_window = OptimumDietWindow(parent=None, person=self.person)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
-    def setup_nutrition(self):
-        labels = ['Nutrient', 'Quantity', 'Unit', 'debug val', 'Daily value bar']
-        h_header = self.nutrition_table.horizontalHeader()
-        self.nutrition_table.setHorizontalHeaderLabels(labels)
-        
-        h_header.setDefaultAlignment(Qt.AlignLeft) 
-        for i in range(0, len(labels)-1):
-            h_header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
-
-        header_font = QFont()
-        header_font.setWeight(QFont.DemiBold)
-        h_header.setFont(header_font)
-
-        # Set vertical header height to determine table's row height
-        v_header = self.nutrition_table.verticalHeader()
-        v_header.setSectionResizeMode(QHeaderView.Fixed)
-        v_header.setDefaultSectionSize(V_HEADER_SIZE)
-
     def display_nutrition(self, selected, deselected):
+        
+        food_name = self.fridge_model.data(selected.indexes()[0], Qt.DisplayRole)
+
+        selected_food = Food(name=food_name)
+        nutrients = selected_food.get_nutrition(self.person)
+        nutrition_model = NutritionTableModel(nutrients=nutrients)
+
+        self.nutrition_view_1.setModel(nutrition_model)
+        #self.setup_nutrition()        
+        
+        '''
         # Check if incoming item is from Food name column in fridge_view
-   
+    
         if selected.indexes()[0].column() == NAME_COL:
             #self.nutrition_label.setText("Nutrition of selected item")
 
@@ -185,6 +193,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 else:
                     percent_bar.setValue(round(self.person.calculate_dv(nut_name, nut_amount)))
                 self.nutrition_table.setCellWidget(current_row, 4, percent_bar)
+        '''
 
     def toggle_remove_btn(self):
         if self.fridge_selection_model.hasSelection():
@@ -235,7 +244,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Nutriton panel connections
         #self.search_list.currentItemChanged.connect(self.display_nutrition)
         self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
-        self.fridge_view.selectionModel().selectionChanged.connect(self.print_debug_info)
         #self.fridge_view_2.currentItemChanged.connect(self.display_nutrition)
 
         # Debug 
@@ -244,8 +252,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         add_foods_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
-        print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) 🦄 ٩(◕‿◕)۶ ❤️
-                ｡^‿^｡ ❀◕ ‿ ◕❀   (ॢ˘⌣˘ ॢ⑅)   (´⌣`ʃƪ)  ''')
+        print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) ٩(◕‿◕)۶ ❤️
+                  ｡^‿^｡ ❀◕ ‿ ◕❀     ''')
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar

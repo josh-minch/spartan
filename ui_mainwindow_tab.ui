@@ -155,7 +155,7 @@
        <string notr="true">QTabWidget::pane { border: 0; }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -288,8 +288,24 @@
           </property>
          </widget>
         </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QTableView" name="fridge_view">
+          <property name="styleSheet">
+           <string notr="true">QHeaderView::section{
+	background-color: white;
+	border: 0px;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="showGrid">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="3" colspan="2">
-         <widget class="QDeselectableTableWidget" name="nutrition_table">
+         <widget class="QTableView" name="nutrition_view_1">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -395,45 +411,6 @@
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <property name="showGrid">
-           <bool>false</bool>
-          </property>
-          <property name="columnCount">
-           <number>5</number>
-          </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderCascadingSectionResizes">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderStretchLastSection">
-           <bool>false</bool>
-          </attribute>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="3">
-         <widget class="QTableView" name="fridge_view">
-          <property name="styleSheet">
-           <string notr="true">QHeaderView::section{
-	background-color: white;
-	border: 0px;
-}</string>
-          </property>
-          <property name="frameShape">
-           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="showGrid">
            <bool>false</bool>
@@ -575,7 +552,7 @@
          </widget>
         </item>
         <item row="1" column="3" colspan="2">
-         <widget class="QDeselectableTableWidget" name="nutrition_table_2">
+         <widget class="QTableView" name="nutrition_view_2">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -685,29 +662,6 @@
           <property name="showGrid">
            <bool>false</bool>
           </property>
-          <property name="columnCount">
-           <number>5</number>
-          </property>
-          <attribute name="horizontalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderCascadingSectionResizes">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <attribute name="verticalHeaderStretchLastSection">
-           <bool>false</bool>
-          </attribute>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
-          <column/>
          </widget>
         </item>
        </layout>
@@ -760,13 +714,6 @@
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QDeselectableTableWidget</class>
-   <extends>QTableWidget</extends>
-   <header>qdeselectable_table_widget.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

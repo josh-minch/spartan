@@ -123,19 +123,10 @@ class Person(object):
 
     # Calculate the equivalent daily value percentage of a given nutrient amount
     # based on a person's nutrient requirements. 
-    def calculate_dv(self, nutrient_name, nutrient_amount):
-        [min_value] = [nut.min for nut in self.nuts if nut.name == nutrient_name]
-
-        return round(100 * (nutrient_amount / min_value), 1)
+    
 
 class Food:
     def __init__(self, food_id=None, name=None, price=None, min=None, target=None, max=None):
-        '''
-        if food_id is not None:
-            self.food_id = food_id
-        else:
-            self.food_id = database.get_food_id(name)
-        '''
         self.food_id = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
         self.price = price
@@ -150,6 +141,7 @@ class Food:
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
 
+        # Get nutrient and amount
         nut_ids = [nut.nut_id for nut in person.nuts]
         nut_ids = tuple(nut_ids)
         sql_stmt = (
@@ -160,6 +152,7 @@ class Food:
         nutrition = cur.fetchall()
         nutrition = [(req.nuts[n[0]], n[1]) for n in nutrition]
 
+        # Get nutrient's corresponding unit
         sql_stmt = (
             'SELECT units '
             'FROM nutr_def WHERE id IN '+ str(nut_ids)
@@ -167,8 +160,22 @@ class Food:
         cur.execute(sql_stmt)
         units = cur.fetchall()
 
-        nutrition = [(n[0], n[1], u[0]) for (n, u) in zip(nutrition, units)]
+        daily_value = []
+        for nut in nutrition:
+            daily_value.append(self.calculate_dv(person, nut[0], nut[1]))
+
+        nutrition = [{'name': n[0], 'amount': n[1], 'unit': u[0], 'percent': d}
+                      for (n, u, d) in zip(nutrition, units, daily_value)]
+
         return nutrition
+
+    def calculate_dv(self, person, nutrient_name, nutrient_amount):
+        if nutrient_amount is None:
+            return None
+            
+        [min_value] = [nut.min for nut in person.nuts if nut.name == nutrient_name]
+
+        return round(100 * (nutrient_amount / min_value), 1)
 
 class Nutrient:
     def __init__(self, name, nut_id=None, min=None, target=None, max=None):

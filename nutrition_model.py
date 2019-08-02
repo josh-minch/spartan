@@ -38,62 +38,80 @@
 
 from PySide2.QtCore import (Qt, QAbstractTableModel, QModelIndex)
 
-from spartan import Food
 from gui_constants import *
 
-class FridgeModel(QAbstractTableModel):
-    def __init__(self, parent=None, foods=None):
+class NutritionTableModel(QAbstractTableModel):
+    def __init__(self, parent=None, nutrients=None):
         QAbstractTableModel.__init__(self, parent)
-        self.foods = foods
+        self.nutrients = nutrients
 
     def rowCount(self, index=QModelIndex()):
-        return len(self.foods)
-        
-    def columnCount(self, index=QModelIndex()):
-        return len(col_to_attr)
-
-    def data(self, index, role=Qt.DisplayRole):
-        if not index.isValid() or not 0 <= index.row() < len(self.foods):
-            return None
-            
-        if role == Qt.DisplayRole or role == Qt.EditRole:
-            # Return food.name of corresponding row and col
-            attr_str = col_to_attr[index.column()]
-            return getattr(self.foods[index.row()], attr_str)
-
-        return None
+        return len(self.nutrients)
     
+    def columnCount(self, index=QModelIndex()):
+        return len(COL_TO_NUT_ATTR)
+
+    def data(self, index, role):
+        if not index.isValid() or not 0 <= index.row() < len(self.nutrients):
+            return None
+
+        if role == Qt.DisplayRole or role == Qt.EditRole:
+            name = self.nutrients[index.row()]["name"]
+            amount = self.nutrients[index.row()]["amount"]
+            unit = self.nutrients[index.row()]["unit"]
+            percent = self.nutrients[index.row()]["percent"]
+            #percent_bar = self.nutrients[index.row()]["percent_bar"]
+
+            if index.column() == NUT_NAME_COL:
+                return name
+            elif index.column() == NUT_AMOUNT_COL:
+                return amount
+            elif index.column() == NUT_UNIT_COL:
+                return unit
+            elif index.column() == NUT_PERCENT_COL:
+                return percent
+            #elif index.column() == NUT_PERCENT_BAR_COL:
+            #    return percent_bar
+
+        if role == Qt.TextAlignmentRole:
+            if index.column() == NUT_AMOUNT_COL:
+                return Qt.AlignRight #| Qt.AlignVCenter
+            elif index.column() == NUT_UNIT_COL:
+                return Qt.AlignLeft #| Qt.AlignVCenter
+      
+        return None
+
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
         if role != Qt.DisplayRole:
             return None
-        
+
         if orientation == Qt.Horizontal:
-            if section == FOOD_ID_COL:
-                return "Id"
-            elif section == NAME_COL:
-                return "Name"
-            elif section == PRICE_COL:
-                return "Price"
-            elif section == MIN_COL:
-                return "Minimum"
-            elif section == MAX_COL:
-                return "Maxmimum"
-            elif section == TARGET_COL:
-                return "Target"
+            if section == NUT_NAME_COL:
+                return "Nutrient"
+            elif section == NUT_AMOUNT_COL:
+                return "Amount"
+            elif section == NUT_UNIT_COL:
+                return "Unit"
+                #return ""
+            elif section == NUT_PERCENT_COL:
+                return "Percent"
+            elif section == NUT_PERCENT_BAR_COL:
+                return "Percent bar"
 
         return None
 
     def insertRows(self, position, rows=1, index=QModelIndex()):
         self.beginInsertRows(QModelIndex(), position, position + rows - 1)
         for row in range(rows):
-            self.foods.insert(position + row, Food())
+            self.nutrients.insert(position + row, {"name":"", "amount":"",
+                                                   "unit":"", "percent":"", "percent_bar":""})
         self.endInsertRows()
        
         return True
         
     def removeRows(self, position, rows=1, index=QModelIndex()):
         self.beginRemoveRows(QModelIndex(), position, position + rows - 1)
-        del self.foods[position:position+rows]
+        del self.nutrients[position:position+rows]
         self.endRemoveRows()
        
         return True
@@ -102,22 +120,20 @@ class FridgeModel(QAbstractTableModel):
         if role != Qt.EditRole:
             return False
 
-        if index.isValid() and 0 <= index.row() < len(self.foods):
+        if index.isValid() and 0 <= index.row() < len(self.nutrients):
+            
+            nutrient = self.nutrients[index.row()]
 
-            food = self.foods[index.row()]
-
-            if index.column() == FOOD_ID_COL:
-                food.food_id = value
-            elif index.column() == NAME_COL:
-                food.name = value
-            elif index.column() == PRICE_COL:
-                food.price = value
-            elif index.column() == MIN_COL:
-                food.min = value
-            elif index.column() == MAX_COL:
-                food.max = value
-            elif index.column() == TARGET_COL:
-                food.target = value
+            if index.column() == NUT_NAME_COL:
+                nutrient['name'] = value 
+            elif index.column() == NUT_AMOUNT_COL:
+                nutrient['amount'] = value 
+            elif index.column() == NUT_UNIT_COL:
+                nutrient['unit'] = value                 
+            elif index.column() == NUT_PERCENT_COL:
+                nutrient['percent'] = value 
+            #elif index.column() == NUT_PERCENT_BAR_COL:
+            #    nutrient['percent_bar'] = value  
             else:
                 return False
 
@@ -129,8 +145,5 @@ class FridgeModel(QAbstractTableModel):
     def flags(self, index):
         if not index.isValid():
             return Qt.ItemIsEnabled
-        if index.column() == NAME_COL:
-            return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
-                            ~Qt.ItemIsEditable)
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
-                            Qt.ItemIsEditable)
+                            ~Qt.ItemIsEditable)
