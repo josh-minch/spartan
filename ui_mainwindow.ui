@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>979</width>
+    <width>891</width>
     <height>693</height>
    </rect>
   </property>
@@ -132,7 +132,7 @@
            </font>
           </property>
           <property name="text">
-           <string>My fridge</string>
+           <string>My food</string>
           </property>
          </widget>
         </item>
@@ -173,11 +173,34 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Add foods</string>
+           <string>Add food</string>
           </property>
           <property name="icon">
            <iconset>
             <normaloff>images/add.png</normaloff>images/add.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="remove_btn">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p style='white-space:pre'&gt;Remove selected food (delete)&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Remove food</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>images/minus.svg</normaloff>images/minus.svg</iconset>
           </property>
          </widget>
         </item>
@@ -193,6 +216,32 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="optimize_btn">
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p style='white-space:pre'&gt;Generate optimum diet (F5)&lt;/p&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Generate diet</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>images/diet_btn.png</normaloff>images/diet_btn.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>F5</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -285,7 +334,7 @@
          <number>0</number>
         </property>
         <property name="alternatingRowColors">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="selectionBehavior">
          <enum>QAbstractItemView::SelectRows</enum>
@@ -325,80 +374,12 @@
        </widget>
       </item>
       <item>
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="remove_btn">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Remove food</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QPushButton" name="optimize_btn">
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Optimize Diet</string>
-          </property>
-          <property name="shortcut">
-           <string>F5</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QGridLayout" name="gridLayout_2"/>
       </item>
      </layout>
     </item>
     <item>
      <layout class="QGridLayout" name="nutrition_layout">
-      <item row="2" column="0">
-       <widget class="QPushButton" name="debug_btn">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <family>Segoe UI Semilight</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Debug</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0">
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
@@ -435,6 +416,25 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="debug_btn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI Semilight</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Debug</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
        <widget class="QDeselectableTableWidget" name="nutrition_table">

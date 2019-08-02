@@ -68,10 +68,10 @@ class Person(object):
         con.close()
    
     def add_foods(self, food_names):
-        for name in food_names:
-            self.foods.append(Food(name=name))
+        #for name in food_names:
+        #    self.foods.append(Food(name=name))
         self.add_foods_to_db(food_names)
-        self.foods.sort(key = lambda f: f.food_id)
+        self.foods.sort(key=lambda f: f.food_id)
 
     def add_foods_to_db(self, food_names):
         con = sql.connect("spartan.db")
@@ -106,12 +106,7 @@ class Person(object):
         con.commit()
         con.close()
 
-    def set_food_attr(self, attr, attr_value, food_name):
-        food = [food for food in self.foods if food.name == food_name]
-        setattr(food[0], attr, attr_value)
-        self.update_attr_in_db(food_name, attr, attr_value)
-
-    def update_attr_in_db(self, food_name, attr, attr_value):
+    def update_attr_in_db(self, attr, attr_value, food_name):
         con = sql.connect("spartan.db")
         cur = con.cursor()
        
@@ -133,10 +128,15 @@ class Person(object):
 
         return round(100 * (nutrient_amount / min_value), 1)
 
-##NOTE: Setting price = 1 by default for testing.  
 class Food:
-    def __init__(self, food_id=None, name=None, price=1, min=None, target=None, max=None):
-        self.food_id = food_id or database.get_food_id(name)
+    def __init__(self, food_id=None, name=None, price=None, min=None, target=None, max=None):
+        '''
+        if food_id is not None:
+            self.food_id = food_id
+        else:
+            self.food_id = database.get_food_id(name)
+        '''
+        self.food_id = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
         self.price = price
         self.min = min

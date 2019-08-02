@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_searchwindow.ui',
 # licensing of 'ui_searchwindow.ui' applies.
 #
-# Created: Tue Jul 30 23:34:18 2019
+# Created: Thu Aug  1 19:14:58 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -45,6 +45,19 @@ class Ui_SearchWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
+        self.debug_btn = QtWidgets.QPushButton(self.centralwidget)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.debug_btn.sizePolicy().hasHeightForWidth())
+        self.debug_btn.setSizePolicy(sizePolicy)
+        self.debug_btn.setMaximumSize(QtCore.QSize(70, 16777215))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semilight")
+        font.setPointSize(10)
+        self.debug_btn.setFont(font)
+        self.debug_btn.setObjectName("debug_btn")
+        self.horizontalLayout.addWidget(self.debug_btn)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.search_box = QtWidgets.QLineEdit(self.centralwidget)
@@ -132,6 +145,7 @@ class Ui_SearchWindow(object):
 
     def retranslateUi(self, SearchWindow):
         SearchWindow.setWindowTitle(QtWidgets.QApplication.translate("SearchWindow", "Spartan - Search", None, -1))
+        self.debug_btn.setText(QtWidgets.QApplication.translate("SearchWindow", "Debug", None, -1))
         self.search_box.setPlaceholderText(QtWidgets.QApplication.translate("SearchWindow", "🔍 Search for foods", None, -1))
         self.add_to_fridge_btn.setText(QtWidgets.QApplication.translate("SearchWindow", "Add to Fridge", None, -1))
         self.add_custom_food_btn.setText(QtWidgets.QApplication.translate("SearchWindow", "Add custom food", None, -1))

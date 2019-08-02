@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_optimumdietwindow.ui',
 # licensing of 'ui_optimumdietwindow.ui' applies.
 #
-# Created: Tue Jul 30 23:34:18 2019
+# Created: Thu Aug  1 19:14:59 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -74,7 +74,7 @@ class Ui_OptimumDietWindow(object):
 "}\n"
 "")
         self.optimum_diet_table.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.optimum_diet_table.setAlternatingRowColors(True)
+        self.optimum_diet_table.setAlternatingRowColors(False)
         self.optimum_diet_table.setShowGrid(False)
         self.optimum_diet_table.setColumnCount(3)
         self.optimum_diet_table.setObjectName("optimum_diet_table")
