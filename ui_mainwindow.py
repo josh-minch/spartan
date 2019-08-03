@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow_tab.ui',
 # licensing of 'ui_mainwindow_tab.ui' applies.
 #
-# Created: Fri Aug  2 15:30:06 2019
+# Created: Fri Aug  2 19:22:33 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -141,7 +141,6 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.nutrition_view_1.sizePolicy().hasHeightForWidth())
         self.nutrition_view_1.setSizePolicy(sizePolicy)
-        self.nutrition_view_1.setMinimumSize(QtCore.QSize(480, 0))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -244,7 +243,6 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.nutrition_view_2.sizePolicy().hasHeightForWidth())
         self.nutrition_view_2.setSizePolicy(sizePolicy)
-        self.nutrition_view_2.setMinimumSize(QtCore.QSize(480, 0))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -308,7 +306,7 @@ class Ui_MainWindow(object):
         self.actionSettings_3.setObjectName("actionSettings_3")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

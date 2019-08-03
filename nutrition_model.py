@@ -77,8 +77,8 @@ class NutritionTableModel(QAbstractTableModel):
         if role == Qt.TextAlignmentRole:
             if index.column() == NUT_AMOUNT_COL:
                 return int(Qt.AlignRight | Qt.AlignVCenter)
-            elif index.column() == NUT_UNIT_COL:
-                return int(Qt.AlignLeft | Qt.AlignVCenter)
+            #elif index.column() == NUT_UNIT_COL:
+            #    return int(Qt.AlignLeft | Qt.AlignVCenter)
       
         return None
 
@@ -136,8 +136,6 @@ class NutritionTableModel(QAbstractTableModel):
                 nutrient['unit'] = value                 
             elif index.column() == NUT_PERCENT_COL:
                 nutrient['percent'] = value 
-            #elif index.column() == NUT_PERCENT_BAR_COL:
-            #    nutrient['percent_bar'] = value  
             else:
                 return False
 

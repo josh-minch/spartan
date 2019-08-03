@@ -31,11 +31,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_constraints_view()
         self.setup_connections()
         self.setup_filters()
-        self.setup_selection_modes()
-        
+        self.setup_selection_modes()    
+
         self.add_foods_btn.setFocus()
-        self.move(30,30)
-        self.resize(1366, 768)
+        #self.move(WINDOW_POS, WINDOW_POS)
+        self.resize(1600-10*WINDOW_POS, 900-4*WINDOW_POS)
         self.show()
 
     def setup_fridge_view(self):
@@ -79,7 +79,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         h_header = self.nutrition_view_1.horizontalHeader()
         
         h_header.setDefaultAlignment(Qt.AlignLeft) 
-        for i in range(0, len(labels)-1):
+        for i in range(0, len(COL_TO_NUT_ATTR)):
             h_header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
 
         header_font = QFont()
@@ -123,18 +123,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def display_nutrition(self, selected, deselected):
-        
+           
         food_name = self.fridge_model.data(selected.indexes()[0], Qt.DisplayRole)
 
         selected_food = Food(name=food_name)
         nutrients = selected_food.get_nutrition(self.person)
         nutrition_model = NutritionTableModel(nutrients=nutrients)
-
+        
         self.nutrition_view_1.setModel(nutrition_model)
 
+        self.setup_nutrition()   
         progress_bar_delegate = ProgressBarDelegate(self)
         self.nutrition_view_1.setItemDelegate(progress_bar_delegate)
-        #self.setup_nutrition()        
+          
         
         '''
         # Check if incoming item is from Food name column in fridge_view
@@ -268,9 +269,9 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
 
-    #p = QPalette()
-    #p.setColor(QPalette.Highlight, Qt.darkRed)
-    #app.setPalette(p)
+    p = QPalette()
+    p.setColor(QPalette.Highlight, Qt.darkRed)
+    app.setPalette(p)
 
     window = MainWindow()
     sys.exit(app.exec_())

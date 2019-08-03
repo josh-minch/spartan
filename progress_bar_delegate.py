@@ -11,9 +11,9 @@ class ProgressBarDelegate (QStyledItemDelegate):
     def __init__(self, parent=None):
         QStyledItemDelegate.__init__(self, parent)
 
-    
+    # Only called when resizing col and row to contents
     def sizeHint(self, option, index):
-        return QSize(120, 30)
+        return QSize(120, 2)
     
 
     def paint(self, painter, option, index):
