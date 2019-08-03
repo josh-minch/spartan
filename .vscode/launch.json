@@ -10,6 +10,13 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Spartan",
+            "type": "python",
+            "request": "launch",
+            "program": "C:/Users/joshm/Misc/Projects/python/frugal-nutrition/gui.py",
+            "console": "integratedTerminal"
         }
     ]
 }

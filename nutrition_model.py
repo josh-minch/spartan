@@ -60,7 +60,6 @@ class NutritionTableModel(QAbstractTableModel):
             amount = self.nutrients[index.row()]["amount"]
             unit = self.nutrients[index.row()]["unit"]
             percent = self.nutrients[index.row()]["percent"]
-            #percent_bar = self.nutrients[index.row()]["percent_bar"]
 
             if index.column() == NUT_NAME_COL:
                 return name
@@ -70,34 +69,39 @@ class NutritionTableModel(QAbstractTableModel):
                 return unit
             elif index.column() == NUT_PERCENT_COL:
                 return percent
-            #elif index.column() == NUT_PERCENT_BAR_COL:
-            #    return percent_bar
+          
+        # A bug in PySide2 requires that we cast the bitwise 
+        # AlignmentFlag to an int before returning
+        # https://bugreports.qt.io/browse/PYSIDE-20
 
         if role == Qt.TextAlignmentRole:
             if index.column() == NUT_AMOUNT_COL:
-                return Qt.AlignRight #| Qt.AlignVCenter
+                return int(Qt.AlignRight | Qt.AlignVCenter)
             elif index.column() == NUT_UNIT_COL:
-                return Qt.AlignLeft #| Qt.AlignVCenter
+                return int(Qt.AlignLeft | Qt.AlignVCenter)
       
         return None
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-        if role != Qt.DisplayRole:
-            return None
 
         if orientation == Qt.Horizontal:
-            if section == NUT_NAME_COL:
-                return "Nutrient"
-            elif section == NUT_AMOUNT_COL:
-                return "Amount"
-            elif section == NUT_UNIT_COL:
-                return "Unit"
-                #return ""
-            elif section == NUT_PERCENT_COL:
-                return "Percent"
-            elif section == NUT_PERCENT_BAR_COL:
-                return "Percent bar"
-
+            
+            if role == Qt.DisplayRole:        
+                if section == NUT_NAME_COL:
+                    return "Nutrient"
+                elif section == NUT_AMOUNT_COL:
+                    return "Amount"
+                elif section == NUT_UNIT_COL:
+                    return ""
+                elif section == NUT_PERCENT_COL:
+                    return "Percent"
+                
+            if role == Qt.TextAlignmentRole:
+                if section == NUT_NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section == NUT_AMOUNT_COL:
+                    return int(Qt.AlignRight | Qt.AlignVCenter)
+    
         return None
 
     def insertRows(self, position, rows=1, index=QModelIndex()):

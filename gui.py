@@ -17,6 +17,7 @@ from search_window import SearchWindow
 from optimum_diet_window import OptimumDietWindow
 from fridge_model import FridgeModel
 from nutrition_model import NutritionTableModel
+from progress_bar_delegate import ProgressBarDelegate
 
 from ui_mainwindow import Ui_MainWindow
 
@@ -130,6 +131,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         nutrition_model = NutritionTableModel(nutrients=nutrients)
 
         self.nutrition_view_1.setModel(nutrition_model)
+
+        progress_bar_delegate = ProgressBarDelegate(self)
+        self.nutrition_view_1.setItemDelegate(progress_bar_delegate)
         #self.setup_nutrition()        
         
         '''
@@ -262,7 +266,11 @@ if __name__ == "__main__":
 
     user_db.create_user_db()
     app = QApplication(sys.argv)
-    app.setStyle(QtWidgets.QStyleFactory.create('Fusion'))
+    app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
+
+    #p = QPalette()
+    #p.setColor(QPalette.Highlight, Qt.darkRed)
+    #app.setPalette(p)
 
     window = MainWindow()
     sys.exit(app.exec_())
