@@ -92,15 +92,17 @@ class NutritionTableModel(QAbstractTableModel):
                 elif section == NUT_AMOUNT_COL:
                     return "Amount"
                 elif section == NUT_UNIT_COL:
-                    return ""
+                    return
                 elif section == NUT_PERCENT_COL:
-                    return "Percent"
+                    return "Percent daily requirement"
                 
             if role == Qt.TextAlignmentRole:
                 if section == NUT_NAME_COL:
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
                 if section == NUT_AMOUNT_COL:
                     return int(Qt.AlignRight | Qt.AlignVCenter)
+                if section == NUT_PERCENT_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
     
         return None
 
@@ -108,7 +110,7 @@ class NutritionTableModel(QAbstractTableModel):
         self.beginInsertRows(QModelIndex(), position, position + rows - 1)
         for row in range(rows):
             self.nutrients.insert(position + row, {"name":"", "amount":"",
-                                                   "unit":"", "percent":"", "percent_bar":""})
+                                                   "unit":"", "percent":""})
         self.endInsertRows()
        
         return True

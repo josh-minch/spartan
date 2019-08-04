@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow_tab.ui',
 # licensing of 'ui_mainwindow_tab.ui' applies.
 #
-# Created: Fri Aug  2 19:22:33 2019
+# Created: Sat Aug  3 17:27:29 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -75,7 +75,6 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabBarAutoHide(False)
         self.tabWidget.setObjectName("tabWidget")
         self.tab = QtWidgets.QWidget()
-        self.tab.setStyleSheet("")
         self.tab.setObjectName("tab")
         self.gridLayout = QtWidgets.QGridLayout(self.tab)
         self.gridLayout.setContentsMargins(0, -1, -1, -1)
@@ -132,15 +131,16 @@ class Ui_MainWindow(object):
 "    border: 0px;\n"
 "}")
         self.fridge_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.fridge_view.setAlternatingRowColors(True)
         self.fridge_view.setShowGrid(False)
+        self.fridge_view.setGridStyle(QtCore.Qt.DashLine)
         self.fridge_view.setObjectName("fridge_view")
+        self.fridge_view.horizontalHeader().setVisible(True)
+        self.fridge_view.horizontalHeader().setHighlightSections(False)
+        self.fridge_view.verticalHeader().setVisible(False)
+        self.fridge_view.verticalHeader().setDefaultSectionSize(23)
         self.gridLayout.addWidget(self.fridge_view, 1, 0, 1, 3)
         self.nutrition_view_1 = QtWidgets.QTableView(self.tab)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.nutrition_view_1.sizePolicy().hasHeightForWidth())
-        self.nutrition_view_1.setSizePolicy(sizePolicy)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -177,6 +177,7 @@ class Ui_MainWindow(object):
         self.nutrition_view_1.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.nutrition_view_1.setShowGrid(False)
         self.nutrition_view_1.setObjectName("nutrition_view_1")
+        self.nutrition_view_1.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.nutrition_view_1, 1, 3, 1, 2)
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap("images/fridge.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -232,10 +233,13 @@ class Ui_MainWindow(object):
         self.constraints_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
-"}")
+"}\n"
+"\n"
+"")
         self.constraints_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.constraints_view.setShowGrid(False)
         self.constraints_view.setObjectName("constraints_view")
+        self.constraints_view.verticalHeader().setVisible(False)
         self.gridLayout_3.addWidget(self.constraints_view, 1, 0, 1, 3)
         self.nutrition_view_2 = QtWidgets.QTableView(self.tab_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
@@ -243,6 +247,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.nutrition_view_2.sizePolicy().hasHeightForWidth())
         self.nutrition_view_2.setSizePolicy(sizePolicy)
+        self.nutrition_view_2.setMinimumSize(QtCore.QSize(480, 0))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -279,6 +284,7 @@ class Ui_MainWindow(object):
         self.nutrition_view_2.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.nutrition_view_2.setShowGrid(False)
         self.nutrition_view_2.setObjectName("nutrition_view_2")
+        self.nutrition_view_2.verticalHeader().setVisible(False)
         self.gridLayout_3.addWidget(self.nutrition_view_2, 1, 3, 1, 2)
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap("images/balance.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -306,7 +312,7 @@ class Ui_MainWindow(object):
         self.actionSettings_3.setObjectName("actionSettings_3")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

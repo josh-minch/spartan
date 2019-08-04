@@ -64,22 +64,28 @@ class FridgeModel(QAbstractTableModel):
         return None
     
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-        if role != Qt.DisplayRole:
-            return None
-        
+
         if orientation == Qt.Horizontal:
-            if section == FOOD_ID_COL:
-                return "Id"
-            elif section == NAME_COL:
-                return "Name"
-            elif section == PRICE_COL:
-                return "Price"
-            elif section == MIN_COL:
-                return "Minimum"
-            elif section == MAX_COL:
-                return "Maxmimum"
-            elif section == TARGET_COL:
-                return "Target"
+
+            if role == Qt.DisplayRole:
+                if section == FOOD_ID_COL:
+                    return "Id"
+                elif section == NAME_COL:
+                    return "Food"
+                elif section == PRICE_COL:
+                    return "Price"
+                elif section == MIN_COL:
+                    return "Minimum"
+                elif section == MAX_COL:
+                    return "Maxmimum"
+                elif section == TARGET_COL:
+                    return "Target"
+
+            if role == Qt.TextAlignmentRole:
+                if section == NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section == PRICE_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
 
         return None
 

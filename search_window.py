@@ -27,7 +27,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         self.search_model = SearchModel(search_result)
         self.search_list.setModel(self.search_model)
 
-        # Set horizontal header stretched table fills horizontal space
+        # Set horizontal header stretched so table fills horizontal space
         h_header = self.search_list.horizontalHeader()
         h_header.setSectionResizeMode(0, QHeaderView.Stretch)
 

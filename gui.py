@@ -39,26 +39,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.show()
 
     def setup_fridge_view(self):
+
         self.fridge_model = FridgeModel(foods=self.person.foods)
         self.fridge_view.setModel(self.fridge_model)
 
         # Hide col
         cols_to_hide = [FOOD_ID_COL, MIN_COL, MAX_COL, TARGET_COL]
         hide_view_cols(self.fridge_view, cols_to_hide)
-
+        
         # Horizontal header
         h_header = self.fridge_view.horizontalHeader()
         h_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
-        h_header.setSectionResizeMode(PRICE_COL, QHeaderView.ResizeToContents)
+        self.fridge_view.setColumnWidth(PRICE_COL, PRICE_COL_WIDTH)
 
-        h_header.setDefaultAlignment(Qt.AlignLeft)
-
+        set_v_header_height(self.fridge_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(h_header, QFont.DemiBold)
-
-        # Set vertical header height to determine table's row height
-        set_v_header_height(self.fridge_view, V_HEADER_SIZE)
     
     def setup_constraints_view(self):
+        '''
         self.constraints_view.setModel(self.fridge_model)
 
         cols_to_hide = [FOOD_ID_COL, PRICE_COL]
@@ -74,14 +72,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(h_header, QFont.DemiBold)
 
         set_v_header_height(self.constraints_view, V_HEADER_SIZE)
+        '''
 
     def setup_nutrition(self):
-        h_header = self.nutrition_view_1.horizontalHeader()
         
-        h_header.setDefaultAlignment(Qt.AlignLeft) 
-        for i in range(0, len(COL_TO_NUT_ATTR)):
-            h_header.setSectionResizeMode(i, QHeaderView.ResizeToContents)
+        self.nutrition_view_1.setMinimumSize(sum(NUT_COL_WIDTHS) + 15, 0)
 
+        for col, width in zip(COL_TO_NUT_ATTR.keys(), NUT_COL_WIDTHS):
+            self.nutrition_view_1.setColumnWidth(col, width)
+            self.nutrition_view_2.setColumnWidth(col, width)
+        
+        h_header = self.nutrition_view_1.horizontalHeader()
         header_font = QFont()
         header_font.setWeight(QFont.DemiBold)
         h_header.setFont(header_font)
@@ -90,7 +91,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         v_header = self.nutrition_view_1.verticalHeader()
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
-        
+
     def remove_from_fridge(self):
         food_names_to_remove = []
 
@@ -133,6 +134,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.nutrition_view_1.setModel(nutrition_model)
 
         self.setup_nutrition()   
+
         progress_bar_delegate = ProgressBarDelegate(self)
         self.nutrition_view_1.setItemDelegate(progress_bar_delegate)
           
@@ -251,6 +253,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
         #self.fridge_view_2.currentItemChanged.connect(self.display_nutrition)
 
+        # Close 
+        close_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_W), self)
+        close_shortcut.activated.connect(self.close)
+
         # Debug 
         self.debug_btn.clicked.connect(self.print_debug_info)
         add_foods_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
@@ -268,10 +274,10 @@ if __name__ == "__main__":
     user_db.create_user_db()
     app = QApplication(sys.argv)
     app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
-
+    
     p = QPalette()
     p.setColor(QPalette.Highlight, Qt.darkRed)
     app.setPalette(p)
-
+    
     window = MainWindow()
     sys.exit(app.exec_())

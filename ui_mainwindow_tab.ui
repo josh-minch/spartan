@@ -170,9 +170,6 @@
        <bool>false</bool>
       </property>
       <widget class="QWidget" name="tab">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
        <attribute name="icon">
         <iconset>
          <normaloff>images/fridge.png</normaloff>images/fridge.png</iconset>
@@ -299,25 +296,31 @@
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
           </property>
+          <property name="alternatingRowColors">
+           <bool>true</bool>
+          </property>
           <property name="showGrid">
            <bool>false</bool>
           </property>
+          <property name="gridStyle">
+           <enum>Qt::DashLine</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>23</number>
+          </attribute>
          </widget>
         </item>
         <item row="1" column="3" colspan="2">
          <widget class="QTableView" name="nutrition_view_1">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>480</width>
-            <height>0</height>
-           </size>
-          </property>
           <property name="palette">
            <palette>
             <active>
@@ -415,6 +418,9 @@
           <property name="showGrid">
            <bool>false</bool>
           </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
          </widget>
         </item>
        </layout>
@@ -541,7 +547,9 @@
            <string notr="true">QHeaderView::section{
 	background-color: white;
 	border: 0px;
-}</string>
+}
+
+</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
@@ -549,6 +557,9 @@
           <property name="showGrid">
            <bool>false</bool>
           </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
          </widget>
         </item>
         <item row="1" column="3" colspan="2">
@@ -662,6 +673,9 @@
           <property name="showGrid">
            <bool>false</bool>
           </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
          </widget>
         </item>
        </layout>
