@@ -75,11 +75,11 @@ class FridgeModel(QAbstractTableModel):
                 elif section == PRICE_COL:
                     return "Price"
                 elif section == MIN_COL:
-                    return "Minimum"
+                    return "At least"
                 elif section == MAX_COL:
-                    return "Maxmimum"
+                    return "At most"
                 elif section == TARGET_COL:
-                    return "Target"
+                    return "Equal to"
 
             if role == Qt.TextAlignmentRole:
                 if section == NAME_COL:

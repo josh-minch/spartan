@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_optimumdietwindow.ui',
 # licensing of 'ui_optimumdietwindow.ui' applies.
 #
-# Created: Sat Aug  3 17:27:30 2019
+# Created: Tue Aug  6 15:12:44 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -80,6 +80,7 @@ class Ui_OptimumDietWindow(object):
         self.optimum_diet_table.setObjectName("optimum_diet_table")
         self.optimum_diet_table.setColumnCount(3)
         self.optimum_diet_table.setRowCount(0)
+        self.optimum_diet_table.horizontalHeader().setVisible(False)
         self.optimum_diet_table.verticalHeader().setVisible(False)
         self.verticalLayout.addWidget(self.optimum_diet_table)
         self.horizontalLayout_2.addLayout(self.verticalLayout)

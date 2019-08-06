@@ -86,7 +86,7 @@ class NutritionTableModel(QAbstractTableModel):
 
         if orientation == Qt.Horizontal:
             
-            if role == Qt.DisplayRole:        
+            if role == Qt.DisplayRole:
                 if section == NUT_NAME_COL:
                     return "Nutrient"
                 elif section == NUT_AMOUNT_COL:
@@ -131,13 +131,13 @@ class NutritionTableModel(QAbstractTableModel):
             nutrient = self.nutrients[index.row()]
 
             if index.column() == NUT_NAME_COL:
-                nutrient['name'] = value 
+                nutrient['name'] = value
             elif index.column() == NUT_AMOUNT_COL:
-                nutrient['amount'] = value 
+                nutrient['amount'] = value
             elif index.column() == NUT_UNIT_COL:
-                nutrient['unit'] = value                 
+                nutrient['unit'] = value         
             elif index.column() == NUT_PERCENT_COL:
-                nutrient['percent'] = value 
+                nutrient['percent'] = value
             else:
                 return False
 

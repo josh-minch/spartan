@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow_tab.ui',
 # licensing of 'ui_mainwindow_tab.ui' applies.
 #
-# Created: Sat Aug  3 17:27:29 2019
+# Created: Tue Aug  6 15:12:43 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(886, 693)
+        MainWindow.resize(918, 588)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -77,7 +77,7 @@ class Ui_MainWindow(object):
         self.tab = QtWidgets.QWidget()
         self.tab.setObjectName("tab")
         self.gridLayout = QtWidgets.QGridLayout(self.tab)
-        self.gridLayout.setContentsMargins(0, -1, -1, -1)
+        self.gridLayout.setSpacing(9)
         self.gridLayout.setObjectName("gridLayout")
         self.add_foods_btn = QtWidgets.QPushButton(self.tab)
         self.add_foods_btn.setEnabled(True)
@@ -126,12 +126,50 @@ class Ui_MainWindow(object):
         self.label_8.setObjectName("label_8")
         self.gridLayout.addWidget(self.label_8, 0, 4, 1, 1)
         self.fridge_view = QtWidgets.QTableView(self.tab)
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Highlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Highlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 120, 215))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Highlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
+        self.fridge_view.setPalette(palette)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.fridge_view.setFont(font)
+        self.fridge_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.fridge_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
+"}\n"
+"\n"
+"QTableView {\n"
+"    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.fridge_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.fridge_view.setAlternatingRowColors(True)
+        self.fridge_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectItems)
         self.fridge_view.setShowGrid(False)
         self.fridge_view.setGridStyle(QtCore.Qt.DashLine)
         self.fridge_view.setObjectName("fridge_view")
@@ -170,14 +208,19 @@ class Ui_MainWindow(object):
         self.nutrition_view_1.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
-"}")
+"}\n"
+"")
         self.nutrition_view_1.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.nutrition_view_1.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.nutrition_view_1.setAlternatingRowColors(False)
         self.nutrition_view_1.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
         self.nutrition_view_1.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.nutrition_view_1.setShowGrid(False)
         self.nutrition_view_1.setObjectName("nutrition_view_1")
+        self.nutrition_view_1.horizontalHeader().setVisible(False)
+        self.nutrition_view_1.horizontalHeader().setStretchLastSection(False)
         self.nutrition_view_1.verticalHeader().setVisible(False)
+        self.nutrition_view_1.verticalHeader().setDefaultSectionSize(22)
         self.gridLayout.addWidget(self.nutrition_view_1, 1, 3, 1, 2)
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap("images/fridge.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -185,7 +228,7 @@ class Ui_MainWindow(object):
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.tab_2)
-        self.gridLayout_3.setContentsMargins(0, -1, -1, -1)
+        self.gridLayout_3.setSpacing(9)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.add_foods_btn_2 = QtWidgets.QPushButton(self.tab_2)
         self.add_foods_btn_2.setEnabled(True)
@@ -230,24 +273,59 @@ class Ui_MainWindow(object):
         self.label_9.setObjectName("label_9")
         self.gridLayout_3.addWidget(self.label_9, 0, 4, 1, 1)
         self.constraints_view = QtWidgets.QTableView(self.tab_2)
+        palette = QtGui.QPalette()
+        brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Highlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Highlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 120, 215))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Highlight, brush)
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
+        self.constraints_view.setPalette(palette)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.constraints_view.setFont(font)
+        self.constraints_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.constraints_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
 "}\n"
 "\n"
-"")
+"QTableView {\n"
+"    alternate-background-color: rgb(247, 247, 247);\n"
+"}")
         self.constraints_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.constraints_view.setAlternatingRowColors(True)
+        self.constraints_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectItems)
         self.constraints_view.setShowGrid(False)
+        self.constraints_view.setGridStyle(QtCore.Qt.DashLine)
         self.constraints_view.setObjectName("constraints_view")
+        self.constraints_view.horizontalHeader().setVisible(False)
+        self.constraints_view.horizontalHeader().setHighlightSections(False)
         self.constraints_view.verticalHeader().setVisible(False)
+        self.constraints_view.verticalHeader().setDefaultSectionSize(23)
         self.gridLayout_3.addWidget(self.constraints_view, 1, 0, 1, 3)
         self.nutrition_view_2 = QtWidgets.QTableView(self.tab_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.nutrition_view_2.sizePolicy().hasHeightForWidth())
-        self.nutrition_view_2.setSizePolicy(sizePolicy)
-        self.nutrition_view_2.setMinimumSize(QtCore.QSize(480, 0))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -277,14 +355,19 @@ class Ui_MainWindow(object):
         self.nutrition_view_2.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
-"}")
+"}\n"
+"")
         self.nutrition_view_2.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.nutrition_view_2.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.nutrition_view_2.setAlternatingRowColors(False)
         self.nutrition_view_2.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
         self.nutrition_view_2.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.nutrition_view_2.setShowGrid(False)
         self.nutrition_view_2.setObjectName("nutrition_view_2")
+        self.nutrition_view_2.horizontalHeader().setVisible(False)
+        self.nutrition_view_2.horizontalHeader().setStretchLastSection(False)
         self.nutrition_view_2.verticalHeader().setVisible(False)
+        self.nutrition_view_2.verticalHeader().setDefaultSectionSize(22)
         self.gridLayout_3.addWidget(self.nutrition_view_2, 1, 3, 1, 2)
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap("images/balance.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
