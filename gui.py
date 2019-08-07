@@ -41,19 +41,23 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.fridge_model = FridgeModel(foods=self.person.foods)
         self.fridge_view.setModel(self.fridge_model)
+        self.prices_view.setModel(self.fridge_model)
         self.constraints_view.setModel(self.fridge_model)
         
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
+        hide_view_cols(self.prices_view, P_COLS_TO_HIDE)
         hide_view_cols(self.constraints_view, C_COLS_TO_HIDE)
         
         # Horizontal header
         f_header = self.fridge_view.horizontalHeader()
+        p_header = self.prices_view.horizontalHeader()
         c_header = self.constraints_view.horizontalHeader()
 
         # Header must be explicitly set to visible even though it's already 
         # set in Qt Designer or else it doesn't display for constraints view
         f_header.setVisible(True)
+        p_header.setVisible(True)
         c_header.setVisible(True)
 
         f_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
@@ -62,18 +66,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         set_v_header_height(self.fridge_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(f_header, QFont.DemiBold)
+        set_v_header_height(self.prices_view, FRIDGE_V_HEADER_SIZE)
+        set_header_weight(p_header, QFont.DemiBold)
         set_v_header_height(self.constraints_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(c_header, QFont.DemiBold)
       
     def setup_nutrition(self):
         
         for col, width in zip(COL_TO_NUT_ATTR.keys(), NUT_COL_WIDTHS):
-            self.nutrition_view_1.setColumnWidth(col, width)
-            self.nutrition_view_2.setColumnWidth(col, width)
+            self.nutrition_view.setColumnWidth(col, width)
         
         '''
         # Set vertical header height to determine table's row height
-        v_header = self.nutrition_view_1.verticalHeader()
+        v_header = self.nutrition_view.verticalHeader()
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
         '''
@@ -117,11 +122,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             nutrition_model = NutritionTableModel(nutrients=nutrients)
             
             progress_bar_delegate = ProgressBarDelegate(self)
-            self.nutrition_view_1.setItemDelegate(progress_bar_delegate)
-            self.nutrition_view_1.setModel(nutrition_model)
-
-            self.nutrition_view_2.setItemDelegate(progress_bar_delegate)
-            self.nutrition_view_2.setModel(nutrition_model)
+            self.nutrition_view.setItemDelegate(progress_bar_delegate)
+            self.nutrition_view.setModel(nutrition_model)
 
             self.setup_nutrition()   
           
@@ -143,13 +145,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
         # Add to fridge button
         self.add_foods_btn.clicked.connect(self.open_search_window)
-        self.add_foods_btn_2.clicked.connect(self.open_search_window)
+        #self.add_foods_btn_2.clicked.connect(self.open_search_window)
         add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
         add_foods_shortcut.activated.connect(self.open_search_window)
         
         # Remove button
         self.remove_btn.clicked.connect(self.remove_from_fridge)
-        self.remove_btn_2.clicked.connect(self.remove_from_fridge)
+        #self.remove_btn_2.clicked.connect(self.remove_from_fridge)
         self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
         remove_shortcut = QShortcut(QKeySequence(Qt.Key_Delete), self)
         remove_shortcut.activated.connect(self.remove_from_fridge)
@@ -159,6 +161,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
        
         # Nutriton panel connections
         self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
+        self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
         self.constraints_view.setSelectionModel(self.fridge_view.selectionModel())
         #self.constraints_view.selectionModel().selectionChanged.connect(self.display_nutrition)
         #self.fridge_view_2.currentItemChanged.connect(self.display_nutrition)
@@ -176,8 +179,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print(self.fridge_view.selectionModel().hasSelection())
         print(self.fridge_view.selectionModel().selectedIndexes())
         print(self.fridge_view.selectionModel().selectedRows())
-        #print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) ٩(◕‿◕)۶ ❤️
-        #          ｡^‿^｡ ❀◕ ‿ ◕❀     ''')
+        print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) ٩(◕‿◕)۶ ❤️
+                 ｡^‿^｡ ❀◕ ‿ ◕❀     ''')
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar

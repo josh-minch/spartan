@@ -92,7 +92,7 @@
     <property name="bottomMargin">
      <number>16</number>
     </property>
-    <item row="1" column="1">
+    <item row="2" column="1">
      <widget class="QPushButton" name="pushButton">
       <property name="maximumSize">
        <size>
@@ -118,7 +118,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="5">
+    <item row="2" column="5">
      <widget class="QPushButton" name="optimize_btn">
       <property name="maximumSize">
        <size>
@@ -170,7 +170,7 @@
        <string notr="true">QTabWidget::pane { border: 0; }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -208,107 +208,6 @@
         <property name="spacing">
          <number>9</number>
         </property>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="add_foods_btn">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>Add food</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>images/add.png</normaloff>images/add.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="remove_btn">
-          <property name="enabled">
-           <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="toolTip">
-           <string>&lt;p style='white-space:pre'&gt;Remove selected food (delete)&lt;/p&gt;</string>
-          </property>
-          <property name="text">
-           <string>Remove food</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>images/minus.svg</normaloff>images/minus.svg</iconset>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>177</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="3">
-         <widget class="QLabel" name="label">
-          <property name="maximumSize">
-           <size>
-            <width>25</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap>images/nutrition.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="4">
-         <widget class="QLabel" name="label_8">
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>11</pointsize>
-            <italic>false</italic>
-           </font>
-          </property>
-          <property name="autoFillBackground">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Nutrition</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0" colspan="3">
          <widget class="QTableView" name="fridge_view">
           <property name="palette">
@@ -449,7 +348,37 @@ QTableView {
           </attribute>
          </widget>
         </item>
-        <item row="1" column="3" colspan="2">
+        <item row="0" column="5">
+         <widget class="QLabel" name="label_8">
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>11</pointsize>
+            <italic>false</italic>
+           </font>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Nutrition</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>177</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="4" colspan="2">
          <widget class="QTableView" name="nutrition_view_1">
           <property name="palette">
            <palette>
@@ -564,6 +493,77 @@ QTableView {
           <attribute name="verticalHeaderDefaultSectionSize">
            <number>22</number>
           </attribute>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QLabel" name="label">
+          <property name="maximumSize">
+           <size>
+            <width>25</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap>images/nutrition.png</pixmap>
+          </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="add_foods_btn">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Add food</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>images/add.png</normaloff>images/add.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="remove_btn">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p style='white-space:pre'&gt;Remove selected food (delete)&lt;/p&gt;</string>
+          </property>
+          <property name="text">
+           <string>Remove food</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>images/minus.svg</normaloff>images/minus.svg</iconset>
+          </property>
          </widget>
         </item>
        </layout>
@@ -945,7 +945,7 @@ QTableView {
       </widget>
      </widget>
     </item>
-    <item row="1" column="2">
+    <item row="2" column="2">
      <widget class="QPushButton" name="debug_btn">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -988,6 +988,21 @@ QTableView {
   <action name="actionSettings_3">
    <property name="text">
     <string>Settings</string>
+   </property>
+  </action>
+  <action name="actione">
+   <property name="text">
+    <string>e</string>
+   </property>
+  </action>
+  <action name="actionex">
+   <property name="text">
+    <string>ex</string>
+   </property>
+  </action>
+  <action name="actionaa">
+   <property name="text">
+    <string>aa[\</string>
    </property>
   </action>
  </widget>
