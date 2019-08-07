@@ -42,11 +42,11 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
                     current_row, OPT_NAME_COL, food_name)
 
                 price = QTableWidgetItem()
-                price.setData(Qt.EditRole, float(prices[i]) * var.varValue)
+                price.setData(Qt.EditRole, round(float(prices[i]) * var.varValue, 2))
                 self.optimum_diet_table.setItem(current_row, OPT_PRICE_COL, price)
 
                 quantity = QTableWidgetItem()
-                quantity.setData(Qt.EditRole, 100 * var.varValue)
+                quantity.setData(Qt.EditRole, round(100 * var.varValue, 2))
                 self.optimum_diet_table.setItem(
                     current_row, OPT_QUANTITY_COL, quantity)
 
@@ -67,10 +67,10 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
         cost_item = QTableWidgetItem()
         cost_item.setFont(totals_font)
-        cost_item.setData(Qt.EditRole, cost_value)
+        cost_item.setData(Qt.EditRole, round(cost_value, 2))
         self.optimum_diet_table.setItem(current_row, OPT_PRICE_COL, cost_item)
 
         mass_item = QTableWidgetItem()
         mass_item.setFont(totals_font)
-        mass_item.setData(Qt.EditRole, mass_value)
+        mass_item.setData(Qt.EditRole, round(mass_value, 2))
         self.optimum_diet_table.setItem(current_row, OPT_QUANTITY_COL, mass_item)

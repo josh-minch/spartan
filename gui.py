@@ -5,8 +5,9 @@ from timeit import default_timer as timer
 from PySide2 import QtCore, QtWidgets, QtGui
 from PySide2.QtCore import Qt, QEvent
 from PySide2.QtGui import QFont, QKeySequence, QPalette
-from PySide2.QtWidgets import (QApplication, QMainWindow, QListWidget, QTableWidget,
-                               QListWidgetItem, QTableWidgetItem, QAbstractItemView, QHeaderView, QShortcut)
+from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListWidget, QTableWidget,
+                               QListWidgetItem, QTableWidgetItem, QAbstractItemView, 
+                               QHeaderView, QShortcut)
 
 from spartan import Person, Food, Nutrient, Optimizier
 from gui_constants import *
@@ -32,7 +33,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_selection_modes()    
 
         self.add_foods_btn.setFocus()
-        self.resize(1600-300, 900-100)
+        #self.resize(QDesktopWidget().availableGeometry(self).size() * 0.90)
+        self.resize(1200, 800)
         self.show()
 
     def setup_fridge_views(self):
@@ -186,9 +188,9 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
     
-    #p = QPalette()
-    #p.setColor(QPalette.Highlight, Qt.darkRed)
-    #app.setPalette(p)
+    p = QPalette()
+    p.setColor(QPalette.Highlight, Qt.darkRed)
+    app.setPalette(p)
     
     window = MainWindow()
     sys.exit(app.exec_())

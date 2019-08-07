@@ -71,7 +71,7 @@ class FridgeModel(QAbstractTableModel):
                 if section == FOOD_ID_COL:
                     return "Id"
                 elif section == NAME_COL:
-                    return "Food"
+                    return " Food"
                 elif section == PRICE_COL:
                     return "Price"
                 elif section == MIN_COL:

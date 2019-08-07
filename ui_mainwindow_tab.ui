@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>918</width>
-    <height>588</height>
+    <height>585</height>
    </rect>
   </property>
   <property name="palette">
@@ -66,6 +66,12 @@
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
+  <property name="iconSize">
+   <size>
+    <width>30</width>
+    <height>30</height>
+   </size>
+  </property>
   <property name="toolButtonStyle">
    <enum>Qt::ToolButtonIconOnly</enum>
   </property>
@@ -77,6 +83,15 @@
     <bool>true</bool>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
+    <property name="leftMargin">
+     <number>16</number>
+    </property>
+    <property name="rightMargin">
+     <number>16</number>
+    </property>
+    <property name="bottomMargin">
+     <number>16</number>
+    </property>
     <item row="1" column="1">
      <widget class="QPushButton" name="pushButton">
       <property name="maximumSize">
@@ -148,19 +163,19 @@
       <property name="font">
        <font>
         <family>Segoe UI Semilight</family>
-        <pointsize>12</pointsize>
+        <pointsize>11</pointsize>
        </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QTabWidget::pane { border: 0; }</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="iconSize">
        <size>
-        <width>20</width>
-        <height>20</height>
+        <width>16</width>
+        <height>16</height>
        </size>
       </property>
       <property name="documentMode">
@@ -178,6 +193,18 @@
         <string>My fridge</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="rightMargin">
+         <number>9</number>
+        </property>
+        <property name="bottomMargin">
+         <number>9</number>
+        </property>
         <property name="spacing">
          <number>9</number>
         </property>
@@ -207,9 +234,6 @@
           <property name="icon">
            <iconset>
             <normaloff>images/add.png</normaloff>images/add.png</iconset>
-          </property>
-          <property name="shortcut">
-           <string>Ctrl+F</string>
           </property>
          </widget>
         </item>
@@ -412,7 +436,7 @@ QTableView {
            <enum>Qt::DashLine</enum>
           </property>
           <attribute name="horizontalHeaderVisible">
-           <bool>true</bool>
+           <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderHighlightSections">
            <bool>false</bool>
@@ -494,7 +518,7 @@ QTableView {
           <property name="font">
            <font>
             <family>Segoe UI</family>
-            <pointsize>10</pointsize>
+            <pointsize>9</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -553,6 +577,9 @@ QTableView {
         <string>Constraints</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
         <property name="spacing">
          <number>9</number>
         </property>
@@ -582,9 +609,6 @@ QTableView {
           <property name="icon">
            <iconset>
             <normaloff>images/add.png</normaloff>images/add.png</iconset>
-          </property>
-          <property name="shortcut">
-           <string>Ctrl+F</string>
           </property>
          </widget>
         </item>

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow_tab.ui',
 # licensing of 'ui_mainwindow_tab.ui' applies.
 #
-# Created: Tue Aug  6 17:13:43 2019
+# Created: Tue Aug  6 19:59:13 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(918, 588)
+        MainWindow.resize(918, 585)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -34,12 +34,14 @@ class Ui_MainWindow(object):
         icon.addPixmap(QtGui.QPixmap("images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(True)
+        MainWindow.setIconSize(QtCore.QSize(30, 30))
         MainWindow.setToolButtonStyle(QtCore.Qt.ToolButtonIconOnly)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setAutoFillBackground(True)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setContentsMargins(16, -1, 16, 16)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setMaximumSize(QtCore.QSize(100, 16777215))
@@ -67,10 +69,10 @@ class Ui_MainWindow(object):
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semilight")
-        font.setPointSize(12)
+        font.setPointSize(11)
         self.tabWidget.setFont(font)
         self.tabWidget.setStyleSheet("QTabWidget::pane { border: 0; }")
-        self.tabWidget.setIconSize(QtCore.QSize(20, 20))
+        self.tabWidget.setIconSize(QtCore.QSize(16, 16))
         self.tabWidget.setDocumentMode(False)
         self.tabWidget.setTabBarAutoHide(False)
         self.tabWidget.setObjectName("tabWidget")
@@ -78,6 +80,7 @@ class Ui_MainWindow(object):
         self.tab.setObjectName("tab")
         self.gridLayout = QtWidgets.QGridLayout(self.tab)
         self.gridLayout.setSpacing(9)
+        self.gridLayout.setContentsMargins(0, 9, 9, 9)
         self.gridLayout.setObjectName("gridLayout")
         self.add_foods_btn = QtWidgets.QPushButton(self.tab)
         self.add_foods_btn.setEnabled(True)
@@ -173,7 +176,7 @@ class Ui_MainWindow(object):
         self.fridge_view.setShowGrid(False)
         self.fridge_view.setGridStyle(QtCore.Qt.DashLine)
         self.fridge_view.setObjectName("fridge_view")
-        self.fridge_view.horizontalHeader().setVisible(True)
+        self.fridge_view.horizontalHeader().setVisible(False)
         self.fridge_view.horizontalHeader().setHighlightSections(False)
         self.fridge_view.verticalHeader().setVisible(False)
         self.fridge_view.verticalHeader().setDefaultSectionSize(23)
@@ -201,7 +204,7 @@ class Ui_MainWindow(object):
         self.nutrition_view_1.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(9)
         self.nutrition_view_1.setFont(font)
         self.nutrition_view_1.setFocusPolicy(QtCore.Qt.NoFocus)
         self.nutrition_view_1.setAutoFillBackground(False)
@@ -229,6 +232,7 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.tab_2)
         self.gridLayout_3.setSpacing(9)
+        self.gridLayout_3.setContentsMargins(0, -1, -1, -1)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.add_foods_btn_2 = QtWidgets.QPushButton(self.tab_2)
         self.add_foods_btn_2.setEnabled(True)
@@ -395,7 +399,7 @@ class Ui_MainWindow(object):
         self.actionSettings_3.setObjectName("actionSettings_3")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -406,13 +410,11 @@ class Ui_MainWindow(object):
         self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Generate diet", None, -1))
         self.optimize_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F5", None, -1))
         self.add_foods_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add food", None, -1))
-        self.add_foods_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Ctrl+F", None, -1))
         self.remove_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Remove selected food (delete)</p>", None, -1))
         self.remove_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Remove food", None, -1))
         self.label_8.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtWidgets.QApplication.translate("MainWindow", "My fridge", None, -1))
         self.add_foods_btn_2.setText(QtWidgets.QApplication.translate("MainWindow", "Add food", None, -1))
-        self.add_foods_btn_2.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Ctrl+F", None, -1))
         self.remove_btn_2.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Remove selected food (delete)</p>", None, -1))
         self.remove_btn_2.setText(QtWidgets.QApplication.translate("MainWindow", "Remove food", None, -1))
         self.label_9.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))

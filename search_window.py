@@ -18,7 +18,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         #self.setup_selection_modes()
         
         self.search_box.setFocus()
-        #self.resize(850, 500)
+        self.resize(850, 500)
         self.show()
 
     def search_food(self):
