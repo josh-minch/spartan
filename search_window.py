@@ -53,7 +53,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
 
             ix = self.fridge_model.index(current_row, FOOD_ID_COL, QModelIndex())
             self.fridge_model.setData(ix, database.get_food_id(food_name), Qt.EditRole)
-
+            
             ix = self.fridge_model.index(current_row, NAME_COL, QModelIndex())
             self.fridge_model.setData(ix, food_name, Qt.EditRole)
             
@@ -62,17 +62,17 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
     def toggle_add_btn(self):
         if self.search_selection_model is None:
             self.add_to_fridge_btn.setEnabled(False)
-        if not self.search_selection_model.hasSelection():
-            self.add_to_fridge_btn.setEnabled(False)
-        else:
+        elif self.search_selection_model.hasSelection():
             self.add_to_fridge_btn.setEnabled(True)
+        else:
+            self.add_to_fridge_btn.setEnabled(False)
     
     def setup_connections(self):
         self.search_box.textChanged.connect(self.search_food)
         self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
         
-        shortcut = QShortcut(QKeySequence(Qt.Key_Return), self.search_list)
-        shortcut.activated.connect(self.add_to_fridge)
+        add_shortcut = QShortcut(QKeySequence(Qt.Key_Return), self.search_list)
+        add_shortcut.activated.connect(self.add_to_fridge)
 
         self.debug_btn.clicked.connect(self.print_debug_info)
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)

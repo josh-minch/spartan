@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow_tab.ui',
 # licensing of 'ui_mainwindow_tab.ui' applies.
 #
-# Created: Tue Aug  6 15:12:43 2019
+# Created: Tue Aug  6 17:13:43 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -97,7 +97,7 @@ class Ui_MainWindow(object):
         self.add_foods_btn.setObjectName("add_foods_btn")
         self.gridLayout.addWidget(self.add_foods_btn, 0, 0, 1, 1)
         self.remove_btn = QtWidgets.QPushButton(self.tab)
-        self.remove_btn.setEnabled(True)
+        self.remove_btn.setEnabled(False)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semilight")
         font.setPointSize(10)
@@ -169,7 +169,7 @@ class Ui_MainWindow(object):
 "}")
         self.fridge_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.fridge_view.setAlternatingRowColors(True)
-        self.fridge_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectItems)
+        self.fridge_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.fridge_view.setShowGrid(False)
         self.fridge_view.setGridStyle(QtCore.Qt.DashLine)
         self.fridge_view.setObjectName("fridge_view")
@@ -246,7 +246,7 @@ class Ui_MainWindow(object):
         self.add_foods_btn_2.setObjectName("add_foods_btn_2")
         self.gridLayout_3.addWidget(self.add_foods_btn_2, 0, 0, 1, 1)
         self.remove_btn_2 = QtWidgets.QPushButton(self.tab_2)
-        self.remove_btn_2.setEnabled(True)
+        self.remove_btn_2.setEnabled(False)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semilight")
         font.setPointSize(10)
@@ -316,7 +316,7 @@ class Ui_MainWindow(object):
 "}")
         self.constraints_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.constraints_view.setAlternatingRowColors(True)
-        self.constraints_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectItems)
+        self.constraints_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.constraints_view.setShowGrid(False)
         self.constraints_view.setGridStyle(QtCore.Qt.DashLine)
         self.constraints_view.setObjectName("constraints_view")

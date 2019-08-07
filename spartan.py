@@ -88,18 +88,14 @@ class Person(object):
         con.commit()
         con.close()
 
-    def remove_foods(self, food_names):
-        self.foods = [food for food in self.foods if food.name not in food_names] 
-        self.remove_foods_from_db(food_names)
-
-    def remove_foods_from_db(self, food_names):
+    def remove_foods(self, food_ids):
         con = sql.connect("spartan.db")
         cur = con.cursor()
 
-        foods_tuple = [(food_name,) for food_name in food_names]
+        foods_tuple = [(food_ids,) for food_ids in food_ids]
         sql_stmt = (
             'DELETE FROM foods '
-            'WHERE name = ?'
+            'WHERE id = ?'
         )
 
         cur.executemany(sql_stmt, foods_tuple)

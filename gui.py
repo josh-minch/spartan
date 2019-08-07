@@ -29,11 +29,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.setup_fridge_views()
         self.setup_connections()
-        self.setup_filters()
         self.setup_selection_modes()    
 
         self.add_foods_btn.setFocus()
-        self.resize(1600-50, 900-50)
+        self.resize(1600-300, 900-100)
         self.show()
 
     def setup_fridge_views(self):
@@ -76,16 +75,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
         '''
-        
-        
+    
     def remove_from_fridge(self):
-        food_names_to_remove = []
+        selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
+        food_ids = self.fridge_model.data(selected_food_id_indexes[0], Qt.DisplayRole)
 
-        for item in self.fridge_view.selectedItems():
-            food_names_to_remove.append(str(item.data(Qt.EditRole)))
-            self.fridge_view.removeRow(item.row())
-
-        self.person.remove_foods(food_names=food_names_to_remove)
+        self.fridge_model.removeRow(selected_food_id_indexes[0].row())
+        self.person.remove_foods(food_ids=[food_ids])
 
     def update_persons_food_attr(self, index):
         # Update food attributes, not food name
@@ -110,24 +106,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def display_nutrition(self, selected, deselected):
-           
-        food_name = self.fridge_model.data(selected.indexes()[0], Qt.DisplayRole)
+        if self.fridge_view.selectionModel().hasSelection():
+            [selected_food_id_indexes] = self.fridge_view.selectionModel().selectedRows()
+            food_id = self.fridge_model.data(selected_food_id_indexes, Qt.DisplayRole)
 
-        selected_food = Food(name=food_name)
-        nutrients = selected_food.get_nutrition(self.person)
-        nutrition_model = NutritionTableModel(nutrients=nutrients)
-        
-        progress_bar_delegate = ProgressBarDelegate(self)
-        self.nutrition_view_1.setItemDelegate(progress_bar_delegate)
-        self.nutrition_view_1.setModel(nutrition_model)
+            selected_food = Food(food_id=food_id)
+            nutrients = selected_food.get_nutrition(self.person)
+            nutrition_model = NutritionTableModel(nutrients=nutrients)
+            
+            progress_bar_delegate = ProgressBarDelegate(self)
+            self.nutrition_view_1.setItemDelegate(progress_bar_delegate)
+            self.nutrition_view_1.setModel(nutrition_model)
 
-        self.nutrition_view_2.setItemDelegate(progress_bar_delegate)
-        self.nutrition_view_2.setModel(nutrition_model)
+            self.nutrition_view_2.setItemDelegate(progress_bar_delegate)
+            self.nutrition_view_2.setModel(nutrition_model)
 
-        self.setup_nutrition()   
+            self.setup_nutrition()   
           
     def toggle_remove_btn(self):
-        if self.fridge_selection_model.hasSelection():
+        if self.fridge_view.selectionModel() is None:
+            self.remove_btn.setEnabled(False)
+        elif self.fridge_view.selectionModel().hasSelection():
             self.remove_btn.setEnabled(True)
         else:
             self.remove_btn.setEnabled(False)
@@ -135,21 +134,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setup_selection_modes(self):
         #self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
         pass
-
-    def setup_filters(self):
-        self.fridge_view.installEventFilter(self)
-    
-    def eventFilter(self, obj, event):
-        # Press delete in fridge_view to remove selected
-        if obj == self.fridge_view:
-            if event.type() == QEvent.KeyPress and event.key() == Qt.Key_Delete:
-                self.remove_from_fridge()
-                return True
-            else:
-                return False
-        else:
-            # pass the event on to the parent class
-            return QMainWindow.eventFilter(self, obj, event)
     
     def setup_connections(self):
         
@@ -164,9 +148,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Remove button
         self.remove_btn.clicked.connect(self.remove_from_fridge)
         self.remove_btn_2.clicked.connect(self.remove_from_fridge)
-
-        # Toggle remove button
-        #self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
+        remove_shortcut = QShortcut(QKeySequence(Qt.Key_Delete), self)
+        remove_shortcut.activated.connect(self.remove_from_fridge)
 
         self.optimize_btn.clicked.connect(self.optimize)
         # optimize button shortcut set in Qt Designer
@@ -187,8 +171,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         add_foods_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
-        print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) ٩(◕‿◕)۶ ❤️
-                  ｡^‿^｡ ❀◕ ‿ ◕❀     ''')
+        print(self.fridge_view.selectionModel().hasSelection())
+        print(self.fridge_view.selectionModel().selectedIndexes())
+        print(self.fridge_view.selectionModel().selectedRows())
+        #print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) ٩(◕‿◕)۶ ❤️
+        #          ｡^‿^｡ ❀◕ ‿ ◕❀     ''')
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
