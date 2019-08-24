@@ -1,10 +1,10 @@
 import sqlite3
 
-mac_nut_names = ["Water", "Carbohydrate, by difference", "Fiber, total dietary", "Total lipid (fat)", "18:2 undifferentiated", "18:3 undifferentiated", "Protein"]
+mac_nut_names = ["Water", "Carbohydrate, by difference", "Fiber, total dietary", "Total lipid (fat)", "18:2 undifferentiated", "18:3 undifferentiated", "Protein", 'Sugars, total']
 min_nut_names = ["Calcium, Ca", "Copper, Cu", "Fluoride, F", "Iron, Fe", "Magnesium, Mg", "Manganese, Mn", "Phosphorus, P", "Selenium, Se", "Zinc, Zn", "Potassium, K", "Sodium, Na"]
 vit_nut_names = ["Vitamin A, RAE", "Vitamin C, total ascorbic acid", "Vitamin D", "Vitamin E (alpha-tocopherol)", "Vitamin K (phylloquinone)", "Thiamin", "Riboflavin", "Niacin", "Vitamin B-6", "Folate, total", "Vitamin B-12", "Pantothenic acid", "Choline, total" ]
 
-mac_nut_ids = [255, 205, 291, 204, 618, 619, 203]
+mac_nut_ids = [255, 205, 291, 204, 618, 619, 203, 269]
 min_nut_ids = [301, 312, 313, 303, 304, 315, 305, 317, 309, 306, 307]
 vit_nut_ids = [320, 401, 324, 323, 430, 404, 405, 406, 415, 417, 418, 410, 421]
 
@@ -14,6 +14,7 @@ nuts = {
     205: 'Carbohydrate, by difference',
     208: 'Energy',
     255: 'Water',
+    269: 'Sugars, total',
     291: 'Fiber, total dietary',
     301: 'Calcium, Ca',
     303: 'Iron, Fe',
@@ -42,7 +43,6 @@ nuts = {
     618: '18:2 undifferentiated',
     619: '18:3 undifferentiated'
 }
-
 
 nut_names = mac_nut_names + min_nut_names + vit_nut_names
 nut_ids = mac_nut_ids + min_nut_ids + vit_nut_ids

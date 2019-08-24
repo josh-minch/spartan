@@ -34,3 +34,10 @@ def setup_table_header(table, labels):
     header_font = QFont()
     header_font.setWeight(QFont.DemiBold)
     header.setFont(header_font)
+
+nut_model_mac_names = {'Energy', 'Carbohydrates', 'Starch', 'Sugars', 'Fiber', 'Protein', 
+                        'Fats', 'Satured fats', 'Monounsaturated fats', 
+                        'Polyunsaturated fats', 'Omega-3', 'EPA', 'DPA', 'DHA', 'Omega-6', 'Trans fats', 'Cholesterol'}
+nut_model_vit_names = {'A', 'B1', 'B2', 'B3', 'B5', 'B6', 'B7', 'B9', 'B12', 'C', 'D', 'E', 'K'}
+nut_model_min_names = {'Calcium', 'Copper', 'Iron', 'Magnesium', 'Manganese',
+                        'Phosphorus', 'Potassium', 'Selenium', 'Sodium', 'Zinc'}

@@ -39,11 +39,12 @@ class Person(object):
         self.remove_nut('Fluoride, F')
         self.remove_nut('Total lipid (fat)')
         self.add_nut(Nutrient('Energy', 208, min=2300, max=2600))
+        #self.add_nut(Nutrient('Sugars, total'))
 
     def add_nut(self, nutrient):
         if (nutrient.nut_id == None):
             nut_index = req.nut_names.index(nutrient.name)
-            nutrient.id = req.nut_ids[nut_index]
+            nutrient.nut_id = req.nut_ids[nut_index]
 
         self.nuts.append(nutrient)
         self.nuts.sort(key=lambda nut: nut.nut_id)
@@ -129,6 +130,11 @@ class Food:
         self.min = min
         self.target = target
         self.max = max
+
+        self.price_unit = 'grams'
+        self.min_unit = 'grams'
+        self.max_unit = 'grams'
+        self.target_unit = 'grams'
 
     def __repr__(self):
         return str(self.__dict__)
