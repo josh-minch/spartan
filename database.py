@@ -1,5 +1,5 @@
 '''
-Functions related to querying food sr_legacy.db
+Functions related to querying food database sr_legacy.db
 '''
 
 import sqlite3 as sql

@@ -19,6 +19,7 @@ from optimum_diet_window import OptimumDietWindow
 from fridge_model import FridgeModel
 from nutrition_model import NutritionTableModel
 from progress_bar_delegate import ProgressBarDelegate
+from fridge_quantity_delegate import FridgeQuantityDelegate
 
 from ui_mainwindow import Ui_MainWindow
 
@@ -43,6 +44,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_view.setModel(self.fridge_model)
         self.prices_view.setModel(self.fridge_model)
         self.constraints_view.setModel(self.fridge_model)
+
+        # Set custom delegates
+        fridge_quantity_delegate = FridgeQuantityDelegate(self)
+        self.prices_view.setItemDelegate(fridge_quantity_delegate)
+        self.constraints_view.setItemDelegate(fridge_quantity_delegate)
         
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
