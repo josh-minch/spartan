@@ -58,6 +58,8 @@ class FridgeModel(QAbstractTableModel):
 
         # Hide units unless corresponding attribute has a value
         if role in (Qt.DisplayRole, Qt.EditRole):
+            if index.column() == PRICE_QUANTITY_COL and self.foods[index.row()].price is None:
+                return None
             if index.column() == PRICE_UNIT_COL and self.foods[index.row()].price is None:
                 return None
             if index.column() == MIN_UNIT_COL and self.foods[index.row()].min is None:
@@ -71,10 +73,8 @@ class FridgeModel(QAbstractTableModel):
             return getattr(self.foods[index.row()], attr_str)
 
         if role == Qt.TextAlignmentRole:
-            if index.column() in (PRICE_COL, MIN_COL, MAX_COL, TARGET_COL):
+            if index.column() in (PRICE_QUANTITY_COL, PRICE_COL, MIN_COL, MAX_COL, TARGET_COL):
                 return int(Qt.AlignRight | Qt.AlignVCenter)
-            #if index.column() == PRICE_UNIT_COL or MIN_UNIT_COL or MAX_UNIT_COL or TARGET_UNIT_COL:
-            #    return int(Qt.AlignLeft | Qt.AlignVCenter)
             
         return None
     
@@ -95,7 +95,7 @@ class FridgeModel(QAbstractTableModel):
                     return "At most"
                 elif section == TARGET_COL:
                     return "Equal to"
-                elif section in (PRICE_UNIT_COL, MIN_UNIT_COL, MAX_UNIT_COL, TARGET_UNIT_COL):
+                elif section in (PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_UNIT_COL, MAX_UNIT_COL, TARGET_UNIT_COL):
                     return ""
 
             if role == Qt.TextAlignmentRole:
@@ -129,24 +129,16 @@ class FridgeModel(QAbstractTableModel):
 
             food = self.foods[index.row()]
 
-            if index.column() == FOOD_ID_COL:
-                food.food_id = value
-            elif index.column() == NAME_COL:
-                food.name = value
-            elif index.column() == PRICE_COL:
-                food.price = value
-            elif index.column() == MIN_COL:
-                food.min = value
-            elif index.column() == MAX_COL:
-                food.max = value
-            elif index.column() == TARGET_COL:
-                food.target = value
-            else:
-                return False
-
+            attr_str = col_to_attr[index.column()]
+            if attr_str in ('price', 'min', 'max', 'target'):
+                if value == '':
+                    value = None
+                else:
+                    value = int(value)
+            setattr(self.foods[index.row()], attr_str, value)
             self.dataChanged.emit(index, index)
             return True
-
+            
         return False
 
     def flags(self, index):

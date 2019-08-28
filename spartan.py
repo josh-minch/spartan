@@ -120,24 +120,56 @@ class Person(object):
 
     # Calculate the equivalent daily value percentage of a given nutrient amount
     # based on a person's nutrient requirements. 
-    
 
 class Food:
     def __init__(self, food_id=None, name=None, price=None, min=None, target=None, max=None):
         self.food_id = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
-        self.price = price
-        self.min = min
-        self.target = target
-        self.max = max
+        self.price: float = price
+        self.min: float = min
+        self.target: float = target
+        self.max: float = max
 
-        self.price_unit = 'grams'
-        self.min_unit = 'grams'
-        self.max_unit = 'grams'
-        self.target_unit = 'grams'
+        self.price_quantity = 100
+        self.price_unit = 'g'
+        self.min_unit = 'g'
+        self.max_unit = 'g'
+        self.target_unit = 'g'
 
     def __repr__(self):
         return str(self.__dict__)
+
+    def get_selectable_units(self):
+
+        con = sql.connect('sr_legacy/sr_legacy.db')
+        cur = con.cursor()
+        sql_stmnt = (
+            'SELECT description'
+            'FROM weight'
+            'WEHERE food_id = ?'
+        )
+        cur.execute(sql_stmnt, self.food_id)
+
+        return cur.fetchall()
+
+    def convert_quantity(self, quantity, old_unit, new_unit):
+
+        con = sql.connect('sr_legacy/sr_legacy.db')
+        cur = con.cursor()
+        sql_stmnt = (
+            'SELECT gm_weight'
+            'FROM weight'
+            'WEHERE food_id = ? AND description = ?'
+        )
+
+        if old_unit == 'g':
+            cur.execute(sql_stmnt, self.food_id, [new_unit])
+            unit_scale_factors = cur.fetchall()
+            return quantity * (1 / unit_scale_factors[1][0])
+        else:
+            cur.execute(sql_stmnt, self.food_id, [old_unit, new_unit])
+            unit_scale_factors = cur.fetchall()
+            return quantity * (unit_scale_factors[0][0] / unit_scale_factors[1][0])
 
     def get_nutrition(self, person):
         con = sql.connect('sr_legacy/sr_legacy.db')
@@ -239,11 +271,23 @@ class Optimizier:
         for i, food in enumerate(person.foods):
             self.lp_prob += self.food_quantity_vector[i] >= 0
             if food.min is not None:
-                self.lp_prob += self.food_quantity_vector[i] >= food.min
-            if food.target is not None:
-                self.lp_prob += self.food_quantity_vector[i] == food.target
+                if food.min_unit != 'g':
+                    min_value = food.convert_quantity(food.min, food.min_unit, 'g')
+                else:
+                    min_value = food.min
+                self.lp_prob += self.food_quantity_vector[i] >= min_value / 100
             if food.max is not None:
-                self.lp_prob += self.food_quantity_vector[i] <= food.max
+                if food.max_unit != 'g':
+                    max_value = food.convert_quantity(food.max, food.max_unit, 'g')
+                else:
+                    max_value = food.max
+                self.lp_prob += self.food_quantity_vector[i] <= max_value / 100
+            if food.target is not None:
+                if food.min_unit != 'g':
+                    target_value = food.convert_quantity(food.target, food.target_unit, 'g')
+                else:
+                    target_value = food.target
+                self.lp_prob += self.food_quantity_vector[i] == target_value / 100
 
     def add_nutrient_constraints(self, person):
         mins = [nut.min for nut in person.nuts]

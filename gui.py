@@ -91,13 +91,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person.remove_foods(food_ids=[food_ids])
 
     def update_persons_food_attr(self, index):
-        # Update food attributes, not food name
-        if index.column() > NAME_COL:
+        if index.column() != NAME_COL:
             food_name = self.person.foods[index.row()].name
             attr = col_to_attr[index.column()]
 
             # User entering empty string stores NULL in database
-            if index.data(Qt.EditRole) == "":
+            if index.data(Qt.EditRole) in ("", None):
                 self.person.update_attr_in_db(
                     attr, attr_value=None, food_name=food_name)
             else:
