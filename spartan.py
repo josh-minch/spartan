@@ -166,20 +166,28 @@ class Food:
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
         sql_stmnt = (
-            'SELECT gm_weight'
-            'FROM weight'
-            'WEHERE food_id = ? AND description = ?'
+            'SELECT gm_weight '
+            'FROM weight '
+            'WHERE food_id = ? AND description = ? '
         )
 
         if old_unit == 'g':
             cur.execute(sql_stmnt, [self.food_id, new_unit])
             unit_scale_factors = cur.fetchall()
-            return quantity * (1 / unit_scale_factors[1][0])
+            return quantity * (1 / unit_scale_factors[0][0])
+        elif new_unit == 'g':
+            cur.execute(sql_stmnt, [self.food_id, old_unit])
+            unit_scale_factors = cur.fetchall()
+            return quantity * unit_scale_factors[0][0]
+        '''
+        Bug: sql query always returns an ordering which may not correspond to the order
+        passed to unit_scale_factors. explicitly return which gm_weight corresponds to which
+        unit description
         else:
             cur.execute(sql_stmnt, [self.food_id, old_unit, new_unit])
             unit_scale_factors = cur.fetchall()
-            return quantity * (unit_scale_factors[0][0] / unit_scale_factors[1][0])
-
+            return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
+        '''
     def get_nutrition(self, person):
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
@@ -292,7 +300,7 @@ class Optimizier:
                     max_value = food.max
                 self.lp_prob += self.food_quantity_vector[i] <= max_value / 100
             if food.target is not None:
-                if food.min_unit != 'g':
+                if food.target_unit != 'g':
                     target_value = food.convert_quantity(food.target, food.target_unit, 'g')
                 else:
                     target_value = food.target
