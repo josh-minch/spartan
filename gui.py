@@ -76,6 +76,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(p_header, QFont.DemiBold)
         set_v_header_height(self.constraints_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(c_header, QFont.DemiBold)
+
+        # Hide fridge scrollbar
+        self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}");
       
     def setup_nutrition(self):
         
@@ -147,7 +150,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setup_connections(self):
         
         self.fridge_model.dataChanged.connect(self.update_persons_food_attr)
+
+        # Synchronize scrollbars       
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.prices_view.verticalScrollBar().setValue)
+        self.prices_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
+
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.constraints_view.verticalScrollBar().setValue)
+        self.constraints_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
         
+
         # Add to fridge button
         self.add_foods_btn.clicked.connect(self.open_search_window)
         #self.add_foods_btn_2.clicked.connect(self.open_search_window)
