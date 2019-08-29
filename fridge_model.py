@@ -134,7 +134,7 @@ class FridgeModel(QAbstractTableModel):
                 if value == '':
                     value = None
                 else:
-                    value = int(value)
+                    value = float(value)
             setattr(self.foods[index.row()], attr_str, value)
             self.dataChanged.emit(index, index)
             return True

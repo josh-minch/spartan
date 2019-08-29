@@ -10,22 +10,26 @@ def create_user_db():
             'CREATE TABLE users ( '
             'rowid	INTEGER NOT NULL, '
             'name	TEXT, '
-            'age	INTEGER, '
-            'sex    INTEGER, '
+            'age	REAL, '
+            'sex    TEXT, '
             'PRIMARY KEY(rowid))'
         )
 
         foods_stmt = (
             'CREATE TABLE foods ( '
-            'user	    INTEGER, '
-            'id         INTEGER, '
-            'name	    TEXT, '
-            'price	    INTEGER, '
-            'min	    INTEGER, '
-            'max	    INTEGER, '
-            'target	    INTEGER, '
-            'PRIMARY KEY(id), '
-            'FOREIGN KEY(user) REFERENCES users(rowid))'
+            'user_id	        INTEGER, '
+            'food_id            INTEGER, '
+            'name	            TEXT, '
+            'price	            REAL, '
+            'price_quantity	    REAL, '
+            'price_unit 	    TEXT, '
+            'min	            REAL, '
+            'min_unit 	        TEXT, '
+            'max	            REAL, '
+            'max_unit 	        TEXT, '
+            'target	            REAL, '
+            'target_unit 	    TEXT, '
+            'FOREIGN KEY(user_id) REFERENCES users(rowid))'
         )
 
         cur.execute(users_stmt)

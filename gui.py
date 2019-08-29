@@ -100,17 +100,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person.remove_foods(food_ids=[food_ids])
 
     def update_persons_food_attr(self, index):
-        if index.column() != NAME_COL:
-            food_name = self.person.foods[index.row()].name
+        if index.column() != FOOD_ID_COL:
+            food_id = self.person.foods[index.row()].food_id
             attr = col_to_attr[index.column()]
 
             # User entering empty string stores NULL in database
             if index.data(Qt.EditRole) in ("", None):
                 self.person.update_attr_in_db(
-                    attr, attr_value=None, food_name=food_name)
+                    attr, attr_value=None, food_id=food_id)
             else:
-                self.person.update_attr_in_db(attr, attr_value=float(
-                    index.data(Qt.EditRole)), food_name=food_name)
+                self.person.update_attr_in_db(attr, 
+                    attr_value=index.data(Qt.EditRole), food_id=food_id)
 
     def open_search_window(self):
         self.search_window = SearchWindow(parent=None, person=self.person, fridge_model=self.fridge_model)

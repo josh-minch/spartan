@@ -57,13 +57,15 @@ class Person(object):
         cur = con.cursor()
 
         sql_stmt = (
-            'SELECT id, name, price, min, max, target '
+            'SELECT food_id, name, price, price_quantity, price_unit, '
+            'min, min_unit, max, max_unit, target, target_unit '
             'FROM foods'
         )
 
         for row in cur.execute(sql_stmt):
             self.foods.append(
-                Food(food_id=row[0], name=row[1], price=row[2], min=row[3], max=row[4], target=row[5]))
+                Food(row[0], row[1], row[2], row[3], row[4], row[5],
+                     row[6], row[7], row[8], row[9], row[10]))
 
         con.commit()
         con.close()
@@ -81,7 +83,7 @@ class Person(object):
         #TODO: One SQL statement to get food_id from food_name and insert it into user db
         foods_tuple = [(food_name, database.get_food_id(food_name)) for food_name in food_names]
         sql_stmt = (
-            'INSERT INTO foods(name, id) '
+            'INSERT INTO foods(name, food_id) '
             'VALUES (?, ?)'
         )
 
@@ -103,18 +105,21 @@ class Person(object):
         con.commit()
         con.close()
 
-    def update_attr_in_db(self, attr, attr_value, food_name):
+    def update_attr_in_db(self, attr, attr_value, food_id):
         con = sql.connect("spartan.db")
         cur = con.cursor()
-       
+
+        if attr in ('price', 'price_quantity', 'min', 'max', 'target'):
+            attr_value = float(attr_value)
+ 
         # attr comes from our dict of attr strings, so no need to sanitize
         sql_stmt = (
             'UPDATE foods '
             'SET ' + attr + ' = ?'
-            'WHERE name = ?'
+            'WHERE food_id = ?'
         )
 
-        cur.execute(sql_stmt, [attr_value] + [food_name])
+        cur.execute(sql_stmt, [attr_value] + [food_id])
         con.commit()
         con.close()
 
@@ -122,19 +127,23 @@ class Person(object):
     # based on a person's nutrient requirements. 
 
 class Food:
-    def __init__(self, food_id=None, name=None, price=None, min=None, target=None, max=None):
+    def __init__(self, food_id=None, name=None, 
+                       price=None, price_quantity=100, price_unit='g',
+                       min=None, min_unit='g', 
+                       max=None, max_unit='g',
+                       target=None, target_unit='g'):
+
         self.food_id = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
-        self.price: float = price
-        self.min: float = min
-        self.target: float = target
-        self.max: float = max
-
-        self.price_quantity = 100
-        self.price_unit = 'g'
-        self.min_unit = 'g'
-        self.max_unit = 'g'
-        self.target_unit = 'g'
+        self.price: float          = price
+        self.price_quantity: float = price_quantity
+        self.price_unit: str       = price_unit
+        self.min: float            = min
+        self.min_unit: str         = min_unit
+        self.max: float            = max
+        self.max_unit: str         = max_unit
+        self.target: float         = target
+        self.target_unit: str      = target_unit
 
     def __repr__(self):
         return str(self.__dict__)
@@ -163,11 +172,11 @@ class Food:
         )
 
         if old_unit == 'g':
-            cur.execute(sql_stmnt, self.food_id, [new_unit])
+            cur.execute(sql_stmnt, [self.food_id, new_unit])
             unit_scale_factors = cur.fetchall()
             return quantity * (1 / unit_scale_factors[1][0])
         else:
-            cur.execute(sql_stmnt, self.food_id, [old_unit, new_unit])
+            cur.execute(sql_stmnt, [self.food_id, old_unit, new_unit])
             unit_scale_factors = cur.fetchall()
             return quantity * (unit_scale_factors[0][0] / unit_scale_factors[1][0])
 
