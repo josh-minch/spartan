@@ -145,9 +145,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             amount_ix = self.fridge_selected_model.index(i, S_AMOUNT_COL, QModelIndex())
             unit_ix = self.fridge_selected_model.index(i, S_UNIT_COL, QModelIndex())
 
+            self.fridge_selected_model.blockSignals(True)
             self.fridge_selected_model.setData(name_ix, name, Qt.EditRole)
-            self.fridge_selected_model.setData(amount_ix, float(100), Qt.EditRole)
             self.fridge_selected_model.setData(unit_ix, 'g', Qt.EditRole)
+            self.fridge_selected_model.blockSignals(False)
+            
+            self.fridge_selected_model.setData(amount_ix, float(100), Qt.EditRole)
           
     def display_nutrition(self):
         amounts = []
