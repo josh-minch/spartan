@@ -346,6 +346,9 @@ QTableView {
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
           </property>
+          <property name="tabKeyNavigation">
+           <bool>false</bool>
+          </property>
           <property name="alternatingRowColors">
            <bool>true</bool>
           </property>
@@ -511,6 +514,9 @@ QTableView {
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="tabKeyNavigation">
+           <bool>false</bool>
           </property>
           <property name="alternatingRowColors">
            <bool>true</bool>

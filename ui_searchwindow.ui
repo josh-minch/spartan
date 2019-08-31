@@ -304,6 +304,9 @@
         <property name="editTriggers">
          <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
         </property>
+        <property name="tabKeyNavigation">
+         <bool>false</bool>
+        </property>
         <property name="alternatingRowColors">
          <bool>false</bool>
         </property>
@@ -329,6 +332,13 @@
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>search_box</tabstop>
+  <tabstop>search_list</tabstop>
+  <tabstop>add_to_fridge_btn</tabstop>
+  <tabstop>add_custom_food_btn</tabstop>
+  <tabstop>debug_btn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -9,7 +9,7 @@ from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListW
                                QListWidgetItem, QTableWidgetItem, QAbstractItemView, 
                                QHeaderView, QShortcut)
 
-from spartan import Person, Food, Nutrient, Optimizier
+from spartan import *
 from gui_constants import *
 from gui_helpers import *
 import database
@@ -121,20 +121,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def display_nutrition(self, selected, deselected):
-        if self.fridge_view.selectionModel().hasSelection():
-            [selected_food_id_indexes] = self.fridge_view.selectionModel().selectedRows()
-            food_id = self.fridge_model.data(selected_food_id_indexes, Qt.DisplayRole)
+        if not self.fridge_view.selectionModel().hasSelection():
+            return
 
-            selected_food = Food(food_id=food_id)
-            nutrients = selected_food.get_nutrition(self.person)
-            nutrition_model = NutritionTableModel(nutrients=nutrients)
-            
-            progress_bar_delegate = ProgressBarDelegate(self)
-            self.nutrition_view.setItemDelegate(progress_bar_delegate)
-            self.nutrition_view.setModel(nutrition_model)
+        selected_food_ixs = self.fridge_view.selectionModel().selectedRows()
 
-            self.setup_nutrition()   
-          
+        food_ids = [self.fridge_model.data(ix, Qt.DisplayRole) for ix in selected_food_ixs]
+        nutrients = get_nutrition(self.person, food_ids)
+
+        nutrition_model = NutritionTableModel(nutrients=nutrients)
+        progress_bar_delegate = ProgressBarDelegate(self)
+        self.nutrition_view.setItemDelegate(progress_bar_delegate)
+        self.nutrition_view.setModel(nutrition_model)
+
+        self.setup_nutrition()   
+
     def toggle_remove_btn(self):
         if self.fridge_view.selectionModel() is None:
             self.remove_btn.setEnabled(False)

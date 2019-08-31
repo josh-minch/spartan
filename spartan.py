@@ -98,7 +98,7 @@ class Person(object):
         foods_tuple = [(food_ids,) for food_ids in food_ids]
         sql_stmt = (
             'DELETE FROM foods '
-            'WHERE id = ?'
+            'WHERE food_id = ?'
         )
 
         cur.executemany(sql_stmt, foods_tuple)
@@ -188,45 +188,52 @@ class Food:
             unit_scale_factors = cur.fetchall()
             return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
         '''
-    def get_nutrition(self, person):
-        con = sql.connect('sr_legacy/sr_legacy.db')
-        cur = con.cursor()
 
-        # Get nutrient and amount
-        nut_ids = [nut.nut_id for nut in person.nuts]
-        nut_ids = tuple(nut_ids)
-        sql_stmt = (
-            'SELECT nut_id, amount '
-            'FROM nut_data WHERE food_id = ? AND nut_id IN '+ str(nut_ids)
-        )
-        cur.execute(sql_stmt, [self.food_id])
-        nutrition = cur.fetchall()
-        nutrition = [(req.nuts[n[0]], n[1]) for n in nutrition]
+def get_nutrition(person, food_ids):
+    con = sql.connect('sr_legacy/sr_legacy.db')
+    cur = con.cursor()
 
-        # Get nutrient's corresponding unit
-        sql_stmt = (
-            'SELECT units '
-            'FROM nutr_def WHERE id IN '+ str(nut_ids)
-        )
-        cur.execute(sql_stmt)
-        units = cur.fetchall()
+    nut_ids = tuple([nut.nut_id for nut in person.nuts])
+    # nutrient list is clean, no need to sanitize
+    sql_stmt = (
+        'SELECT amount '
+        'FROM nut_data WHERE food_id IN (' + (len(food_ids) - 1) * '?, ' + '?) '
+        'AND nut_id IN '+ str(nut_ids)
+    )
+    cur.execute(sql_stmt, food_ids)
+    
+    # sum amounts for each respective nutrient
+    nut_amounts = np.array(cur.fetchall())
+    nut_amounts = nut_amounts.reshape(len(food_ids), len(nut_ids))
+    nut_amounts = sum(nut_amounts)
 
-        daily_value = []
-        for nut in nutrition:
-            daily_value.append(self.calculate_dv(person, nut[0], nut[1]))
+    units = get_nutrition_unit(nut_ids)
+  
+    nutrition = []
+    nut_names = [nut.name for nut in person.nuts]
+    for nut_name, nut_amount, unit in zip(nut_names, nut_amounts, units):
+        dv = calculate_dv(person, nut_name, nut_amount)
+        nutrition.append({'name':nut_name, 'amount': nut_amount, 'unit': unit[0], 'percent': dv})
+                
+    return nutrition
 
-        nutrition = [{'name': n[0], 'amount': n[1], 'unit': u[0], 'percent': d}
-                      for (n, u, d) in zip(nutrition, units, daily_value)]
-
-        return nutrition
-
-    def calculate_dv(self, person, nutrient_name, nutrient_amount):
+def calculate_dv(person, nut_name, nutrient_amount):
         if nutrient_amount is None:
             return None
             
-        [min_value] = [nut.min for nut in person.nuts if nut.name == nutrient_name]
+        [min_value] = [nut.min for nut in person.nuts if nut.name == nut_name]
 
         return round(100 * (nutrient_amount / min_value), 1)
+
+def get_nutrition_unit(nut_ids):
+    con = sql.connect('sr_legacy/sr_legacy.db')
+    cur = con.cursor()
+    sql_stmt = (
+        'SELECT units '
+        'FROM nutr_def WHERE id IN '+ str(nut_ids)
+    )
+    cur.execute(sql_stmt)
+    return cur.fetchall()
 
 class Nutrient:
     def __init__(self, name, nut_id=None, min=None, target=None, max=None):
@@ -320,7 +327,6 @@ class Optimizier:
                 self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) <= maxes[i]
 
     def optimize_diet(self, person):
-        
         self.make_nutrition_matrix(person)
         self.construct_lp_problem(person)
         self.add_nutrient_constraints(person)
@@ -341,7 +347,6 @@ class Optimizier:
         return status_statement
 
     def describe_solution(self):
-
         print("Status: " + LpStatus[self.lp_prob.status])
         
         for v in self.lp_prob.variables():
@@ -375,32 +380,8 @@ def add_random_foods():
 def main():
     josh = Person(name="josh", age=25, sex='m')
 
-    food_ids = basic_foods.food
-
-    with open('fridge.txt', 'w') as file:
-        for f in food_ids:
-            file.write(str(format(f).zfill(MAX_FOOD_ID_LEN)) + " - " + database.get_food_name(f) + '\n')
-    
-    prices = len(food_ids) * [1]
-    josh.add_foods(food_ids=food_ids)
-    for food in food_ids:
-        josh.set_food_price(food, 1)
-    
-    for food in josh.foods[:5]:
-        food.min = 1
-
-    josh.remove_nut(['fl'])
-
-    josh.add_nut(Nutrient('DHA', 631, min = 0.3))
-    josh.add_nut(Nutrient('EPA', 629, min = 0.3))
-    josh.add_nut(Nutrient('energy', 208, min=2000, max=2500))
-    josh.add_nut(Nutrient('sat', 606, max=27))
-
-    optimizier = Optimizier()
-    start_time = time.time()
-    optimizier.optimize_diet(josh)
-    print("--- %s seconds ---" % (time.time() - start_time))
-    optimizier.describe_solution()
+    food_ids = [1001, 1002]
+    print(get_nutrition(josh, food_ids))
    
 if __name__ == '__main__':
     main()

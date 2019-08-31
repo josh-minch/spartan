@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_searchwindow.ui',
 # licensing of 'ui_searchwindow.ui' applies.
 #
-# Created: Tue Aug 27 18:25:37 2019
+# Created: Fri Aug 30 15:51:50 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -130,6 +130,7 @@ class Ui_SearchWindow(object):
         self.search_list.setStyleSheet("")
         self.search_list.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.search_list.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
+        self.search_list.setTabKeyNavigation(False)
         self.search_list.setAlternatingRowColors(False)
         self.search_list.setShowGrid(False)
         self.search_list.setWordWrap(True)
@@ -143,6 +144,10 @@ class Ui_SearchWindow(object):
 
         self.retranslateUi(SearchWindow)
         QtCore.QMetaObject.connectSlotsByName(SearchWindow)
+        SearchWindow.setTabOrder(self.search_box, self.search_list)
+        SearchWindow.setTabOrder(self.search_list, self.add_to_fridge_btn)
+        SearchWindow.setTabOrder(self.add_to_fridge_btn, self.add_custom_food_btn)
+        SearchWindow.setTabOrder(self.add_custom_food_btn, self.debug_btn)
 
     def retranslateUi(self, SearchWindow):
         SearchWindow.setWindowTitle(QtWidgets.QApplication.translate("SearchWindow", "Spartan - Search", None, -1))

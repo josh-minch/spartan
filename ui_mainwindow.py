@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Tue Aug 27 18:25:37 2019
+# Created: Fri Aug 30 15:51:49 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -153,6 +153,7 @@ class Ui_MainWindow(object):
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.prices_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.prices_view.setTabKeyNavigation(False)
         self.prices_view.setAlternatingRowColors(True)
         self.prices_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.prices_view.setShowGrid(False)
@@ -215,6 +216,7 @@ class Ui_MainWindow(object):
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.constraints_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.constraints_view.setTabKeyNavigation(False)
         self.constraints_view.setAlternatingRowColors(True)
         self.constraints_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.constraints_view.setShowGrid(False)

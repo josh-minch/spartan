@@ -8,11 +8,9 @@ def create_user_db():
         
         users_stmt = (
             'CREATE TABLE users ( '
-            'rowid	INTEGER NOT NULL, '
             'name	TEXT, '
             'age	REAL, '
-            'sex    TEXT, '
-            'PRIMARY KEY(rowid))'
+            'sex    TEXT)'
         )
 
         foods_stmt = (
@@ -29,6 +27,7 @@ def create_user_db():
             'max_unit 	        TEXT, '
             'target	            REAL, '
             'target_unit 	    TEXT, '
+            'PRIMARY KEY(user_id, food_id) '
             'FOREIGN KEY(user_id) REFERENCES users(rowid))'
         )
 

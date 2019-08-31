@@ -83,9 +83,7 @@ class NutritionTableModel(QAbstractTableModel):
         return None
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-
         if orientation == Qt.Horizontal:
-            
             if role == Qt.DisplayRole:
                 if section == NUT_NAME_COL:
                     return "Nutrient"
