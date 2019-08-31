@@ -40,82 +40,72 @@ from PySide2.QtCore import (Qt, QAbstractTableModel, QModelIndex)
 
 from gui_constants import *
 
-class NutritionTableModel(QAbstractTableModel):
-    def __init__(self, parent=None, nutrients=None):
+class FridgeSelectedModel(QAbstractTableModel):
+    def __init__(self, parent=None, foods=None):
         QAbstractTableModel.__init__(self, parent)
-        self.nutrients = nutrients
+        self.foods = foods
 
     def rowCount(self, index=QModelIndex()):
-        return len(self.nutrients)
-    
+        return len(self.foods)
+        
     def columnCount(self, index=QModelIndex()):
-        return len(NUT_COL_TO_ATTR)
+        return len(S_COL_TO_ATTR)
 
-    def data(self, index, role):
-        if not index.isValid() or not 0 <= index.row() < len(self.nutrients):
+    def data(self, index, role=Qt.DisplayRole):
+        if not index.isValid() or not 0 <= index.row() < len(self.foods):
             return None
 
         if role == Qt.DisplayRole or role == Qt.EditRole:
-            name = self.nutrients[index.row()]["name"]
-            amount = self.nutrients[index.row()]["amount"]
-            unit = self.nutrients[index.row()]["unit"]
-            percent = self.nutrients[index.row()]["percent"]
+            name = self.foods[index.row()]["name"]
+            amount: float = self.foods[index.row()]["amount"]
+            unit = self.foods[index.row()]["unit"]
+            calories: float = self.foods[index.row()]["calories"]
 
-            if index.column() == NUT_NAME_COL:
+            if index.column() == S_NAME_COL:
                 return name
-            elif index.column() == NUT_AMOUNT_COL:
+            elif index.column() == S_AMOUNT_COL:
                 return amount
-            elif index.column() == NUT_UNIT_COL:
+            elif index.column() == S_UNIT_COL:
                 return unit
-            elif index.column() == NUT_PERCENT_COL:
-                return percent
+            elif index.column() == S_CALORIES_COL:
+                return calories
           
         # A bug in PySide2 requires that we cast the bitwise 
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
 
         if role == Qt.TextAlignmentRole:
-            if index.column() == NUT_AMOUNT_COL:
+            if index.column() == S_AMOUNT_COL:
                 return int(Qt.AlignRight | Qt.AlignVCenter)
-            #elif index.column() == NUT_UNIT_COL:
-            #    return int(Qt.AlignLeft | Qt.AlignVCenter)
-      
-        return None
 
+        return None
+    
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
         if orientation == Qt.Horizontal:
             if role == Qt.DisplayRole:
-                if section == NUT_NAME_COL:
-                    return "Nutrient"
-                elif section == NUT_AMOUNT_COL:
-                    return "Amount"
-                elif section == NUT_UNIT_COL:
-                    return
-                elif section == NUT_PERCENT_COL:
-                    return "Percent daily requirement"
-                
-            if role == Qt.TextAlignmentRole:
-                if section == NUT_NAME_COL:
-                    return int(Qt.AlignLeft | Qt.AlignVCenter)
-                if section == NUT_AMOUNT_COL:
-                    return int(Qt.AlignRight | Qt.AlignVCenter)
-                if section == NUT_PERCENT_COL:
-                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section == S_NAME_COL:
+                    return "Food"
+                elif section == S_AMOUNT_COL:
+                    return "Quantity"
+                elif section == S_UNIT_COL:
+                    return ''
+                elif section == S_CALORIES_COL:
+                    return 'Calories'
     
         return None
 
     def insertRows(self, position, rows=1, index=QModelIndex()):
         self.beginInsertRows(QModelIndex(), position, position + rows - 1)
         for row in range(rows):
-            self.nutrients.insert(position + row, {"name":"", "amount":"",
-                                                   "unit":"", "percent":""})
+            self.foods.insert(position + row, {"name":"", "amount":"",
+                                                   "unit":"", "calories":""})
         self.endInsertRows()
        
         return True
         
     def removeRows(self, position, rows=1, index=QModelIndex()):
         self.beginRemoveRows(QModelIndex(), position, position + rows - 1)
-        del self.nutrients[position:position+rows]
+        del self.foods[position:position+rows]
         self.endRemoveRows()
        
         return True
@@ -124,22 +114,21 @@ class NutritionTableModel(QAbstractTableModel):
         if role != Qt.EditRole:
             return False
 
-        if index.isValid() and 0 <= index.row() < len(self.nutrients):
-            
-            nutrient = self.nutrients[index.row()]
+        if index.isValid() and 0 <= index.row() < len(self.foods):
+            food = self.foods[index.row()]
 
-            if index.column() == NUT_NAME_COL:
-                nutrient['name'] = value
-            elif index.column() == NUT_AMOUNT_COL:
-                nutrient['amount'] = value
-            elif index.column() == NUT_UNIT_COL:
-                nutrient['unit'] = value         
-            elif index.column() == NUT_PERCENT_COL:
-                nutrient['percent'] = value
+            if index.column() == S_NAME_COL:
+                food['name'] = value
+            elif index.column() == S_AMOUNT_COL:
+                food['amount'] = float(value)
+            elif index.column() == S_UNIT_COL:
+                food['unit'] = value
+            elif index.column() == S_CALORIE_COL:
+                food['percent'] = float(value)
             else:
                 return False
 
-            self.dataChanged.emit(index, index)
+            self.dataChanged.emit(index, index, [])
             return True
 
         return False
@@ -147,5 +136,8 @@ class NutritionTableModel(QAbstractTableModel):
     def flags(self, index):
         if not index.isValid():
             return Qt.ItemIsEnabled
-        return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
+        if index.column() == S_NAME_COL:
+            return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
+        return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
+                            Qt.ItemIsEditable)

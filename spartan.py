@@ -189,7 +189,7 @@ class Food:
             return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
         '''
 
-def get_nutrition(person, food_ids):
+def get_nutrition(person, food_ids, food_amounts):
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
 
@@ -205,7 +205,8 @@ def get_nutrition(person, food_ids):
     # sum amounts for each respective nutrient
     nut_amounts = np.array(cur.fetchall())
     nut_amounts = nut_amounts.reshape(len(food_ids), len(nut_ids))
-    nut_amounts = sum(nut_amounts)
+    food_amounts = np.reshape(food_amounts, (len(food_amounts), 1))
+    nut_amounts = sum(food_amounts*(nut_amounts/100))
 
     units = get_nutrition_unit(nut_ids)
   

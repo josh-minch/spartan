@@ -45,7 +45,6 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
     def add_to_fridge(self, selected_items=None):
         selected_items = self.search_list.selectionModel().selectedRows()
         for item in selected_items:
-            
             current_row = self.fridge_model.rowCount()
             self.fridge_model.insertRows(current_row)
 

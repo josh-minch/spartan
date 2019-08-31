@@ -50,7 +50,7 @@ class FridgeModel(QAbstractTableModel):
         return len(self.foods)
         
     def columnCount(self, index=QModelIndex()):
-        return len(col_to_attr)
+        return len(F_COL_TO_ATTR)
 
     def data(self, index, role=Qt.DisplayRole):
         if not index.isValid() or not 0 <= index.row() < len(self.foods):
@@ -68,7 +68,7 @@ class FridgeModel(QAbstractTableModel):
             return None
         
         if role in (Qt.DisplayRole, Qt.EditRole):
-            attr_str = col_to_attr[index.column()]
+            attr_str = F_COL_TO_ATTR[index.column()]
             return getattr(self.foods[index.row()], attr_str)
 
         if role == Qt.TextAlignmentRole:
@@ -85,7 +85,7 @@ class FridgeModel(QAbstractTableModel):
                 if section == FOOD_ID_COL:
                     return "Id"
                 elif section == NAME_COL:
-                    return " Food"
+                    return "Food"
                 elif section == PRICE_COL:
                     return "Price"
                 elif section == MIN_COL:
@@ -128,7 +128,7 @@ class FridgeModel(QAbstractTableModel):
 
             food = self.foods[index.row()]
 
-            attr_str = col_to_attr[index.column()]
+            attr_str = F_COL_TO_ATTR[index.column()]
             if attr_str in ('price', 'min', 'max', 'target'):
                 if value == '':
                     value = None

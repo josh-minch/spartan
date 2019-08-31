@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>963</width>
-    <height>640</height>
+    <height>730</height>
    </rect>
   </property>
   <property name="palette">
@@ -182,7 +182,7 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="5" rowspan="2">
+    <item row="0" column="5" rowspan="4">
      <widget class="QTabWidget" name="tabWidget">
       <property name="font">
        <font>
@@ -232,7 +232,7 @@
         <property name="spacing">
          <number>0</number>
         </property>
-        <item row="0" column="0" colspan="2">
+        <item row="0" column="2">
          <widget class="QTableView" name="prices_view">
           <property name="palette">
            <palette>
@@ -589,7 +589,258 @@ QTableView {
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="5">
+    <item row="1" column="6" colspan="3">
+     <widget class="QTableView" name="nutrition_view">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>340</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>218</red>
+            <green>236</green>
+            <blue>249</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="HighlightedText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>218</red>
+            <green>236</green>
+            <blue>249</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="HighlightedText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>120</green>
+            <blue>215</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="HighlightedText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QHeaderView::section{
+	background-color: white;
+	border: 0px;
+}
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>false</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::NoSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>23</number>
+      </attribute>
+     </widget>
+    </item>
+    <item row="2" column="6" colspan="3">
+     <widget class="QTableView" name="fridge_selected_view">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="showGrid">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="QPushButton" name="debug_btn">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>70</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI Semilight</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Debug</string>
+      </property>
+      <property name="shortcut">
+       <string>Ctrl+S</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2" colspan="3">
+     <spacer name="horizontalSpacer_6">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>208</width>
+        <height>25</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="3" column="6" colspan="2">
+     <widget class="QPushButton" name="pushButton">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Settings</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/settings.svg</normaloff>images/settings.svg</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="shortcut">
+       <string>F9</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="8">
+     <widget class="QPushButton" name="optimize_btn">
+      <property name="maximumSize">
+       <size>
+        <width>120</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>&lt;p style='white-space:pre'&gt;Generate optimum diet (F5)&lt;/p&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Generate diet</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>images/diet_btn.png</normaloff>images/diet_btn.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="shortcut">
+       <string>F5</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2" colspan="5">
      <widget class="QTableView" name="fridge_view">
       <property name="palette">
        <palette>
@@ -730,247 +981,6 @@ QTableView {
       <attribute name="verticalHeaderDefaultSectionSize">
        <number>23</number>
       </attribute>
-     </widget>
-    </item>
-    <item row="1" column="6" colspan="3">
-     <widget class="QTableView" name="nutrition_view">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>340</width>
-        <height>0</height>
-       </size>
-      </property>
-      <property name="palette">
-       <palette>
-        <active>
-         <colorrole role="Highlight">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>218</red>
-            <green>236</green>
-            <blue>249</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="HighlightedText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </active>
-        <inactive>
-         <colorrole role="Highlight">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>218</red>
-            <green>236</green>
-            <blue>249</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="HighlightedText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </inactive>
-        <disabled>
-         <colorrole role="Highlight">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>120</green>
-            <blue>215</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="HighlightedText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </disabled>
-       </palette>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI</family>
-        <pointsize>9</pointsize>
-       </font>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="autoFillBackground">
-       <bool>false</bool>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QHeaderView::section{
-	background-color: white;
-	border: 0px;
-}
-</string>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::NoFrame</enum>
-      </property>
-      <property name="sizeAdjustPolicy">
-       <enum>QAbstractScrollArea::AdjustToContents</enum>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>false</bool>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::NoSelection</enum>
-      </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-      <property name="showGrid">
-       <bool>false</bool>
-      </property>
-      <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="horizontalHeaderStretchLastSection">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>23</number>
-      </attribute>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="2">
-     <widget class="QPushButton" name="debug_btn">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>70</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI Semilight</family>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Debug</string>
-      </property>
-      <property name="shortcut">
-       <string>Ctrl+S</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2" colspan="3">
-     <spacer name="horizontalSpacer_6">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>208</width>
-        <height>25</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="2" column="6" colspan="2">
-     <widget class="QPushButton" name="pushButton">
-      <property name="maximumSize">
-       <size>
-        <width>100</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>10</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Settings</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>images/settings.svg</normaloff>images/settings.svg</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="shortcut">
-       <string>F9</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="8">
-     <widget class="QPushButton" name="optimize_btn">
-      <property name="maximumSize">
-       <size>
-        <width>120</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>Segoe UI</family>
-        <pointsize>10</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>&lt;p style='white-space:pre'&gt;Generate optimum diet (F5)&lt;/p&gt;</string>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Generate diet</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>images/diet_btn.png</normaloff>images/diet_btn.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="shortcut">
-       <string>F5</string>
-      </property>
      </widget>
     </item>
    </layout>

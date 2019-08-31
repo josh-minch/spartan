@@ -3,7 +3,7 @@ import ctypes
 from timeit import default_timer as timer
 
 from PySide2 import QtCore, QtWidgets, QtGui
-from PySide2.QtCore import Qt, QEvent
+from PySide2.QtCore import Qt, QEvent, Slot, QModelIndex
 from PySide2.QtGui import QFont, QKeySequence, QPalette
 from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListWidget, QTableWidget,
                                QListWidgetItem, QTableWidgetItem, QAbstractItemView, 
@@ -18,6 +18,7 @@ from search_window import SearchWindow
 from optimum_diet_window import OptimumDietWindow
 from fridge_model import FridgeModel
 from nutrition_model import NutritionTableModel
+from fridge_selected_model import FridgeSelectedModel
 from progress_bar_delegate import ProgressBarDelegate
 from fridge_quantity_delegate import FridgeQuantityDelegate
 
@@ -30,6 +31,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person = Person('josh', 25, 'm')
 
         self.setup_fridge_views()
+        self.setup_selected_foods()
         self.setup_connections()
         self.setup_selection_modes()    
 
@@ -81,8 +83,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}");
       
     def setup_nutrition(self):
-        
-        for col, width in zip(COL_TO_NUT_ATTR.keys(), NUT_COL_WIDTHS):
+        for col, width in zip(NUT_COL_TO_ATTR.keys(), NUT_COL_WIDTHS):
             self.nutrition_view.setColumnWidth(col, width)
         
         '''
@@ -102,7 +103,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def update_persons_food_attr(self, index):
         if index.column() != FOOD_ID_COL:
             food_id = self.person.foods[index.row()].food_id
-            attr = col_to_attr[index.column()]
+            attr = F_COL_TO_ATTR[index.column()]
 
             # User entering empty string stores NULL in database
             if index.data(Qt.EditRole) in ("", None):
@@ -120,19 +121,46 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimum_diet_window = OptimumDietWindow(parent=None, person=self.person)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
-    def display_nutrition(self, selected, deselected):
+    def setup_selected_foods(self):
+        self.fridge_selected_model = FridgeSelectedModel(foods=[])
+        self.fridge_selected_view.setModel(self.fridge_selected_model)
+
+    def change_fridge_selection(self, selected, deselected):
         if not self.fridge_view.selectionModel().hasSelection():
             return
 
-        selected_food_ixs = self.fridge_view.selectionModel().selectedRows()
+        selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
+        selected_food_name_ixs = [ix.siblingAtColumn(NAME_COL) for ix in selected_food_id_ixs]
 
-        food_ids = [self.fridge_model.data(ix, Qt.DisplayRole) for ix in selected_food_ixs]
-        nutrients = get_nutrition(self.person, food_ids)
+        self.selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
+        food_names = [ix.data() for ix in selected_food_name_ixs]
 
+        for i in range(self.fridge_selected_model.rowCount()):
+            self.fridge_selected_model.removeRows(i)
+
+        for i, name in enumerate(food_names):
+            self.fridge_selected_model.insertRows(i)
+
+            name_ix = self.fridge_selected_model.index(i, S_NAME_COL, QModelIndex())
+            amount_ix = self.fridge_selected_model.index(i, S_AMOUNT_COL, QModelIndex())
+            unit_ix = self.fridge_selected_model.index(i, S_UNIT_COL, QModelIndex())
+
+            self.fridge_selected_model.setData(name_ix, name, Qt.EditRole)
+            self.fridge_selected_model.setData(amount_ix, float(100), Qt.EditRole)
+            self.fridge_selected_model.setData(unit_ix, 'g', Qt.EditRole)
+          
+    def display_nutrition(self):
+        amounts = []
+        for row in range(self.fridge_selected_model.rowCount()):
+            index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
+            amounts.append(self.fridge_selected_model.data(index))
+
+        nutrients = get_nutrition(self.person, self.selected_food_ids, amounts)
         nutrition_model = NutritionTableModel(nutrients=nutrients)
+        self.nutrition_view.setModel(nutrition_model)
+
         progress_bar_delegate = ProgressBarDelegate(self)
         self.nutrition_view.setItemDelegate(progress_bar_delegate)
-        self.nutrition_view.setModel(nutrition_model)
 
         self.setup_nutrition()   
 
@@ -151,6 +179,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setup_connections(self):
         
         self.fridge_model.dataChanged.connect(self.update_persons_food_attr)
+        self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
 
         # Synchronize scrollbars       
         self.fridge_view.verticalScrollBar().valueChanged.connect(
@@ -162,17 +191,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.constraints_view.verticalScrollBar().setValue)
         self.constraints_view.verticalScrollBar().valueChanged.connect(
             self.fridge_view.verticalScrollBar().setValue)
-        
 
         # Add to fridge button
         self.add_foods_btn.clicked.connect(self.open_search_window)
-        #self.add_foods_btn_2.clicked.connect(self.open_search_window)
         add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
         add_foods_shortcut.activated.connect(self.open_search_window)
         
         # Remove button
         self.remove_btn.clicked.connect(self.remove_from_fridge)
-        #self.remove_btn_2.clicked.connect(self.remove_from_fridge)
         self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
         remove_shortcut = QShortcut(QKeySequence(Qt.Key_Delete), self)
         remove_shortcut.activated.connect(self.remove_from_fridge)
@@ -181,11 +207,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # optimize button shortcut set in Qt Designer
        
         # Nutriton panel connections
-        self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
         self.constraints_view.setSelectionModel(self.fridge_view.selectionModel())
-        #self.constraints_view.selectionModel().selectionChanged.connect(self.display_nutrition)
-        #self.fridge_view_2.currentItemChanged.connect(self.display_nutrition)
 
         # Close 
         close_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_W), self)
@@ -197,11 +221,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         add_foods_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
-        print(self.fridge_view.selectionModel().hasSelection())
-        print(self.fridge_view.selectionModel().selectedIndexes())
-        print(self.fridge_view.selectionModel().selectedRows())
-        print('''(づ ◕‿◕ )づ ❤️  Jane is such a sweetie pie (=⌒‿‿⌒=) ٩(◕‿◕)۶ ❤️
-                 ｡^‿^｡ ❀◕ ‿ ◕❀     ''')
+        amounts = []
+        for row in range(self.fridge_selected_model.rowCount()):
+            index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
+            amounts.append(self.fridge_selected_model.data(index))
+
+        print(amounts)
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar

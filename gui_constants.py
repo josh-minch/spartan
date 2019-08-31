@@ -1,3 +1,4 @@
+# Fridge view
 FOOD_ID_COL = 0
 NAME_COL = 1
 PRICE_COL = 2
@@ -24,13 +25,14 @@ C_COLS_TO_HIDE = [FOOD_ID_COL, NAME_COL, PRICE_COL, PRICE_QUANTITY_COL, PRICE_UN
 
 FRIDGE_V_HEADER_SIZE = 32
 
-col_to_attr = {FOOD_ID_COL: 'food_id', NAME_COL: 'name', 
+F_COL_TO_ATTR = {FOOD_ID_COL: 'food_id', NAME_COL: 'name', 
                PRICE_COL: 'price', PRICE_QUANTITY_COL: 'price_quantity', PRICE_UNIT_COL: 'price_unit',
                MIN_COL: 'min', MIN_UNIT_COL: 'min_unit', 
                MAX_COL: 'max', MAX_UNIT_COL: 'max_unit',
                TARGET_COL: 'target', TARGET_UNIT_COL: 'target_unit'}
 
 
+# Nutrition view
 NUT_NAME_COL = 0
 NUT_AMOUNT_COL = 1
 NUT_UNIT_COL = 2
@@ -45,10 +47,19 @@ NUT_V_HEADER_SIZE = 22
 
 NUT_COL_WIDTHS = [NUT_NAME_COL_WIDTH, NUT_AMOUNT_COL_WIDTH, NUT_UNIT_COL_WIDTH, NUT_PERCENT_COL_WIDTH]
 
-COL_TO_NUT_ATTR = {NUT_NAME_COL: 'name', NUT_AMOUNT_COL: 'amount', NUT_UNIT_COL: 'unit',
+NUT_COL_TO_ATTR = {NUT_NAME_COL: 'name', NUT_AMOUNT_COL: 'amount', NUT_UNIT_COL: 'unit',
                     NUT_PERCENT_COL: 'percent'}
 
+# Selected foods view
+S_NAME_COL = 0
+S_AMOUNT_COL = 1
+S_UNIT_COL = 2
+S_CALORIES_COL = 3
 
+S_COL_TO_ATTR = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
+                    S_CALORIES_COL: 'percent'}
+
+# Optimum diet view
 OPT_NAME_COL = 0
 OPT_PRICE_COL = 1
 OPT_QUANTITY_COL= 2
