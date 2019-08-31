@@ -57,9 +57,9 @@ class FridgeSelectedModel(QAbstractTableModel):
 
         if role == Qt.DisplayRole or role == Qt.EditRole:
             name = self.foods[index.row()]["name"]
-            amount: float = self.foods[index.row()]["amount"]
+            amount = float(self.foods[index.row()]["amount"])
             unit = self.foods[index.row()]["unit"]
-            calories: float = self.foods[index.row()]["calories"]
+            calories = self.foods[index.row()]["calories"]
 
             if index.column() == S_NAME_COL:
                 return name

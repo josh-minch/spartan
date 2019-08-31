@@ -202,11 +202,13 @@ def get_nutrition(person, food_ids, food_amounts):
     )
     cur.execute(sql_stmt, food_ids)
     
-    # sum amounts for each respective nutrient
-    nut_amounts = np.array(cur.fetchall())
+    nut_amounts = cur.fetchall()
+    nut_amounts = np.array([amount[0] if amount[0] is not None else 0 for amount in nut_amounts])
+
+    # sum amounts for each respective nutrient given each amount of food
     nut_amounts = nut_amounts.reshape(len(food_ids), len(nut_ids))
     food_amounts = np.reshape(food_amounts, (len(food_amounts), 1))
-    nut_amounts = sum(food_amounts*(nut_amounts/100))
+    nut_amounts = sum(np.dot(food_amounts, (nut_amounts / 100)))
 
     units = get_nutrition_unit(nut_ids)
   
