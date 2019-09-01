@@ -66,7 +66,7 @@ class FridgeModel(QAbstractTableModel):
             return None
         if index.column() == TARGET_UNIT_COL and self.foods[index.row()].target is None:
             return None
-        
+         
         if role in (Qt.DisplayRole, Qt.EditRole):
             attr_str = F_COL_TO_ATTR[index.column()]
             return getattr(self.foods[index.row()], attr_str)
