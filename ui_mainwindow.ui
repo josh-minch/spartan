@@ -756,19 +756,6 @@ QTableView {
       </property>
      </widget>
     </item>
-    <item row="3" column="2" colspan="3">
-     <spacer name="horizontalSpacer_6">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>208</width>
-        <height>25</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="3" column="6" colspan="2">
      <widget class="QPushButton" name="pushButton">
       <property name="maximumSize">
@@ -982,6 +969,19 @@ QTableView {
        <number>23</number>
       </attribute>
      </widget>
+    </item>
+    <item row="3" column="2" colspan="3">
+     <spacer name="horizontalSpacer_6">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>208</width>
+        <height>25</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
