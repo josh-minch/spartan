@@ -1,11 +1,13 @@
 import sqlite3 as sql
 import req, basic_foods, database, random, time
 import numpy as np
+import operator
 from pulp import *
 from timeit import default_timer as timer
 import os.path
 
 MAX_FOOD_ID_LEN = 5
+DB_SCALER = 100
         
 class Person(object):
     def __init__(self, name, age, sex):
@@ -161,33 +163,33 @@ class Food:
 
         return cur.fetchall()
 
-    def convert_quantity(self, quantity, old_unit, new_unit):
+def convert_quantity(food_id, quantity, old_unit, new_unit):
 
-        con = sql.connect('sr_legacy/sr_legacy.db')
-        cur = con.cursor()
-        sql_stmnt = (
-            'SELECT gm_weight '
-            'FROM weight '
-            'WHERE food_id = ? AND description = ? '
-        )
+    con = sql.connect('sr_legacy/sr_legacy.db')
+    cur = con.cursor()
+    sql_stmnt = (
+        'SELECT gm_weight '
+        'FROM weight '
+        'WHERE food_id = ? AND description = ? '
+    )
 
-        if old_unit == 'g':
-            cur.execute(sql_stmnt, [self.food_id, new_unit])
-            unit_scale_factors = cur.fetchall()
-            return quantity * (1 / unit_scale_factors[0][0])
-        elif new_unit == 'g':
-            cur.execute(sql_stmnt, [self.food_id, old_unit])
-            unit_scale_factors = cur.fetchall()
-            return quantity * unit_scale_factors[0][0]
-        '''
-        Bug: sql query always returns an ordering which may not correspond to the order
-        passed to unit_scale_factors. explicitly return which gm_weight corresponds to which
-        unit description
-        else:
-            cur.execute(sql_stmnt, [self.food_id, old_unit, new_unit])
-            unit_scale_factors = cur.fetchall()
-            return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
-        '''
+    if old_unit == 'g':
+        cur.execute(sql_stmnt, [food_id, new_unit])
+        unit_scale_factors = cur.fetchall()
+        return quantity * (1 / unit_scale_factors[0][0])
+    elif new_unit == 'g':
+        cur.execute(sql_stmnt, [food_id, old_unit])
+        unit_scale_factors = cur.fetchall()
+        return quantity * unit_scale_factors[0][0]
+    '''
+    Bug: sql query always returns an ordering which may not correspond to the order
+    passed to unit_scale_factors. explicitly return which gm_weight corresponds to which
+    unit description
+    else:
+        cur.execute(sql_stmnt, [self.food_id, old_unit, new_unit])
+        unit_scale_factors = cur.fetchall()
+        return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
+    '''
 
 def get_nutrition(person, food_ids, food_amounts):
     con = sql.connect('sr_legacy/sr_legacy.db')
@@ -208,7 +210,7 @@ def get_nutrition(person, food_ids, food_amounts):
     # sum amounts for each respective nutrient given each amount of food
     nut_amounts = nut_amounts.reshape(len(food_ids), len(nut_ids))
     food_amounts = np.reshape(food_amounts, (len(food_amounts), 1))
-    nut_amounts = sum(np.dot(food_amounts, (nut_amounts / 100)))
+    nut_amounts = sum(food_amounts * (nut_amounts / DB_SCALER))
 
     units = get_nutrition_unit(nut_ids)
   
@@ -271,8 +273,8 @@ class Optimizier:
 
         cur.execute(sql_stmnt, food_ids + nut_ids)
 
-        data = cur.fetchall()
-        self.nutrition_matrix = self.format_nutrition_matrix(data, person)
+        nut_data = cur.fetchall()
+        self.nutrition_matrix = self.format_nutrition_matrix(nut_data, person)
 
     def format_nutrition_matrix(self, unformatted_data, person):
         # Construct formatted matrix where each row is a food and each col is a nutrient
@@ -297,24 +299,26 @@ class Optimizier:
     def add_food_constraints(self, person):
         for i, food in enumerate(person.foods):
             self.lp_prob += self.food_quantity_vector[i] >= 0
-            if food.min is not None:
-                if food.min_unit != 'g':
-                    min_value = food.convert_quantity(food.min, food.min_unit, 'g')
-                else:
-                    min_value = food.min
-                self.lp_prob += self.food_quantity_vector[i] >= min_value / 100
-            if food.max is not None:
-                if food.max_unit != 'g':
-                    max_value = food.convert_quantity(food.max, food.max_unit, 'g')
-                else:
-                    max_value = food.max
-                self.lp_prob += self.food_quantity_vector[i] <= max_value / 100
-            if food.target is not None:
-                if food.target_unit != 'g':
-                    target_value = food.convert_quantity(food.target, food.target_unit, 'g')
-                else:
-                    target_value = food.target
-                self.lp_prob += self.food_quantity_vector[i] == target_value / 100
+
+            constraints = [food.min, food.max, food.target]
+            units = [food.min_unit, food.max_unit, food.target_unit]
+            operators = [operator.ge, operator.le, operator.eq]
+
+            for constraint, unit, op in zip(constraints, units, operators):
+                if constraint is not None:
+                    converted_constraint = self.convert_constraint(food.food_id, constraint, unit)
+                    self.add_constraint(self.food_quantity_vector[i], op,
+                                        converted_constraint/DB_SCALER)
+
+    def convert_constraint(self, food_id, constraint_value, constraint_unit):
+        if constraint_unit == 'g':
+            return constraint_value
+        else:
+            return convert_quantity(food_id, constraint_value, constraint_unit, 'g')
+
+    def add_constraint(self, var, comparator, constraint_value):
+        # parameterized <=, >=, and == comparators with operator
+        self.lp_prob += comparator(var, constraint_value)
 
     def add_nutrient_constraints(self, person):
         mins = [nut.min for nut in person.nuts]
@@ -337,7 +341,6 @@ class Optimizier:
 
         self.lp_prob.writeLP("DietModel.lp")
         self.lp_prob.solve()
-        
         
     def describe_solution_status(self):
         status_statement = ""
