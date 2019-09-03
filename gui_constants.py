@@ -63,3 +63,20 @@ S_COL_TO_ATTR = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
 OPT_NAME_COL = 0
 OPT_PRICE_COL = 1
 OPT_QUANTITY_COL= 2
+
+# Requirements view
+R_NAME_COL = 0
+R_MIN_COL = 1
+R_MIN_UNIT_COL = 2
+R_MAX_COL = 3
+R_MAX_UNIT_COL = 4
+
+R_COL_TO_ATTR = {R_NAME_COL: 'name', R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
+                 R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
+
+F_INDEX = 0
+L_INDEX = 1
+P_INDEX = 2
+M_INDEX = 3
+
+INDEX_TO_SEX = {F_INDEX: 'f', L_INDEX: 'l', P_INDEX: 'p', M_INDEX: 'm'}

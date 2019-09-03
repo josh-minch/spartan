@@ -1,51 +1,38 @@
 import operator
 import os.path
+import random
+import time
 import sqlite3 as sql
 import numpy as np
 from datetime import date
 from timeit import default_timer as timer
 
 from pulp import *
-import req, basic_foods, database, random, time
-
-def calculate_age(born):
+import req
+import database
     
 MAX_FOOD_ID_LEN = 5
 DB_SCALER = 100
-DAYS_IN_YEAR = 365.2425 
+
         
 class Person(object):
-    def __init__(self, name, sex, bd_day, bd_month, bd_year):
+    def __init__(self, name=None, sex=None, bd_day=None, bd_month=None, bd_year=None):
         self.name = name
         self.sex = sex
         self.bd_day = bd_day
         self.bd_month = bd_month
         self.bd_year = bd_year
 
-        self.age = calculate_age(bd_day, bd_month, bd_year)
-        self.age_range = self.set_age_range()
-        self.activity_level
-
         self.nuts = []
         self.foods = []
-        self.set_nuts()
         self.populate_foods_from_db()
 
     def __repr__(self):
         return str(self.__dict__)
 
-    def calculate_age(day, month, year):
-        age = date.today() - date(year, month, day)
-        return age.days / DAYS_IN_YEAR 
-
-    def set_age_range(self):
-        for i, ar in enumerate(req.age_range):
-            if self.age < ar: 
-                return req.age_range[i-1]
-
     def set_nuts(self):
-        nuts = [ Nutrient(name, id, min) for (id, name, min) 
-        in zip(req.nut_ids, req.nut_names, req.min[(self.age_range, self.sex)])]
+        nuts = [Nutrient(name, id, min) for (id, name, min) 
+                in zip(req.nut_ids, req.nut_names, req.min[(self.age_range, self.sex)])]
   
         nuts.sort(key=lambda nut: nut.nut_id)
         self.nuts = nuts

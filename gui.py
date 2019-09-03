@@ -220,8 +220,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Debug 
         self.debug_btn.clicked.connect(self.print_debug_info)
-        add_foods_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
-        add_foods_shortcut.activated.connect(self.print_debug_info)
+        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
+        debug_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
         amounts = []
