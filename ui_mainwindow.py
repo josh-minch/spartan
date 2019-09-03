@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Fri Aug 30 20:14:50 2019
+# Created: Mon Sep  2 19:09:39 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -318,8 +318,6 @@ class Ui_MainWindow(object):
         self.debug_btn.setFont(font)
         self.debug_btn.setObjectName("debug_btn")
         self.gridLayout_2.addWidget(self.debug_btn, 3, 0, 1, 2)
-        spacerItem = QtWidgets.QSpacerItem(208, 25, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem, 3, 2, 1, 3)
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setMaximumSize(QtCore.QSize(100, 16777215))
         font = QtGui.QFont()
@@ -400,6 +398,8 @@ class Ui_MainWindow(object):
         self.fridge_view.verticalHeader().setVisible(False)
         self.fridge_view.verticalHeader().setDefaultSectionSize(23)
         self.gridLayout_2.addWidget(self.fridge_view, 1, 0, 2, 5)
+        spacerItem = QtWidgets.QSpacerItem(208, 25, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.gridLayout_2.addItem(spacerItem, 3, 2, 1, 3)
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionSettings = QtWidgets.QAction(MainWindow)
         self.actionSettings.setObjectName("actionSettings")

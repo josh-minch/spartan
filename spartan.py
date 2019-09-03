@@ -1,32 +1,43 @@
-import sqlite3 as sql
-import req, basic_foods, database, random, time
-import numpy as np
 import operator
-from pulp import *
-from timeit import default_timer as timer
 import os.path
+import sqlite3 as sql
+import numpy as np
+from datetime import date
+from timeit import default_timer as timer
 
+from pulp import *
+import req, basic_foods, database, random, time
+
+def calculate_age(born):
+    
 MAX_FOOD_ID_LEN = 5
 DB_SCALER = 100
+DAYS_IN_YEAR = 365.2425 
         
 class Person(object):
-    def __init__(self, name, age, sex):
-        assert isinstance(age, (int, float)), "Age must be a number"
-        assert sex in {'f', 'm', 'c', 'l', 'p'}, "Select female, male, child, lactating, or pregnant"
+    def __init__(self, name, sex, bd_day, bd_month, bd_year):
         self.name = name
-        self.age = age
         self.sex = sex
-        #self.activity_level = activity_level
+        self.bd_day = bd_day
+        self.bd_month = bd_month
+        self.bd_year = bd_year
 
+        self.age = calculate_age(bd_day, bd_month, bd_year)
         self.age_range = self.set_age_range()
+        self.activity_level
+
         self.nuts = []
-        self.set_nuts()
         self.foods = []
+        self.set_nuts()
         self.populate_foods_from_db()
 
     def __repr__(self):
         return str(self.__dict__)
-        
+
+    def calculate_age(day, month, year):
+        age = date.today() - date(year, month, day)
+        return age.days / DAYS_IN_YEAR 
+
     def set_age_range(self):
         for i, ar in enumerate(req.age_range):
             if self.age < ar: 
@@ -124,9 +135,6 @@ class Person(object):
         cur.execute(sql_stmt, [attr_value] + [food_id])
         con.commit()
         con.close()
-
-    # Calculate the equivalent daily value percentage of a given nutrient amount
-    # based on a person's nutrient requirements. 
 
 class Food:
     def __init__(self, food_id=None, name=None, 

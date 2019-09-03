@@ -1,0 +1,98 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'ui_requirementswindow.ui',
+# licensing of 'ui_requirementswindow.ui' applies.
+#
+# Created: Mon Sep  2 20:00:05 2019
+#      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
+#
+# WARNING! All changes made in this file will be lost!
+
+from PySide2 import QtCore, QtGui, QtWidgets
+
+class Ui_RequirementsWindow(object):
+    def setupUi(self, RequirementsWindow):
+        RequirementsWindow.setObjectName("RequirementsWindow")
+        RequirementsWindow.resize(855, 719)
+        self.label = QtWidgets.QLabel(RequirementsWindow)
+        self.label.setGeometry(QtCore.QRect(9, 9, 118, 16))
+        self.label.setObjectName("label")
+        self.buttonBox = QtWidgets.QDialogButtonBox(RequirementsWindow)
+        self.buttonBox.setGeometry(QtCore.QRect(210, 687, 156, 23))
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Save)
+        self.buttonBox.setCenterButtons(False)
+        self.buttonBox.setObjectName("buttonBox")
+        self.req_table = QtWidgets.QTableView(RequirementsWindow)
+        self.req_table.setGeometry(QtCore.QRect(10, 260, 256, 192))
+        self.req_table.setObjectName("req_table")
+        self.label_5 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_5.setGeometry(QtCore.QRect(10, 121, 120, 16))
+        self.label_5.setObjectName("label_5")
+        self.comboBox_4 = QtWidgets.QComboBox(RequirementsWindow)
+        self.comboBox_4.setGeometry(QtCore.QRect(516, 42, 69, 20))
+        self.comboBox_4.setObjectName("comboBox_4")
+        self.label_8 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_8.setGeometry(QtCore.QRect(417, 38, 93, 16))
+        self.label_8.setObjectName("label_8")
+        self.lineEdit_3 = QtWidgets.QLineEdit(RequirementsWindow)
+        self.lineEdit_3.setGeometry(QtCore.QRect(645, 42, 133, 20))
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.label_9 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_9.setGeometry(QtCore.QRect(602, 38, 37, 16))
+        self.label_9.setObjectName("label_9")
+        self.label_6 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_6.setGeometry(QtCore.QRect(417, 9, 179, 16))
+        self.label_6.setObjectName("label_6")
+        self.comboBox_3 = QtWidgets.QComboBox(RequirementsWindow)
+        self.comboBox_3.setGeometry(QtCore.QRect(602, 10, 69, 20))
+        self.comboBox_3.setObjectName("comboBox_3")
+        self.lineEdit = QtWidgets.QLineEdit(RequirementsWindow)
+        self.lineEdit.setGeometry(QtCore.QRect(10, 70, 40, 20))
+        self.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit_2 = QtWidgets.QLineEdit(RequirementsWindow)
+        self.lineEdit_2.setGeometry(QtCore.QRect(70, 70, 40, 20))
+        self.lineEdit_2.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.lineEdit_4 = QtWidgets.QLineEdit(RequirementsWindow)
+        self.lineEdit_4.setGeometry(QtCore.QRect(130, 70, 71, 20))
+        self.lineEdit_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.lineEdit_4.setObjectName("lineEdit_4")
+        self.label_2 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_2.setGeometry(QtCore.QRect(10, 50, 47, 13))
+        self.label_2.setObjectName("label_2")
+        self.label_7 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_7.setGeometry(QtCore.QRect(80, 50, 47, 13))
+        self.label_7.setObjectName("label_7")
+        self.label_10 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_10.setGeometry(QtCore.QRect(140, 50, 47, 13))
+        self.label_10.setObjectName("label_10")
+        self.label_4 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_4.setGeometry(QtCore.QRect(10, 30, 44, 16))
+        self.label_4.setObjectName("label_4")
+        self.label_3 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_3.setGeometry(QtCore.QRect(230, 51, 18, 16))
+        self.label_3.setObjectName("label_3")
+        self.sex_edit = QtWidgets.QComboBox(RequirementsWindow)
+        self.sex_edit.setGeometry(QtCore.QRect(230, 70, 69, 20))
+        self.sex_edit.setObjectName("sex_edit")
+        self.rec_edit = QtWidgets.QComboBox(RequirementsWindow)
+        self.rec_edit.setGeometry(QtCore.QRect(10, 140, 69, 20))
+        self.rec_edit.setObjectName("rec_edit")
+
+        self.retranslateUi(RequirementsWindow)
+        QtCore.QMetaObject.connectSlotsByName(RequirementsWindow)
+
+    def retranslateUi(self, RequirementsWindow):
+        RequirementsWindow.setWindowTitle(QtWidgets.QApplication.translate("RequirementsWindow", "Dialog", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Nutritional Requirements", None, -1))
+        self.label_5.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Recommendations set by", None, -1))
+        self.label_8.setText(QtWidgets.QApplication.translate("RequirementsWindow", "for someone who is", None, -1))
+        self.label_9.setText(QtWidgets.QApplication.translate("RequirementsWindow", "born on", None, -1))
+        self.label_6.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Use dietary  recommendations by the", None, -1))
+        self.label_2.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Month", None, -1))
+        self.label_7.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Day", None, -1))
+        self.label_10.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Year", None, -1))
+        self.label_4.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Birthdate", None, -1))
+        self.label_3.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Sex", None, -1))
+
