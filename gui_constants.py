@@ -18,16 +18,16 @@ MIN_COL_WIDTH = 3
 MAX_COL_WIDTH = 4
 TARGET_COL_WIDTH = 5
 
-F_COLS_TO_HIDE = [FOOD_ID_COL, PRICE_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_COL, 
+F_COLS_TO_HIDE = [FOOD_ID_COL, PRICE_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_COL,
                   MIN_UNIT_COL, MAX_COL, MAX_UNIT_COL, TARGET_COL, TARGET_UNIT_COL]
 P_COLS_TO_HIDE = [FOOD_ID_COL, NAME_COL, MIN_COL, MIN_UNIT_COL, MAX_COL, MAX_UNIT_COL, TARGET_COL, TARGET_UNIT_COL]
 C_COLS_TO_HIDE = [FOOD_ID_COL, NAME_COL, PRICE_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL]
 
 FRIDGE_V_HEADER_SIZE = 32
 
-F_COL_TO_ATTR = {FOOD_ID_COL: 'food_id', NAME_COL: 'name', 
+F_COL_TO_ATTR = {FOOD_ID_COL: 'food_id', NAME_COL: 'name',
                PRICE_COL: 'price', PRICE_QUANTITY_COL: 'price_quantity', PRICE_UNIT_COL: 'price_unit',
-               MIN_COL: 'min', MIN_UNIT_COL: 'min_unit', 
+               MIN_COL: 'min', MIN_UNIT_COL: 'min_unit',
                MAX_COL: 'max', MAX_UNIT_COL: 'max_unit',
                TARGET_COL: 'target', TARGET_UNIT_COL: 'target_unit'}
 
@@ -64,6 +64,13 @@ OPT_NAME_COL = 0
 OPT_PRICE_COL = 1
 OPT_QUANTITY_COL= 2
 
+# Requirements window
+F_INDEX = 0
+L_INDEX = 1
+P_INDEX = 2
+M_INDEX = 3
+
+INDEX_TO_SEX = {F_INDEX: 'f', L_INDEX: 'l', P_INDEX: 'p', M_INDEX: 'm'}
 # Requirements view
 R_NAME_COL = 0
 R_MIN_COL = 1
@@ -74,9 +81,3 @@ R_MAX_UNIT_COL = 4
 R_COL_TO_ATTR = {R_NAME_COL: 'name', R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
                  R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
 
-F_INDEX = 0
-L_INDEX = 1
-P_INDEX = 2
-M_INDEX = 3
-
-INDEX_TO_SEX = {F_INDEX: 'f', L_INDEX: 'l', P_INDEX: 'p', M_INDEX: 'm'}
