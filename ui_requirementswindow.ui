@@ -81,40 +81,52 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Nutritional Requirements</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="3">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Segoe UI</family>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nutritional Requirements</string>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="0" colspan="5">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Set requirements according to national guidelines</string>
+     </property>
+    </widget>
+   </item>
    <item row="3" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
       <string>Birthdate</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="5">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>Sex</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="17">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
-     </property>
-     <property name="centerButtons">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0" colspan="18">
-    <widget class="QTableView" name="req_view">
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <property name="showGrid">
-      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -143,33 +155,28 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0" colspan="13">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Set requirements according to national guidelines</string>
+   <item row="3" column="2">
+    <widget class="QLineEdit" name="day_edit">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="4">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <family>Segoe UI</family>
-       <pointsize>11</pointsize>
-      </font>
+     <property name="maximumSize">
+      <size>
+       <width>50</width>
+       <height>21</height>
+      </size>
      </property>
-     <property name="text">
-      <string>Nutritional Requirements</string>
+     <property name="focusPolicy">
+      <enum>Qt::StrongFocus</enum>
      </property>
-     <property name="margin">
-      <number>0</number>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="4">
-    <widget class="QCheckBox" name="cust_edit">
-     <property name="text">
-      <string>Allow custom requirements</string>
+     <property name="placeholderText">
+      <string>Day</string>
      </property>
     </widget>
    </item>
@@ -198,54 +205,6 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="6">
-    <widget class="QPushButton" name="debug_btn">
-     <property name="text">
-      <string>debug</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>10</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="3" column="2">
-    <widget class="QLineEdit" name="day_edit">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>50</width>
-       <height>21</height>
-      </size>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::StrongFocus</enum>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-     <property name="placeholderText">
-      <string>Day</string>
-     </property>
-    </widget>
-   </item>
    <item row="3" column="4">
     <spacer name="horizontalSpacer">
      <property name="orientation">
@@ -261,6 +220,13 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item row="3" column="5">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Sex</string>
+     </property>
+    </widget>
    </item>
    <item row="3" column="6">
     <widget class="QComboBox" name="sex_edit">
@@ -345,6 +311,73 @@
      </item>
     </widget>
    </item>
+   <item row="5" column="0" colspan="3">
+    <widget class="QCheckBox" name="cust_edit">
+     <property name="text">
+      <string>Allow custom requirements</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="6">
+    <widget class="QPushButton" name="debug_btn">
+     <property name="text">
+      <string>debug</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="10">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
+     </property>
+     <property name="centerButtons">
+      <bool>false</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="11">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTableView" name="macro_view">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="showGrid">
+        <bool>false</bool>
+       </property>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableView" name="vit_view">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="showGrid">
+        <bool>false</bool>
+       </property>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTableView" name="mineral_view">
+       <property name="frameShape">
+        <enum>QFrame::NoFrame</enum>
+       </property>
+       <property name="showGrid">
+        <bool>false</bool>
+       </property>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <tabstops>
@@ -352,7 +385,7 @@
   <tabstop>day_edit</tabstop>
   <tabstop>year_edit</tabstop>
   <tabstop>cust_edit</tabstop>
-  <tabstop>req_view</tabstop>
+  <tabstop>macro_view</tabstop>
   <tabstop>debug_btn</tabstop>
  </tabstops>
  <resources/>

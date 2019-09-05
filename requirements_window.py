@@ -1,7 +1,8 @@
 import sys
+import datetime
 
 from PySide2.QtCore import Qt
-from PySide2.QtGui import QKeySequence, QPalette
+from PySide2.QtGui import QKeySequence, QPalette, QIntValidator
 from PySide2.QtWidgets import QApplication, QStyleFactory, QDialog, QShortcut
 
 from spartan import *
@@ -17,6 +18,12 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
         self.setupUi(self)
         self.set_defaults()
         self.setup_connections()
+
+        int_validator = QIntValidator()
+        self.day_edit.setValidator(int_validator)
+        self.mon_edit.setValidator(int_validator)
+        self.year_edit.setValidator(int_validator)
+
         self.show()
 
     def set_defaults(self):
@@ -27,33 +34,50 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
         self.req = 'us'
 
     def init_person(self):
-        person = Person('name', self.sex, self.bd_day, self.bd_month, self.bd_year) 
-
+        person = Person('name', self.sex, self.bd_day, self.bd_month, self.bd_year)
         person.set_nuts()
+
+    def valid_date(self):
+        try :
+            datetime.datetime(self.bd_year, self.bd_mon, self.bd_day)
+            date_validity = True
+        except ValueError:
+            date_validity = False
+        return date_validity
 
     def display_req(self):
         if None in (self.bd_day, self.bd_mon, self.bd_year):
             return
-        
+        if not self.valid_date():
+            return
+        if len(str(self.bd_year)) < 4:
+            return
+
         self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
-        nutrients = req.get_min(self.age_range, self.sex)
-        self.requirements_model = RequirementsModel(nutrients=nutrients)
-        self.req_view.setModel(self.requirements_model)
+        (macro, vit, mineral) = req.get_req(self.age_range, self.sex)
 
-    def day_edit_changed(self):
-        self.bd_day = int(self.day_edit.text())
+        self.macro_model = RequirementsModel(nutrients=macro)
+        self.vit_model = RequirementsModel(nutrients=vit)
+        self.mineral_model = RequirementsModel(nutrients=mineral)
 
-    def mon_edit_changed(self):
-        self.bd_mon = int(self.mon_edit.text())
+        self.macro_view.setModel(self.macro_model)
+        self.vit_view.setModel(self.vit_model)
+        self.mineral_view.setModel(self.mineral_model)
 
-    def year_edit_changed(self):
-        self.bd_year = int(self.year_edit.text())
+    def day_edit_changed(self, day):
+        self.bd_day = int(day)
+
+    def mon_edit_changed(self, mon):
+        self.bd_mon = int(mon)
+
+    def year_edit_changed(self, year):
+        self.bd_year = int(year)
 
     def sex_edit_changed(self, index):
         self.sex = INDEX_TO_SEX[index]
 
-    def req_edit_changed(self, req):
-        self.req = req
+    def req_edit_changed(self, req_text):
+        self.req_text = req_text
 
     def cust_edit_changed(self):
         if self.cust_edit.isChecked():
@@ -73,7 +97,7 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
         self.sex_edit. currentIndexChanged[int].connect(self.display_req)
         self.req_edit. currentIndexChanged[int].connect(self.display_req)
 
-        # Debug 
+        # Debug
         self.debug_btn.clicked.connect(self.print_debug_info)
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
         debug_shortcut.activated.connect(self.print_debug_info)
@@ -82,6 +106,7 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
 
         try:
             print("bd_day is {}".format(self.bd_day))
+            print("bd_day is {}".format(type(self.bd_day)))
         except AttributeError as e:
             print ("no bd_day")
 
@@ -105,13 +130,6 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
 
 
 if __name__ == "__main__":
-
     app = QApplication(sys.argv)
-
-    app.setStyle(QStyleFactory.create('fusion'))
-    p = QPalette()
-    p.setColor(QPalette.Highlight, Qt.darkRed)
-    app.setPalette(p)
-
     dialog = RequirementsWindow()
     sys.exit(app.exec_())
