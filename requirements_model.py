@@ -47,7 +47,7 @@ class RequirementsModel(QAbstractTableModel):
 
     def rowCount(self, index=QModelIndex()):
         return len(self.nutrients)
-    
+
     def columnCount(self, index=QModelIndex()):
         return len(R_COL_TO_ATTR)
 
@@ -65,50 +65,39 @@ class RequirementsModel(QAbstractTableModel):
             if index.column() == R_NAME_COL:
                 return name
             elif index.column() == R_MIN_COL:
+                if min is None:
+                    return "None"
                 return min
             #elif index.column() == R_MIN_UNIT_COL:
             #    return min_unit
-         
-        # A bug in PySide2 requires that we cast the bitwise 
+
+        # A bug in PySide2 requires that we cast the bitwise
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
 
         if role == Qt.TextAlignmentRole:
             if index.column() == R_MIN_COL:
                 return int(Qt.AlignRight | Qt.AlignVCenter)
-      
+
         return None
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-        if orientation == Qt.Horizontal:
-            if role == Qt.DisplayRole:
-                if section == R_NAME_COL:
-                    return "Nutrient"
-                elif section == R_MIN_COL:
-                    return "Recommended"
-                elif section == R_MIN_UNIT_COL:
-                    return
-                
-            if role == Qt.TextAlignmentRole:
-                if section == R_MIN_COL:
-                    return int(Qt.AlignRight | Qt.AlignVCenter)
-    
-        return None
+        raise NotImplementedError
 
     def insertRows(self, position, rows=1, index=QModelIndex()):
         self.beginInsertRows(QModelIndex(), position, position + rows - 1)
         for row in range(rows):
             self.nutrients.insert(position + row, {"name":"", "min":"",})
-                                        
+
         self.endInsertRows()
-       
+
         return True
-        
+
     def removeRows(self, position, rows=1, index=QModelIndex()):
         self.beginRemoveRows(QModelIndex(), position, position + rows - 1)
         del self.nutrients[position:position+rows]
         self.endRemoveRows()
-       
+
         return True
 
     def setData(self, index, value, role=Qt.EditRole):
@@ -116,7 +105,7 @@ class RequirementsModel(QAbstractTableModel):
             return False
 
         if index.isValid() and 0 <= index.row() < len(self.nutrients):
-        
+
             nutrient = self.nutrients[index.row()]
 
             if index.column() == R_NAME_COL:
@@ -136,3 +125,69 @@ class RequirementsModel(QAbstractTableModel):
             return Qt.ItemIsEnabled
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
+
+class MacroModel(RequirementsModel):
+    def __init__(self, parent=None, nutrients=None):
+        super().__init__(parent, nutrients)
+
+    def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
+            if orientation == Qt.Horizontal:
+                if role == Qt.DisplayRole:
+                    if section == R_NAME_COL:
+                        return "Macronutrient"
+                    elif section == R_MIN_COL:
+                        return "Recommended"
+                    elif section == R_MIN_UNIT_COL:
+                        return
+
+                if role == Qt.TextAlignmentRole:
+                    if section == R_NAME_COL:
+                        return int(Qt.AlignLeft | Qt.AlignVCenter)
+                    if section == R_MIN_COL:
+                        return int(Qt.AlignRight | Qt.AlignVCenter)
+
+            return None
+
+class VitModel(RequirementsModel):
+    def __init__(self, parent=None, nutrients=None):
+        super().__init__(parent, nutrients)
+
+    def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
+            if orientation == Qt.Horizontal:
+                if role == Qt.DisplayRole:
+                    if section == R_NAME_COL:
+                        return "Vitamin"
+                    elif section == R_MIN_COL:
+                        return "Recommended"
+                    elif section == R_MIN_UNIT_COL:
+                        return
+
+                if role == Qt.TextAlignmentRole:
+                    if section == R_NAME_COL:
+                        return int(Qt.AlignLeft | Qt.AlignVCenter)
+                    if section == R_MIN_COL:
+                        return int(Qt.AlignRight | Qt.AlignVCenter)
+
+            return None
+
+class MineralModel(RequirementsModel):
+    def __init__(self, parent=None, nutrients=None):
+        super().__init__(parent, nutrients)
+
+    def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
+            if orientation == Qt.Horizontal:
+                if role == Qt.DisplayRole:
+                    if section == R_NAME_COL:
+                        return "Mineral"
+                    elif section == R_MIN_COL:
+                        return "Recommended"
+                    elif section == R_MIN_UNIT_COL:
+                        return
+
+                if role == Qt.TextAlignmentRole:
+                    if section == R_NAME_COL:
+                        return int(Qt.AlignLeft | Qt.AlignVCenter)
+                    if section == R_MIN_COL:
+                        return int(Qt.AlignRight | Qt.AlignVCenter)
+
+            return None

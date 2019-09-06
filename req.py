@@ -138,8 +138,8 @@ req_mineral = {
 }
 
 macro_names = ["Water", "Carbohydrates", "Sugar", "Fiber", "Protein", "Fat", "Saturated", "Monounsaturated", "Polyunsaturated", "Omega-3", "Omega-6", "Trans"]
-vit_names = ["Calcium (Ca)", "Copper (Cu)", "Fluoride (F)", "Iron (Fe)", "Magnesium (Mg)", "Manganese (Mn)", "Phosphorus (P)", "Potassium (K)", "Selenium (Se)", "Sodium (Na)", "Zinc (Zn)", ]
-mineral_names = ['A', 'B1 (Thiamin)', 'B2 (Riboflavin)', 'B3 (Niacin)', 'B5 (Pantothenic acid)', 'B6', 'B7 (Biotin)', 'B9 (Folate)', 'B12 (Cobalamin)', 'C (Ascorbic acid)', 'D', 'E (Alpha-tocopherol)', 'K (Phylloquinone)', 'Choline']
+vit_names = ['A', 'B₁ (Thiamin)', 'B₂ (Riboflavin)', 'B3 (Niacin)', 'B5 (Pantothenic acid)', 'B6', 'B7 (Biotin)', 'B9 (Folate)', 'B12 (Cobalamin)', 'C (Ascorbic acid)', 'D', 'E (Alpha-tocopherol)', 'K (Phylloquinone)', 'Choline']
+mineral_names = ["Calcium (Ca)", "Copper (Cu)", "Fluoride (F)", "Iron (Fe)", "Magnesium (Mg)", "Manganese (Mn)", "Phosphorus (P)", "Potassium (K)", "Selenium (Se)", "Sodium (Na)", "Zinc (Zn)", ]
 
 age_ranges = [
     (0, 0.5), (0.5, 1), (1, 4), (4, 9), (9, 14), (14, 19), (19, 31), (31, 51), (51, 71), (71, math.inf)

@@ -3,12 +3,12 @@ import datetime
 
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QKeySequence, QPalette, QIntValidator, QFont
-from PySide2.QtWidgets import QApplication, QStyleFactory, QDialog, QShortcut
+from PySide2.QtWidgets import (QApplication, QStyleFactory, QDialog, QShortcut, QHeaderView)
 
 from spartan import *
 import req
 from gui_constants import *
-from requirements_model import RequirementsModel
+from requirements_model import MacroModel, VitModel, MineralModel
 from ui_requirementswindow import Ui_RequirementsWindow
 
 
@@ -56,13 +56,17 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
         self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
         (macro, vit, mineral) = req.get_req(self.age_range, self.sex)
 
-        self.macro_model = RequirementsModel(nutrients=macro)
-        self.vit_model = RequirementsModel(nutrients=vit)
-        self.mineral_model = RequirementsModel(nutrients=mineral)
+        self.macro_model = MacroModel(nutrients=macro)
+        self.vit_model = VitModel(nutrients=vit)
+        self.mineral_model = MineralModel(nutrients=mineral)
 
         self.macro_view.setModel(self.macro_model)
         self.vit_view.setModel(self.vit_model)
         self.mineral_view.setModel(self.mineral_model)
+
+        self.macro_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.vit_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.mineral_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
     def cust_edit_changed(self):
         if self.cust_edit.isChecked():
