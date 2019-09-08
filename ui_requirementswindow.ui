@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>847</width>
-    <height>719</height>
+    <height>780</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -93,55 +93,51 @@
    <iconset>
     <normaloff>images/icon_trimmed.png</normaloff>images/icon_trimmed.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,1,0">
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Segoe UI Semilight</family>
+       <pointsize>18</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nutritional Requirements</string>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>12</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
    <item>
     <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0" colspan="2">
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <property name="spacing">
-        <number>4</number>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Set your nutritional requirements according to national recommendations.</string>
        </property>
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="font">
-          <font>
-           <family>Segoe UI Semibold</family>
-           <pointsize>11</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Nutritional Requirements</string>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Set your nutritional requirements according to national recommendations.</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
      </item>
-     <item row="1" column="0" colspan="2">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>3</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="2" column="0">
+     <item row="1" column="0">
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <property name="spacing">
         <number>4</number>
@@ -154,9 +150,9 @@
             <colorrole role="WindowText">
              <brush brushstyle="SolidPattern">
               <color alpha="255">
-               <red>52</red>
-               <green>52</green>
-               <blue>52</blue>
+               <red>0</red>
+               <green>0</green>
+               <blue>0</blue>
               </color>
              </brush>
             </colorrole>
@@ -165,9 +161,9 @@
             <colorrole role="WindowText">
              <brush brushstyle="SolidPattern">
               <color alpha="255">
-               <red>52</red>
-               <green>52</green>
-               <blue>52</blue>
+               <red>0</red>
+               <green>0</green>
+               <blue>0</blue>
               </color>
              </brush>
             </colorrole>
@@ -187,10 +183,10 @@
          </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
+           <family>Segoe UI Semibold</family>
            <pointsize>10</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -208,87 +204,48 @@
          </property>
          <property name="minimumSize">
           <size>
-           <width>200</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
-         <property name="palette">
-          <palette>
-           <active>
-            <colorrole role="Highlight">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>218</red>
-               <green>236</green>
-               <blue>249</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="HighlightedText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </active>
-           <inactive>
-            <colorrole role="Highlight">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>218</red>
-               <green>236</green>
-               <blue>249</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="HighlightedText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </inactive>
-           <disabled>
-            <colorrole role="Highlight">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>120</green>
-               <blue>215</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="HighlightedText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </disabled>
-          </palette>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="mouseTracking">
+          <bool>false</bool>
          </property>
          <property name="focusPolicy">
           <enum>Qt::TabFocus</enum>
          </property>
+         <property name="currentText">
+          <string>United States (Health Department)</string>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
          <item>
           <property name="text">
-           <string>USDA</string>
+           <string>United States (Health Department)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>European Union (Food Safety Authority)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Japan (Ministry of Health, Labour and Welfare)</string>
           </property>
          </item>
         </widget>
        </item>
       </layout>
      </item>
-     <item row="3" column="0">
+     <item row="2" column="0">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <property name="spacing">
         <number>4</number>
@@ -301,9 +258,9 @@
             <colorrole role="WindowText">
              <brush brushstyle="SolidPattern">
               <color alpha="255">
-               <red>52</red>
-               <green>52</green>
-               <blue>52</blue>
+               <red>0</red>
+               <green>0</green>
+               <blue>0</blue>
               </color>
              </brush>
             </colorrole>
@@ -312,9 +269,9 @@
             <colorrole role="WindowText">
              <brush brushstyle="SolidPattern">
               <color alpha="255">
-               <red>52</red>
-               <green>52</green>
-               <blue>52</blue>
+               <red>0</red>
+               <green>0</green>
+               <blue>0</blue>
               </color>
              </brush>
             </colorrole>
@@ -334,10 +291,10 @@
          </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
+           <family>Segoe UI Semibold</family>
            <pointsize>10</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -426,8 +383,34 @@
            </disabled>
           </palette>
          </property>
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::TabFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QComboBox {
+    padding: 2px 0px 2px 3px;
+}
+
+QComboBox QAbstractItemView {
+    margin-top: 0px;
+    padding-bottom: 0px;
+}
+
+QComboBox QAbstractItemView::item { 
+	min-height: 35px; 
+	min-width: 50px;
+}
+
+QListView::item:selected {
+	color: black; 
+	background-color: lightblue
+}</string>
          </property>
          <item>
           <property name="text">
@@ -453,7 +436,7 @@
        </item>
       </layout>
      </item>
-     <item row="4" column="0">
+     <item row="3" column="0">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <property name="spacing">
         <number>4</number>
@@ -466,9 +449,9 @@
             <colorrole role="WindowText">
              <brush brushstyle="SolidPattern">
               <color alpha="255">
-               <red>52</red>
-               <green>52</green>
-               <blue>52</blue>
+               <red>0</red>
+               <green>0</green>
+               <blue>0</blue>
               </color>
              </brush>
             </colorrole>
@@ -477,9 +460,9 @@
             <colorrole role="WindowText">
              <brush brushstyle="SolidPattern">
               <color alpha="255">
-               <red>52</red>
-               <green>52</green>
-               <blue>52</blue>
+               <red>0</red>
+               <green>0</green>
+               <blue>0</blue>
               </color>
              </brush>
             </colorrole>
@@ -499,10 +482,10 @@
          </property>
          <property name="font">
           <font>
-           <family>Segoe UI</family>
+           <family>Segoe UI Semibold</family>
            <pointsize>10</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
+           <weight>75</weight>
+           <bold>true</bold>
           </font>
          </property>
          <property name="text">
@@ -513,7 +496,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <property name="spacing">
-          <number>6</number>
+          <number>8</number>
          </property>
          <item>
           <widget class="QLineEdit" name="mon_edit">
@@ -594,39 +577,42 @@
        </item>
       </layout>
      </item>
-     <item row="5" column="0" colspan="2">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>17</width>
+       <height>12</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Or, select a recommendation as a guideline then customize it to your needs.</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>4</height>
-        </size>
-       </property>
-      </spacer>
+      </widget>
      </item>
-     <item row="6" column="0" colspan="2">
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="spacing">
-        <number>4</number>
+     <item>
+      <widget class="QCheckBox" name="cust_edit">
+       <property name="text">
+        <string>Allow custom requirements</string>
        </property>
-       <item>
-        <widget class="QLabel" name="label_9">
-         <property name="text">
-          <string>Or, select a recommendation as a guideline then customize it to your needs.</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="cust_edit">
-         <property name="text">
-          <string>Allow custom requirements</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
      </item>
     </layout>
    </item>
@@ -634,11 +620,6 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QTableView" name="macro_view">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
@@ -671,11 +652,6 @@ QTableView {
      </item>
      <item>
       <widget class="QTableView" name="vit_view">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
@@ -708,11 +684,6 @@ QTableView {
      </item>
      <item>
       <widget class="QTableView" name="mineral_view">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
