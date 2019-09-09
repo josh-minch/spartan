@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_requirementswindow.ui',
 # licensing of 'ui_requirementswindow.ui' applies.
 #
-# Created: Sun Sep  8 15:24:55 2019
+# Created: Sun Sep  8 21:54:13 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_RequirementsWindow(object):
     def setupUi(self, RequirementsWindow):
         RequirementsWindow.setObjectName("RequirementsWindow")
-        RequirementsWindow.resize(847, 780)
+        RequirementsWindow.resize(806, 780)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -46,8 +46,10 @@ class Ui_RequirementsWindow(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         RequirementsWindow.setWindowIcon(icon)
-        self.verticalLayout = QtWidgets.QVBoxLayout(RequirementsWindow)
-        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(RequirementsWindow)
+        self.verticalLayout_3.setSpacing(20)
+        self.verticalLayout_3.setContentsMargins(20, 20, 20, 20)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.label = QtWidgets.QLabel(RequirementsWindow)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semilight")
@@ -57,17 +59,31 @@ class Ui_RequirementsWindow(object):
         self.label.setFont(font)
         self.label.setMargin(0)
         self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        spacerItem = QtWidgets.QSpacerItem(20, 12, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout.addItem(spacerItem)
-        self.formLayout = QtWidgets.QFormLayout()
-        self.formLayout.setObjectName("formLayout")
+        self.verticalLayout_3.addWidget(self.label)
+        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout.setSpacing(8)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setSpacing(4)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.label_4 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_4.setMaximumSize(QtCore.QSize(20, 20))
+        self.label_4.setText("")
+        self.label_4.setPixmap(QtGui.QPixmap("images/person-outline.png"))
+        self.label_4.setScaledContents(True)
+        self.label_4.setObjectName("label_4")
+        self.horizontalLayout_3.addWidget(self.label_4)
         self.label_2 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_2.setScaledContents(False)
+        self.label_2.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_2.setObjectName("label_2")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_2)
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_5.setSpacing(4)
-        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.horizontalLayout_3.addWidget(self.label_2)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.ExpandingFieldsGrow)
+        self.formLayout.setHorizontalSpacing(20)
+        self.formLayout.setVerticalSpacing(10)
+        self.formLayout.setObjectName("formLayout")
         self.req_label = QtWidgets.QLabel(RequirementsWindow)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -87,7 +103,7 @@ class Ui_RequirementsWindow(object):
         font.setBold(True)
         self.req_label.setFont(font)
         self.req_label.setObjectName("req_label")
-        self.verticalLayout_5.addWidget(self.req_label)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.req_label)
         self.req_edit = QtWidgets.QComboBox(RequirementsWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -101,16 +117,25 @@ class Ui_RequirementsWindow(object):
         self.req_edit.setFont(font)
         self.req_edit.setMouseTracking(False)
         self.req_edit.setFocusPolicy(QtCore.Qt.TabFocus)
+        self.req_edit.setStyleSheet("QListView{\n"
+"    outline: none;\n"
+"}\n"
+"\n"
+"QListView::item:selected {\n"
+"    color: black;\n"
+"    background-color: rgb(204, 232, 255);\n"
+"}\n"
+"\n"
+"QListView::item {\n"
+"    min-height: 28px;\n"
+"}\n"
+"")
         self.req_edit.setFrame(True)
         self.req_edit.setObjectName("req_edit")
         self.req_edit.addItem("")
         self.req_edit.addItem("")
         self.req_edit.addItem("")
-        self.verticalLayout_5.addWidget(self.req_edit)
-        self.formLayout.setLayout(1, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_5)
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_4.setSpacing(4)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.req_edit)
         self.sex_label = QtWidgets.QLabel(RequirementsWindow)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -130,7 +155,7 @@ class Ui_RequirementsWindow(object):
         font.setBold(True)
         self.sex_label.setFont(font)
         self.sex_label.setObjectName("sex_label")
-        self.verticalLayout_4.addWidget(self.sex_label)
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.sex_label)
         self.sex_edit = QtWidgets.QComboBox(RequirementsWindow)
         self.sex_edit.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -139,59 +164,30 @@ class Ui_RequirementsWindow(object):
         sizePolicy.setHeightForWidth(self.sex_edit.sizePolicy().hasHeightForWidth())
         self.sex_edit.setSizePolicy(sizePolicy)
         self.sex_edit.setMinimumSize(QtCore.QSize(130, 0))
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Highlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.HighlightedText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Highlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.HighlightedText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 120, 215))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Highlight, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
-        self.sex_edit.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.sex_edit.setFont(font)
         self.sex_edit.setFocusPolicy(QtCore.Qt.TabFocus)
-        self.sex_edit.setStyleSheet("QComboBox {\n"
-"    padding: 2px 0px 2px 3px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView {\n"
-"    margin-top: 0px;\n"
-"    padding-bottom: 0px;\n"
-"}\n"
-"\n"
-"QComboBox QAbstractItemView::item { \n"
-"    min-height: 35px; \n"
-"    min-width: 50px;\n"
+        self.sex_edit.setStyleSheet("QListView{\n"
+"    outline: none;\n"
 "}\n"
 "\n"
 "QListView::item:selected {\n"
-"    color: black; \n"
-"    background-color: lightblue\n"
-"}")
+"    color: black;\n"
+"    background-color: rgb(204, 232, 255);\n"
+"}\n"
+"\n"
+"QListView::item {\n"
+"    min-height: 28px;\n"
+"}\n"
+"")
         self.sex_edit.setObjectName("sex_edit")
         self.sex_edit.addItem("")
         self.sex_edit.addItem("")
         self.sex_edit.addItem("")
         self.sex_edit.addItem("")
-        self.verticalLayout_4.addWidget(self.sex_edit)
-        self.formLayout.setLayout(2, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_4)
-        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_3.setSpacing(4)
-        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.sex_edit)
         self.birth_label = QtWidgets.QLabel(RequirementsWindow)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -211,10 +207,11 @@ class Ui_RequirementsWindow(object):
         font.setBold(True)
         self.birth_label.setFont(font)
         self.birth_label.setObjectName("birth_label")
-        self.verticalLayout_3.addWidget(self.birth_label)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setSpacing(8)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.birth_label)
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_4.setSpacing(6)
+        self.horizontalLayout_4.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.mon_edit = QtWidgets.QLineEdit(RequirementsWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -225,7 +222,7 @@ class Ui_RequirementsWindow(object):
         self.mon_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.mon_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.mon_edit.setObjectName("mon_edit")
-        self.horizontalLayout_2.addWidget(self.mon_edit)
+        self.horizontalLayout_4.addWidget(self.mon_edit)
         self.day_edit = QtWidgets.QLineEdit(RequirementsWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -236,7 +233,7 @@ class Ui_RequirementsWindow(object):
         self.day_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.day_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.day_edit.setObjectName("day_edit")
-        self.horizontalLayout_2.addWidget(self.day_edit)
+        self.horizontalLayout_4.addWidget(self.day_edit)
         self.year_edit = QtWidgets.QLineEdit(RequirementsWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -247,22 +244,32 @@ class Ui_RequirementsWindow(object):
         self.year_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.year_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.year_edit.setObjectName("year_edit")
-        self.horizontalLayout_2.addWidget(self.year_edit)
-        self.verticalLayout_3.addLayout(self.horizontalLayout_2)
-        self.formLayout.setLayout(3, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_3)
+        self.horizontalLayout_4.addWidget(self.year_edit)
+        self.formLayout.setLayout(2, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_4)
         self.verticalLayout.addLayout(self.formLayout)
-        spacerItem1 = QtWidgets.QSpacerItem(17, 12, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-        self.verticalLayout.addItem(spacerItem1)
+        self.verticalLayout_3.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_2.setSpacing(6)
+        self.verticalLayout_2.setSpacing(8)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setSpacing(4)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.label_5 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_5.setMaximumSize(QtCore.QSize(20, 20))
+        self.label_5.setText("")
+        self.label_5.setPixmap(QtGui.QPixmap("images/info-outline.svg"))
+        self.label_5.setScaledContents(True)
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout_2.addWidget(self.label_5)
         self.label_9 = QtWidgets.QLabel(RequirementsWindow)
+        self.label_9.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_9.setObjectName("label_9")
-        self.verticalLayout_2.addWidget(self.label_9)
+        self.horizontalLayout_2.addWidget(self.label_9)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.cust_edit = QtWidgets.QCheckBox(RequirementsWindow)
         self.cust_edit.setObjectName("cust_edit")
         self.verticalLayout_2.addWidget(self.cust_edit)
-        self.verticalLayout.addLayout(self.verticalLayout_2)
+        self.verticalLayout_3.addLayout(self.verticalLayout_2)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.macro_view = QtWidgets.QTableView(RequirementsWindow)
@@ -316,12 +323,12 @@ class Ui_RequirementsWindow(object):
         self.mineral_view.setObjectName("mineral_view")
         self.mineral_view.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.mineral_view)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
         self.buttonBox = QtWidgets.QDialogButtonBox(RequirementsWindow)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Save)
         self.buttonBox.setCenterButtons(False)
         self.buttonBox.setObjectName("buttonBox")
-        self.verticalLayout.addWidget(self.buttonBox)
+        self.verticalLayout_3.addWidget(self.buttonBox)
 
         self.retranslateUi(RequirementsWindow)
         QtCore.QMetaObject.connectSlotsByName(RequirementsWindow)
@@ -345,10 +352,10 @@ class Ui_RequirementsWindow(object):
         self.sex_edit.setItemText(1, QtWidgets.QApplication.translate("RequirementsWindow", "Female, lactating", None, -1))
         self.sex_edit.setItemText(2, QtWidgets.QApplication.translate("RequirementsWindow", "Female, pregnant", None, -1))
         self.sex_edit.setItemText(3, QtWidgets.QApplication.translate("RequirementsWindow", "Male", None, -1))
-        self.birth_label.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Birthdate", None, -1))
+        self.birth_label.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Date of birth", None, -1))
         self.mon_edit.setPlaceholderText(QtWidgets.QApplication.translate("RequirementsWindow", "Month", None, -1))
         self.day_edit.setPlaceholderText(QtWidgets.QApplication.translate("RequirementsWindow", "Day", None, -1))
         self.year_edit.setPlaceholderText(QtWidgets.QApplication.translate("RequirementsWindow", "Year", None, -1))
-        self.label_9.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Or, select a recommendation as a guideline then customize it to your needs.", None, -1))
+        self.label_9.setText(QtWidgets.QApplication.translate("RequirementsWindow", "You can select a recommendation as a guideline then customize it to your needs.", None, -1))
         self.cust_edit.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Allow custom requirements", None, -1))
 

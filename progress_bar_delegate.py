@@ -17,8 +17,6 @@ class ProgressBarDelegate (QStyledItemDelegate):
 
     def paint(self, painter, option, index):
         if index.column() == NUT_PERCENT_COL:
-            
-            p = QPalette()
 
             progress_bar_option = QStyleOptionProgressBar()
             progress_bar_option.rect = option.rect
@@ -27,6 +25,8 @@ class ProgressBarDelegate (QStyledItemDelegate):
             progress_bar_option.textVisible = True
 
             progress = index.data(role=Qt.DisplayRole)
+
+            p = QPalette()
 
             if progress is None:
                 # A bug in the progress bar for the fusion style causes a thin vertical strip

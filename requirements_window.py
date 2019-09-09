@@ -2,7 +2,7 @@ import sys
 import datetime
 
 from PySide2.QtCore import Qt
-from PySide2.QtGui import QKeySequence, QPalette, QIntValidator, QFont
+from PySide2.QtGui import QKeySequence, QPalette, QIntValidator, QFont, QPalette, QColor
 from PySide2.QtWidgets import (QApplication, QStyleFactory, QDialog, QShortcut,
 QHeaderView, QListView, QStyledItemDelegate, QStyleFactory)
 
@@ -25,16 +25,11 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
         self.mon_edit.setValidator(int_validator)
         self.year_edit.setValidator(int_validator)
 
-        self.sex_edit.setStyle(QStyleFactory.create('windowsvista'))
-        self.req_edit.setStyle(QStyleFactory.create('windowsvista'))
+        #self.req_edit.setStyle(QStyleFactory.create('windowsvista'))
+        #self.sex_edit.setStyle(QStyleFactory.create('windowsvista'))
 
-        #self.sex_edit.setItemDelegate(QStyledItemDelegate())
-
-        #self.sex_edit.setView(QListView())
         self.req_edit.setView(QListView())
-        self.req_edit.setItemDelegate(QStyledItemDelegate())
-
-        self.req_edit.setStyleSheet("QComboBox QAbstractItemView::item { min-height: 35px; min-width: 50px; }QListView::item:selected { color: black; background-color: lightgray}")
+        self.sex_edit.setView(QListView())
 
         self.show()
 
@@ -120,6 +115,7 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyle(QStyleFactory.create('fusion'))
+    #app.setStyle(QStyleFactory.create('fusion'))
+
     dialog = RequirementsWindow()
     sys.exit(app.exec_())

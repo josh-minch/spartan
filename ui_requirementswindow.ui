@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>847</width>
+    <width>806</width>
     <height>780</height>
    </rect>
   </property>
@@ -93,7 +93,22 @@
    <iconset>
     <normaloff>images/icon_trimmed.png</normaloff>images/icon_trimmed.png</iconset>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <property name="spacing">
+    <number>20</number>
+   </property>
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
    <item>
     <widget class="QLabel" name="label">
      <property name="font">
@@ -113,36 +128,61 @@
     </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>8</number>
      </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>12</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
-    <layout class="QFormLayout" name="formLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Set your nutritional requirements according to national recommendations.</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
        <property name="spacing">
         <number>4</number>
        </property>
        <item>
+        <widget class="QLabel" name="label_4">
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>images/person-outline.png</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Set requirements according to national recommendations.</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="fieldGrowthPolicy">
+        <enum>QFormLayout::ExpandingFieldsGrow</enum>
+       </property>
+       <property name="horizontalSpacing">
+        <number>20</number>
+       </property>
+       <property name="verticalSpacing">
+        <number>10</number>
+       </property>
+       <item row="0" column="0">
         <widget class="QLabel" name="req_label">
          <property name="palette">
           <palette>
@@ -194,7 +234,7 @@
          </property>
         </widget>
        </item>
-       <item>
+       <item row="0" column="1">
         <widget class="QComboBox" name="req_edit">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -220,6 +260,21 @@
          <property name="focusPolicy">
           <enum>Qt::TabFocus</enum>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QListView{
+	outline: none;
+}
+
+QListView::item:selected {
+	color: black;
+	background-color: rgb(204, 232, 255);
+}
+
+QListView::item {
+	min-height: 28px;
+}
+</string>
+         </property>
          <property name="currentText">
           <string>United States (Health Department)</string>
          </property>
@@ -243,14 +298,7 @@
          </item>
         </widget>
        </item>
-      </layout>
-     </item>
-     <item row="2" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <property name="spacing">
-        <number>4</number>
-       </property>
-       <item>
+       <item row="1" column="0">
         <widget class="QLabel" name="sex_label">
          <property name="palette">
           <palette>
@@ -302,7 +350,7 @@
          </property>
         </widget>
        </item>
-       <item>
+       <item row="1" column="1">
         <widget class="QComboBox" name="sex_edit">
          <property name="enabled">
           <bool>true</bool>
@@ -319,70 +367,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="palette">
-          <palette>
-           <active>
-            <colorrole role="Highlight">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>218</red>
-               <green>236</green>
-               <blue>249</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="HighlightedText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </active>
-           <inactive>
-            <colorrole role="Highlight">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>218</red>
-               <green>236</green>
-               <blue>249</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="HighlightedText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </inactive>
-           <disabled>
-            <colorrole role="Highlight">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>120</green>
-               <blue>215</blue>
-              </color>
-             </brush>
-            </colorrole>
-            <colorrole role="HighlightedText">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>0</red>
-               <green>0</green>
-               <blue>0</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </disabled>
-          </palette>
-         </property>
          <property name="font">
           <font>
            <family>Segoe UI</family>
@@ -393,24 +377,19 @@
           <enum>Qt::TabFocus</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">QComboBox {
-    padding: 2px 0px 2px 3px;
-}
-
-QComboBox QAbstractItemView {
-    margin-top: 0px;
-    padding-bottom: 0px;
-}
-
-QComboBox QAbstractItemView::item { 
-	min-height: 35px; 
-	min-width: 50px;
+          <string notr="true">QListView{
+	outline: none;
 }
 
 QListView::item:selected {
-	color: black; 
-	background-color: lightblue
-}</string>
+	color: black;
+	background-color: rgb(204, 232, 255);
+}
+
+QListView::item {
+	min-height: 28px;
+}
+</string>
          </property>
          <item>
           <property name="text">
@@ -434,14 +413,7 @@ QListView::item:selected {
          </item>
         </widget>
        </item>
-      </layout>
-     </item>
-     <item row="3" column="0">
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="spacing">
-        <number>4</number>
-       </property>
-       <item>
+       <item row="2" column="0">
         <widget class="QLabel" name="birth_label">
          <property name="palette">
           <palette>
@@ -489,14 +461,17 @@ QListView::item:selected {
           </font>
          </property>
          <property name="text">
-          <string>Birthdate</string>
+          <string>Date of birth</string>
          </property>
         </widget>
        </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item row="2" column="1">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <property name="spacing">
-          <number>8</number>
+          <number>6</number>
+         </property>
+         <property name="sizeConstraint">
+          <enum>QLayout::SetFixedSize</enum>
          </property>
          <item>
           <widget class="QLineEdit" name="mon_edit">
@@ -580,32 +555,45 @@ QListView::item:selected {
     </layout>
    </item>
    <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>17</width>
-       <height>12</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <property name="spacing">
-      <number>6</number>
+      <number>8</number>
      </property>
      <item>
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>Or, select a recommendation as a guideline then customize it to your needs.</string>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="spacing">
+        <number>4</number>
        </property>
-      </widget>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="maximumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="pixmap">
+          <pixmap>images/info-outline.svg</pixmap>
+         </property>
+         <property name="scaledContents">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>You can select a recommendation as a guideline then customize it to your needs.</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item>
       <widget class="QCheckBox" name="cust_edit">
