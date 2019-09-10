@@ -60,9 +60,12 @@ S_COL_TO_ATTR = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
                     S_CALORIES_COL: 'percent'}
 
 # Optimum diet view
-OPT_NAME_COL = 0
-OPT_PRICE_COL = 1
-OPT_QUANTITY_COL= 2
+O_NAME_COL = 0
+O_COST_COL = 1
+O_QUANTITY_COL= 2
+O_UNIT_COL = 3
+
+O_COL_TO_ATTR = {O_NAME_COL: 'name', O_COST_COL: 'cost', O_QUANTITY_COL: 'quantity', O_UNIT_COL: 'unit'}
 
 # Requirements window
 F_INDEX = 0

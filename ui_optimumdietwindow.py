@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_optimumdietwindow.ui',
 # licensing of 'ui_optimumdietwindow.ui' applies.
 #
-# Created: Sun Sep  8 15:24:55 2019
+# Created: Mon Sep  9 22:06:12 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -40,12 +40,16 @@ class Ui_OptimumDietWindow(object):
         OptimumDietWindow.setIconSize(QtCore.QSize(30, 30))
         self.centralwidget = QtWidgets.QWidget(OptimumDietWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.diet_label = QtWidgets.QLabel(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        self.diet_label.setFont(font)
+        self.diet_label.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.diet_label.setObjectName("diet_label")
+        self.verticalLayout.addWidget(self.diet_label)
         self.label = QtWidgets.QLabel(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -55,36 +59,16 @@ class Ui_OptimumDietWindow(object):
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("images/opt_diet.png"))
         self.label.setObjectName("label")
-        self.horizontalLayout.addWidget(self.label)
-        self.diet_label = QtWidgets.QLabel(self.centralwidget)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(11)
-        self.diet_label.setFont(font)
-        self.diet_label.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.diet_label.setObjectName("diet_label")
-        self.horizontalLayout.addWidget(self.diet_label)
+        self.verticalLayout.addWidget(self.label)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.diet_view = QtWidgets.QTableView(self.centralwidget)
+        self.diet_view.setObjectName("diet_view")
+        self.horizontalLayout.addWidget(self.diet_view)
+        self.nutrition_view = QtWidgets.QTableView(self.centralwidget)
+        self.nutrition_view.setObjectName("nutrition_view")
+        self.horizontalLayout.addWidget(self.nutrition_view)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.optimum_diet_table = QtWidgets.QTableWidget(self.centralwidget)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.optimum_diet_table.setFont(font)
-        self.optimum_diet_table.setStyleSheet("QHeaderView::section{\n"
-"    border: 0px;\n"
-"    background-color: white;\n"
-"}\n"
-"")
-        self.optimum_diet_table.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.optimum_diet_table.setAlternatingRowColors(False)
-        self.optimum_diet_table.setShowGrid(False)
-        self.optimum_diet_table.setColumnCount(3)
-        self.optimum_diet_table.setObjectName("optimum_diet_table")
-        self.optimum_diet_table.setColumnCount(3)
-        self.optimum_diet_table.setRowCount(0)
-        self.optimum_diet_table.horizontalHeader().setVisible(False)
-        self.optimum_diet_table.verticalHeader().setVisible(False)
-        self.verticalLayout.addWidget(self.optimum_diet_table)
-        self.horizontalLayout_2.addLayout(self.verticalLayout)
         OptimumDietWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(OptimumDietWindow)

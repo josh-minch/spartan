@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>806</width>
+    <width>822</width>
     <height>780</height>
    </rect>
   </property>
@@ -261,7 +261,11 @@
           <enum>Qt::TabFocus</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">QListView{
+          <string notr="true">QComboBox {
+    padding: 2px 0px 2px 2px;
+}
+
+QListView{
 	outline: none;
 }
 
@@ -377,7 +381,11 @@ QListView::item {
           <enum>Qt::TabFocus</enum>
          </property>
          <property name="styleSheet">
-          <string notr="true">QListView{
+          <string notr="true">QComboBox {
+    padding: 2px 0px 2px 2px;
+}
+
+QListView{
 	outline: none;
 }
 
@@ -608,6 +616,12 @@ QListView::item {
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QTableView" name="macro_view">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
@@ -640,6 +654,12 @@ QTableView {
      </item>
      <item>
       <widget class="QTableView" name="vit_view">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>
@@ -672,6 +692,12 @@ QTableView {
      </item>
      <item>
       <widget class="QTableView" name="mineral_view">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="focusPolicy">
         <enum>Qt::NoFocus</enum>
        </property>

@@ -6,7 +6,7 @@ from PySide2 import QtCore, QtWidgets, QtGui
 from PySide2.QtCore import Qt, QEvent, Slot, QModelIndex
 from PySide2.QtGui import QFont, QKeySequence, QPalette
 from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListWidget, QTableWidget,
-                               QListWidgetItem, QTableWidgetItem, QAbstractItemView, 
+                               QListWidgetItem, QTableWidgetItem, QAbstractItemView,
                                QHeaderView, QShortcut)
 
 from spartan import *
@@ -28,12 +28,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.person = Person('josh', 25, 'm')
+        self.person = Person(19, 'm')
 
         self.setup_fridge_views()
         self.setup_selected_foods()
         self.setup_connections()
-        self.setup_selection_modes()    
+        self.setup_selection_modes()
 
         self.add_foods_btn.setFocus()
         #self.resize(QDesktopWidget().availableGeometry(self).size() * 0.90)
@@ -51,18 +51,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         fridge_quantity_delegate = FridgeQuantityDelegate(self)
         self.prices_view.setItemDelegate(fridge_quantity_delegate)
         self.constraints_view.setItemDelegate(fridge_quantity_delegate)
-        
+
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
         hide_view_cols(self.prices_view, P_COLS_TO_HIDE)
         hide_view_cols(self.constraints_view, C_COLS_TO_HIDE)
-        
+
         # Horizontal header
         f_header = self.fridge_view.horizontalHeader()
         p_header = self.prices_view.horizontalHeader()
         c_header = self.constraints_view.horizontalHeader()
 
-        # Header must be explicitly set to visible even though it's already 
+        # Header must be explicitly set to visible even though it's already
         # set in Qt Designer or else it doesn't display for constraints view
         f_header.setVisible(True)
         p_header.setVisible(True)
@@ -81,18 +81,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Hide fridge scrollbar
         self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}");
-      
+
     def setup_nutrition(self):
         for col, width in zip(NUT_COL_TO_ATTR.keys(), NUT_COL_WIDTHS):
             self.nutrition_view.setColumnWidth(col, width)
-        
+
         '''
         # Set vertical header height to determine table's row height
         v_header = self.nutrition_view.verticalHeader()
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
         '''
-    
+
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
         food_ids = self.fridge_model.data(selected_food_id_indexes[0], Qt.DisplayRole)
@@ -110,7 +110,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.person.update_attr_in_db(
                     attr, attr_value=None, food_id=food_id)
             else:
-                self.person.update_attr_in_db(attr, 
+                self.person.update_attr_in_db(attr,
                     attr_value=index.data(Qt.EditRole), food_id=food_id)
 
     def open_search_window(self):
@@ -149,9 +149,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.fridge_selected_model.setData(name_ix, name, Qt.EditRole)
             self.fridge_selected_model.setData(unit_ix, 'g', Qt.EditRole)
             self.fridge_selected_model.blockSignals(False)
-            
+
             self.fridge_selected_model.setData(amount_ix, float(100), Qt.EditRole)
-          
+
     def display_nutrition(self):
         amounts = []
         for row in range(self.fridge_selected_model.rowCount()):
@@ -165,7 +165,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         progress_bar_delegate = ProgressBarDelegate(self)
         self.nutrition_view.setItemDelegate(progress_bar_delegate)
 
-        self.setup_nutrition()   
+        self.setup_nutrition()
 
     def toggle_remove_btn(self):
         if self.fridge_view.selectionModel() is None:
@@ -178,13 +178,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setup_selection_modes(self):
         #self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
         pass
-    
+
     def setup_connections(self):
-        
+
         self.fridge_model.dataChanged.connect(self.update_persons_food_attr)
         self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
 
-        # Synchronize scrollbars       
+        # Synchronize scrollbars
         self.fridge_view.verticalScrollBar().valueChanged.connect(
             self.prices_view.verticalScrollBar().setValue)
         self.prices_view.verticalScrollBar().valueChanged.connect(
@@ -199,7 +199,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_foods_btn.clicked.connect(self.open_search_window)
         add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
         add_foods_shortcut.activated.connect(self.open_search_window)
-        
+
         # Remove button
         self.remove_btn.clicked.connect(self.remove_from_fridge)
         self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
@@ -208,17 +208,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.optimize_btn.clicked.connect(self.optimize)
         # optimize button shortcut set in Qt Designer
-       
+
         # Nutriton panel connections
         self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
         self.constraints_view.setSelectionModel(self.fridge_view.selectionModel())
 
-        # Close 
+        # Close
         close_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_W), self)
         close_shortcut.activated.connect(self.close)
 
-        # Debug 
+        # Debug
         self.debug_btn.clicked.connect(self.print_debug_info)
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
         debug_shortcut.activated.connect(self.print_debug_info)
@@ -239,10 +239,10 @@ if __name__ == "__main__":
     user_db.create_user_db()
     app = QApplication(sys.argv)
     app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
-    
+
     p = QPalette()
     p.setColor(QPalette.Highlight, Qt.darkRed)
     app.setPalette(p)
-    
+
     window = MainWindow()
     sys.exit(app.exec_())

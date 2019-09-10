@@ -25,8 +25,7 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
         self.mon_edit.setValidator(int_validator)
         self.year_edit.setValidator(int_validator)
 
-        #self.req_edit.setStyle(QStyleFactory.create('windowsvista'))
-        #self.sex_edit.setStyle(QStyleFactory.create('windowsvista'))
+        self.cust_edit.setStyle(QStyleFactory.create('windowsvista'))
 
         self.req_edit.setView(QListView())
         self.sex_edit.setView(QListView())
@@ -115,7 +114,5 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    #app.setStyle(QStyleFactory.create('fusion'))
-
     dialog = RequirementsWindow()
     sys.exit(app.exec_())

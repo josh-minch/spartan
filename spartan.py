@@ -10,35 +10,39 @@ from timeit import default_timer as timer
 from pulp import *
 import req
 import database
-    
+
 MAX_FOOD_ID_LEN = 5
 DB_SCALER = 100
 
-        
-class Person(object):
-    def __init__(self, name=None, sex=None, bd_day=None, bd_month=None, bd_year=None):
-        self.name = name
-        self.sex = sex
-        self.bd_day = bd_day
-        self.bd_month = bd_month
-        self.bd_year = bd_year
 
+class Person(object):
+    def __init__(self, age_range, sex):
+        # TODO: get rid of age_range, sex member variables. only here now for testing in opt diet window
+        self.age_range = age_range
+        self.sex = sex
         self.nuts = []
         self.foods = []
         self.populate_foods_from_db()
+        self.set_nuts()
 
     def __repr__(self):
         return str(self.__dict__)
 
     def set_nuts(self):
-        nuts = [Nutrient(name, id, min) for (id, name, min) 
-                in zip(req.nut_ids, req.nut_names, req.min[(self.age_range, self.sex)])]
-  
+        (macro, vit, mineral) = req.get_req(self.age_range, self.sex)
+
+        nuts = []
+        for nutrient in macro + vit + mineral:
+            # TODO: restructure data to fix this mess
+            nut_id = list(req.nuts.keys())[list(req.nuts.values()).index(nutrient['name'])]
+            nut_to_append = Nutrient(name=nutrient['name'], nut_id=nut_id, min=nutrient['min'])
+            nuts.append(nut_to_append)
+
         nuts.sort(key=lambda nut: nut.nut_id)
         self.nuts = nuts
-        self.remove_nut('Fluoride, F')
-        self.remove_nut('Total lipid (fat)')
-        self.add_nut(Nutrient('Energy', 208, min=2300, max=2600))
+        self.remove_nut('Fluoride (F)')
+        #self.remove_nut('Fat')
+        #self.add_nut(Nutrient('Energy', 208, min=2300, max=2600))
         #self.add_nut(Nutrient('Sugars, total'))
 
     def add_nut(self, nutrient):
@@ -48,7 +52,7 @@ class Person(object):
 
         self.nuts.append(nutrient)
         self.nuts.sort(key=lambda nut: nut.nut_id)
-        
+
     def remove_nut(self, nut_name):
         self.nuts = [nut for nut in self.nuts if nut.name not in nut_name]
 
@@ -69,7 +73,7 @@ class Person(object):
 
         con.commit()
         con.close()
-   
+
     def add_foods(self, food_names):
         #for name in food_names:
         #    self.foods.append(Food(name=name))
@@ -111,7 +115,7 @@ class Person(object):
 
         if attr in ('price', 'price_quantity', 'min', 'max', 'target'):
             attr_value = float(attr_value)
- 
+
         # attr comes from our dict of attr strings, so no need to sanitize
         sql_stmt = (
             'UPDATE foods '
@@ -124,9 +128,9 @@ class Person(object):
         con.close()
 
 class Food:
-    def __init__(self, food_id=None, name=None, 
+    def __init__(self, food_id=None, name=None,
                        price=None, price_quantity=100, price_unit='g',
-                       min=None, min_unit='g', 
+                       min=None, min_unit='g',
                        max=None, max_unit='g',
                        target=None, target_unit='g'):
 
@@ -176,6 +180,7 @@ def convert_quantity(food_id, quantity, old_unit, new_unit):
         cur.execute(sql_stmnt, [food_id, old_unit])
         unit_scale_factors = cur.fetchall()
         return quantity * unit_scale_factors[0][0]
+
     '''
     Bug: sql query always returns an ordering which may not correspond to the order
     passed to unit_scale_factors. explicitly return which gm_weight corresponds to which
@@ -198,7 +203,7 @@ def get_nutrition(person, food_ids, food_amounts):
         'AND nut_id IN '+ str(nut_ids)
     )
     cur.execute(sql_stmt, food_ids)
-    
+
     nut_amounts = cur.fetchall()
     nut_amounts = np.array([amount[0] if amount[0] is not None else 0 for amount in nut_amounts])
 
@@ -208,20 +213,23 @@ def get_nutrition(person, food_ids, food_amounts):
     nut_amounts = sum(food_amounts * (nut_amounts / DB_SCALER))
 
     units = get_nutrition_unit(nut_ids)
-  
+
     nutrition = []
     nut_names = [nut.name for nut in person.nuts]
     for nut_name, nut_amount, unit in zip(nut_names, nut_amounts, units):
         dv = calculate_dv(person, nut_name, nut_amount)
         nutrition.append({'name':nut_name, 'amount': nut_amount, 'unit': unit[0], 'percent': dv})
-                
+
     return nutrition
 
 def calculate_dv(person, nut_name, nutrient_amount):
         if nutrient_amount is None:
             return None
-            
+
         [min_value] = [nut.min for nut in person.nuts if nut.name == nut_name]
+
+        if min_value is None:
+            return None
 
         return round(100 * (nutrient_amount / min_value), 1)
 
@@ -250,7 +258,7 @@ class Optimizier:
 
     def __init__(self):
         self.lp_prob = LpProblem("Diet", sense=LpMinimize)
-    
+
     def make_nutrition_matrix(self, person):
         nut_ids = [nut.nut_id for nut in person.nuts]
         food_ids = [food.food_id for food in person.foods]
@@ -259,7 +267,7 @@ class Optimizier:
         cur = con.cursor()
 
         # Get nutritional values for each of the nutrients for each user's food.
-        # The len(food_ids)-1 are to programmatically generate a SQL statement with 
+        # The len(food_ids)-1 are to programmatically generate a SQL statement with
         # a variable length number of parameters, since food_ids and nut_ids vary depending on user settings
 
         sql_stmnt = '''select amount from nut_data where food_id in \
@@ -281,7 +289,7 @@ class Optimizier:
         return formatted_data
 
     def construct_lp_problem(self, person):
-        
+
         food_ids = [food.food_id for food in person.foods]
         ## TODO: Require prices on all foods? SETTING PRICE = 1 TEMPORARY FOR TESTING
         prices = [float(food.price) if food.price is not None else 1 for food in person.foods]
@@ -336,10 +344,10 @@ class Optimizier:
 
         self.lp_prob.writeLP("DietModel.lp")
         self.lp_prob.solve()
-        
+
     def describe_solution_status(self):
         status_statement = ""
-        
+
         if (self.lp_prob.status == LpStatusOptimal):
             status_statement = "Optimum diet"
         elif (self.lp_prob.status == LpStatusInfeasible):
@@ -349,7 +357,7 @@ class Optimizier:
 
     def describe_solution(self):
         print("Status: " + LpStatus[self.lp_prob.status])
-        
+
         for v in self.lp_prob.variables():
             if (v.varValue is not None and v.varValue > 0):
                 print(database.get_food_name(v.name), "=", 100 * v.varValue)
@@ -379,10 +387,7 @@ def add_random_foods():
     return food_ids.sort()
 
 def main():
-    josh = Person(name="josh", age=25, sex='m')
+    pass
 
-    food_ids = [1001, 1002]
-    print(get_nutrition(josh, food_ids))
-   
 if __name__ == '__main__':
     main()

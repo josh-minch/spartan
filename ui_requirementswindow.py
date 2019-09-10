@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_requirementswindow.ui',
 # licensing of 'ui_requirementswindow.ui' applies.
 #
-# Created: Sun Sep  8 21:54:13 2019
+# Created: Mon Sep  9 22:06:12 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_RequirementsWindow(object):
     def setupUi(self, RequirementsWindow):
         RequirementsWindow.setObjectName("RequirementsWindow")
-        RequirementsWindow.resize(806, 780)
+        RequirementsWindow.resize(822, 780)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -117,7 +117,11 @@ class Ui_RequirementsWindow(object):
         self.req_edit.setFont(font)
         self.req_edit.setMouseTracking(False)
         self.req_edit.setFocusPolicy(QtCore.Qt.TabFocus)
-        self.req_edit.setStyleSheet("QListView{\n"
+        self.req_edit.setStyleSheet("QComboBox {\n"
+"    padding: 2px 0px 2px 2px;\n"
+"}\n"
+"\n"
+"QListView{\n"
 "    outline: none;\n"
 "}\n"
 "\n"
@@ -169,7 +173,11 @@ class Ui_RequirementsWindow(object):
         font.setPointSize(10)
         self.sex_edit.setFont(font)
         self.sex_edit.setFocusPolicy(QtCore.Qt.TabFocus)
-        self.sex_edit.setStyleSheet("QListView{\n"
+        self.sex_edit.setStyleSheet("QComboBox {\n"
+"    padding: 2px 0px 2px 2px;\n"
+"}\n"
+"\n"
+"QListView{\n"
 "    outline: none;\n"
 "}\n"
 "\n"
@@ -273,6 +281,10 @@ class Ui_RequirementsWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.macro_view = QtWidgets.QTableView(RequirementsWindow)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        self.macro_view.setFont(font)
         self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
@@ -290,6 +302,10 @@ class Ui_RequirementsWindow(object):
         self.macro_view.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.macro_view)
         self.vit_view = QtWidgets.QTableView(RequirementsWindow)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        self.vit_view.setFont(font)
         self.vit_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
@@ -307,6 +323,10 @@ class Ui_RequirementsWindow(object):
         self.vit_view.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.vit_view)
         self.mineral_view = QtWidgets.QTableView(RequirementsWindow)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        self.mineral_view.setFont(font)
         self.mineral_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
@@ -341,7 +361,7 @@ class Ui_RequirementsWindow(object):
     def retranslateUi(self, RequirementsWindow):
         RequirementsWindow.setWindowTitle(QtWidgets.QApplication.translate("RequirementsWindow", "Nutritional Requirements", None, -1))
         self.label.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Nutritional Requirements", None, -1))
-        self.label_2.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Set your nutritional requirements according to national recommendations.", None, -1))
+        self.label_2.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Set requirements according to national recommendations.", None, -1))
         self.req_label.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Recommendation by", None, -1))
         self.req_edit.setCurrentText(QtWidgets.QApplication.translate("RequirementsWindow", "United States (Health Department)", None, -1))
         self.req_edit.setItemText(0, QtWidgets.QApplication.translate("RequirementsWindow", "United States (Health Department)", None, -1))
