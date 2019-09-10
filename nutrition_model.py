@@ -47,7 +47,7 @@ class NutritionTableModel(QAbstractTableModel):
 
     def rowCount(self, index=QModelIndex()):
         return len(self.nutrients)
-    
+
     def columnCount(self, index=QModelIndex()):
         return len(NUT_COL_TO_ATTR)
 
@@ -64,22 +64,19 @@ class NutritionTableModel(QAbstractTableModel):
             if index.column() == NUT_NAME_COL:
                 return name
             elif index.column() == NUT_AMOUNT_COL:
-                return amount
+                return str(amount)
             elif index.column() == NUT_UNIT_COL:
                 return unit
             elif index.column() == NUT_PERCENT_COL:
                 return percent
-          
-        # A bug in PySide2 requires that we cast the bitwise 
+
+        # A bug in PySide2 requires that we cast the bitwise
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
-
         if role == Qt.TextAlignmentRole:
             if index.column() == NUT_AMOUNT_COL:
                 return int(Qt.AlignRight | Qt.AlignVCenter)
-            #elif index.column() == NUT_UNIT_COL:
-            #    return int(Qt.AlignLeft | Qt.AlignVCenter)
-      
+
         return None
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
@@ -93,7 +90,7 @@ class NutritionTableModel(QAbstractTableModel):
                     return
                 elif section == NUT_PERCENT_COL:
                     return "Percent daily requirement"
-                
+
             if role == Qt.TextAlignmentRole:
                 if section == NUT_NAME_COL:
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
@@ -101,7 +98,7 @@ class NutritionTableModel(QAbstractTableModel):
                     return int(Qt.AlignRight | Qt.AlignVCenter)
                 if section == NUT_PERCENT_COL:
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
-    
+
         return None
 
     def insertRows(self, position, rows=1, index=QModelIndex()):
@@ -110,14 +107,14 @@ class NutritionTableModel(QAbstractTableModel):
             self.nutrients.insert(position + row, {"name":"", "amount":"",
                                                    "unit":"", "percent":""})
         self.endInsertRows()
-       
+
         return True
-        
+
     def removeRows(self, position, rows=1, index=QModelIndex()):
         self.beginRemoveRows(QModelIndex(), position, position + rows - 1)
         del self.nutrients[position:position+rows]
         self.endRemoveRows()
-       
+
         return True
 
     def setData(self, index, value, role=Qt.EditRole):
@@ -125,7 +122,6 @@ class NutritionTableModel(QAbstractTableModel):
             return False
 
         if index.isValid() and 0 <= index.row() < len(self.nutrients):
-            
             nutrient = self.nutrients[index.row()]
 
             if index.column() == NUT_NAME_COL:
@@ -133,7 +129,7 @@ class NutritionTableModel(QAbstractTableModel):
             elif index.column() == NUT_AMOUNT_COL:
                 nutrient['amount'] = value
             elif index.column() == NUT_UNIT_COL:
-                nutrient['unit'] = value         
+                nutrient['unit'] = value
             elif index.column() == NUT_PERCENT_COL:
                 nutrient['percent'] = value
             else:
