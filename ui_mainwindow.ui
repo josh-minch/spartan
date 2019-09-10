@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>963</width>
+    <width>855</width>
     <height>730</height>
    </rect>
   </property>
@@ -50,6 +50,7 @@
   <property name="font">
    <font>
     <family>Segoe UI</family>
+    <pointsize>10</pointsize>
     <italic>false</italic>
    </font>
   </property>
@@ -720,6 +721,12 @@ QTableView {
     </item>
     <item row="2" column="6" colspan="3">
      <widget class="QTableView" name="fridge_selected_view">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>300</height>
+       </size>
+      </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
       </property>

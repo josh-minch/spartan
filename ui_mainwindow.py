@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Mon Sep  9 22:06:11 2019
+# Created: Tue Sep 10 11:32:26 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(963, 730)
+        MainWindow.resize(855, 730)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -27,6 +27,7 @@ class Ui_MainWindow(object):
         MainWindow.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
+        font.setPointSize(10)
         font.setItalic(False)
         MainWindow.setFont(font)
         MainWindow.setFocusPolicy(QtCore.Qt.StrongFocus)
@@ -301,6 +302,7 @@ class Ui_MainWindow(object):
         self.nutrition_view.verticalHeader().setDefaultSectionSize(23)
         self.gridLayout_2.addWidget(self.nutrition_view, 1, 6, 1, 3)
         self.fridge_selected_view = QtWidgets.QTableView(self.centralwidget)
+        self.fridge_selected_view.setMinimumSize(QtCore.QSize(0, 300))
         self.fridge_selected_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.fridge_selected_view.setShowGrid(False)
         self.fridge_selected_view.setObjectName("fridge_selected_view")
