@@ -25,7 +25,7 @@ nuts = {
     317: 'Selenium (Se)',
     320: 'A',
     323: 'E (Alpha-tocopherol)',
-    324: 'D',
+    328: 'D',
     401: 'C (Ascorbic acid)',
     404: 'B₁ (Thiamin)',
     405: 'B₂ (Riboflavin)',
@@ -79,7 +79,6 @@ req_macro = {
     (31, 'l') : [3800.0,210,None,29,71,None,None,None,None,1.3,13,None]
 }
 
-macro_names = ["Water", "Carbohydrates", "Sugar", "Fiber", "Protein", "Fat", "Saturated", "Monounsaturated", "Polyunsaturated", "Omega-3", "Omega-6", "Trans"]
 req_vit = {
     ( 0, 'm') : [400,0.2,0.3,2,1.7,0.1,65,0.4,40,10,4,2,125],
     (0.5, 'm'): [500,0.3,0.4,4,1.8,0.3,80,0.5,50,10,5,2.5,150],
