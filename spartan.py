@@ -6,6 +6,7 @@ import sqlite3 as sql
 import numpy as np
 from datetime import date
 from timeit import default_timer as timer
+from operator import itemgetter
 
 from pulp import *
 import req
@@ -35,13 +36,13 @@ class Person(object):
 
         for nutrient in macro + vit + mineral:
             # TODO: restructure data to fix this mess
-            # Get nut_id from nut name
+            # Get nut_id from nutrient name
             nut_id = list(req.nuts.keys())[list(req.nuts.values()).index(nutrient['name'])]
             nut_to_append = Nutrient(name=nutrient['name'], nut_id=nut_id, min=nutrient['min'])
             self.nuts.append(nut_to_append)
 
         self.remove_nut('Fluoride (F)')
-        self.add_nut(Nutrient('Energy', nut_id=208, min=2000, max=2900))
+        self.add_nut(Nutrient('Energy', nut_id=208, target=2200))
         self.nuts.sort(key=lambda nut: nut.nut_id)
 
     def add_nut(self, nutrient):
@@ -288,10 +289,24 @@ class Optimizier:
             if (var.varValue is not None and var.varValue > 0):
                 food_name = database.get_food_name(var.name)
                 cost = round(float(prices[i]) * var.varValue, 2)
-                quantity = round(100 * var.varValue, 2)
+                quantity = round(DB_SCALER * var.varValue, 2)
                 foods.append({"name":food_name, "cost":cost, "quantity":quantity, "unit":'g'})
 
         return foods
+
+    def get_data_for_nutrition_lookup(self):
+        food_ids = []
+        food_amounts = []
+
+        vars = self.lp_prob.variables()
+        vars.sort(key = lambda v : int(v.name))
+
+        for var in vars:
+            if (var.varValue is not None and var.varValue > 0):
+                food_ids.append(int(var.name))
+                food_amounts.append(DB_SCALER * var.varValue)
+
+        return food_ids, food_amounts
 
     def get_totals(self):
         total_number = len([v for v in self.lp_prob.variables() if v.varValue is not None and v.varValue > 0])
@@ -345,6 +360,7 @@ def get_nutrition(person, food_ids, food_amounts):
         'SELECT amount '
         'FROM nut_data WHERE food_id IN (' + (len(food_ids) - 1) * '?, ' + '?) '
         'AND nut_id IN (' + (len(nut_ids) - 1) * '?, ' + '?) '
+        'ORDER BY food_id, nut_id'
     )
     cur.execute(sql_stmt, food_ids + nut_ids)
 

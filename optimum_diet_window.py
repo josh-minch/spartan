@@ -47,9 +47,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.diet_view.setModel(diet_model)
 
     def populate_nutrition_table(self):
-        foods = self.optimizier.get_diet_report()
-        food_ids = [database.get_food_id(food['name']) for food in foods]
-        food_amounts = [food['quantity'] for food in foods]
+        (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
 
         nutrients = spartan.get_nutrition(self.person, food_ids, food_amounts)
         nutrition_model = NutritionTableModel(nutrients=nutrients)
