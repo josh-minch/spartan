@@ -2,11 +2,11 @@ import operator
 import os.path
 import random
 import time
+import copy
 import sqlite3 as sql
 import numpy as np
 from datetime import date
 from timeit import default_timer as timer
-from operator import itemgetter
 
 from pulp import *
 import req
@@ -42,7 +42,7 @@ class Person(object):
             self.nuts.append(nut_to_append)
 
         self.remove_nut('Fluoride (F)')
-        self.add_nut(Nutrient('Energy', nut_id=208, target=2200))
+        self.add_nut(Nutrient('Energy', nut_id=208, max=2500))
         self.nuts.sort(key=lambda nut: nut.nut_id)
 
     def add_nut(self, nutrient):
@@ -71,10 +71,8 @@ class Person(object):
         con.close()
 
     def add_foods(self, food_names):
-        #for name in food_names:
-        #    self.foods.append(Food(name=name))
         self.add_foods_to_db(food_names)
-        self.foods.sort(key=lambda f: f.food_id)
+
 
     def add_foods_to_db(self, food_names):
         con = sql.connect("spartan.db")
@@ -175,10 +173,21 @@ class Optimizier:
     def __init__(self, person):
         self.lp_prob = LpProblem("Diet", sense=LpMinimize)
         self.person = person
+        self.foods = copy.deepcopy(self.person.foods)
+        self.foods.sort(key=lambda f: f.food_id)
+
+    def optimize_diet(self):
+        self.make_nutrition_matrix()
+        self.construct_lp_problem()
+        self.add_nutrient_constraints()
+        self.add_food_constraints()
+
+        self.lp_prob.writeLP("DietModel.lp")
+        self.lp_prob.solve()
 
     def make_nutrition_matrix(self):
         nut_ids = [nut.nut_id for nut in self.person.nuts]
-        food_ids = [food.food_id for food in self.person.foods]
+        food_ids = [food.food_id for food in self.foods]
 
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
@@ -200,15 +209,15 @@ class Optimizier:
         # Construct formatted matrix where each row is a food and each col is a nutrient
         unformatted_data = np.array(unformatted_data)
         unformatted_data[unformatted_data == None] = 0
-        unformatted_data = unformatted_data.reshape(len(self.person.foods), len(self.person.nuts))
+        unformatted_data = unformatted_data.reshape(len(self.foods), len(self.person.nuts))
 
         formatted_data = np.transpose(unformatted_data)
         return formatted_data
 
     def construct_lp_problem(self):
-        food_ids = [food.food_id for food in self.person.foods]
+        food_ids = [food.food_id for food in self.foods]
         ## TODO: Require prices on all foods? SETTING PRICE = 1 TEMPORARY FOR TESTING
-        prices = [float(food.price) if food.price is not None else 1 for food in self.person.foods]
+        prices = [float(food.price) if food.price is not None else 1 for food in self.foods]
 
         self.food_quantity_vector = np.array(
             [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
@@ -216,7 +225,7 @@ class Optimizier:
         self.lp_prob += lpSum(prices * self.food_quantity_vector), "Total cost of foods"
 
     def add_food_constraints(self):
-        for i, food in enumerate(self.person.foods):
+        for i, food in enumerate(self.foods):
             self.lp_prob += self.food_quantity_vector[i] >= 0
 
             constraints = [food.min, food.max, food.target]
@@ -252,16 +261,6 @@ class Optimizier:
             if maxes[i] is not None:
                 self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) <= maxes[i]
 
-    def optimize_diet(self):
-        self.person.foods.sort(key=lambda f: f.food_id)
-        self.make_nutrition_matrix()
-        self.construct_lp_problem()
-        self.add_nutrient_constraints()
-        self.add_food_constraints()
-
-        self.lp_prob.writeLP("DietModel.lp")
-        self.lp_prob.solve()
-
     def get_solution_status(self):
         status_statement = ""
 
@@ -282,7 +281,7 @@ class Optimizier:
         print(100 * value(self.lp_prob.objective), "total grams of food")
 
     def get_diet_report(self):
-        prices = [food.price if food.price is not None else 1 for food in self.person.foods]
+        prices = [food.price if food.price is not None else 1 for food in self.foods]
 
         foods = []
         for i, var in enumerate(self.lp_prob.variables()):
@@ -299,12 +298,12 @@ class Optimizier:
         food_amounts = []
 
         vars = self.lp_prob.variables()
+        vars = [v for v in vars if v.varValue is not None and v.varValue > 0]
         vars.sort(key = lambda v : int(v.name))
 
         for var in vars:
-            if (var.varValue is not None and var.varValue > 0):
-                food_ids.append(int(var.name))
-                food_amounts.append(DB_SCALER * var.varValue)
+            food_ids.append(int(var.name))
+            food_amounts.append(DB_SCALER * var.varValue)
 
         return food_ids, food_amounts
 

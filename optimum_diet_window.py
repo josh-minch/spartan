@@ -43,7 +43,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         num_value, cost_value, mass_value = self.optimizier.get_totals()
         foods.append({"name":str(num_value) + ' items of food', "cost":cost_value, "quantity":mass_value, "unit":'g'})
 
-        diet_model = DietModel(foods=foods)
+        self.diet_model = DietModel(foods=foods)
         self.diet_view.setModel(diet_model)
 
     def populate_nutrition_table(self):
@@ -56,6 +56,20 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.nutrition_view.setItemDelegate(progress_bar_delegate)
 
         self.nutrition_view.setModel(nutrition_model)
+
+    def display_selected_food_nutrition(self):
+        amounts = []
+        for row in range(self.diet_.rowCount()):
+            index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
+            amounts.append(self.fridge_selected_model.data(index))
+
+        nutrients = get_nutrition(self.person, self.selected_food_ids, amounts)
+        nutrition_model = NutritionTableModel(nutrients=nutrients)
+        self.nutrition_view.setModel(nutrition_model)
+
+        progress_bar_delegate = ProgressBarDelegate(self)
+        self.nutrition_view.setItemDelegate(progress_bar_delegate)
+
 
 if __name__ == "__main__":
     person = Person(19, 'm')

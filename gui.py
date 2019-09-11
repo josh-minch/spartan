@@ -37,7 +37,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.add_foods_btn.setFocus()
         #self.resize(QDesktopWidget().availableGeometry(self).size() * 0.90)
-        self.resize(1200, 800)
+        self.resize(1200, 600)
         self.show()
 
     def setup_fridge_views(self):
@@ -126,17 +126,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_selected_view.setModel(self.fridge_selected_model)
 
     def change_fridge_selection(self, selected, deselected):
-        if not self.fridge_view.selectionModel().hasSelection():
-            return
-
+        print("selection changed")
+        print(self.fridge_view.selectionModel().selectedRows())
         selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
         selected_food_name_ixs = [ix.siblingAtColumn(NAME_COL) for ix in selected_food_id_ixs]
 
         self.selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
         food_names = [ix.data() for ix in selected_food_name_ixs]
 
-        for i in range(self.fridge_selected_model.rowCount()):
-            self.fridge_selected_model.removeRows(i)
+        while self.fridge_selected_model.rowCount() > 0:
+            self.fridge_selected_model.removeRow(0)
 
         for i, name in enumerate(food_names):
             self.fridge_selected_model.insertRows(i)
@@ -219,17 +218,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         close_shortcut.activated.connect(self.close)
 
         # Debug
-        self.debug_btn.clicked.connect(self.print_debug_info)
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
         debug_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
-        amounts = []
-        for row in range(self.fridge_selected_model.rowCount()):
-            index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
-            amounts.append(self.fridge_selected_model.data(index))
-
-        print(amounts)
+        print(self.fridge_view.selectionModel().selectedRows())
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
@@ -240,9 +233,9 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
 
-    p = QPalette()
-    p.setColor(QPalette.Highlight, Qt.darkRed)
-    app.setPalette(p)
+    #p = QPalette()
+    #p.setColor(QPalette.Highlight, Qt.darkRed)
+    #app.setPalette(p)
 
     window = MainWindow()
     sys.exit(app.exec_())

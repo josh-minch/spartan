@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_searchwindow.ui',
 # licensing of 'ui_searchwindow.ui' applies.
 #
-# Created: Tue Sep 10 11:32:27 2019
+# Created: Wed Sep 11 16:06:53 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
