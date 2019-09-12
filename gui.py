@@ -100,18 +100,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_model.removeRow(selected_food_id_indexes[0].row())
         self.person.remove_foods(food_ids=[food_ids])
 
-    def update_persons_food_attr(self, index):
+    def update_foods(self, index):
         if index.column() != FOOD_ID_COL:
-            food_id = self.person.foods[index.row()].food_id
-            attr = F_COL_TO_ATTR[index.column()]
-
-            # User entering empty string stores NULL in database
-            if index.data(Qt.EditRole) in ("", None):
-                self.person.update_attr_in_db(
-                    attr, attr_value=None, food_id=food_id)
-            else:
-                self.person.update_attr_in_db(attr,
-                    attr_value=index.data(Qt.EditRole), food_id=food_id)
+            food = self.person.foods[index.row()]
+            self.person.update_food_in_user_db(food=food)
 
     def open_search_window(self):
         self.search_window = SearchWindow(parent=None, person=self.person, fridge_model=self.fridge_model)
@@ -126,8 +118,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_selected_view.setModel(self.fridge_selected_model)
 
     def change_fridge_selection(self, selected, deselected):
-        print("selection changed")
-        print(self.fridge_view.selectionModel().selectedRows())
         selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
         selected_food_name_ixs = [ix.siblingAtColumn(NAME_COL) for ix in selected_food_id_ixs]
 
@@ -180,7 +170,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
 
-        self.fridge_model.dataChanged.connect(self.update_persons_food_attr)
+        self.fridge_model.dataChanged.connect(self.update_foods)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
         self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
 
         # Synchronize scrollbars
@@ -209,7 +200,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # optimize button shortcut set in Qt Designer
 
         # Nutriton panel connections
-        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
+
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
         self.constraints_view.setSelectionModel(self.fridge_view.selectionModel())
 

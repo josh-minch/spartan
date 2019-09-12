@@ -73,7 +73,6 @@ class Person(object):
     def add_foods(self, food_names):
         self.add_foods_to_db(food_names)
 
-
     def add_foods_to_db(self, food_names):
         con = sql.connect("spartan.db")
         cur = con.cursor()
@@ -103,21 +102,21 @@ class Person(object):
         con.commit()
         con.close()
 
-    def update_attr_in_db(self, attr, attr_value, food_id):
+    def update_food_in_user_db(self, food):
         con = sql.connect("spartan.db")
         cur = con.cursor()
 
-        if attr in ('price', 'price_quantity', 'min', 'max', 'target'):
-            attr_value = float(attr_value)
-
+        attrs = str(tuple(vars(food).keys()))
+        attr_values = list(vars(food).values())
         # attr comes from our dict of attr strings, so no need to sanitize
         sql_stmt = (
-            'UPDATE foods '
-            'SET ' + attr + ' = ?'
-            'WHERE food_id = ?'
+            "UPDATE foods "
+            "SET "+ attrs +" = "
+            "("+ (len(attr_values)-1)*"?," +"?)"
+            "WHERE food_id = ?"
         )
 
-        cur.execute(sql_stmt, [attr_value] + [food_id])
+        cur.execute(sql_stmt, attr_values + [food.food_id])
         con.commit()
         con.close()
 
