@@ -110,6 +110,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def optimize(self):
+        if len(self.person.foods) == 0:
+            return
+
         self.optimum_diet_window = OptimumDietWindow(parent=None, person=self.person)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
