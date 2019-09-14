@@ -44,7 +44,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         foods.append({"name":str(num_value) + ' items of food', "cost":cost_value, "quantity":mass_value, "unit":'g'})
 
         self.diet_model = DietModel(foods=foods)
-        self.diet_view.setModel(diet_model)
+        self.diet_view.setModel(self.diet_model)
 
     def populate_nutrition_table(self):
         (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
