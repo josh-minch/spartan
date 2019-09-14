@@ -49,7 +49,7 @@ class NutritionTableModel(QAbstractTableModel):
         return len(self.nutrients)
 
     def columnCount(self, index=QModelIndex()):
-        return len(NUT_COL_TO_ATTR)
+        return len(nut_col_to_attr)
 
     def data(self, index, role):
         if not index.isValid() or not 0 <= index.row() < len(self.nutrients):
