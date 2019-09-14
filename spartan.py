@@ -30,7 +30,7 @@ class Person(object):
         return str(self.__dict__)
 
     def set_nuts(self):
-        (macro, vit, mineral) = req.get_req(self.age_range, self.sex)
+        (macro, vit, mineral) = req.get_reqs(self.age_range, self.sex)
 
         self.nuts = []
 

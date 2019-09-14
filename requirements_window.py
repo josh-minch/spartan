@@ -60,7 +60,7 @@ class RequirementsWindow(QDialog, Ui_RequirementsWindow):
             return
 
         self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
-        (macro, vit, mineral) = req.get_req(self.age_range, self.sex)
+        (macro, vit, mineral) = req.get_reqs(self.age_range, self.sex)
 
         self.macro_model = MacroModel(nutrients=macro)
         self.vit_model = VitModel(nutrients=vit)

@@ -1,5 +1,6 @@
 import sqlite3
 import math
+import sqlite3 as sql
 from datetime import date
 DAYS_IN_YEAR = 365.2425
 
@@ -44,13 +45,53 @@ nuts = {
     606: 'Saturated'
 }
 
+display_name_to_id = {
+    'Protein': 203,
+    'Fat': 204,
+    'Carbohydrates': 205,
+    'Energy': 208,
+    'Water': 255,
+    'Sugar': 269,
+    'Fiber': 291,
+    'Calcium (Ca)': 301,
+    'Iron (Fe)': 303,
+    'Magnesium (Mg)': 304,
+    'Phosphorus (P)': 305,
+    'Potassium (K)': 306,
+    'Sodium (Na)': 307,
+    'Zinc (Zn)': 309,
+    'Copper (Cu)': 312,
+    'Fluoride (F)': 313,
+    'Manganese (Mn)': 315,
+    'Selenium (Se)': 317,
+    'A': 320,
+    'E (Alpha-tocopherol)': 323,
+    'D': 328,
+    'C (Ascorbic acid)': 401,
+    'B₁ (Thiamin)': 404,
+    'B₂ (Riboflavin)': 405,
+    'B₃ (Niacin)': 406,
+    'B₅ (Pantothenic acid)': 410,
+    'B₆': 415,
+    'B₉ (Folate)': 417,
+    'B₁₂ (Cobalamin)': 418,
+    'Choline': 421,
+    'K (Phylloquinone)': 430,
+    'Omega-6': 618,
+    'Omega-3': 619,
+    'Monounsaturated': 645,
+    'Polyunsaturated': 646,
+    'Trans': 605,
+    'Saturated': 606
+}
+
 # Nutritional requirements. Rows correspond to life stages and cols to nutrients
 # TODO: Handle folate, dfe, total, in food
 # TODO: Add "added" nutrients like vitamin b12 and vitamin e, as well as adjusted protein and kcal.
 # TODO: Resort to match db order or sort when adding nut.
 # Replace nut ordered dict with something else, like a list of tuples
 # (list of tuples like nut = (name, id, req) ?)
-req_macro = {
+min_macro = {
     ( 0, 'm') : [700.0,60,None,None,9.1,31,None,None,None,0.5,4.4,None],
     (0.5, 'm'): [800.0,95,None,None,11,30,None,None,None,0.5,4.6,None],
     ( 1, 'm') : [1300.0,130,None,19,13,None,None,None,None,0.7,7,None],
@@ -79,7 +120,7 @@ req_macro = {
     (31, 'l') : [3800.0,210,None,29,71,None,None,None,None,1.3,13,None]
 }
 
-req_vit = {
+min_vit = {
     ( 0, 'm') : [400,0.2,0.3,2,1.7,0.1,65,0.4,40,10,4,2,125],
     (0.5, 'm'): [500,0.3,0.4,4,1.8,0.3,80,0.5,50,10,5,2.5,150],
     ( 1, 'm') : [300,0.5,0.5,6,2,0.5,150,0.9,15,15,6,30,200],
@@ -108,7 +149,7 @@ req_vit = {
     (31, 'l') : [1300,1.4,1.6,17,7,2,500,2.8,120,15,19,90,550]
 }
 
-req_mineral = {
+min_mineral = {
     ( 0, 'm') : [200,0.2,10,0.27,30,0.003,100,400,15,110,2],
     (0.5, 'm'): [260,0.22,500,11,75,0.6,275,860,20,370,3],
     ( 1, 'm') : [700,0.34,700,7,80,1.2,460,2000,20,800,3],
@@ -137,7 +178,7 @@ req_mineral = {
     (31, 'l') : [1000,1.3,3000,9,320,2.6,700,2800,70,1500,12]
 }
 
-ul_vit = {
+max_vit = {
     ( 0, 'm') : [600,None,None,None,None,None,None,None,None,25,None,None,None],
     (0.5, 'm'): [600,None,None,None,None,None,None,None,None,38,None,None,None],
     ( 1, 'm') : [600,None,None,10,None,30,300,None,400,63,200,None,1],
@@ -166,7 +207,7 @@ ul_vit = {
     (31, 'l') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5]
 }
 
-ul_mineral = {
+max_mineral = {
    ( 0, 'm') : [1000,None,0.7,40,None,None,None,45,4,None],
    (0.5, 'm'): [1500,None,0.9,40,None,None,None,60,5,None],
    ( 1, 'm') : [2500,1000,1.3,40,65,2,3,90,7,1.5],
@@ -203,18 +244,42 @@ age_ranges = [
     (0, 0.5), (0.5, 1), (1, 4), (4, 9), (9, 14), (14, 19), (19, 31), (31, 51), (51, 71), (71, math.inf)
 ]
 
-def get_req(age_range, sex):
-    macro = [{'name': name, 'min': value} for (name, value) in zip(macro_names, req_macro[(age_range, sex)])]
-    vit = [{'name': name, 'min': value} for (name, value) in zip(vit_names, req_vit[(age_range, sex)])]
-    mineral = [{'name': name, 'min': value} for (name, value) in zip(mineral_names, req_mineral[(age_range, sex)])]
+def get_reqs(age_range, sex):
+    macro = []
+    for (name, min) in zip(macro_names, min_macro[(age_range, sex)]):
+        unit = get_unit(name)
+        macro.append({'name': name, 'min': min, 'min_unit': unit, 'max': None, 'max_unit': unit})
+
+    vit = extract_req(age_range, sex, vit_names, min_vit, max_vit)
+    mineral = extract_req(age_range, sex, mineral_names, min_mineral, max_mineral)
 
     return (macro, vit, mineral)
 
-def get_ul(age_range, sex):
-    vit = [{'name': name, 'min': value} for (name, value) in zip(vit_names, ul_vit[(age_range, sex)])]
-    mineral = [{'name': name, 'min': value} for (name, value) in zip(mineral_names, ul_mineral[(age_range, sex)])]
+def extract_req(age_range, sex, nut_names, min_reqs, max_reqs):
+    nuts = []
+    for (name, min, max) in zip(nut_names, min_reqs[(age_range, sex)], max_reqs[(age_range, sex)]):
+        unit = get_unit(name)
+        nuts.append({'name': name, 'min': min, 'min_unit': unit, 'max': None, 'max_unit': unit})
 
-    return (vit, mineral)
+    return nuts
+
+def get_unit(nut_name):
+    con = sql.connect("sr_legacy/sr_legacy.db")
+    cur = con.cursor()
+
+    sql_stmt = (
+        'SELECT units '
+        'FROM nutr_def '
+        'WHERE id = ?'
+    )
+    nut_id = display_name_to_id[nut_name]
+
+    cur.execute(sql_stmt, [nut_id])
+    unit = cur.fetchall()[0][0]
+
+    con.commit()
+    con.close()
+    return unit
 
 def calculate_age_range(bd_year, bd_month, bd_day):
     age = calculate_age(bd_year, bd_month, bd_day)

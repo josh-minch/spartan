@@ -49,34 +49,25 @@ class RequirementsModel(QAbstractTableModel):
         return len(self.nutrients)
 
     def columnCount(self, index=QModelIndex()):
-        return len(R_COL_TO_ATTR)
+        return len(r_col_to_attr)
 
     def data(self, index, role):
         if not index.isValid() or not 0 <= index.row() < len(self.nutrients):
             return None
 
-        if role == Qt.DisplayRole or role == Qt.EditRole:
-            name = self.nutrients[index.row()]["name"]
-            min = self.nutrients[index.row()]["min"]
-            #min_unit = self.nutrients[index.row()]["min_unit"]
-            #max = self.nutrients[index.row()]["max"]
-            #max_unit = self.nutrients[index.row()]["max_unit"]
+        if role in (Qt.DisplayRole, Qt.EditRole):
+            attr_str = r_col_to_attr[index.column()]
+            attr = self.nutrients[index.row()][attr_str]
 
-            if index.column() == R_NAME_COL:
-                return name
-            elif index.column() == R_MIN_COL:
-                if min is None:
-                    return "None"
-                return min
-            #elif index.column() == R_MIN_UNIT_COL:
-            #    return min_unit
+            if attr is None:
+                return "None"
+            return attr
 
         # A bug in PySide2 requires that we cast the bitwise
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
-
         if role == Qt.TextAlignmentRole:
-            if index.column() == R_MIN_COL:
+            if index.column() in (R_MIN_COL, R_MAX_COL):
                 return int(Qt.AlignRight | Qt.AlignVCenter)
 
         return None
@@ -87,7 +78,7 @@ class RequirementsModel(QAbstractTableModel):
     def insertRows(self, position, rows=1, index=QModelIndex()):
         self.beginInsertRows(QModelIndex(), position, position + rows - 1)
         for row in range(rows):
-            self.nutrients.insert(position + row, {"name":"", "min":"",})
+            self.nutrients.insert(position + row, {'name':'', 'min':'', 'min_unit':'', 'max':'', 'max_unit':''})
 
         self.endInsertRows()
 
@@ -112,6 +103,8 @@ class RequirementsModel(QAbstractTableModel):
                 nutrient['name'] = value
             elif index.column() == R_MIN_COL:
                 nutrient['min'] = value
+            elif index.column() == R_MAX_COL:
+                nutrient['max'] = value
             else:
                 return False
 
@@ -131,63 +124,75 @@ class MacroModel(RequirementsModel):
         super().__init__(parent, nutrients)
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-            if orientation == Qt.Horizontal:
-                if role == Qt.DisplayRole:
-                    if section == R_NAME_COL:
-                        return "Macronutrient"
-                    elif section == R_MIN_COL:
-                        return "Recommended"
-                    elif section == R_MIN_UNIT_COL:
-                        return
+        if orientation == Qt.Horizontal:
+            if role == Qt.DisplayRole:
+                if section == R_NAME_COL:
+                    return "Macronutrient"
+                elif section == R_MIN_COL:
+                    return "Recommended"
+                elif section == R_MIN_UNIT_COL:
+                    return
+                elif section == R_MAX_COL:
+                    return "Upper limit"
+                elif section == R_MAX_UNIT_COL:
+                    return
 
-                if role == Qt.TextAlignmentRole:
-                    if section == R_NAME_COL:
-                        return int(Qt.AlignLeft | Qt.AlignVCenter)
-                    if section == R_MIN_COL:
-                        return int(Qt.AlignRight | Qt.AlignVCenter)
+            if role == Qt.TextAlignmentRole:
+                if section == R_NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section in (R_MIN_COL, R_MAX_COL):
+                    return int(Qt.AlignRight | Qt.AlignVCenter)
 
-            return None
+        return None
 
 class VitModel(RequirementsModel):
     def __init__(self, parent=None, nutrients=None):
         super().__init__(parent, nutrients)
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-            if orientation == Qt.Horizontal:
-                if role == Qt.DisplayRole:
-                    if section == R_NAME_COL:
-                        return "Vitamin"
-                    elif section == R_MIN_COL:
-                        return "Recommended"
-                    elif section == R_MIN_UNIT_COL:
-                        return
+        if orientation == Qt.Horizontal:
+            if role == Qt.DisplayRole:
+                if section == R_NAME_COL:
+                    return "Vitamin"
+                elif section == R_MIN_COL:
+                    return "Recommended"
+                elif section == R_MIN_UNIT_COL:
+                    return
+                elif section == R_MAX_COL:
+                    return "Upper limit"
+                elif section == R_MAX_UNIT_COL:
+                    return
 
-                if role == Qt.TextAlignmentRole:
-                    if section == R_NAME_COL:
-                        return int(Qt.AlignLeft | Qt.AlignVCenter)
-                    if section == R_MIN_COL:
-                        return int(Qt.AlignRight | Qt.AlignVCenter)
+            if role == Qt.TextAlignmentRole:
+                if section == R_NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section in (R_MIN_COL, R_MAX_COL):
+                    return int(Qt.AlignRight | Qt.AlignVCenter)
 
-            return None
+        return None
 
 class MineralModel(RequirementsModel):
     def __init__(self, parent=None, nutrients=None):
         super().__init__(parent, nutrients)
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-            if orientation == Qt.Horizontal:
-                if role == Qt.DisplayRole:
-                    if section == R_NAME_COL:
-                        return "Mineral"
-                    elif section == R_MIN_COL:
-                        return "Recommended"
-                    elif section == R_MIN_UNIT_COL:
-                        return
+        if orientation == Qt.Horizontal:
+            if role == Qt.DisplayRole:
+                if section == R_NAME_COL:
+                    return "Mineral"
+                elif section == R_MIN_COL:
+                    return "Recommended"
+                elif section == R_MIN_UNIT_COL:
+                    return
+                elif section == R_MAX_COL:
+                    return "Upper limit"
+                elif section == R_MAX_UNIT_COL:
+                    return
 
-                if role == Qt.TextAlignmentRole:
-                    if section == R_NAME_COL:
-                        return int(Qt.AlignLeft | Qt.AlignVCenter)
-                    if section == R_MIN_COL:
-                        return int(Qt.AlignRight | Qt.AlignVCenter)
+            if role == Qt.TextAlignmentRole:
+                if section == R_NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section in (R_MIN_COL, R_MAX_COL):
+                    return int(Qt.AlignRight | Qt.AlignVCenter)
 
-            return None
+        return None
