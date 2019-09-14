@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_requirementswindow.ui',
 # licensing of 'ui_requirementswindow.ui' applies.
 #
-# Created: Wed Sep 11 16:06:54 2019
+# Created: Fri Sep 13 20:17:22 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,12 +13,8 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_RequirementsWindow(object):
     def setupUi(self, RequirementsWindow):
         RequirementsWindow.setObjectName("RequirementsWindow")
-        RequirementsWindow.resize(822, 780)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(RequirementsWindow.sizePolicy().hasHeightForWidth())
-        RequirementsWindow.setSizePolicy(sizePolicy)
+        RequirementsWindow.resize(1000, 780)
+        RequirementsWindow.setMaximumSize(QtCore.QSize(1600, 16777215))
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -281,6 +277,7 @@ class Ui_RequirementsWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.macro_view = QtWidgets.QTableView(RequirementsWindow)
+        self.macro_view.setMaximumSize(QtCore.QSize(450, 16777215))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
@@ -302,6 +299,7 @@ class Ui_RequirementsWindow(object):
         self.macro_view.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.macro_view)
         self.vit_view = QtWidgets.QTableView(RequirementsWindow)
+        self.vit_view.setMaximumSize(QtCore.QSize(450, 16777215))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
@@ -323,6 +321,7 @@ class Ui_RequirementsWindow(object):
         self.vit_view.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.vit_view)
         self.mineral_view = QtWidgets.QTableView(RequirementsWindow)
+        self.mineral_view.setMaximumSize(QtCore.QSize(450, 16777215))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
