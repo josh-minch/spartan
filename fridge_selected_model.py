@@ -47,9 +47,9 @@ class FridgeSelectedModel(QAbstractTableModel):
 
     def rowCount(self, index=QModelIndex()):
         return len(self.foods)
-        
+
     def columnCount(self, index=QModelIndex()):
-        return len(S_COL_TO_ATTR)
+        return len(s_col_to_attr)
 
     def data(self, index, role=Qt.DisplayRole):
         if not index.isValid() or not 0 <= index.row() < len(self.foods):
@@ -69,8 +69,8 @@ class FridgeSelectedModel(QAbstractTableModel):
                 return unit
             elif index.column() == S_CALORIES_COL:
                 return calories
-          
-        # A bug in PySide2 requires that we cast the bitwise 
+
+        # A bug in PySide2 requires that we cast the bitwise
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
 
@@ -79,7 +79,7 @@ class FridgeSelectedModel(QAbstractTableModel):
                 return int(Qt.AlignRight | Qt.AlignVCenter)
 
         return None
-    
+
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
         if orientation == Qt.Horizontal:
             if role == Qt.DisplayRole:
@@ -91,7 +91,7 @@ class FridgeSelectedModel(QAbstractTableModel):
                     return ''
                 elif section == S_CALORIES_COL:
                     return 'Calories'
-    
+
         return None
 
     def insertRows(self, position, rows=1, index=QModelIndex()):
@@ -100,14 +100,14 @@ class FridgeSelectedModel(QAbstractTableModel):
             self.foods.insert(position + row, {"name":"", "amount":"",
                                                    "unit":"", "calories":""})
         self.endInsertRows()
-       
+
         return True
-        
+
     def removeRows(self, position, rows=1, index=QModelIndex()):
         self.beginRemoveRows(QModelIndex(), position, position + rows - 1)
         del self.foods[position:position+rows]
         self.endRemoveRows()
-       
+
         return True
 
     def setData(self, index, value, role=Qt.EditRole):
@@ -123,8 +123,8 @@ class FridgeSelectedModel(QAbstractTableModel):
                 food['amount'] = float(value)
             elif index.column() == S_UNIT_COL:
                 food['unit'] = value
-            elif index.column() == S_CALORIE_COL:
-                food['percent'] = float(value)
+            elif index.column() == S_CALORIES_COL:
+                food['calories'] = float(value)
             else:
                 return False
 
@@ -136,7 +136,7 @@ class FridgeSelectedModel(QAbstractTableModel):
     def flags(self, index):
         if not index.isValid():
             return Qt.ItemIsEnabled
-        if index.column() == S_NAME_COL:
+        if index.column()  == S_NAME_COL:
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |

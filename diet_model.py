@@ -49,14 +49,14 @@ class DietModel(QAbstractTableModel):
         return len(self.foods)
 
     def columnCount(self, index=QModelIndex()):
-        return len(O_COL_TO_ATTR)
+        return len(o_col_to_attr)
 
     def data(self, index, role):
         if not index.isValid() or not 0 <= index.row() < len(self.foods):
             return None
 
         if role in (Qt.DisplayRole, Qt.EditRole):
-            attr_str = O_COL_TO_ATTR[index.column()]
+            attr_str = o_col_to_attr[index.column()]
             return self.foods[index.row()][attr_str]
 
         # A bug in PySide2 requires that we cast the bitwise
