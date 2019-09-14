@@ -1,31 +1,43 @@
 # Fridge view
+F_NUM_COLS = 12
+
 FOOD_ID_COL = 0
 NAME_COL = 1
 PRICE_COL = 2
-PRICE_QUANTITY_COL = 3
-PRICE_UNIT_COL = 4
-MIN_COL = 5
-MIN_UNIT_COL = 6
-MAX_COL = 7
-MAX_UNIT_COL = 8
-TARGET_COL = 9
-TARGET_UNIT_COL = 10
+PER_COL = 3
+PRICE_QUANTITY_COL = 4
+PRICE_UNIT_COL = 5
+MIN_COL = 6
+MIN_UNIT_COL = 7
+MAX_COL = 8
+MAX_UNIT_COL = 9
+TARGET_COL = 10
+TARGET_UNIT_COL = 11
 
 FOOD_ID_COL_WIDTH = 0
-NAME_COL_WIDTH = 1
-PRICE_COL_WIDTH = 50
-MIN_COL_WIDTH = 3
-MAX_COL_WIDTH = 4
-TARGET_COL_WIDTH = 5
+NAME_COL_WIDTH = 100
+PRICE_COL_WIDTH = 20
+PRICE_QUANTITY_COL_WIDTH = 50
+PRICE_UNIT_COL_WDITH = 25
+MIN_COL_WIDTH = 25
+MIN_UNIT_COL_WIDTH = 10
+MAX_COL_WIDTH = 25
+MAX_UNIT_COL_WIDTH = 10
+TARGET_COL_WIDTH = 25
+TARGET_UNIT_COL_WIDTH = 10
 
-F_COLS_TO_HIDE = [FOOD_ID_COL, PRICE_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_COL,
+PER_COL_WIDTH = 1
+VALUE_COL_WIDTH = 50
+UNIT_COL_WIDTH = 10
+
+F_COLS_TO_HIDE = [FOOD_ID_COL, PRICE_COL, PER_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_COL,
                   MIN_UNIT_COL, MAX_COL, MAX_UNIT_COL, TARGET_COL, TARGET_UNIT_COL]
 P_COLS_TO_HIDE = [FOOD_ID_COL, NAME_COL, MIN_COL, MIN_UNIT_COL, MAX_COL, MAX_UNIT_COL, TARGET_COL, TARGET_UNIT_COL]
-C_COLS_TO_HIDE = [FOOD_ID_COL, NAME_COL, PRICE_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL]
+C_COLS_TO_HIDE = [FOOD_ID_COL, NAME_COL, PRICE_COL, PER_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL]
 
 FRIDGE_V_HEADER_SIZE = 32
 
-F_COL_TO_ATTR = {FOOD_ID_COL: 'food_id', NAME_COL: 'name',
+f_col_to_attr = {FOOD_ID_COL: 'food_id', NAME_COL: 'name',
                PRICE_COL: 'price', PRICE_QUANTITY_COL: 'price_quantity', PRICE_UNIT_COL: 'price_unit',
                MIN_COL: 'min', MIN_UNIT_COL: 'min_unit',
                MAX_COL: 'max', MAX_UNIT_COL: 'max_unit',
@@ -45,9 +57,9 @@ NUT_PERCENT_COL_WIDTH = 130
 
 NUT_V_HEADER_SIZE = 22
 
-NUT_COL_WIDTHS = [NUT_NAME_COL_WIDTH, NUT_AMOUNT_COL_WIDTH, NUT_UNIT_COL_WIDTH, NUT_PERCENT_COL_WIDTH]
+nut_col_widths = [NUT_NAME_COL_WIDTH, NUT_AMOUNT_COL_WIDTH, NUT_UNIT_COL_WIDTH, NUT_PERCENT_COL_WIDTH]
 
-NUT_COL_TO_ATTR = {NUT_NAME_COL: 'name', NUT_AMOUNT_COL: 'amount', NUT_UNIT_COL: 'unit',
+nut_col_to_attr = {NUT_NAME_COL: 'name', NUT_AMOUNT_COL: 'amount', NUT_UNIT_COL: 'unit',
                     NUT_PERCENT_COL: 'percent'}
 
 # Selected foods view
@@ -56,7 +68,7 @@ S_AMOUNT_COL = 1
 S_UNIT_COL = 2
 S_CALORIES_COL = 3
 
-S_COL_TO_ATTR = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
+s_col_to_attr = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
                     S_CALORIES_COL: 'percent'}
 
 # Optimum diet view
@@ -65,7 +77,7 @@ O_COST_COL = 1
 O_QUANTITY_COL= 2
 O_UNIT_COL = 3
 
-O_COL_TO_ATTR = {O_NAME_COL: 'name', O_COST_COL: 'cost', O_QUANTITY_COL: 'quantity', O_UNIT_COL: 'unit'}
+o_col_to_attr = {O_NAME_COL: 'name', O_COST_COL: 'cost', O_QUANTITY_COL: 'quantity', O_UNIT_COL: 'unit'}
 
 # Requirements window
 F_INDEX = 0
@@ -73,7 +85,7 @@ L_INDEX = 1
 P_INDEX = 2
 M_INDEX = 3
 
-INDEX_TO_SEX = {F_INDEX: 'f', L_INDEX: 'l', P_INDEX: 'p', M_INDEX: 'm'}
+index_to_sex = {F_INDEX: 'f', L_INDEX: 'l', P_INDEX: 'p', M_INDEX: 'm'}
 # Requirements view
 R_NAME_COL = 0
 R_MIN_COL = 1
@@ -81,6 +93,7 @@ R_MIN_UNIT_COL = 2
 R_MAX_COL = 3
 R_MAX_UNIT_COL = 4
 
-R_COL_TO_ATTR = {R_NAME_COL: 'name', R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
-                 R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
+r_col_to_attr = {   R_NAME_COL: 'name',
+                    R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
+                    R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
 
