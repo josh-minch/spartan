@@ -20,7 +20,7 @@ from fridge_model import FridgeModel
 from nutrition_model import NutritionTableModel
 from fridge_selected_model import FridgeSelectedModel
 from progress_bar_delegate import ProgressBarDelegate
-from fridge_quantity_delegate import FridgeQuantityDelegate
+from align_right_delegate import AlignRightDelegate
 
 from ui_mainwindow import Ui_MainWindow
 
@@ -33,6 +33,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_fridge_views()
         self.setup_selected_foods()
         self.setup_connections()
+        self.setup_shortcuts()
         self.setup_selection_modes()
 
         self.add_foods_btn.setFocus()
@@ -40,17 +41,63 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.resize(1200, 600)
         self.show()
 
-    def setup_fridge_views(self):
+    def setup_connections(self):
 
-        self.fridge_model = FridgeModel(foods=self.person.foods)
+        self.fridge_model.dataChanged.connect(self.update_foods)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
+        self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
+
+        # Synchronize fridge selection to prices and constraints
+        self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
+        self.constraints_view.setSelectionModel(self.fridge_view.selectionModel())
+
+        # Synchronize scrollbars
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.prices_view.verticalScrollBar().setValue)
+        self.prices_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
+
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.constraints_view.verticalScrollBar().setValue)
+        self.constraints_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
+
+        # Add to fridge button
+        self.add_foods_btn.clicked.connect(self.open_search_window)
+
+        # Remove button
+        self.remove_btn.clicked.connect(self.remove_from_fridge)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
+
+        # Optimize button
+        self.optimize_btn.clicked.connect(self.optimize)
+        # optimize button shortcut set in Qt Designer
+
+    def setup_shortcuts(self):
+        add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
+        add_foods_shortcut.activated.connect(self.open_search_window)
+
+        remove_shortcut = QShortcut(QKeySequence(Qt.Key_Delete), self)
+        remove_shortcut.activated.connect(self.remove_from_fridge)
+
+        close_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_W), self)
+        close_shortcut.activated.connect(self.close)
+
+        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
+        debug_shortcut.activated.connect(self.print_debug_info)
+
+    def setup_fridge_views(self):
+        self.fridge_model = FridgeModel(foods=self.person.foods, currency='$')
         self.fridge_view.setModel(self.fridge_model)
         self.prices_view.setModel(self.fridge_model)
         self.constraints_view.setModel(self.fridge_model)
 
         # Set custom delegates
-        fridge_quantity_delegate = FridgeQuantityDelegate(self)
-        self.prices_view.setItemDelegate(fridge_quantity_delegate)
-        self.constraints_view.setItemDelegate(fridge_quantity_delegate)
+        self.prices_view.setItemDelegateForColumn(PRICE_COL, AlignRightDelegate(self))
+        self.prices_view.setItemDelegateForColumn(PRICE_QUANTITY_COL, AlignRightDelegate(self))
+        self.constraints_view.setItemDelegateForColumn(MIN_COL, AlignRightDelegate(self))
+        self.constraints_view.setItemDelegateForColumn(MAX_COL, AlignRightDelegate(self))
+        self.constraints_view.setItemDelegateForColumn(TARGET_COL, AlignRightDelegate(self))
 
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
@@ -68,8 +115,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         p_header.setVisible(True)
         c_header.setVisible(True)
 
+        # Set column width
+        self.fridge_view.setColumnWidth(NAME_COL, 1)
+        self.prices_view.setColumnWidth(PRICE_COL, VALUE_COL_WIDTH)
+        self.prices_view.setColumnWidth(PER_COL, PER_COL_WIDTH)
+        self.prices_view.setColumnWidth(PRICE_QUANTITY_COL, VALUE_COL_WIDTH)
+        self.prices_view.setColumnWidth(PRICE_UNIT_COL, UNIT_COL_WIDTH)
+
+        self.constraints_view.setColumnWidth(MIN_COL, VALUE_COL_WIDTH)
+        self.constraints_view.setColumnWidth(MIN_UNIT_COL, UNIT_COL_WIDTH)
+        self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
+        self.constraints_view.setColumnWidth(MAX_UNIT_COL, UNIT_COL_WIDTH)
+        self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
+        self.constraints_view.setColumnWidth(TARGET_UNIT_COL, UNIT_COL_WIDTH)
+
         f_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
-        self.fridge_view.setColumnWidth(PRICE_COL, PRICE_COL_WIDTH)
         c_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
 
         set_v_header_height(self.fridge_view, FRIDGE_V_HEADER_SIZE)
@@ -83,8 +143,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}");
 
     def setup_nutrition(self):
-        for col, width in zip(NUT_COL_TO_ATTR.keys(), NUT_COL_WIDTHS):
-            self.nutrition_view.setColumnWidth(col, width)
+        set_column_widths(self.nutrition_view, nut_col_to_attr.keys(), nut_col_widths)
 
         '''
         # Set vertical header height to determine table's row height
@@ -92,6 +151,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
         '''
+
+    def setup_selected_foods(self):
+        self.fridge_selected_model = FridgeSelectedModel(foods=[])
+        self.fridge_selected_view.setModel(self.fridge_selected_model)
+        self.fridge_selected_view.setItemDelegateForColumn(S_AMOUNT_COL, AlignRightDelegate(self))
+        self.fridge_selected_view.setItemDelegateForColumn(S_CALORIES_COL, AlignRightDelegate(self))
 
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
@@ -115,10 +180,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.optimum_diet_window = OptimumDietWindow(parent=None, person=self.person)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
-
-    def setup_selected_foods(self):
-        self.fridge_selected_model = FridgeSelectedModel(foods=[])
-        self.fridge_selected_view.setModel(self.fridge_selected_model)
 
     def change_fridge_selection(self, selected, deselected):
         selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
@@ -170,50 +231,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setup_selection_modes(self):
         #self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
         pass
-
-    def setup_connections(self):
-
-        self.fridge_model.dataChanged.connect(self.update_foods)
-        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
-        self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
-
-        # Synchronize scrollbars
-        self.fridge_view.verticalScrollBar().valueChanged.connect(
-            self.prices_view.verticalScrollBar().setValue)
-        self.prices_view.verticalScrollBar().valueChanged.connect(
-            self.fridge_view.verticalScrollBar().setValue)
-
-        self.fridge_view.verticalScrollBar().valueChanged.connect(
-            self.constraints_view.verticalScrollBar().setValue)
-        self.constraints_view.verticalScrollBar().valueChanged.connect(
-            self.fridge_view.verticalScrollBar().setValue)
-
-        # Add to fridge button
-        self.add_foods_btn.clicked.connect(self.open_search_window)
-        add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
-        add_foods_shortcut.activated.connect(self.open_search_window)
-
-        # Remove button
-        self.remove_btn.clicked.connect(self.remove_from_fridge)
-        self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
-        remove_shortcut = QShortcut(QKeySequence(Qt.Key_Delete), self)
-        remove_shortcut.activated.connect(self.remove_from_fridge)
-
-        self.optimize_btn.clicked.connect(self.optimize)
-        # optimize button shortcut set in Qt Designer
-
-        # Nutriton panel connections
-
-        self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
-        self.constraints_view.setSelectionModel(self.fridge_view.selectionModel())
-
-        # Close
-        close_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_W), self)
-        close_shortcut.activated.connect(self.close)
-
-        # Debug
-        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
-        debug_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
         print(self.fridge_view.selectionModel().selectedRows())

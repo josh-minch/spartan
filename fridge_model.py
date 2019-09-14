@@ -42,21 +42,25 @@ from spartan import Food
 from gui_constants import *
 
 class FridgeModel(QAbstractTableModel):
-    def __init__(self, parent=None, foods=None):
+    def __init__(self, parent=None, foods=None, currency=None):
         QAbstractTableModel.__init__(self, parent)
         self.foods = foods
+        self.currency = currency
 
     def rowCount(self, index=QModelIndex()):
         return len(self.foods)
-        
+
     def columnCount(self, index=QModelIndex()):
-        return len(F_COL_TO_ATTR)
+        return F_NUM_COLS
 
     def data(self, index, role=Qt.DisplayRole):
         if not index.isValid() or not 0 <= index.row() < len(self.foods):
             return None
+
         # Hide units unless corresponding attribute has a value
         if index.column() == PRICE_QUANTITY_COL and self.foods[index.row()].price is None:
+            return None
+        if index.column() == PER_COL and self.foods[index.row()].price is None:
             return None
         if index.column() == PRICE_UNIT_COL and self.foods[index.row()].price is None:
             return None
@@ -66,17 +70,26 @@ class FridgeModel(QAbstractTableModel):
             return None
         if index.column() == TARGET_UNIT_COL and self.foods[index.row()].target is None:
             return None
-         
+
         if role in (Qt.DisplayRole, Qt.EditRole):
-            attr_str = F_COL_TO_ATTR[index.column()]
-            return getattr(self.foods[index.row()], attr_str)
+            if index.column() == PER_COL:
+                return 'per'
+
+            attr_str = f_col_to_attr[index.column()]
+            attr = getattr(self.foods[index.row()], attr_str)
+
+            #if index.column() == PRICE_COL:
+            #    attr = self.currency + '{:.2f}'.format(attr)
+            return attr
 
         if role == Qt.TextAlignmentRole:
             if index.column() in (PRICE_QUANTITY_COL, PRICE_COL, MIN_COL, MAX_COL, TARGET_COL):
                 return int(Qt.AlignRight | Qt.AlignVCenter)
-            
+            if index.column() == PER_COL:
+                return Qt.AlignCenter
+
         return None
-    
+
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
 
         if orientation == Qt.Horizontal:
@@ -88,6 +101,8 @@ class FridgeModel(QAbstractTableModel):
                     return "Food"
                 elif section == PRICE_COL:
                     return "Price"
+                elif section == PRICE_UNIT_COL:
+                    return "Unit"
                 elif section == MIN_COL:
                     return "At least"
                 elif section == MAX_COL:
@@ -98,9 +113,9 @@ class FridgeModel(QAbstractTableModel):
                     return ""
 
             if role == Qt.TextAlignmentRole:
-                if section == NAME_COL:
+                if section in (NAME_COL, PRICE_UNIT_COL):
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
-                if section == PRICE_COL or MIN_COL or MAX_COL or TARGET_COL:
+                if section in (PRICE_COL, MIN_COL, MAX_COL, TARGET_COL):
                     return int(Qt.AlignRight | Qt.AlignVCenter)
 
         return None
@@ -110,14 +125,14 @@ class FridgeModel(QAbstractTableModel):
         for row in range(rows):
             self.foods.insert(position + row, Food())
         self.endInsertRows()
-       
+
         return True
-        
+
     def removeRows(self, position, rows=1, index=QModelIndex()):
         self.beginRemoveRows(QModelIndex(), position, position + rows - 1)
         del self.foods[position:position+rows]
         self.endRemoveRows()
-       
+
         return True
 
     def setData(self, index, value, role=Qt.EditRole):
@@ -125,10 +140,9 @@ class FridgeModel(QAbstractTableModel):
             return False
 
         if index.isValid() and 0 <= index.row() < len(self.foods):
-
             food = self.foods[index.row()]
+            attr_str = f_col_to_attr[index.column()]
 
-            attr_str = F_COL_TO_ATTR[index.column()]
             if attr_str in ('price', 'min', 'max', 'target'):
                 if value == '':
                     value = None
@@ -137,13 +151,13 @@ class FridgeModel(QAbstractTableModel):
             setattr(self.foods[index.row()], attr_str, value)
             self.dataChanged.emit(index, index)
             return True
-            
+
         return False
 
     def flags(self, index):
         if not index.isValid():
             return Qt.ItemIsEnabled
-        if index.column() == NAME_COL:
+        if index.column() in (NAME_COL, PER_COL):
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
