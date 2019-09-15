@@ -34,15 +34,11 @@ class Person(object):
 
         self.nuts = []
 
-        for nutrient in macro + vit + mineral:
-            # TODO: restructure data to fix this mess
-            # Get nut_id from nutrient name
-            nut_id = list(req.nuts.keys())[list(req.nuts.values()).index(nutrient['name'])]
-            nut_to_append = Nutrient(name=nutrient['name'], nut_id=nut_id, min=nutrient['min'])
+        for nut in macro + vit + mineral:
+            nut_id = req.display_name_to_id[nut['name']]
+            nut_to_append = Nutrient(name=nut['name'], nut_id=nut_id, min=nut['min'], max=nut['max'], target=nut['max'])
             self.nuts.append(nut_to_append)
 
-        self.remove_nut('Fluoride (F)')
-        self.add_nut(Nutrient('Energy', nut_id=208, max=2500))
         self.nuts.sort(key=lambda nut: nut.nut_id)
 
     def add_nut(self, nutrient):
@@ -80,8 +76,8 @@ class Person(object):
         #TODO: One SQL statement to get food_id from food_name and insert it into user db
         foods_tuple = [(food_name, database.get_food_id(food_name)) for food_name in food_names]
         sql_stmt = (
-            'INSERT INTO foods(name, food_id) '
-            'VALUES (?, ?)'
+            'INSERT INTO foods(name, food_id, price_quantity, price_unit, min_unit, max_unit, target_unit) '
+            'VALUES (?, ?, 100, "g", "g", "g", "g")'
         )
 
         cur.executemany(sql_stmt, foods_tuple)
