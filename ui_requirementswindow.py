@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_requirementswindow.ui',
 # licensing of 'ui_requirementswindow.ui' applies.
 #
-# Created: Fri Sep 13 20:17:22 2019
+# Created: Sat Sep 14 22:24:23 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -49,7 +49,7 @@ class Ui_RequirementsWindow(object):
         self.label = QtWidgets.QLabel(RequirementsWindow)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semilight")
-        font.setPointSize(18)
+        font.setPointSize(20)
         font.setWeight(50)
         font.setBold(False)
         self.label.setFont(font)
@@ -375,6 +375,6 @@ class Ui_RequirementsWindow(object):
         self.mon_edit.setPlaceholderText(QtWidgets.QApplication.translate("RequirementsWindow", "Month", None, -1))
         self.day_edit.setPlaceholderText(QtWidgets.QApplication.translate("RequirementsWindow", "Day", None, -1))
         self.year_edit.setPlaceholderText(QtWidgets.QApplication.translate("RequirementsWindow", "Year", None, -1))
-        self.label_9.setText(QtWidgets.QApplication.translate("RequirementsWindow", "You can select a recommendation as a guideline then customize it to your needs.", None, -1))
+        self.label_9.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Select a recommendation as a guideline then customize it to your needs.", None, -1))
         self.cust_edit.setText(QtWidgets.QApplication.translate("RequirementsWindow", "Allow custom requirements", None, -1))
 

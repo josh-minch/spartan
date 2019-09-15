@@ -114,7 +114,7 @@
      <property name="font">
       <font>
        <family>Segoe UI Semilight</family>
-       <pointsize>18</pointsize>
+       <pointsize>20</pointsize>
        <weight>50</weight>
        <bold>false</bold>
       </font>
@@ -594,7 +594,7 @@ QListView::item {
        <item>
         <widget class="QLabel" name="label_9">
          <property name="text">
-          <string>You can select a recommendation as a guideline then customize it to your needs.</string>
+          <string>Select a recommendation as a guideline then customize it to your needs.</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

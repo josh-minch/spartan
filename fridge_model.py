@@ -59,17 +59,17 @@ class FridgeModel(QAbstractTableModel):
 
         # Hide units unless corresponding attribute has a value
         if index.column() == PRICE_QUANTITY_COL and self.foods[index.row()].price is None:
-            return None
+            return
         if index.column() == PER_COL and self.foods[index.row()].price is None:
-            return None
+            return
         if index.column() == PRICE_UNIT_COL and self.foods[index.row()].price is None:
-            return None
+            return
         if index.column() == MIN_UNIT_COL and self.foods[index.row()].min is None:
-            return None
+            return
         if index.column() == MAX_UNIT_COL and self.foods[index.row()].max is None:
-            return None
+            return
         if index.column() == TARGET_UNIT_COL and self.foods[index.row()].target is None:
-            return None
+            return
 
         if role in (Qt.DisplayRole, Qt.EditRole):
             if index.column() == PER_COL:
@@ -78,8 +78,9 @@ class FridgeModel(QAbstractTableModel):
             attr_str = f_col_to_attr[index.column()]
             attr = getattr(self.foods[index.row()], attr_str)
 
-            #if index.column() == PRICE_COL:
-            #    attr = self.currency + '{:.2f}'.format(attr)
+            if index.column() == PRICE_COL and attr is not None:
+                attr = self.currency + '{:.2f}'.format(attr)
+
             return attr
 
         if role == Qt.TextAlignmentRole:
@@ -101,6 +102,8 @@ class FridgeModel(QAbstractTableModel):
                     return "Food"
                 elif section == PRICE_COL:
                     return "Price"
+                elif section == PRICE_QUANTITY_COL:
+                    return 'Amount'
                 elif section == PRICE_UNIT_COL:
                     return "Unit"
                 elif section == MIN_COL:
@@ -142,6 +145,9 @@ class FridgeModel(QAbstractTableModel):
         if index.isValid() and 0 <= index.row() < len(self.foods):
             food = self.foods[index.row()]
             attr_str = f_col_to_attr[index.column()]
+
+            if index.column() == PRICE_COL:
+                value.strip(self.currency)
 
             if attr_str in ('price', 'min', 'max', 'target'):
                 if value == '':

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_optimumdietwindow.ui',
 # licensing of 'ui_optimumdietwindow.ui' applies.
 #
-# Created: Fri Sep 13 17:23:37 2019
+# Created: Sat Sep 14 22:24:23 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -63,10 +63,14 @@ class Ui_OptimumDietWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.diet_view = QtWidgets.QTableView(self.centralwidget)
+        self.diet_view.setShowGrid(False)
         self.diet_view.setObjectName("diet_view")
+        self.diet_view.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.diet_view)
         self.nutrition_view = QtWidgets.QTableView(self.centralwidget)
+        self.nutrition_view.setShowGrid(False)
         self.nutrition_view.setObjectName("nutrition_view")
+        self.nutrition_view.verticalHeader().setVisible(False)
         self.horizontalLayout.addWidget(self.nutrition_view)
         self.verticalLayout.addLayout(self.horizontalLayout)
         OptimumDietWindow.setCentralWidget(self.centralwidget)

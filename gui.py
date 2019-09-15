@@ -29,6 +29,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.person = Person(19, 'm')
+        self.person.remove_nut('Fluoride (F)')
+        self.person.remove_nut('Water')
+        self.person.add_nut(Nutrient('Energy', nut_id=208, max=2500))
 
         self.setup_fridge_views()
         self.setup_selected_foods()
@@ -38,7 +41,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.add_foods_btn.setFocus()
         #self.resize(QDesktopWidget().availableGeometry(self).size() * 0.90)
-        self.resize(1200, 600)
+        self.resize(1500, 700)
         self.show()
 
     def setup_connections(self):

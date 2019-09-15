@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui_mainwindow.ui',
 # licensing of 'ui_mainwindow.ui' applies.
 #
-# Created: Fri Sep 13 17:23:36 2019
+# Created: Sat Sep 14 22:24:22 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -41,10 +41,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setAutoFillBackground(True)
         self.centralwidget.setObjectName("centralwidget")
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.centralwidget)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.centralwidget)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setSpacing(12)
@@ -165,9 +162,9 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addWidget(self.pushButton)
         self.horizontalLayout_3.addLayout(self.verticalLayout_3)
         self.verticalLayout = QtWidgets.QVBoxLayout()
-        self.verticalLayout.setSpacing(0)
+        self.verticalLayout.setSpacing(12)
         self.verticalLayout.setObjectName("verticalLayout")
-        spacerItem1 = QtWidgets.QSpacerItem(13, 52, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem1 = QtWidgets.QSpacerItem(13, 46, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem1)
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setMinimumSize(QtCore.QSize(300, 0))
@@ -229,6 +226,7 @@ class Ui_MainWindow(object):
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.prices_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.prices_view.setEditTriggers(QtWidgets.QAbstractItemView.AllEditTriggers)
         self.prices_view.setTabKeyNavigation(False)
         self.prices_view.setAlternatingRowColors(True)
         self.prices_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
@@ -308,9 +306,16 @@ class Ui_MainWindow(object):
         icon5.addPixmap(QtGui.QPixmap("images/balance.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tab_2, icon5, "")
         self.verticalLayout.addWidget(self.tabWidget)
+        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2.setMaximumSize(QtCore.QSize(100, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.pushButton_2.setFont(font)
+        self.pushButton_2.setIcon(icon3)
+        self.pushButton_2.setIconSize(QtCore.QSize(20, 20))
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.verticalLayout.addWidget(self.pushButton_2)
         self.horizontalLayout_3.addLayout(self.verticalLayout)
-        self.horizontalLayout_3.setStretch(0, 1)
-        self.horizontalLayout_4.addLayout(self.horizontalLayout_3)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
@@ -485,7 +490,7 @@ class Ui_MainWindow(object):
         self.optimize_btn.setIconSize(QtCore.QSize(20, 20))
         self.optimize_btn.setObjectName("optimize_btn")
         self.verticalLayout_2.addWidget(self.optimize_btn)
-        self.horizontalLayout_4.addLayout(self.verticalLayout_2)
+        self.horizontalLayout_3.addLayout(self.verticalLayout_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.actionSettings = QtWidgets.QAction(MainWindow)
         self.actionSettings.setObjectName("actionSettings")
@@ -514,6 +519,8 @@ class Ui_MainWindow(object):
         self.pushButton.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F9", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtWidgets.QApplication.translate("MainWindow", "Prices", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtWidgets.QApplication.translate("MainWindow", "Constraints", None, -1))
+        self.pushButton_2.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))
+        self.pushButton_2.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F9", None, -1))
         self.label_8.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))
         self.optimize_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Generate optimum diet (F5)</p>", None, -1))
         self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Generate diet", None, -1))

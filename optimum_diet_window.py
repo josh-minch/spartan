@@ -28,8 +28,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.populate_diet_table()
         self.populate_nutrition_table()
 
-
-        #self.resize(800, 600)
+        self.resize(1400, 700)
         self.show()
 
     def populate_title(self):
@@ -45,6 +44,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
         self.diet_model = DietModel(foods=foods)
         self.diet_view.setModel(self.diet_model)
+        self.diet_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
     def populate_nutrition_table(self):
         (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
@@ -54,8 +54,8 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
         progress_bar_delegate = ProgressBarDelegate(self)
         self.nutrition_view.setItemDelegate(progress_bar_delegate)
-
         self.nutrition_view.setModel(nutrition_model)
+        self.nutrition_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
     def display_selected_food_nutrition(self):
         amounts = []
@@ -70,9 +70,8 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         progress_bar_delegate = ProgressBarDelegate(self)
         self.nutrition_view.setItemDelegate(progress_bar_delegate)
 
-
 if __name__ == "__main__":
-    person = Person(19, 'm')
+    person = spartan.Person(19, 'm')
 
     app = QApplication(sys.argv)
     window = OptimumDietWindow(person=person)
