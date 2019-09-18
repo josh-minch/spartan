@@ -42,7 +42,7 @@ from gui_constants import *
 
 class NutritionTableModel(QAbstractTableModel):
     def __init__(self, parent=None, nutrients=None):
-        QAbstractTableModel.__init__(self, parent)
+        super().__init__(parent)
         self.nutrients = nutrients
 
     def rowCount(self, index=QModelIndex()):
@@ -61,10 +61,16 @@ class NutritionTableModel(QAbstractTableModel):
             unit = self.nutrients[index.row()]["unit"]
             percent = self.nutrients[index.row()]["percent"]
 
+            if index.column() == NUT_UNIT_COL and amount is None:
+                return None
+
             if index.column() == NUT_NAME_COL:
                 return name
             elif index.column() == NUT_AMOUNT_COL:
-                return str(amount)
+                if amount is None:
+                    return "No data"
+                else:
+                    return str(round(amount,1))
             elif index.column() == NUT_UNIT_COL:
                 return unit
             elif index.column() == NUT_PERCENT_COL:
@@ -89,7 +95,7 @@ class NutritionTableModel(QAbstractTableModel):
                 elif section == NUT_UNIT_COL:
                     return
                 elif section == NUT_PERCENT_COL:
-                    return "Percent daily requirement"
+                    return
 
             if role == Qt.TextAlignmentRole:
                 if section == NUT_NAME_COL:
@@ -145,3 +151,81 @@ class NutritionTableModel(QAbstractTableModel):
             return Qt.ItemIsEnabled
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
+
+class MacroModel(NutritionTableModel):
+    def __init__(self, parent=None, nutrients=None):
+        super().__init__(parent, nutrients)
+
+    def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
+        if orientation == Qt.Horizontal:
+            if role == Qt.DisplayRole:
+                if section == NUT_NAME_COL:
+                    return "Macronutrients"
+                elif section == NUT_AMOUNT_COL:
+                    return "Amount"
+                elif section == NUT_UNIT_COL:
+                    return
+                elif section == NUT_PERCENT_COL:
+                    return
+
+            if role == Qt.TextAlignmentRole:
+                if section == NUT_NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section == NUT_AMOUNT_COL:
+                    return int(Qt.AlignRight | Qt.AlignVCenter)
+                if section == NUT_PERCENT_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+
+        return None
+
+class VitModel(NutritionTableModel):
+    def __init__(self, parent=None, nutrients=None):
+        super().__init__(parent, nutrients)
+
+    def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
+        if orientation == Qt.Horizontal:
+            if role == Qt.DisplayRole:
+                if section == NUT_NAME_COL:
+                    return "Vitamins"
+                elif section == NUT_AMOUNT_COL:
+                    return "Amount"
+                elif section == NUT_UNIT_COL:
+                    return
+                elif section == NUT_PERCENT_COL:
+                    return
+
+            if role == Qt.TextAlignmentRole:
+                if section == NUT_NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section == NUT_AMOUNT_COL:
+                    return int(Qt.AlignRight | Qt.AlignVCenter)
+                if section == NUT_PERCENT_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+
+        return None
+
+class MineralModel(NutritionTableModel):
+    def __init__(self, parent=None, nutrients=None):
+        super().__init__(parent, nutrients)
+
+    def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
+        if orientation == Qt.Horizontal:
+            if role == Qt.DisplayRole:
+                if section == NUT_NAME_COL:
+                    return "Minerals"
+                elif section == NUT_AMOUNT_COL:
+                    return "Amount"
+                elif section == NUT_UNIT_COL:
+                    return
+                elif section == NUT_PERCENT_COL:
+                    return
+
+            if role == Qt.TextAlignmentRole:
+                if section == NUT_NAME_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+                if section == NUT_AMOUNT_COL:
+                    return int(Qt.AlignRight | Qt.AlignVCenter)
+                if section == NUT_PERCENT_COL:
+                    return int(Qt.AlignLeft | Qt.AlignVCenter)
+
+        return None
