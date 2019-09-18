@@ -85,12 +85,15 @@ display_name_to_id = {
     'Saturated': 606
 }
 
+macro_names = ["Water", "Carbohydrates", "Sugar", "Fiber", "Protein", "Fat", "Saturated", "Monounsaturated", "Polyunsaturated", "Omega-3", "Omega-6", "Trans"]
+vit_names = ['A', 'B₁ (Thiamin)', 'B₂ (Riboflavin)', 'B₃ (Niacin)', 'B₅ (Pantothenic acid)', 'B₆', 'B₉ (Folate)', 'B₁₂ (Cobalamin)', 'C (Ascorbic acid)', 'D', 'E (Alpha-tocopherol)', 'K (Phylloquinone)', 'Choline']
+mineral_names = ["Calcium (Ca)", "Copper (Cu)", "Fluoride (F)", "Iron (Fe)", "Magnesium (Mg)", "Manganese (Mn)", "Phosphorus (P)", "Potassium (K)", "Selenium (Se)", "Sodium (Na)", "Zinc (Zn)", ]
+
+nut_names = macro_names + vit_names + mineral_names
+
 # Nutritional requirements. Rows correspond to life stages and cols to nutrients
 # TODO: Handle folate, dfe, total, in food
 # TODO: Add "added" nutrients like vitamin b12 and vitamin e, as well as adjusted protein and kcal.
-# TODO: Resort to match db order or sort when adding nut.
-# Replace nut ordered dict with something else, like a list of tuples
-# (list of tuples like nut = (name, id, req) ?)
 min_macro = {
     ( 0, 'm') : [700.0,60,None,None,9.1,31,None,None,None,0.5,4.4,None],
     (0.5, 'm'): [800.0,95,None,None,11,30,None,None,None,0.5,4.6,None],
@@ -181,64 +184,61 @@ min_mineral = {
 max_vit = {
     ( 0, 'm') : [600,None,None,None,None,None,None,None,None,25,None,None,None],
     (0.5, 'm'): [600,None,None,None,None,None,None,None,None,38,None,None,None],
-    ( 1, 'm') : [600,None,None,10,None,30,300,None,400,63,200,None,1],
-    ( 4, 'm') : [900,None,None,15,None,40,400,None,650,75,300,None,1],
-    ( 9, 'm') : [1700,None,None,20,None,60,600,None,1200,100,600,None,2],
-    (14, 'm') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3],
-    (19, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (31, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (51, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (71, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
+    ( 1, 'm') : [600,None,None,10,None,30,300,None,400,63,200,None,1000],
+    ( 4, 'm') : [900,None,None,15,None,40,400,None,650,75,300,None,1000],
+    ( 9, 'm') : [1700,None,None,20,None,60,600,None,1200,100,600,None,2000],
+    (14, 'm') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3000],
+    (19, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (31, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (51, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (71, 'm') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
     ( 0, 'f') : [600,None,None,None,None,None,None,None,None,25,None,None,None],
     (0.5, 'f'): [600,None,None,None,None,None,None,None,None,38,None,None,None],
-    ( 1, 'f') : [600,None,None,10,None,30,300,None,400,63,200,None,1],
-    ( 4, 'f') : [900,None,None,15,None,40,400,None,650,75,300,None,1],
-    ( 9, 'f') : [1700,None,None,20,None,60,600,None,1200,100,600,None,2],
-    (14, 'f') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3],
-    (19, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (31, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (51, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (71, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (14, 'p') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3],
-    (19, 'p') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (31, 'p') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (14, 'l') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3],
-    (19, 'l') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5],
-    (31, 'l') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3.5]
+    ( 1, 'f') : [600,None,None,10,None,30,300,None,400,63,200,None,1000],
+    ( 4, 'f') : [900,None,None,15,None,40,400,None,650,75,300,None,1000],
+    ( 9, 'f') : [1700,None,None,20,None,60,600,None,1200,100,600,None,2000],
+    (14, 'f') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3000],
+    (19, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (31, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (51, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (71, 'f') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (14, 'p') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3000],
+    (19, 'p') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (31, 'p') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (14, 'l') : [2800,None,None,30,None,80,800,None,1800,100,800,None,3000],
+    (19, 'l') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500],
+    (31, 'l') : [3000,None,None,35,None,100,1000,None,2000,100,1000,None,3500]
 }
 
 max_mineral = {
-   ( 0, 'm') : [1000,None,0.7,40,None,None,None,45,4,None],
-   (0.5, 'm'): [1500,None,0.9,40,None,None,None,60,5,None],
-   ( 1, 'm') : [2500,1000,1.3,40,65,2,3,90,7,1.5],
-   ( 4, 'm') : [2500,3000,2.2,40,110,3,3,150,12,1.9],
-   ( 9, 'm') : [3000,5000,10,40,350,6,4,280,23,2.2],
-   (14, 'm') : [3000,8000,10,45,350,9,4,400,34,2.3],
-   (19, 'm') : [2500,10000,10,45,350,11,4,400,40,2.3],
-   (31, 'm') : [2500,10000,10,45,350,11,4,400,40,2.3],
-   (51, 'm') : [2000,10000,10,45,350,11,4,400,40,2.3],
-   (71, 'm') : [2000,10000,10,45,350,11,3,400,40,2.3],
-   ( 0, 'f') : [1000,None,0.7,40,None,None,None,45,4,None],
-   (0.5, 'f'): [1500,None,0.9,40,None,None,None,60,5,None],
-   ( 1, 'f') : [2500,1000,1.3,40,65,2,3,90,7,1.5],
-   ( 4, 'f') : [2500,3000,2.2,40,110,3,3,150,12,1.9],
-   ( 9, 'f') : [3000,5000,10,40,350,6,4,280,23,2.2],
-   (14, 'f') : [3000,8000,10,45,350,9,4,400,34,2.3],
-   (19, 'f') : [2500,10000,10,45,350,11,4,400,40,2.3],
-   (31, 'f') : [2500,10000,10,45,350,11,4,400,40,2.3],
-   (51, 'f') : [2000,10000,10,45,350,11,4,400,40,2.3],
-   (71, 'f') : [2000,10000,10,45,350,11,3,400,40,2.3],
-   (14, 'p') : [3000,8000,10,45,350,9,3.5,400,34,2.3],
-   (19, 'p') : [2500,10000,10,45,350,11,3.5,400,40,2.3],
-   (31, 'p') : [2500,10000,10,45,350,11,3.5,400,40,2.3],
-   (14, 'l') : [3000,8000,10,45,350,9,4,400,34,2.3],
-   (19, 'l') : [2500,10000,10,45,350,11,4,400,40,2.3],
-   (31, 'l') : [2500,10000,10,45,350,11,4,400,40,2.3]
+   ( 0, 'm') : [1000,None,0.7,40,None,None,None,45,None,4],
+   (0.5, 'm'): [1500,None,0.9,40,None,None,None,60,None,5],
+   ( 1, 'm') : [2500,1,1.3,40,65,2,3000,90,1.5,7],
+   ( 4, 'm') : [2500,3,2.2,40,110,3,3000,150,1.9,12],
+   ( 9, 'm') : [3000,5,10,40,350,6,4000,280,2.2,23],
+   (14, 'm') : [3000,8,10,45,350,9,4000,400,2.3,34],
+   (19, 'm') : [2500,10,10,45,350,11,4000,400,2.3,40],
+   (31, 'm') : [2500,10,10,45,350,11,4000,400,2.3,40],
+   (51, 'm') : [2000,10,10,45,350,11,4000,400,2.3,40],
+   (71, 'm') : [2000,10,10,45,350,11,3000,400,2.3,40],
+   ( 0, 'f') : [1000,None,0.7,40,None,None,None,45,None,4],
+   (0.5, 'f'): [1500,None,0.9,40,None,None,None,60,None,5],
+   ( 1, 'f') : [2500,1,1.3,40,65,2,3000,90,1.5,7],
+   ( 4, 'f') : [2500,3,2.2,40,110,3,3000,150,1.9,12],
+   ( 9, 'f') : [3000,5,10,40,350,6,4000,280,2.2,23],
+   (14, 'f') : [3000,8,10,45,350,9,4000,400,2.3,34],
+   (19, 'f') : [2500,10,10,45,350,11,4000,400,2.3,40],
+   (31, 'f') : [2500,10,10,45,350,11,4000,400,2.3,40],
+   (51, 'f') : [2000,10,10,45,350,11,4000,400,2.3,40],
+   (71, 'f') : [2000,10,10,45,350,11,3000,400,2.3,40],
+   (14, 'p') : [3000,8,10,45,350,9,3500,400,2.3,34],
+   (19, 'p') : [2500,10,10,45,350,11,3500,400,2.3,40],
+   (31, 'p') : [2500,10,10,45,350,11,3500,400,2.3,40],
+   (14, 'l') : [3000,8,10,45,350,9,4000,400,2.3,34],
+   (19, 'l') : [2500,10,10,45,350,11,4000,400,2.3,40],
+   (31, 'l') : [2500,10,10,45,350,11,0.004,400,2.3,40]
 }
 
-macro_names = ["Water", "Carbohydrates", "Sugar", "Fiber", "Protein", "Fat", "Saturated", "Monounsaturated", "Polyunsaturated", "Omega-3", "Omega-6", "Trans"]
-vit_names = ['A', 'B₁ (Thiamin)', 'B₂ (Riboflavin)', 'B₃ (Niacin)', 'B₅ (Pantothenic acid)', 'B₆', 'B₉ (Folate)', 'B₁₂ (Cobalamin)', 'C (Ascorbic acid)', 'D', 'E (Alpha-tocopherol)', 'K (Phylloquinone)', 'Choline']
-mineral_names = ["Calcium (Ca)", "Copper (Cu)", "Fluoride (F)", "Iron (Fe)", "Magnesium (Mg)", "Manganese (Mn)", "Phosphorus (P)", "Potassium (K)", "Selenium (Se)", "Sodium (Na)", "Zinc (Zn)", ]
 
 age_ranges = [
     (0, 0.5), (0.5, 1), (1, 4), (4, 9), (9, 14), (14, 19), (19, 31), (31, 51), (51, 71), (71, math.inf)
@@ -259,7 +259,7 @@ def extract_req(age_range, sex, nut_names, min_reqs, max_reqs):
     nuts = []
     for (name, min, max) in zip(nut_names, min_reqs[(age_range, sex)], max_reqs[(age_range, sex)]):
         unit = get_unit(name)
-        nuts.append({'name': name, 'min': min, 'min_unit': unit, 'max': None, 'max_unit': unit})
+        nuts.append({'name': name, 'min': min, 'min_unit': unit, 'max': max, 'max_unit': unit})
 
     return nuts
 
