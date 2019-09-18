@@ -14,15 +14,16 @@ from gui_constants import *
 from gui_helpers import *
 import database
 import user_db
-import nutrition_model
+
 from search_window import SearchWindow
 from optimum_diet_window import OptimumDietWindow
-from fridge_model import FridgeModel
-from fridge_selected_model import FridgeSelectedModel
-from progress_bar_delegate import ProgressBarDelegate
-from align_right_delegate import AlignRightDelegate
+import models.nutrition_model as nutrition_model
+from models.fridge_model import FridgeModel
+from models.fridge_selected_model import FridgeSelectedModel
+from delegates.progress_bar_delegate import ProgressBarDelegate
+from delegates.align_right_delegate import AlignRightDelegate
 
-from ui_mainwindow import Ui_MainWindow
+from ui.ui_mainwindow import Ui_MainWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):

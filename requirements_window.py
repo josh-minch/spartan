@@ -9,7 +9,7 @@ QHeaderView, QListView, QStyledItemDelegate, QStyleFactory)
 from spartan import *
 import req
 from gui_constants import *
-from requirements_model import MacroModel, VitModel, MineralModel
+from models.requirements_model import MacroModel, VitModel, MineralModel
 from ui_requirementswindow import Ui_RequirementsWindow
 
 

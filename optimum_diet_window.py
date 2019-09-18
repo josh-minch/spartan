@@ -9,10 +9,10 @@ import database
 import basic_foods
 from gui_constants import *
 from gui_helpers import *
-from diet_model import DietModel
-import nutrition_model
-from progress_bar_delegate import ProgressBarDelegate
-from ui_optimumdietwindow import Ui_OptimumDietWindow
+from models.diet_model import DietModel
+import models.nutrition_model as nutrition_model
+from delegates.progress_bar_delegate import ProgressBarDelegate
+from ui.ui_optimumdietwindow import Ui_OptimumDietWindow
 
 
 class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):

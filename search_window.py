@@ -4,8 +4,8 @@ from PySide2.QtWidgets import (QApplication, QMainWindow, QHeaderView, QShortcut
 
 import database
 from gui_constants import *
-from ui_searchwindow import Ui_SearchWindow
-from search_model import SearchModel
+from ui.ui_searchwindow import Ui_SearchWindow
+from models.search_model import SearchModel
 
 class SearchWindow(QMainWindow, Ui_SearchWindow):
     def __init__(self, parent=None, person=None, fridge_model=None):
