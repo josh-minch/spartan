@@ -10,7 +10,7 @@ import basic_foods
 from gui_constants import *
 from gui_helpers import *
 from diet_model import DietModel
-from nutrition_model import NutritionTableModel
+import nutrition_model
 from progress_bar_delegate import ProgressBarDelegate
 from ui_optimumdietwindow import Ui_OptimumDietWindow
 
@@ -48,14 +48,30 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
     def populate_nutrition_table(self):
         (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
+        macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, food_amounts)
 
-        nutrients = spartan.get_nutrition(self.person, food_ids, food_amounts)
-        nutrition_model = NutritionTableModel(nutrients=nutrients)
+        macros_model = nutrition_model.MacroModel(nutrients=macros)
+        vits_model = nutrition_model.VitModel(nutrients=vits)
+        minerals_model = nutrition_model.MineralModel(nutrients=minerals)
 
-        progress_bar_delegate = ProgressBarDelegate(self)
-        self.nutrition_view.setItemDelegate(progress_bar_delegate)
-        self.nutrition_view.setModel(nutrition_model)
-        self.nutrition_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.macros_view.setModel(macros_model)
+        self.vits_view.setModel(vits_model)
+        self.minerals_view.setModel(minerals_model)
+
+        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
+        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
+        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
+
+        self.setup_nutrition()
+
+    def setup_nutrition(self):
+        set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(self.minerals_view, nut_col_to_attr.keys(), nut_col_widths)
+
+        set_view_header_weights(self.macros_view, QFont.DemiBold)
+        set_view_header_weights(self.vits_view, QFont.DemiBold)
+        set_view_header_weights(self.minerals_view, QFont.DemiBold)
 
     def display_selected_food_nutrition(self):
         amounts = []

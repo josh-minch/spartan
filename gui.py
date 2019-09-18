@@ -14,10 +14,10 @@ from gui_constants import *
 from gui_helpers import *
 import database
 import user_db
+import nutrition_model
 from search_window import SearchWindow
 from optimum_diet_window import OptimumDietWindow
 from fridge_model import FridgeModel
-from nutrition_model import NutritionTableModel
 from fridge_selected_model import FridgeSelectedModel
 from progress_bar_delegate import ProgressBarDelegate
 from align_right_delegate import AlignRightDelegate
@@ -31,7 +31,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person = Person(19, 'm')
 
         self.person.remove_nut('Fluoride (F)')
-        self.person.remove_nut('Water')
+        #self.person.remove_nut('Copper (Cu)')
+        #self.person.remove_nut('Water')
         #self.person.add_nut(Nutrient('Energy', nut_id=208, max=2500))
 
         self.setup_fridge_views()
@@ -147,8 +148,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}");
 
     def setup_nutrition(self):
-        set_column_widths(self.nutrition_view, nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(self.minerals_view, nut_col_to_attr.keys(), nut_col_widths)
 
+        set_view_header_weights(self.macros_view, QFont.DemiBold)
+        set_view_header_weights(self.vits_view, QFont.DemiBold)
+        set_view_header_weights(self.minerals_view, QFont.DemiBold)
         '''
         # Set vertical header height to determine table's row height
         v_header = self.nutrition_view.verticalHeader()
@@ -217,9 +223,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         macros, vits, minerals = get_nutrition(self.person, self.selected_food_ids, amounts)
 
-        macros_model = NutritionTableModel(nutrients=macros)
-        vits_model = NutritionTableModel(nutrients=vits)
-        minerals_model = NutritionTableModel(nutrients=minerals)
+        macros_model = nutrition_model.MacroModel(nutrients=macros)
+        vits_model = nutrition_model.VitModel(nutrients=vits)
+        minerals_model = nutrition_model.MineralModel(nutrients=minerals)
 
         self.macros_view.setModel(macros_model)
         self.vits_view.setModel(vits_model)
@@ -253,7 +259,7 @@ if __name__ == "__main__":
 
     user_db.create_user_db()
     app = QApplication(sys.argv)
-    app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
+    #app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
 
     #p = QPalette()
     #p.setColor(QPalette.Highlight, Qt.darkRed)

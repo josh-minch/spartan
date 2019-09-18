@@ -15,6 +15,10 @@ def set_header_weight(header, weight):
     header_font.setWeight(weight)
     header.setFont(header_font)
 
+def set_view_header_weights(view, weight):
+    header = view.horizontalHeader()
+    set_header_weight(header, weight)
+
 def set_v_header_height(view, size):
     v_header = view.verticalHeader()
     v_header.setSectionResizeMode(QHeaderView.Fixed)
