@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QStyledItemDelegate, QStyle, QApplication, QStyleOptionProgressBar, QStyleOptionViewItem, QProgressBar
+from PySide2.QtWidgets import QStyledItemDelegate, QStyle, QApplication, QStyleOptionProgressBar, QStyleOptionViewItem, QProgressBar, QStyleFactory
 from PySide2.QtCore import Qt, QSize
 from PySide2.QtGui import QPalette, QColor
 
@@ -59,7 +59,8 @@ class ProgressBarDelegate (QStyledItemDelegate):
             #p.setColor(QPalette.Highlight, QColor(247, 202, 202))
             #progress_bar_option.palette = p
 
-            QApplication.style().drawControl(QStyle.CE_ProgressBar, progress_bar_option, painter)
+            #QApplication.style().drawControl(QStyle.CE_ProgressBar, progress_bar_option, painter)
+            QStyleFactory.create('fusion').drawControl(QStyle.CE_ProgressBar, progress_bar_option, painter)
 
         else:
             QStyledItemDelegate.paint(self, painter, option, index)
