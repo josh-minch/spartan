@@ -36,7 +36,7 @@ class Person(object):
 
         for nut in macro + vit + mineral:
             nut_id = req.display_name_to_id[nut['name']]
-            nut_to_append = Nutrient(name=nut['name'], nut_id=nut_id, min=nut['min'], max=nut['max'], target=nut['max'])
+            nut_to_append = Nutrient(name=nut['name'], nut_id=nut_id, min=nut['min'], max=nut['max'], target=None)
             self.nuts.append(nut_to_append)
 
         self.nuts.sort(key=lambda nut: nut.nut_id)
