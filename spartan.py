@@ -342,9 +342,6 @@ def convert_quantity(food_id, quantity, old_unit, new_unit):
     '''
 
 def get_nutrition(person, food_ids, food_amounts):
-    if len(food_ids) == 0:
-        return
-
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
 
@@ -357,12 +354,20 @@ def get_nutrition(person, food_ids, food_amounts):
         'ORDER BY food_id, nut_id'
     )
     cur.execute(sql_stmt, food_ids + nut_ids)
+    nut_amounts = np.array(cur.fetchall())
 
-    nut_amounts = cur.fetchall()
-    nut_amounts = np.array([amount[0] if amount[0] is not None else 0 for amount in nut_amounts])
-
-    # sum amounts for each respective nutrient given each amount of food
+    # Reshape array into matrix, where each row is a food and each column a nutrient
     nut_amounts = nut_amounts.reshape(len(food_ids), len(nut_ids))
+
+    # Check if database lacks a value for each nutrient for all foods and record for later.
+    # If every selected food lacks a value for a given nutrient, we display No data.
+    # If one or more selected foods have a value, even if the rest have no value in the database,
+    # we treat the NULL value in the database as 0 and add them.
+    nut_has_data = check_if_sparse_nutrient(nut_amounts)
+
+    nut_amounts[nut_amounts == None] = 0
+
+    # Sum amounts for each respective nutrient given each amount of food
     food_amounts = np.reshape(food_amounts, (len(food_amounts), 1))
     nut_amounts = sum(food_amounts * (nut_amounts / DB_SCALER))
 
@@ -370,11 +375,30 @@ def get_nutrition(person, food_ids, food_amounts):
 
     nutrition = []
     nut_names = [nut.name for nut in person.nuts]
-    for nut_name, nut_amount, unit in zip(nut_names, nut_amounts, units):
+    for nut_name, nut_amount, has_data, unit in zip(nut_names, nut_amounts, nut_has_data, units):
         dv = calculate_dv(person, nut_name, nut_amount)
-        nutrition.append({'name':nut_name, 'amount': nut_amount, 'unit': unit[0], 'percent': dv})
+        if has_data:
+            nutrition.append({'name':nut_name, 'amount': nut_amount, 'unit': unit[0], 'percent': dv})
+        else:
+            nutrition.append({'name':nut_name, 'amount': None, 'unit': unit[0], 'percent': dv})
 
-    return nutrition
+    return sort_nutrition(nutrition)
+
+def sort_nutrition(nutrition):
+
+    nutrition = sorted(nutrition, key=lambda n: req.nut_names.index(n['name']))
+
+    macros, vits, minerals = [], [], []
+
+    for nutrient in nutrition:
+        if nutrient['name'] in req.macro_names:
+            macros.append(nutrient)
+        elif nutrient['name'] in req.vit_names:
+            vits.append(nutrient)
+        elif nutrient['name'] in req.mineral_names:
+            minerals.append(nutrient)
+
+    return macros, vits, minerals
 
 def calculate_dv(person, nut_name, nutrient_amount):
         if nutrient_amount is None:
@@ -396,6 +420,16 @@ def get_nutrition_unit(nut_ids):
     )
     cur.execute(sql_stmt, nut_ids)
     return cur.fetchall()
+
+def check_if_sparse_nutrient(nut_amounts):
+    nut_has_data = []
+    for nut in np.transpose(nut_amounts):
+        if all(value is None for value in nut):
+            nut_has_data.append(False)
+        else:
+            nut_has_data.append(True)
+
+    return nut_has_data
 
 def add_random_foods():
     con = sql.connect('sr_legacy/sr_legacy.db')

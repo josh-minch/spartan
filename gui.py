@@ -29,9 +29,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.person = Person(19, 'm')
+
         self.person.remove_nut('Fluoride (F)')
         self.person.remove_nut('Water')
-        self.person.add_nut(Nutrient('Energy', nut_id=208, max=2500))
+        #self.person.add_nut(Nutrient('Energy', nut_id=208, max=2500))
 
         self.setup_fridge_views()
         self.setup_selected_foods()
@@ -214,12 +215,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
             amounts.append(self.fridge_selected_model.data(index))
 
-        nutrients = get_nutrition(self.person, self.selected_food_ids, amounts)
-        nutrition_model = NutritionTableModel(nutrients=nutrients)
-        self.nutrition_view.setModel(nutrition_model)
+        macros, vits, minerals = get_nutrition(self.person, self.selected_food_ids, amounts)
 
-        progress_bar_delegate = ProgressBarDelegate(self)
-        self.nutrition_view.setItemDelegate(progress_bar_delegate)
+        macros_model = NutritionTableModel(nutrients=macros)
+        vits_model = NutritionTableModel(nutrients=vits)
+        minerals_model = NutritionTableModel(nutrients=minerals)
+
+        self.macros_view.setModel(macros_model)
+        self.vits_view.setModel(vits_model)
+        self.minerals_view.setModel(minerals_model)
+
+        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
+        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
+        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
 
         self.setup_nutrition()
 
