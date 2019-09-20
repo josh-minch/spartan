@@ -131,8 +131,8 @@ QPushButton:pressed {
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../images/back-black.svg</normaloff>../images/back-black.svg</iconset>
+        <iconset resource="../images/images.qrc">
+         <normaloff>:/images/back-black.svg</normaloff>:/images/back-black.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -162,76 +162,17 @@ QPushButton:pressed {
      <property name="spacing">
       <number>6</number>
      </property>
-     <item row="0" column="0" colspan="2">
-      <widget class="QLabel" name="label_6">
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Presets</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QLabel" name="label_7">
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>10</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Select all that apply</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QCheckBox" name="vegan">
-       <property name="text">
-        <string>Vegan</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="4">
       <widget class="QCheckBox" name="vegetarian">
        <property name="text">
         <string>Ovo-lacto vegetarian</string>
        </property>
-      </widget>
-     </item>
-     <item row="1" column="5">
-      <widget class="QCheckBox" name="pescatarian">
-       <property name="text">
-        <string>Pescatarian</string>
+       <property name="autoExclusive">
+        <bool>false</bool>
        </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QCheckBox" name="fruitarian">
-       <property name="text">
-        <string>Fruitarian</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QCheckBox" name="carnivore">
-       <property name="text">
-        <string>Carnivore</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="5">
-      <widget class="QCheckBox" name="home">
-       <property name="text">
-        <string>Home-cooked</string>
-       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">preset_btn_grp</string>
+       </attribute>
       </widget>
      </item>
      <item row="3" column="2">
@@ -249,6 +190,16 @@ QPushButton:pressed {
         </size>
        </property>
       </spacer>
+     </item>
+     <item row="5" column="3">
+      <widget class="QCheckBox" name="generated">
+       <property name="text">
+        <string>Generated diets</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">type_btn_grp</string>
+       </attribute>
+      </widget>
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="label_37">
@@ -274,24 +225,53 @@ QPushButton:pressed {
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>../images/info-outline.png</pixmap>
+        <pixmap resource="../images/images.qrc">:/images/info-outline.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="4" column="1" colspan="2">
-      <widget class="QLabel" name="label_38">
+     <item row="1" column="0" colspan="2">
+      <widget class="QLabel" name="label_7">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="text">
-        <string>Restricted foods won't appear in  </string>
+        <string>Select all that apply</string>
        </property>
       </widget>
      </item>
-     <item row="4" column="3">
-      <widget class="QCheckBox" name="search">
+     <item row="1" column="5">
+      <widget class="QCheckBox" name="pescatarian">
        <property name="text">
-        <string>Search results</string>
+        <string>Pescatarian</string>
+       </property>
+       <property name="autoExclusive">
+        <bool>false</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">preset_btn_grp</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <widget class="QLabel" name="label_6">
+       <property name="font">
+        <font>
+         <family>Segoe UI Semibold</family>
+         <pointsize>14</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Presets</string>
        </property>
       </widget>
      </item>
@@ -311,11 +291,73 @@ QPushButton:pressed {
        </property>
       </spacer>
      </item>
-     <item row="5" column="3">
-      <widget class="QCheckBox" name="generated">
+     <item row="4" column="1" colspan="2">
+      <widget class="QLabel" name="label_38">
        <property name="text">
-        <string>Generated diets</string>
+        <string>Restricted foods won't appear in  </string>
        </property>
+      </widget>
+     </item>
+     <item row="1" column="3">
+      <widget class="QCheckBox" name="vegan">
+       <property name="text">
+        <string>Vegan</string>
+       </property>
+       <property name="autoExclusive">
+        <bool>false</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">preset_btn_grp</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="4" column="3">
+      <widget class="QCheckBox" name="search">
+       <property name="text">
+        <string>Search results</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">type_btn_grp</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="2" column="3">
+      <widget class="QCheckBox" name="carnivore">
+       <property name="text">
+        <string>Carnivore</string>
+       </property>
+       <property name="autoExclusive">
+        <bool>false</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">preset_btn_grp</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="2" column="5">
+      <widget class="QCheckBox" name="custom">
+       <property name="text">
+        <string>Custom</string>
+       </property>
+       <property name="autoExclusive">
+        <bool>false</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">preset_btn_grp</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="2" column="4">
+      <widget class="QCheckBox" name="home">
+       <property name="text">
+        <string>Home-cooked</string>
+       </property>
+       <property name="autoExclusive">
+        <bool>false</bool>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">preset_btn_grp</string>
+       </attribute>
       </widget>
      </item>
     </layout>
@@ -361,6 +403,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>true</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="0" column="2">
@@ -382,6 +427,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>true</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="1" column="0">
@@ -401,6 +449,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="1" column="1">
@@ -420,6 +471,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="1" column="2">
@@ -439,6 +493,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="1" column="3">
@@ -460,6 +517,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="2" column="0">
@@ -485,6 +545,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="2" column="1">
@@ -504,6 +567,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="2" column="2">
@@ -523,6 +589,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="2" column="3">
@@ -542,10 +611,13 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QCheckBox" name="grain">
+        <widget class="QCheckBox" name="cereal">
          <property name="font">
           <font>
            <family>Segoe UI</family>
@@ -561,6 +633,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="3" column="1">
@@ -580,6 +655,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="3" column="2">
@@ -599,6 +677,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="3" column="3">
@@ -618,10 +699,13 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QCheckBox" name="cereal">
+        <widget class="QCheckBox" name="breakfast">
          <property name="font">
           <font>
            <family>Segoe UI</family>
@@ -637,6 +721,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="4" column="2">
@@ -658,6 +745,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="5" column="1">
@@ -695,6 +785,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>true</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="7" column="0">
@@ -714,6 +807,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="7" column="1">
@@ -733,10 +829,13 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="8" column="0">
-        <widget class="QCheckBox" name="prepared">
+        <widget class="QCheckBox" name="meal">
          <property name="font">
           <font>
            <family>Segoe UI</family>
@@ -752,6 +851,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="8" column="1">
@@ -771,6 +873,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="9" column="0">
@@ -790,6 +895,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="9" column="1">
@@ -809,6 +917,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="10" column="0">
@@ -828,6 +939,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="10" column="1">
@@ -847,6 +961,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="11" column="0">
@@ -866,6 +983,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="11" column="1">
@@ -885,6 +1005,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
        <item row="12" column="0">
@@ -904,6 +1027,9 @@ QPushButton:pressed {
          <property name="tristate">
           <bool>false</bool>
          </property>
+         <attribute name="buttonGroup">
+          <string notr="true">food_btn_grp</string>
+         </attribute>
         </widget>
        </item>
       </layout>
@@ -912,6 +1038,25 @@ QPushButton:pressed {
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../images/images.qrc"/>
+ </resources>
  <connections/>
+ <buttongroups>
+  <buttongroup name="preset_btn_grp">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="type_btn_grp">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+  <buttongroup name="food_btn_grp">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
+ </buttongroups>
 </ui>

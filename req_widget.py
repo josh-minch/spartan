@@ -31,8 +31,6 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.req_edit.setView(QListView())
         self.sex_edit.setView(QListView())
 
-        self.show()
-
     def set_defaults(self):
         self.bd_day = None
         self.bd_mon = None
