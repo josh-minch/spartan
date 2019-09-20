@@ -11,9 +11,7 @@ from timeit import default_timer as timer
 from pulp import *
 import req
 import database
-
-MAX_FOOD_ID_LEN = 5
-DB_SCALER = 100
+import constants
 
 
 class Person(object):
