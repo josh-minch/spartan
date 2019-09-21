@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwidget.ui',
 # licensing of 'ui/ui_prefwidget.ui' applies.
 #
-# Created: Sat Sep 21 00:33:42 2019
+# Created: Sat Sep 21 16:18:14 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,7 +39,7 @@ class Ui_PrefWidget(object):
         icon.addPixmap(QtGui.QPixmap("../images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         PrefWidget.setWindowIcon(icon)
         self.formLayout = QtWidgets.QFormLayout(PrefWidget)
-        self.formLayout.setContentsMargins(30, 30, 30, 20)
+        self.formLayout.setContentsMargins(30, 25, 30, 30)
         self.formLayout.setVerticalSpacing(20)
         self.formLayout.setObjectName("formLayout")
         self.label = QtWidgets.QLabel(PrefWidget)

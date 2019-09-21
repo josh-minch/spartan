@@ -95,13 +95,13 @@
     <number>30</number>
    </property>
    <property name="topMargin">
-    <number>30</number>
+    <number>25</number>
    </property>
    <property name="rightMargin">
     <number>30</number>
    </property>
    <property name="bottomMargin">
-    <number>20</number>
+    <number>30</number>
    </property>
    <item row="0" column="0">
     <widget class="QLabel" name="label">

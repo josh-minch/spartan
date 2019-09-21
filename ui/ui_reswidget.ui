@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>979</width>
-    <height>730</height>
+    <width>929</width>
+    <height>787</height>
    </rect>
   </property>
   <property name="palette">
@@ -83,37 +83,70 @@
   <property name="windowTitle">
    <string>Spartan - Preferences</string>
   </property>
-  <layout class="QFormLayout" name="formLayout">
-   <property name="verticalSpacing">
-    <number>30</number>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <property name="spacing">
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>30</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>20</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>30</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>30</number>
+    <number>0</number>
    </property>
-   <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item alignment="Qt::AlignBottom">
-      <widget class="QPushButton" name="back_btn">
-       <property name="minimumSize">
-        <size>
-         <width>45</width>
-         <height>35</height>
-        </size>
+   <item>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>912</width>
+        <height>915</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <property name="leftMargin">
+        <number>30</number>
        </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
+       <property name="topMargin">
+        <number>25</number>
        </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+       <property name="rightMargin">
+        <number>30</number>
+       </property>
+       <property name="bottomMargin">
+        <number>30</number>
+       </property>
+       <item row="0" column="0">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="verticalSpacing">
+          <number>30</number>
+         </property>
+         <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignBottom">
+          <widget class="QPushButton" name="back_btn">
+           <property name="minimumSize">
+            <size>
+             <width>45</width>
+             <height>35</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
     border: none;
 	border-radius: 8px;
 }
@@ -126,915 +159,973 @@ QPushButton:pressed {
 	background-color: #c0e1f9;
 }
 </string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../images/images.qrc">
-         <normaloff>:/images/back-black.svg</normaloff>:/images/back-black.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="font">
-        <font>
-         <family>Segoe UI Semilight</family>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Dietary Restrictions</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="0">
-    <layout class="QGridLayout" name="gridLayout_3">
-     <property name="spacing">
-      <number>6</number>
-     </property>
-     <item row="1" column="4">
-      <widget class="QCheckBox" name="vegetarian">
-       <property name="text">
-        <string>Ovo-lacto vegetarian</string>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">preset_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <spacer name="verticalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>17</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="5" column="3">
-      <widget class="QCheckBox" name="generated">
-       <property name="text">
-        <string>Generated diets</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">type_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_37">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="../images/images.qrc">:/images/info-outline.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" colspan="2">
-      <widget class="QLabel" name="label_7">
-       <property name="font">
-        <font>
-         <family>Segoe UI</family>
-         <pointsize>10</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Select all that apply</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="5">
-      <widget class="QCheckBox" name="pescatarian">
-       <property name="text">
-        <string>Pescatarian</string>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">preset_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="0" column="0" colspan="2">
-      <widget class="QLabel" name="label_6">
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Presets</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <spacer name="verticalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>21</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="4" column="1" colspan="2">
-      <widget class="QLabel" name="label_38">
-       <property name="text">
-        <string>Restricted foods won't appear in  </string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QCheckBox" name="vegan">
-       <property name="text">
-        <string>Vegan</string>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">preset_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="4" column="3">
-      <widget class="QCheckBox" name="search">
-       <property name="text">
-        <string>Search results</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">type_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QCheckBox" name="carnivore">
-       <property name="text">
-        <string>Carnivore</string>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">preset_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="2" column="5">
-      <widget class="QCheckBox" name="custom">
-       <property name="text">
-        <string>Custom</string>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">preset_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QCheckBox" name="home">
-       <property name="text">
-        <string>Home-cooked</string>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">preset_btn_grp</string>
-       </attribute>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="2" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout_3">
-     <property name="spacing">
-      <number>10</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="label_8">
-       <property name="font">
-        <font>
-         <family>Segoe UI Semibold</family>
-         <pointsize>14</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Restricted food groups</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QCheckBox" name="plant">
-         <property name="font">
-          <font>
-           <family>Segoe UI Semibold</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Plant products</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QCheckBox" name="animal">
-         <property name="font">
-          <font>
-           <family>Segoe UI Semibold</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Animal products</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QCheckBox" name="veg">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Vegetables</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QCheckBox" name="legume">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Legumes</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QCheckBox" name="poultry">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Poultry</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QCheckBox" name="seafood">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Seafood</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="fruit">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Fruits and fruit juices</string>
-         </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QCheckBox" name="nut">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Nuts and seeds</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QCheckBox" name="pork">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Pork</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QCheckBox" name="sausage">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Sausages and deli meats</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QCheckBox" name="cereal">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Cereal grains and pasta</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QCheckBox" name="spice">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Spices and herbs</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QCheckBox" name="beef">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Beef</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QCheckBox" name="lamb">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Lamb, veal, and game</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QCheckBox" name="breakfast">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Breakfast cereals</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QCheckBox" name="dairy">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Dairy and eggs</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <spacer name="verticalSpacer_6">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>17</width>
-           <height>13</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="6" column="0">
-        <widget class="QCheckBox" name="misc">
-         <property name="font">
-          <font>
-           <family>Segoe UI Semibold</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Miscellaneous</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="7" column="0">
-        <widget class="QCheckBox" name="fat">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Fats and oils</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="7" column="1">
-        <widget class="QCheckBox" name="restaurant">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Restaurant Foods</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="8" column="0">
-        <widget class="QCheckBox" name="meal">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Prepared meals</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="8" column="1">
-        <widget class="QCheckBox" name="fast">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Fast Foods</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="9" column="0">
-        <widget class="QCheckBox" name="baked">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Baked products</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="9" column="1">
-        <widget class="QCheckBox" name="baby">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Baby Foods</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="10" column="0">
-        <widget class="QCheckBox" name="soup">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Soups, Sauces, and Gravies</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="10" column="1">
-        <widget class="QCheckBox" name="american">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>American Indian/Alaska Native foods</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="11" column="0">
-        <widget class="QCheckBox" name="snack">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Snacks</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="11" column="1">
-        <widget class="QCheckBox" name="drink">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Drinks</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
-       </item>
-       <item row="12" column="0">
-        <widget class="QCheckBox" name="sweet">
-         <property name="font">
-          <font>
-           <family>Segoe UI</family>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::LeftToRight</enum>
-         </property>
-         <property name="text">
-          <string>Sweets</string>
-         </property>
-         <property name="tristate">
-          <bool>false</bool>
-         </property>
-         <attribute name="buttonGroup">
-          <string notr="true">food_btn_grp</string>
-         </attribute>
-        </widget>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../images/images.qrc">
+             <normaloff>:/images/back-black.svg</normaloff>:/images/back-black.svg</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <layout class="QGridLayout" name="gridLayout">
+           <property name="spacing">
+            <number>7</number>
+           </property>
+           <item row="18" column="1">
+            <widget class="QCheckBox" name="poultry">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Poultry</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QLabel" name="label_6">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Presets</string>
+             </property>
+            </widget>
+           </item>
+           <item row="21" column="1">
+            <widget class="QCheckBox" name="dairy">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Dairy and eggs</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="13" column="1">
+            <widget class="QCheckBox" name="fruit">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>Fruits and fruit juices</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="29" column="1">
+            <widget class="QCheckBox" name="sweet">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Sweets</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="8" column="2">
+            <widget class="QCheckBox" name="custom">
+             <property name="text">
+              <string>Custom</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">preset_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="23" column="0" colspan="2">
+            <widget class="QCheckBox" name="misc">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Miscellaneous</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="27" column="1">
+            <widget class="QCheckBox" name="soup">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Soups, sauces, and gravies</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="28" column="1">
+            <widget class="QCheckBox" name="snack">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Snacks</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="22" column="3">
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="5" column="0" colspan="2">
+            <widget class="QLabel" name="label_7">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Select all that apply</string>
+             </property>
+            </widget>
+           </item>
+           <item row="25" column="1">
+            <widget class="QCheckBox" name="meal">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Prepared meals</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="9" column="1">
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="6" column="0" colspan="2">
+            <widget class="QCheckBox" name="vegan">
+             <property name="text">
+              <string>Vegan</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">preset_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="24" column="1">
+            <widget class="QCheckBox" name="fat">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Fats and oils</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="12" column="0">
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>12</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="12" column="1">
+            <widget class="QCheckBox" name="veg">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Vegetables</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="17" column="0" colspan="3">
+            <widget class="QCheckBox" name="animal">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Animal products</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="7" column="2">
+            <widget class="QCheckBox" name="carnivore">
+             <property name="text">
+              <string>Carnivore</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">preset_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="6" column="2" colspan="2">
+            <widget class="QCheckBox" name="vegetarian">
+             <property name="text">
+              <string>Ovo-lacto vegetarian</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">preset_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="5">
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="search">
+               <property name="text">
+                <string>Search results</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">type_btn_grp</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="generated">
+               <property name="text">
+                <string>Generated diets</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">type_btn_grp</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <property name="spacing">
+                <number>7</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="label_37">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>24</width>
+                   <height>24</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="pixmap">
+                  <pixmap resource="../images/images.qrc">:/images/info-outline.png</pixmap>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item alignment="Qt::AlignLeft">
+                <widget class="QLabel" name="label_38">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Restricted foods won't appear in  </string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item row="15" column="1">
+            <widget class="QCheckBox" name="breakfast">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Breakfast cereals</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="11" column="0" colspan="2">
+            <widget class="QCheckBox" name="plant">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+               <pointsize>10</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Plant products</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="26" column="1">
+            <widget class="QCheckBox" name="baked">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Baked products</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="10" column="0" colspan="3">
+            <widget class="QLabel" name="label_8">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Restricted food groups</string>
+             </property>
+            </widget>
+           </item>
+           <item row="16" column="3">
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>13</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="14" column="1">
+            <widget class="QCheckBox" name="cereal">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Cereal grains and pasta</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="20" column="1">
+            <widget class="QCheckBox" name="beef">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Beef</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="19" column="1">
+            <widget class="QCheckBox" name="pork">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Pork</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>13</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="8" column="0" colspan="2">
+            <widget class="QCheckBox" name="home">
+             <property name="text">
+              <string>Home-cooked</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">preset_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="2">
+            <widget class="QCheckBox" name="pescatarian">
+             <property name="text">
+              <string>Pescatarian</string>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">preset_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="12" column="3">
+            <widget class="QCheckBox" name="legume">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Legumes</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="13" column="3">
+            <widget class="QCheckBox" name="nut">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Nuts and seeds</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="14" column="3">
+            <widget class="QCheckBox" name="spice">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Spices and herbs</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="18" column="3">
+            <widget class="QCheckBox" name="seafood">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Seafood</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="19" column="3">
+            <widget class="QCheckBox" name="sausage">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Sausages and deli meats</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="20" column="3">
+            <widget class="QCheckBox" name="lamb">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Lamb, veal, and game</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="24" column="3">
+            <widget class="QCheckBox" name="restaurant">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Restaurant Foods</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="25" column="3">
+            <widget class="QCheckBox" name="fast">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Fast Foods</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="26" column="3">
+            <widget class="QCheckBox" name="baby">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Baby Foods</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="27" column="3">
+            <widget class="QCheckBox" name="american">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>American Indian/Alaska Native foods</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+           <item row="28" column="3">
+            <widget class="QCheckBox" name="drink">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Drinks</string>
+             </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
+             <attribute name="buttonGroup">
+              <string notr="true">food_btn_grp</string>
+             </attribute>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <family>Segoe UI Semilight</family>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Dietary Restrictions</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>30</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
-     </item>
-    </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>
@@ -1043,6 +1134,7 @@ QPushButton:pressed {
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="food_btn_grp"/>
   <buttongroup name="preset_btn_grp">
    <property name="exclusive">
     <bool>false</bool>
@@ -1053,6 +1145,5 @@ QPushButton:pressed {
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="food_btn_grp"/>
  </buttongroups>
 </ui>
