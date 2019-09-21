@@ -1,7 +1,7 @@
 import sys
 
 from PySide2.QtCore import Qt
-from PySide2.QtWidgets import (QApplication, QMainWindow, QWidget, QStackedWidget, QVBoxLayout)
+from PySide2.QtWidgets import (QApplication, QMainWindow, QWidget, QStackedWidget, QVBoxLayout, QStyleFactory)
 
 import database
 from ui.ui_prefwindow import Ui_PrefWindow
@@ -51,5 +51,6 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setStyle(QStyleFactory.create('fusion'))
     dialog = PrefWindow()
     sys.exit(app.exec_())

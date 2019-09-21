@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reswidget.ui',
 # licensing of 'ui/ui_reswidget.ui' applies.
 #
-# Created: Fri Sep 20 15:07:12 2019
+# Created: Sat Sep 21 00:33:43 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -181,7 +181,7 @@ class Ui_ResWidget(object):
         font.setBold(True)
         self.plant.setFont(font)
         self.plant.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.plant.setTristate(True)
+        self.plant.setTristate(False)
         self.plant.setObjectName("plant")
         self.food_btn_grp = QtWidgets.QButtonGroup(ResWidget)
         self.food_btn_grp.setObjectName("food_btn_grp")
@@ -195,7 +195,7 @@ class Ui_ResWidget(object):
         font.setBold(True)
         self.animal.setFont(font)
         self.animal.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.animal.setTristate(True)
+        self.animal.setTristate(False)
         self.animal.setObjectName("animal")
         self.food_btn_grp.addButton(self.animal)
         self.gridLayout_4.addWidget(self.animal, 0, 2, 1, 1)
@@ -355,7 +355,7 @@ class Ui_ResWidget(object):
         font.setBold(True)
         self.misc.setFont(font)
         self.misc.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.misc.setTristate(True)
+        self.misc.setTristate(False)
         self.misc.setObjectName("misc")
         self.food_btn_grp.addButton(self.misc)
         self.gridLayout_4.addWidget(self.misc, 6, 0, 1, 1)
