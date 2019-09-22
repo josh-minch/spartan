@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Sat Sep 21 16:18:15 2019
+# Created: Sat Sep 21 18:20:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,7 +36,7 @@ class Ui_ReqWidget(object):
         ReqWidget.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         ReqWidget.setFont(font)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -126,7 +126,7 @@ class Ui_ReqWidget(object):
         self.req_label.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semibold")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setWeight(75)
         font.setBold(True)
         self.req_label.setFont(font)
@@ -182,7 +182,7 @@ class Ui_ReqWidget(object):
         self.sex_label.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semibold")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setWeight(75)
         font.setBold(True)
         self.sex_label.setFont(font)
@@ -238,7 +238,7 @@ class Ui_ReqWidget(object):
         self.birth_label_4.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI Semibold")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setWeight(75)
         font.setBold(True)
         self.birth_label_4.setFont(font)
@@ -255,6 +255,9 @@ class Ui_ReqWidget(object):
         sizePolicy.setHeightForWidth(self.mon_edit.sizePolicy().hasHeightForWidth())
         self.mon_edit.setSizePolicy(sizePolicy)
         self.mon_edit.setMaximumSize(QtCore.QSize(50, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.mon_edit.setFont(font)
         self.mon_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.mon_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.mon_edit.setObjectName("mon_edit")
@@ -266,6 +269,9 @@ class Ui_ReqWidget(object):
         sizePolicy.setHeightForWidth(self.day_edit.sizePolicy().hasHeightForWidth())
         self.day_edit.setSizePolicy(sizePolicy)
         self.day_edit.setMaximumSize(QtCore.QSize(50, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.day_edit.setFont(font)
         self.day_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.day_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.day_edit.setObjectName("day_edit")
@@ -277,6 +283,9 @@ class Ui_ReqWidget(object):
         sizePolicy.setHeightForWidth(self.year_edit.sizePolicy().hasHeightForWidth())
         self.year_edit.setSizePolicy(sizePolicy)
         self.year_edit.setMaximumSize(QtCore.QSize(75, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.year_edit.setFont(font)
         self.year_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.year_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.year_edit.setObjectName("year_edit")

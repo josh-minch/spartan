@@ -31,6 +31,7 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
         lay.addWidget(self.stacked_widget)
 
         self.setup_connections()
+        self.resize(900,600)
         self.show()
 
     def setup_connections(self):
@@ -51,5 +52,6 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setStyle(QStyleFactory.create('fusion'))
     dialog = PrefWindow()
     sys.exit(app.exec_())

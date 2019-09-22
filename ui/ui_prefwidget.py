@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwidget.ui',
 # licensing of 'ui/ui_prefwidget.ui' applies.
 #
-# Created: Sat Sep 21 16:18:14 2019
+# Created: Sat Sep 21 18:20:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -92,7 +92,7 @@ class Ui_PrefWidget(object):
         self.label_2.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
         self.verticalLayout.addWidget(self.label_2)
@@ -110,7 +110,7 @@ class Ui_PrefWidget(object):
         self.label_4.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_4.setFont(font)
         self.label_4.setObjectName("label_4")
         self.verticalLayout.addWidget(self.label_4)
@@ -128,7 +128,7 @@ class Ui_PrefWidget(object):
         self.label_6.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_6.setFont(font)
         self.label_6.setObjectName("label_6")
         self.verticalLayout.addWidget(self.label_6)
@@ -174,7 +174,7 @@ class Ui_PrefWidget(object):
         self.label_3.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
         self.verticalLayout_2.addWidget(self.label_3)
@@ -192,7 +192,7 @@ class Ui_PrefWidget(object):
         self.label_5.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
         self.verticalLayout_2.addWidget(self.label_5)
