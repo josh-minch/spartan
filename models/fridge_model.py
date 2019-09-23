@@ -76,14 +76,12 @@ class FridgeModel(QAbstractTableModel):
         if role in (Qt.DisplayRole, Qt.EditRole):
             if index.column() == PER_COL:
                 return 'per'
-
             attr_str = f_col_to_attr[index.column()]
             attr = getattr(self.foods[index.row()], attr_str)
             '''
             if index.column() == PRICE_COL and attr is not None:
                 attr = self.currency + '{:.2f}'.format(attr)
             '''
-
             return attr
 
         if role == Qt.TextAlignmentRole:
@@ -152,17 +150,15 @@ class FridgeModel(QAbstractTableModel):
         if index.isValid() and 0 <= index.row() < len(self.foods):
             food = self.foods[index.row()]
             attr_str = f_col_to_attr[index.column()]
-
             if index.column() == PRICE_COL:
                 value.strip(self.currency)
-
             if attr_str in ('price', 'min', 'max', 'target'):
                 if value == '':
                     value = None
                 else:
                     value = float(value)
             setattr(self.foods[index.row()], attr_str, value)
-            self.dataChanged.emit(index, index, [role])
+            self.dataChanged.emit(index, index, [])
             return True
 
         return False
@@ -172,9 +168,6 @@ class FridgeModel(QAbstractTableModel):
             return None
         # Cannot edit name, per col
         if index.column() in (NAME_COL, PER_COL):
-            return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
-                            ~Qt.ItemIsEditable)
-        if index.column in (PRICE_UNIT_COL, MIN_UNIT_COL):
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |

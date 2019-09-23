@@ -9,7 +9,7 @@ from ui.ui_searchwindow import Ui_SearchWindow
 from models.search_model import SearchModel
 
 class SearchWindow(QMainWindow, Ui_SearchWindow):
-    food_added = Signal()
+    food_added = Signal(int)
 
     def __init__(self, parent=None, person=None, fridge_model=None):
         super().__init__(parent)
@@ -63,10 +63,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
             self.fridge_model.setData(ix, food_name, Qt.EditRole)
             '''
 
-            # We cannot access the data added to a model when the signal rowsInserted is emitted,
-            # as its emitted before the data is set.
-            # Emit a signal after when we have the food_id in the model, so we can use it to get
-            # the correct units to display in the main window combo boxes
+            # Emit row
             self.food_added.emit()
             self.person.add_food_to_db(food_to_add)
 

@@ -48,32 +48,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.resize(1500, 700)
         self.show()
 
-    def set_units(self):
-        for row in range(self.fridge_model.rowCount()):
-
+    def populate_editors(self):
+        for row, food in enumerate(self.person.foods):
             food = self.person.foods[row]
+            #self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_COL))
 
-            self.price_unit_combo = ComboBoxDelegate(food)
-            self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, self.price_unit_combo)
-            '''
-            self.constraints_view.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(units))
-            self.constraints_view.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(units))
-            self.constraints_view.setItemDelegateForColumn(TARGET_UNIT_COL, ComboBoxDelegate(units))
-            '''
+            self.prices_view.setItemDelegateForRow(row, ComboBoxDelegate(food))
+            self.constraints_view.setItemDelegateForRow(row, ComboBoxDelegate(food))
             #self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_UNIT_COL))
+
             '''
             self.constraints_view.openPersistentEditor(self.fridge_model.index(row, MIN_UNIT_COL))
             self.constraints_view.openPersistentEditor(self.fridge_model.index(row, MAX_UNIT_COL))
             self.constraints_view.openPersistentEditor(self.fridge_model.index(row, TARGET_UNIT_COL))
             '''
-            #self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_COL))
 
     def setup_connections(self):
         self.fridge_model.dataChanged.connect(self.update_foods)
         self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
         self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
-
-        self.fridge_model.rowsInserted.connect(self.set_units)
 
         # Synchronize fridge selection to prices and constraints
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
@@ -121,15 +114,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.constraints_view.setModel(self.fridge_model)
 
         # Set custom delegates
+        '''
         self.prices_view.setItemDelegateForColumn(PRICE_COL, AlignRightDelegate(self))
         self.prices_view.setItemDelegateForColumn(PRICE_QUANTITY_COL, AlignRightDelegate(self))
         self.constraints_view.setItemDelegateForColumn(MIN_COL, AlignRightDelegate(self))
         self.constraints_view.setItemDelegateForColumn(MAX_COL, AlignRightDelegate(self))
         self.constraints_view.setItemDelegateForColumn(TARGET_COL, AlignRightDelegate(self))
-
-        # Populate table with combo boxes and persistent editors
-        #for i in range(self.fridge_model.rowCount()):
-        #    self.create_editors()
+        '''
 
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
@@ -172,7 +163,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(c_header, QFont.DemiBold)
 
         # Hide fridge scrollbar
-        self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}");
+        self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}")
+
+        # Populate table persistent editors
+        self.populate_editors()
 
     def setup_nutrition(self):
         set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
@@ -212,7 +206,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_window.setAttribute(Qt.WA_DeleteOnClose)
 
         # Set unit columns in fridge when food added from search window
-        #self.search_window.food_added.connect(self.set_units)
+        self.search_window.food_added.connect(self.create_editor)
 
     def optimize(self):
         if len(self.person.foods) == 0:
@@ -282,6 +276,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def print_debug_info(self):
         print(self.person.foods)
+        ix = self.fridge_model.index(0, PRICE_UNIT_COL, QModelIndex())
+        print(self.fridge_model.data(ix))
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
