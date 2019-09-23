@@ -1,13 +1,16 @@
-from PySide2.QtCore import Qt, QModelIndex
+from PySide2.QtCore import Qt, QModelIndex, Signal
 from PySide2.QtGui import QKeySequence
 from PySide2.QtWidgets import (QApplication, QMainWindow, QHeaderView, QShortcut)
 
+import spartan
 import database
 from gui_constants import *
 from ui.ui_searchwindow import Ui_SearchWindow
 from models.search_model import SearchModel
 
 class SearchWindow(QMainWindow, Ui_SearchWindow):
+    food_added = Signal()
+
     def __init__(self, parent=None, person=None, fridge_model=None):
         super().__init__(parent)
         self.setupUi(self)
@@ -46,17 +49,26 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         selected_items = self.search_list.selectionModel().selectedRows()
         for item in selected_items:
             current_row = self.fridge_model.rowCount()
-            self.fridge_model.insertRows(current_row)
-
             food_name = self.search_model.data(item, Qt.DisplayRole)
+            food_to_add = spartan.Food(name=food_name)
+            self.fridge_model.insertRows(current_row, food_to_add)
+
+            '''
+            food_id = database.get_food_id(food_name)
 
             ix = self.fridge_model.index(current_row, FOOD_ID_COL, QModelIndex())
-            self.fridge_model.setData(ix, database.get_food_id(food_name), Qt.EditRole)
+            self.fridge_model.setData(ix, food_id, Qt.EditRole)
 
             ix = self.fridge_model.index(current_row, NAME_COL, QModelIndex())
             self.fridge_model.setData(ix, food_name, Qt.EditRole)
+            '''
 
-            self.person.add_foods_to_db([food_name])
+            # We cannot access the data added to a model when the signal rowsInserted is emitted,
+            # as its emitted before the data is set.
+            # Emit a signal after when we have the food_id in the model, so we can use it to get
+            # the correct units to display in the main window combo boxes
+            self.food_added.emit()
+            self.person.add_food_to_db(food_to_add)
 
     def toggle_add_btn(self):
         if self.search_selection_model is None:

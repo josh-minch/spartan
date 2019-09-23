@@ -57,6 +57,7 @@ class FridgeModel(QAbstractTableModel):
         if not index.isValid() or not 0 <= index.row() < len(self.foods):
             return None
 
+        '''
         # Hide units unless corresponding attribute has a value
         if index.column() == PRICE_QUANTITY_COL and self.foods[index.row()].price is None:
             return
@@ -70,6 +71,7 @@ class FridgeModel(QAbstractTableModel):
             return
         if index.column() == TARGET_UNIT_COL and self.foods[index.row()].target is None:
             return
+        '''
 
         if role in (Qt.DisplayRole, Qt.EditRole):
             if index.column() == PER_COL:
@@ -77,9 +79,10 @@ class FridgeModel(QAbstractTableModel):
 
             attr_str = f_col_to_attr[index.column()]
             attr = getattr(self.foods[index.row()], attr_str)
-
+            '''
             if index.column() == PRICE_COL and attr is not None:
                 attr = self.currency + '{:.2f}'.format(attr)
+            '''
 
             return attr
 
@@ -92,9 +95,7 @@ class FridgeModel(QAbstractTableModel):
         return None
 
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
-
         if orientation == Qt.Horizontal:
-
             if role == Qt.DisplayRole:
                 if section == FOOD_ID_COL:
                     return "Id"
@@ -123,10 +124,10 @@ class FridgeModel(QAbstractTableModel):
 
         return None
 
-    def insertRows(self, position, rows=1, index=QModelIndex()):
-        self.beginInsertRows(QModelIndex(), position, position + rows - 1)
-        for row in range(rows):
-            self.foods.insert(position + row, Food())
+    def insertRows(self, row, food, count=1, index=QModelIndex()):
+        self.beginInsertRows(QModelIndex(), row, row + count - 1)
+        for row in range(count):
+            self.foods.insert(row + row, food)
         self.endInsertRows()
 
         return True
@@ -137,6 +138,12 @@ class FridgeModel(QAbstractTableModel):
         self.endRemoveRows()
 
         return True
+
+    def append_food(self, position, food):
+        self.beginInsertRows(QModelIndex(), position, position + rows - 1)
+        for row in range(rows):
+            self.foods.insert(position + row, food)
+        self.endInsertRows()
 
     def setData(self, index, value, role=Qt.EditRole):
         if role != Qt.EditRole:
@@ -155,15 +162,19 @@ class FridgeModel(QAbstractTableModel):
                 else:
                     value = float(value)
             setattr(self.foods[index.row()], attr_str, value)
-            self.dataChanged.emit(index, index)
+            self.dataChanged.emit(index, index, [role])
             return True
 
         return False
 
     def flags(self, index):
         if not index.isValid():
-            return Qt.ItemIsEnabled
+            return None
+        # Cannot edit name, per col
         if index.column() in (NAME_COL, PER_COL):
+            return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
+                            ~Qt.ItemIsEditable)
+        if index.column in (PRICE_UNIT_COL, MIN_UNIT_COL):
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |

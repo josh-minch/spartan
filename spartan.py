@@ -11,7 +11,7 @@ from timeit import default_timer as timer
 from pulp import *
 import req
 import database
-import constants
+from constants import *
 
 
 class Person(object):
@@ -51,8 +51,7 @@ class Person(object):
         cur = con.cursor()
 
         sql_stmt = (
-            'SELECT food_id, name, price, price_quantity, price_unit, '
-            'min, min_unit, max, max_unit, target, target_unit '
+            'SELECT * '
             'FROM foods'
         )
 
@@ -65,20 +64,25 @@ class Person(object):
         con.close()
 
     def add_foods(self, food_names):
-        self.add_foods_to_db(food_names)
+        for food_name in food_names:
+            self.foods.append(Food(name=food_name))
 
-    def add_foods_to_db(self, food_names):
+    def add_food_to_db(self, food):
         con = sql.connect("spartan.db")
         cur = con.cursor()
 
-        #TODO: One SQL statement to get food_id from food_name and insert it into user db
-        foods_tuple = [(food_name, database.get_food_id(food_name)) for food_name in food_names]
+        # Store everything but selectable units, as this is a dynamic list
+        food_vars = list(vars(food).keys())
+        food_vars.remove('selectable_units')
+        food_tuple = str(tuple(food_vars))
+
+        food_values = [getattr(food, var) for var in food_vars]
         sql_stmt = (
-            'INSERT INTO foods(name, food_id, price_quantity, price_unit, min_unit, max_unit, target_unit) '
-            'VALUES (?, ?, 100, "g", "g", "g", "g")'
+            'INSERT INTO foods' + food_tuple + ''
+            'VALUES (' + (len(food_vars)-1)*'?,' + '?)'
         )
 
-        cur.executemany(sql_stmt, foods_tuple)
+        cur.execute(sql_stmt, food_values)
         con.commit()
         con.close()
 
@@ -100,55 +104,58 @@ class Person(object):
         con = sql.connect("spartan.db")
         cur = con.cursor()
 
-        attrs = str(tuple(vars(food).keys()))
-        attr_values = list(vars(food).values())
-        # attr comes from our dict of attr strings, so no need to sanitize
+        food_vars = list(vars(food).keys())
+        food_vars.remove('selectable_units')
+
+        food_tuple = str(tuple(food_vars))
+        food_values = [getattr(food, var) for var in food_vars]
+        # tuple comes from our dict of attr strings, so no need to sanitize
         sql_stmt = (
             "UPDATE foods "
-            "SET "+ attrs +" = "
-            "("+ (len(attr_values)-1)*"?," +"?)"
+            "SET "+ food_tuple +" = "
+            "("+ (len(food_values)-1)*"?," +"?)"
             "WHERE food_id = ?"
         )
 
-        cur.execute(sql_stmt, attr_values + [food.food_id])
+        cur.execute(sql_stmt, food_values + [food.food_id])
         con.commit()
         con.close()
 
 class Food:
-    def __init__(self, food_id=None, name=None,
-                       price=None, price_quantity=100, price_unit='g',
-                       min=None, min_unit='g',
-                       max=None, max_unit='g',
-                       target=None, target_unit='g'):
+    def __init__(self, food_id=None, name=None, price=None, price_quantity=None, price_unit = 'g', min=None, min_unit='g',
+                max=None, max_unit='g', target=None, target_unit='g'):
 
         self.food_id = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
-
         self.price: float          = price
         self.price_quantity: float = price_quantity
-        self.price_unit: str       = price_unit
         self.min: float            = min
-        self.min_unit: str         = min_unit
         self.max: float            = max
-        self.max_unit: str         = max_unit
         self.target: float         = target
-        self.target_unit: str      = target_unit
+
+        self.price_unit = price_unit
+        self.min_unit = min_unit
+        self.max_unit = max_unit
+        self.target_unit = target_unit
+        self.selectable_units = self.get_selectable_units()
 
     def __repr__(self):
         return str(self.__dict__)
 
     def get_selectable_units(self):
-
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
         sql_stmnt = (
-            'SELECT description'
-            'FROM weight'
-            'WEHERE food_id = ?'
+            'SELECT description '
+            'FROM weight '
+            'WHERE food_id = ?'
         )
-        cur.execute(sql_stmnt, self.food_id)
+        cur.execute(sql_stmnt, [self.food_id])
+        units = cur.fetchall()
+        con.commit()
+        cur.close()
 
-        return cur.fetchall()
+        return ['g'] + [unit[0] for unit in units]
 
 class Nutrient:
     def __init__(self, name, nut_id=None, min=None, target=None, max=None):

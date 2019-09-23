@@ -5,7 +5,7 @@ def create_user_db():
     if not os.path.isfile('spartan.db'):
         con = sql.connect("spartan.db")
         cur = con.cursor()
-        
+
         users_stmt = (
             'CREATE TABLE users ( '
             'name	TEXT, '
@@ -15,7 +15,6 @@ def create_user_db():
 
         foods_stmt = (
             'CREATE TABLE foods ( '
-            'user_id	        INTEGER, '
             'food_id            INTEGER, '
             'name	            TEXT, '
             'price	            REAL, '
@@ -27,8 +26,7 @@ def create_user_db():
             'max_unit 	        TEXT, '
             'target	            REAL, '
             'target_unit 	    TEXT, '
-            'PRIMARY KEY(user_id, food_id) '
-            'FOREIGN KEY(user_id) REFERENCES users(rowid))'
+            'PRIMARY KEY(food_id)) '
         )
 
         cur.execute(users_stmt)

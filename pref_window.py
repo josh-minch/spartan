@@ -52,6 +52,6 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyle(QStyleFactory.create('fusion'))
+    #app.setStyle(QStyleFactory.create('fusion'))
     dialog = PrefWindow()
     sys.exit(app.exec_())
