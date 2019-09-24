@@ -10,10 +10,9 @@ from ui.ui_reswidget import Ui_ResWidget
 
 
 class ResWidget(QWidget, Ui_ResWidget):
-    def __init__(self, presets, types, fd_grps, parent=None):
+    def __init__(self, types, fd_grps, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.presets = presets
         self.types = types
         self.fd_grps = fd_grps
 
@@ -125,7 +124,7 @@ class ResWidget(QWidget, Ui_ResWidget):
 
     def setup_connections(self):
         # Update restriction values for external use
-        self.preset_btn_grp.buttonToggled[int, bool].connect(partial(self.change_res, self.presets))
+        #self.preset_btn_grp.buttonToggled[int, bool].connect(partial(self.change_res, self.presets))
         self.type_btn_grp.buttonToggled[int, bool].connect(partial(self.change_res, self.types))
         self.food_btn_grp.buttonToggled[int, bool].connect(partial(self.change_res, self.fd_grps))
 

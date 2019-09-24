@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_searchwindow.ui',
-# licensing of 'ui_searchwindow.ui' applies.
+# Form implementation generated from reading ui file 'ui/ui_searchwindow.ui',
+# licensing of 'ui/ui_searchwindow.ui' applies.
 #
-# Created: Tue Sep 17 20:19:00 2019
+# Created: Tue Sep 24 11:58:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!

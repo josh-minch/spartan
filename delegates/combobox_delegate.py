@@ -4,17 +4,24 @@ from gui_constants import *
 
 
 class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
-    def __init__(self, food, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.food = food
-        self.items = food.selectable_units
+        #self.food = food
+        #self.items = food.selectable_units
 
     def createEditor(self, parent, option, index):
+        '''
         if index.column() in (PRICE_COL, PRICE_QUANTITY_COL):
             editor = QtWidgets.QLineEdit(parent)
         else:
             editor = QtWidgets.QComboBox(parent)
             editor.addItems(self.items)
+        return editor
+        '''
+        editor = QtWidgets.QComboBox(parent)
+        items_ix = index.model().index(index.row(), SELECTABLE_UNITS_COL)
+        items = index.model().data(items_ix)
+        editor.addItems(items)
         return editor
 
     def setEditorData(self, editor, index):

@@ -16,10 +16,9 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
         self.setupUi(self)
         self.stacked_widget = QStackedWidget()
 
-        presets, types, fd_grps = [], [], []
         self.pref_widget = PrefWidget()
         self.req_widget = ReqWidget()
-        self.res_widget = ResWidget(presets, types, fd_grps)
+        self.res_widget = ResWidget(person.restrict_types, person.food_groups)
 
         self.stacked_widget.addWidget(self.pref_widget)
         self.stacked_widget.addWidget(self.req_widget)

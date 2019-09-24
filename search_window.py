@@ -9,7 +9,7 @@ from ui.ui_searchwindow import Ui_SearchWindow
 from models.search_model import SearchModel
 
 class SearchWindow(QMainWindow, Ui_SearchWindow):
-    food_added = Signal(int)
+    food_added = Signal()
 
     def __init__(self, parent=None, person=None, fridge_model=None):
         super().__init__(parent)
@@ -51,7 +51,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
             current_row = self.fridge_model.rowCount()
             food_name = self.search_model.data(item, Qt.DisplayRole)
             food_to_add = spartan.Food(name=food_name)
-            self.fridge_model.insertRows(current_row, food_to_add)
+            self.fridge_model.insertRows(current_row+1, food_to_add)
 
             '''
             food_id = database.get_food_id(food_name)

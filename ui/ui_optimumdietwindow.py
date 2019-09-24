@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_optimumdietwindow.ui',
-# licensing of 'ui_optimumdietwindow.ui' applies.
+# Form implementation generated from reading ui file 'ui/ui_optimumdietwindow.ui',
+# licensing of 'ui/ui_optimumdietwindow.ui' applies.
 #
-# Created: Tue Sep 17 20:19:01 2019
+# Created: Tue Sep 24 11:58:39 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!

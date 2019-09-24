@@ -19,10 +19,15 @@ class Person(object):
         # TODO: get rid of age_range, sex member variables. only here now for testing in opt diet window
         self.age_range = age_range
         self.sex = sex
+
+        # Personal nutrient requirements and foods in a person's fridge
         self.nuts = []
         self.foods = []
-        self.populate_foods_from_db()
         self.set_nuts()
+        self.populate_foods_from_db()
+
+        # Restricted food groups and type of restricton
+        self.food_groups, self.restrict_types = [], []
 
     def __repr__(self):
         return str(self.__dict__)

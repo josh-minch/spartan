@@ -325,7 +325,7 @@ QTableView {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pref_btn">
         <property name="maximumSize">
          <size>
           <width>100</width>
@@ -339,7 +339,7 @@ QTableView {
          </font>
         </property>
         <property name="text">
-         <string>Settings</string>
+         <string>Preferences</string>
         </property>
         <property name="icon">
          <iconset>
@@ -753,38 +753,6 @@ QTableView {
           </item>
          </layout>
         </widget>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Settings</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>images/settings.svg</normaloff>images/settings.svg</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>20</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="shortcut">
-         <string>F9</string>
-        </property>
        </widget>
       </item>
      </layout>

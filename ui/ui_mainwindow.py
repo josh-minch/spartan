@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui_mainwindow.ui',
-# licensing of 'ui_mainwindow.ui' applies.
+# Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
+# licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Tue Sep 17 20:19:00 2019
+# Created: Tue Sep 24 11:58:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -149,18 +149,18 @@ class Ui_MainWindow(object):
         self.fridge_view.verticalHeader().setVisible(False)
         self.fridge_view.verticalHeader().setDefaultSectionSize(25)
         self.verticalLayout.addWidget(self.fridge_view)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setMaximumSize(QtCore.QSize(100, 16777215))
+        self.pref_btn = QtWidgets.QPushButton(self.centralwidget)
+        self.pref_btn.setMaximumSize(QtCore.QSize(100, 16777215))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(9)
-        self.pushButton.setFont(font)
+        self.pref_btn.setFont(font)
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("images/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon3)
-        self.pushButton.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton.setObjectName("pushButton")
-        self.verticalLayout.addWidget(self.pushButton)
+        self.pref_btn.setIcon(icon3)
+        self.pref_btn.setIconSize(QtCore.QSize(20, 20))
+        self.pref_btn.setObjectName("pref_btn")
+        self.verticalLayout.addWidget(self.pref_btn)
         self.horizontalLayout_2.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -307,16 +307,6 @@ class Ui_MainWindow(object):
         icon5.addPixmap(QtGui.QPixmap("images/balance.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tab_2, icon5, "")
         self.verticalLayout_2.addWidget(self.tabWidget)
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setMaximumSize(QtCore.QSize(100, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(9)
-        self.pushButton_2.setFont(font)
-        self.pushButton_2.setIcon(icon3)
-        self.pushButton_2.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout_2.addWidget(self.pushButton_2)
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -622,12 +612,10 @@ class Ui_MainWindow(object):
         self.add_foods_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add food", None, -1))
         self.remove_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Remove selected food (delete)</p>", None, -1))
         self.remove_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Remove", None, -1))
-        self.pushButton.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))
-        self.pushButton.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F9", None, -1))
+        self.pref_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Preferences", None, -1))
+        self.pref_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F9", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtWidgets.QApplication.translate("MainWindow", "Prices", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtWidgets.QApplication.translate("MainWindow", "Constraints", None, -1))
-        self.pushButton_2.setText(QtWidgets.QApplication.translate("MainWindow", "Settings", None, -1))
-        self.pushButton_2.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F9", None, -1))
         self.label_8.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))
         self.optimize_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Generate optimum diet (F5)</p>", None, -1))
         self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Generate diet", None, -1))

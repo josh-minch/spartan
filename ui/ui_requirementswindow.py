@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_requirementswindow.ui',
 # licensing of 'ui/ui_requirementswindow.ui' applies.
 #
-# Created: Thu Sep 19 18:34:57 2019
+# Created: Tue Sep 24 11:58:39 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
