@@ -14,7 +14,6 @@ from gui_constants import *
 from gui_helpers import *
 import database
 import user_db
-
 from search_window import SearchWindow
 from pref_window import PrefWindow
 from optimum_diet_window import OptimumDietWindow
@@ -24,7 +23,6 @@ from models.fridge_selected_model import FridgeSelectedModel
 from delegates.progress_bar_delegate import ProgressBarDelegate
 from delegates.align_right_delegate import AlignRightDelegate
 from delegates.combobox_delegate import ComboBoxDelegate
-
 from ui.ui_mainwindow import Ui_MainWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):

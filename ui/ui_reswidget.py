@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reswidget.ui',
 # licensing of 'ui/ui_reswidget.ui' applies.
 #
-# Created: Tue Sep 24 11:58:32 2019
+# Created: Wed Sep 25 15:18:49 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -53,7 +53,7 @@ class Ui_ResWidget(object):
         self.scrollArea.setWidgetResizable(False)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -150, 912, 888))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 912, 888))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.formLayout = QtWidgets.QFormLayout(self.scrollAreaWidgetContents)
         self.formLayout.setContentsMargins(30, 25, 30, 30)
@@ -208,7 +208,6 @@ class Ui_ResWidget(object):
         self.misc.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.misc.setTristate(False)
         self.misc.setObjectName("misc")
-        self.food_btn_grp.addButton(self.misc)
         self.gridLayout.addWidget(self.misc, 22, 0, 1, 2)
         self.nut = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
@@ -279,7 +278,6 @@ class Ui_ResWidget(object):
         self.plant.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.plant.setTristate(False)
         self.plant.setObjectName("plant")
-        self.food_btn_grp.addButton(self.plant)
         self.gridLayout.addWidget(self.plant, 10, 0, 1, 2)
         self.legume = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
@@ -301,7 +299,6 @@ class Ui_ResWidget(object):
         self.animal.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.animal.setTristate(False)
         self.animal.setObjectName("animal")
-        self.food_btn_grp.addButton(self.animal)
         self.gridLayout.addWidget(self.animal, 16, 0, 1, 3)
         self.baby = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         font = QtGui.QFont()

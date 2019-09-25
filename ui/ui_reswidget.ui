@@ -120,7 +120,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-150</y>
+        <y>0</y>
         <width>912</width>
         <height>888</height>
        </rect>
@@ -477,9 +477,6 @@ QPushButton:pressed {
              <property name="tristate">
               <bool>false</bool>
              </property>
-             <attribute name="buttonGroup">
-              <string notr="true">food_btn_grp</string>
-             </attribute>
             </widget>
            </item>
            <item row="12" column="2">
@@ -636,9 +633,6 @@ QPushButton:pressed {
              <property name="tristate">
               <bool>false</bool>
              </property>
-             <attribute name="buttonGroup">
-              <string notr="true">food_btn_grp</string>
-             </attribute>
             </widget>
            </item>
            <item row="11" column="2">
@@ -682,9 +676,6 @@ QPushButton:pressed {
              <property name="tristate">
               <bool>false</bool>
              </property>
-             <attribute name="buttonGroup">
-              <string notr="true">food_btn_grp</string>
-             </attribute>
             </widget>
            </item>
            <item row="25" column="2">
@@ -1117,16 +1108,16 @@ QPushButton:pressed {
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="type_btn_grp">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
   <buttongroup name="preset_btn_grp">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
   <buttongroup name="food_btn_grp"/>
-  <buttongroup name="type_btn_grp">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
  </buttongroups>
 </ui>

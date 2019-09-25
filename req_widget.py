@@ -105,6 +105,6 @@ class ReqWidget(QWidget, Ui_ReqWidget):
     def year_edit_changed(self, year):
         self.bd_year = int(year)
     def sex_edit_changed(self, index):
-        self.sex = INDEX_TO_SEX[index]
+        self.sex = index_to_sex[index]
     def req_edit_changed(self, req_text):
         self.req_text = req_text

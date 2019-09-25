@@ -1,10 +1,8 @@
 from functools import partial
 
 from PySide2.QtCore import Qt
-from PySide2.QtGui import QPixmap, QKeySequence
-from PySide2.QtWidgets import QWidget, QButtonGroup, QCheckBox, QShortcut, QAbstractButton
+from PySide2.QtWidgets import QWidget
 
-import res
 import constants
 from ui.ui_reswidget import Ui_ResWidget
 
@@ -16,7 +14,6 @@ class ResWidget(QWidget, Ui_ResWidget):
         self.types = types
         self.fd_grps = fd_grps
 
-        self.checked_food_btns = set()
         self.list_btns()
         self.assign_id(self.preset_btns, self.preset_btn_grp,
                        constants.preset_grp.values())
@@ -41,6 +38,7 @@ class ResWidget(QWidget, Ui_ResWidget):
                           self.sweet, self.cereal, self.fast, self.meal,
                           self.snack, self.american, self.restaurant]
         self.type_btns = [self.search, self.generated]
+        self.select_all_btns = [self.plant, self.animal, self.misc]
 
         # Qt Designer apparently does not support the creation of intersectiong groups
         # The remaining groups are enumerated here
@@ -51,14 +49,16 @@ class ResWidget(QWidget, Ui_ResWidget):
         self.misc_btns = {self.baby, self.fat, self.soup, self.drink, self.baked,
                           self.sweet, self.fast, self.meal, self.snack,
                           self.american, self.restaurant}
+        self.select_all_btn_sets = [
+            self.plant_btns, self.animal_btns, self.misc_btns]
 
         self.vegan_btns = self.animal_btns
         self.vegetarian_btns = self.vegan_btns - {self.animal, self.dairy}
         self.pesc_btns = self.vegetarian_btns - {self.seafood}
         self.carnivore_btns = self.plant_btns
         self.home_btns = {self.restaurant, self.fast, self.meal, self.snack}
-
-        self.preset_btn_sets = [self.vegan_btns, self.vegetarian_btns, self.pesc_btns, self.carnivore_btns, self.home_btns]
+        self.preset_btn_sets = [self.vegan_btns, self.vegetarian_btns,
+                                self.pesc_btns, self.carnivore_btns, self.home_btns]
 
     def assign_id(self, btns, group, values):
         for btn, id in zip(btns, values):
@@ -87,28 +87,36 @@ class ResWidget(QWidget, Ui_ResWidget):
         for btn_to_check in btns_to_check:
             btn_to_check.setChecked(True)
 
-    def update_preset_after_btn_toggle(self, btn):
-        '''
-        for preset_btn, preset_btn_set in zip(self.preset_btns, self.preset_btn_sets):
-            if btn.isChecked() == False and btn in preset_btn_set:
-                preset_btn.blockSignals(True)
-                preset_btn.setChecked(False)
-                preset_btn.blockSignals(False)
-        '''
+    def update_preset_after_btn_toggle(self):
         for preset_btn in self.preset_btns:
             preset_btn.blockSignals(True)
             preset_btn.setChecked(False)
             preset_btn.blockSignals(False)
+        self.custom.setChecked(False)
 
-        presets_to_check = set()
+        checked_btns = {
+            btn for btn in self.food_btn_grp.buttons() if btn.isChecked()}
         for preset_btn, preset_btn_set in zip(self.preset_btns, self.preset_btn_sets):
-            if self.checked_food_btns >= preset_btn_set:
-                presets_to_check.add(preset_btn)
+            if checked_btns == preset_btn_set:
+                # If currently checked btns match a preset, check that preset and return
+                preset_btn.setChecked(True)
+                return
 
-        for preset_to_check in presets_to_check:
-            #preset_btn.blockSignals(True)
-            preset_to_check.setChecked(True)
-            #preset_btn.blockSignals(False)
+        if len(checked_btns) > 0:
+            # If btns are checked but no preset matches, set custom
+            self.custom.setChecked(True)
+
+    def update_select_all_after_btn_toggle(self):
+        for select_all_btn in self.select_all_btns:
+            select_all_btn.blockSignals(True)
+            select_all_btn.setChecked(False)
+            select_all_btn.blockSignals(False)
+
+        checked_btns = {
+            btn for btn in self.food_btn_grp.buttons() if btn.isChecked()}
+        for select_all_btn, select_all_btn_set in zip(self.select_all_btns, self.select_all_btn_sets):
+            if checked_btns >= select_all_btn_set:
+                select_all_btn.setChecked(True)
 
     def change_res(self, res, id, checked):
         if checked:
@@ -124,26 +132,24 @@ class ResWidget(QWidget, Ui_ResWidget):
 
     def setup_connections(self):
         # Update restriction values for external use
-        #self.preset_btn_grp.buttonToggled[int, bool].connect(partial(self.change_res, self.presets))
-        self.type_btn_grp.buttonToggled[int, bool].connect(partial(self.change_res, self.types))
-        self.food_btn_grp.buttonToggled[int, bool].connect(partial(self.change_res, self.fd_grps))
-
-        # Update currently checked internal member variable
-        self.food_btn_grp.buttonToggled[QAbstractButton, bool].connect(self.update_checked_food_btns)
+        self.type_btn_grp.buttonToggled[int, bool].connect(
+            partial(self.change_res, self.types))
+        self.food_btn_grp.buttonToggled[int, bool].connect(
+            partial(self.change_res, self.fd_grps))
 
         # Update GUI
-        self.plant.stateChanged.connect(partial(self.toggle_group, self.plant_btns))
-        self.animal.stateChanged.connect(partial(self.toggle_group, self.animal_btns))
-        self.misc.stateChanged.connect(partial(self.toggle_group, self.misc_btns))
+        self.plant.stateChanged.connect(
+            partial(self.toggle_group, self.plant_btns))
+        self.animal.stateChanged.connect(
+            partial(self.toggle_group, self.animal_btns))
+        self.misc.stateChanged.connect(
+            partial(self.toggle_group, self.misc_btns))
 
         for btn, preset_btn_set in zip(self.preset_btns, self.preset_btn_sets):
-            btn.stateChanged.connect(partial(self.update_btns_after_preset_toggle, preset_btn_set))
+            btn.stateChanged.connect(
+                partial(self.update_btns_after_preset_toggle, preset_btn_set))
 
-        self.food_btn_grp.buttonClicked[QAbstractButton].connect(self.update_preset_after_btn_toggle)
-
-        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
-        debug_shortcut.activated.connect(self.print_debug_info)
-
-    def print_debug_info(self):
-        print(self.fd_grps)
-        print(self.presets)
+        self.food_btn_grp.buttonToggled.connect(
+            self.update_preset_after_btn_toggle)
+        self.food_btn_grp.buttonToggled.connect(
+            self.update_select_all_after_btn_toggle)
