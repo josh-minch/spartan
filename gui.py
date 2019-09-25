@@ -34,7 +34,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.person = Person(19, 'm')
 
         self.person.remove_nut('Fluoride (F)')
-        #self.person.remove_nut('Copper (Cu)')
         #self.person.remove_nut('Water')
         #self.person.add_nut(Nutrient('Energy', nut_id=208, max=2500))
 
@@ -49,27 +48,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.resize(1500, 700)
         self.show()
 
-    def populate_editors(self):
-        for row, food in enumerate(self.person.foods):
-            #food = self.person.foods[row]
-
-            self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
-            '''
-            self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_COL))
-
-            self.constraints_view.setItemDelegateForRow(row, ComboBoxDelegate(food))
-            self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_UNIT_COL))
-
-            self.constraints_view.openPersistentEditor(self.fridge_model.index(row, MIN_UNIT_COL))
-            self.constraints_view.openPersistentEditor(self.fridge_model.index(row, MAX_UNIT_COL))
-            self.constraints_view.openPersistentEditor(self.fridge_model.index(row, TARGET_UNIT_COL))
-            '''
-
     def create_editor(self):
-        self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(TARGET_UNIT_COL, ComboBoxDelegate(self))
+
         '''
         self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_COL))
 
@@ -82,7 +62,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         '''
 
     def setup_connections(self):
-        self.fridge_model.dataChanged.connect(self.update_foods)
+        #self.fridge_model.dataChanged.connect(self.update_foods)
         self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
         self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
 
@@ -134,14 +114,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.prices_view.setModel(self.fridge_model)
         self.constraints_view.setModel(self.fridge_model)
 
-        # Set custom delegates
-        '''
+        # Add combobox delegates
+        self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
+        self.constraints_view.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(self))
+        self.constraints_view.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(self))
+        self.constraints_view.setItemDelegateForColumn(TARGET_UNIT_COL, ComboBoxDelegate(self))
+
+        # Alignment delegates
         self.prices_view.setItemDelegateForColumn(PRICE_COL, AlignRightDelegate(self))
         self.prices_view.setItemDelegateForColumn(PRICE_QUANTITY_COL, AlignRightDelegate(self))
         self.constraints_view.setItemDelegateForColumn(MIN_COL, AlignRightDelegate(self))
         self.constraints_view.setItemDelegateForColumn(MAX_COL, AlignRightDelegate(self))
         self.constraints_view.setItemDelegateForColumn(TARGET_COL, AlignRightDelegate(self))
-        '''
 
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
@@ -185,9 +169,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Hide fridge scrollbar
         self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}")
-
-        # Populate table persistent editors
-        self.create_editor()
 
     def setup_nutrition(self):
         set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
@@ -299,11 +280,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
     def print_debug_info(self):
-        print(self.person.foods)
+        print(self.person)
         p_ix = self.fridge_model.index(0, PRICE_UNIT_COL, QModelIndex())
         s_ix = self.fridge_model.index(0, SELECTABLE_UNITS_COL, QModelIndex())
         print(self.fridge_model.data(p_ix))
         print(self.fridge_model.data(s_ix))
+
+    def closeEvent(self, event):
+        for food in self.person.foods:
+            self.person.update_food_in_user_db(food)
+        event.accept()
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
@@ -312,7 +298,7 @@ if __name__ == "__main__":
 
     user_db.create_user_db()
     app = QApplication(sys.argv)
-    app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
+    #app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
 
     #p = QPalette()
     #p.setColor(QPalette.Highlight, Qt.darkRed)

@@ -174,7 +174,6 @@ class Nutrient:
         return str(self.__dict__)
 
 class Optimizier:
-
     def __init__(self, person):
         self.lp_prob = LpProblem("Diet", sense=LpMinimize)
         self.person = person

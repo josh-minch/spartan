@@ -70,10 +70,24 @@ class FridgeSelectedModel(QAbstractTableModel):
             elif index.column() == S_CALORIES_COL:
                 return calories
 
+        if role == Qt.ToolTipRole:
+            name = self.foods[index.row()]["name"]
+            amount = float(self.foods[index.row()]["amount"])
+            unit = self.foods[index.row()]["unit"]
+            calories = self.foods[index.row()]["calories"]
+
+            if index.column() == S_NAME_COL:
+                return name
+            elif index.column() == S_AMOUNT_COL:
+                return amount
+            elif index.column() == S_UNIT_COL:
+                return unit
+            elif index.column() == S_CALORIES_COL:
+                return calories
+
         # A bug in PySide2 requires that we cast the bitwise
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
-
         if role == Qt.TextAlignmentRole:
             if index.column() == S_AMOUNT_COL:
                 return int(Qt.AlignRight | Qt.AlignVCenter)
