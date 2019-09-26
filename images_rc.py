@@ -2,7 +2,7 @@
 
 # Resource object code
 #
-# Created: Wed Sep 25 15:18:50 2019
+# Created: Wed Sep 25 20:26:50 2019
 #      by: The Resource Compiler for PySide2 (Qt v5.13.0)
 #
 # WARNING! All changes made in this file will be lost!
@@ -46,6 +46,37 @@ y=\x220\x22/>\x0d\x0a       \
 z\x22/>\x0d\x0a        </\
 g>\x0d\x0a    </g>\x0d\x0a</\
 svg>\
+\x00\x00\x01\xc2\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 viewBox=\x22\
+0 0 24 24\x22><g da\
+ta-name=\x22Layer 2\
+\x22><g data-name=\x22\
+arrow-back\x22><rec\
+t width=\x2224\x22 hei\
+ght=\x2224\x22 transfo\
+rm=\x22rotate(90 12\
+ 12)\x22 opacity=\x220\
+\x22/><path d=\x22M19 \
+11H7.14l3.63-4.3\
+6a1 1 0 1 0-1.54\
+-1.28l-5 6a1.19 \
+1.19 0 0 0-.09.1\
+5c0 .05 0 .08-.0\
+7.13A1 1 0 0 0 4\
+ 12a1 1 0 0 0 .0\
+7.36c0 .05 0 .08\
+.07.13a1.19 1.19\
+ 0 0 0 .09.15l5 \
+6A1 1 0 0 0 10 1\
+9a1 1 0 0 0 .64-\
+.23 1 1 0 0 0 .1\
+3-1.41L7.14 13H1\
+9a1 1 0 0 0 0-2z\
+\x22/></g></g></svg\
+>\
 \x00\x00!*\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -579,37 +610,6 @@ tEXtdate:modify\x00\
 2019-01-28T10:16\
 :41+03:00\xb4\x95\xce2\x00\x00\x00\
 \x00IEND\xaeB`\x82\
-\x00\x00\x01\xc2\
-<\
-svg xmlns=\x22http:\
-//www.w3.org/200\
-0/svg\x22 viewBox=\x22\
-0 0 24 24\x22><g da\
-ta-name=\x22Layer 2\
-\x22><g data-name=\x22\
-arrow-back\x22><rec\
-t width=\x2224\x22 hei\
-ght=\x2224\x22 transfo\
-rm=\x22rotate(90 12\
- 12)\x22 opacity=\x220\
-\x22/><path d=\x22M19 \
-11H7.14l3.63-4.3\
-6a1 1 0 1 0-1.54\
--1.28l-5 6a1.19 \
-1.19 0 0 0-.09.1\
-5c0 .05 0 .08-.0\
-7.13A1 1 0 0 0 4\
- 12a1 1 0 0 0 .0\
-7.36c0 .05 0 .08\
-.07.13a1.19 1.19\
- 0 0 0 .09.15l5 \
-6A1 1 0 0 0 10 1\
-9a1 1 0 0 0 .64-\
-.23 1 1 0 0 0 .1\
-3-1.41L7.14 13H1\
-9a1 1 0 0 0 0-2z\
-\x22/></g></g></svg\
->\
 "
 
 qt_resource_name = b"\
@@ -621,21 +621,21 @@ qt_resource_name = b"\
 \x0f\x9c\xdb'\
 \x00b\
 \x00a\x00c\x00k\x00-\x00w\x00h\x00i\x00t\x00e\x00.\x00s\x00v\x00g\
-\x00\x10\
-\x0c\xd9\xd2G\
-\x00i\
-\x00n\x00f\x00o\x00-\x00o\x00u\x00t\x00l\x00i\x00n\x00e\x00.\x00p\x00n\x00g\
 \x00\x0e\
 \x08\xa22\x87\
 \x00b\
 \x00a\x00c\x00k\x00-\x00b\x00l\x00a\x00c\x00k\x00.\x00s\x00v\x00g\
+\x00\x10\
+\x0c\xd9\xd2G\
+\x00i\
+\x00n\x00f\x00o\x00-\x00o\x00u\x00t\x00l\x00i\x00n\x00e\x00.\x00p\x00n\x00g\
 "
 
 qt_resource_struct = b"\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x01\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x03\x00\x00\x00\x02\
-\x00\x00\x00Z\x00\x00\x00\x00\x00\x01\x00\x00#G\
 \x00\x00\x004\x00\x00\x00\x00\x00\x01\x00\x00\x02\x19\
+\x00\x00\x00V\x00\x00\x00\x00\x00\x01\x00\x00\x03\xdf\
 \x00\x00\x00\x12\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
 "
 

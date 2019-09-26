@@ -90,6 +90,15 @@ P_INDEX = 2
 M_INDEX = 3
 
 index_to_sex = {F_INDEX: 'f', L_INDEX: 'l', P_INDEX: 'p', M_INDEX: 'm'}
+sex_to_index = {'f': F_INDEX, 'l': L_INDEX, 'p': P_INDEX, 'm': M_INDEX}
+
+US_INDEX = 0
+EU_INDEX = 1
+JP_INDEX = 2
+
+index_to_rec = {US_INDEX: 'us', EU_INDEX: 'eu', JP_INDEX: 'jp'}
+rec_to_index = {'us': US_INDEX, 'eu': EU_INDEX, 'jp': JP_INDEX}
+
 # Requirements view
 R_NAME_COL = 0
 R_MIN_COL = 1

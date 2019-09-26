@@ -16,8 +16,8 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
         self.setupUi(self)
         self.stacked_widget = QStackedWidget()
 
-        self.pref_widget = PrefWidget()
-        self.req_widget = ReqWidget()
+        self.pref_widget = PrefWidget(person)
+        self.req_widget = ReqWidget(person)
         self.res_widget = ResWidget(person.restrict_types, person.food_groups)
 
         self.stacked_widget.addWidget(self.pref_widget)
@@ -47,6 +47,7 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
         self.stacked_widget.setCurrentWidget(self.res_widget)
 
     def show_pref(self):
+        self.pref_widget.set_preview_text()
         self.stacked_widget.setCurrentWidget(self.pref_widget)
 
 if __name__ == "__main__":

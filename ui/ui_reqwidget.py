@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Wed Sep 25 15:18:48 2019
+# Created: Wed Sep 25 20:26:48 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -132,20 +132,20 @@ class Ui_ReqWidget(object):
         self.req_label.setFont(font)
         self.req_label.setObjectName("req_label")
         self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.req_label)
-        self.req_edit = QtWidgets.QComboBox(ReqWidget)
+        self.rec_edit = QtWidgets.QComboBox(ReqWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.req_edit.sizePolicy().hasHeightForWidth())
-        self.req_edit.setSizePolicy(sizePolicy)
-        self.req_edit.setMinimumSize(QtCore.QSize(0, 0))
+        sizePolicy.setHeightForWidth(self.rec_edit.sizePolicy().hasHeightForWidth())
+        self.rec_edit.setSizePolicy(sizePolicy)
+        self.rec_edit.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
-        self.req_edit.setFont(font)
-        self.req_edit.setMouseTracking(False)
-        self.req_edit.setFocusPolicy(QtCore.Qt.TabFocus)
-        self.req_edit.setStyleSheet("QComboBox {\n"
+        self.rec_edit.setFont(font)
+        self.rec_edit.setMouseTracking(False)
+        self.rec_edit.setFocusPolicy(QtCore.Qt.TabFocus)
+        self.rec_edit.setStyleSheet("QComboBox {\n"
 "    padding: 2px 0px 2px 2px;\n"
 "}\n"
 "\n"
@@ -162,12 +162,12 @@ class Ui_ReqWidget(object):
 "    min-height: 28px;\n"
 "}\n"
 "")
-        self.req_edit.setFrame(True)
-        self.req_edit.setObjectName("req_edit")
-        self.req_edit.addItem("")
-        self.req_edit.addItem("")
-        self.req_edit.addItem("")
-        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.req_edit)
+        self.rec_edit.setFrame(True)
+        self.rec_edit.setObjectName("rec_edit")
+        self.rec_edit.addItem("")
+        self.rec_edit.addItem("")
+        self.rec_edit.addItem("")
+        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.rec_edit)
         self.sex_label = QtWidgets.QLabel(ReqWidget)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -394,10 +394,10 @@ class Ui_ReqWidget(object):
         self.label.setText(QtWidgets.QApplication.translate("ReqWidget", "Nutritional Requirements", None, -1))
         self.label_15.setText(QtWidgets.QApplication.translate("ReqWidget", "Set requirements according to national recommendations.", None, -1))
         self.req_label.setText(QtWidgets.QApplication.translate("ReqWidget", "Recommendation by", None, -1))
-        self.req_edit.setCurrentText(QtWidgets.QApplication.translate("ReqWidget", "United States (Health Department)", None, -1))
-        self.req_edit.setItemText(0, QtWidgets.QApplication.translate("ReqWidget", "United States (Health Department)", None, -1))
-        self.req_edit.setItemText(1, QtWidgets.QApplication.translate("ReqWidget", "European Union (Food Safety Authority)", None, -1))
-        self.req_edit.setItemText(2, QtWidgets.QApplication.translate("ReqWidget", "Japan (Ministry of Health, Labour and Welfare)", None, -1))
+        self.rec_edit.setCurrentText(QtWidgets.QApplication.translate("ReqWidget", "United States (Health Department)", None, -1))
+        self.rec_edit.setItemText(0, QtWidgets.QApplication.translate("ReqWidget", "United States (Health Department)", None, -1))
+        self.rec_edit.setItemText(1, QtWidgets.QApplication.translate("ReqWidget", "European Union (Food Safety Authority)", None, -1))
+        self.rec_edit.setItemText(2, QtWidgets.QApplication.translate("ReqWidget", "Japan (Ministry of Health, Labour and Welfare)", None, -1))
         self.sex_label.setText(QtWidgets.QApplication.translate("ReqWidget", "Sex", None, -1))
         self.sex_edit.setItemText(0, QtWidgets.QApplication.translate("ReqWidget", "Female", None, -1))
         self.sex_edit.setItemText(1, QtWidgets.QApplication.translate("ReqWidget", "Female, lactating", None, -1))

@@ -29,7 +29,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.person = Person(19, 'm')
+        self.person = Person(19, 'm', 1, 12, 1993)
 
         self.person.remove_nut('Fluoride (F)')
         #self.person.remove_nut('Water')

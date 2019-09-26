@@ -15,10 +15,14 @@ from constants import *
 
 
 class Person(object):
-    def __init__(self, age_range, sex):
-        # TODO: get rid of age_range, sex member variables. only here now for testing in opt diet window
-        self.age_range = age_range
-        self.sex = sex
+    def __init__(self):
+        self.bd_day, self.bd_mon, self.bd_year = None, None, None
+        self.sex = None
+        # Nutritional recommendation agency
+        self.rec = None
+
+        # Restricted food groups and type of restricton
+        self.res_fds, self.res_types = [], []
 
         # Personal nutrient requirements and foods in a person's fridge
         self.nuts = []
@@ -26,16 +30,11 @@ class Person(object):
         self.set_nuts()
         self.populate_foods_from_db()
 
-        # Restricted food groups and type of restricton
-        self.food_groups, self.restrict_types = [], []
-
     def __repr__(self):
         return str(self.__dict__)
 
     def set_nuts(self):
         (macro, vit, mineral) = req.get_reqs(self.age_range, self.sex)
-
-        self.nuts = []
 
         for nut in macro + vit + mineral:
             nut_id = req.display_name_to_id[nut['name']]
