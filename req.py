@@ -291,5 +291,8 @@ def calculate_age(bd_year, bd_month, bd_day):
     age = date.today() - date(bd_year, bd_month, bd_day)
     return age.days / DAYS_IN_YEAR
 
+def calculate_age_months(bd_month, bd_day):
+    return date.today().month - bd_month - (date.today().day - bd_day)
+
 if __name__ == '__main__':
     pass

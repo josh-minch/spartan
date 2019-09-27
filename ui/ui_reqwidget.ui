@@ -152,24 +152,6 @@ QPushButton:pressed {
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <family>Segoe UI Semilight</family>
-         <pointsize>20</pointsize>
-         <weight>50</weight>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Nutritional Requirements</string>
-       </property>
-       <property name="margin">
-        <number>0</number>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="1">
       <layout class="QFormLayout" name="formLayout">
        <property name="verticalSpacing">
@@ -178,7 +160,7 @@ QPushButton:pressed {
        <item row="0" column="0">
         <layout class="QVBoxLayout" name="verticalLayout_8">
          <property name="spacing">
-          <number>15</number>
+          <number>8</number>
          </property>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -197,7 +179,7 @@ QPushButton:pressed {
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap>../images/person-outline.png</pixmap>
+              <pixmap resource="../images/images.qrc">:/images/person-outline.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -647,7 +629,7 @@ QListView::item {
               <string/>
              </property>
              <property name="pixmap">
-              <pixmap>../images/info-outline.png</pixmap>
+              <pixmap resource="../images/images.qrc">:/images/info-outline.png</pixmap>
              </property>
              <property name="scaledContents">
               <bool>true</bool>
@@ -682,7 +664,7 @@ QListView::item {
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>10</pointsize>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -720,7 +702,7 @@ QTableView {
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>10</pointsize>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -758,7 +740,7 @@ QTableView {
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>10</pointsize>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -795,23 +777,30 @@ QTableView {
        </item>
       </layout>
      </item>
-     <item row="1" column="0">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label">
+       <property name="font">
+        <font>
+         <family>Segoe UI Semilight</family>
+         <pointsize>20</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+       <property name="text">
+        <string>Nutritional Requirements</string>
        </property>
-      </spacer>
+       <property name="margin">
+        <number>0</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../images/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

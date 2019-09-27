@@ -4,7 +4,7 @@ import datetime
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QKeySequence, QPalette, QIntValidator, QFont, QPalette, QColor, QPixmap
 from PySide2.QtWidgets import (QApplication, QWidget, QStyleFactory, QDialog, QShortcut,
-QHeaderView, QListView, QStyledItemDelegate, QStyleFactory)
+                               QHeaderView, QListView, QStyledItemDelegate, QStyleFactory)
 
 from spartan import *
 import req
@@ -29,6 +29,7 @@ class ReqWidget(QWidget, Ui_ReqWidget):
 
         self.rec_edit.setView(QListView())
         self.sex_edit.setView(QListView())
+        self.display_req()
 
     def set_defaults(self):
         self.day_edit.setText(str(self.person.bd_day))
@@ -39,7 +40,8 @@ class ReqWidget(QWidget, Ui_ReqWidget):
 
     def valid_date(self):
         try:
-            datetime.datetime(self.person.bd_year, self.person.bd_mon, self.person.bd_day)
+            datetime.datetime(self.person.bd_year,
+                              self.person.bd_mon, self.person.bd_day)
             date_validity = True
         except ValueError:
             date_validity = False
@@ -54,7 +56,8 @@ class ReqWidget(QWidget, Ui_ReqWidget):
             return
 
         # Create req table
-        age_range = req.calculate_age_range(self.person.bd_year, self.person.bd_mon, self.person.bd_day)
+        age_range = req.calculate_age_range(
+            self.person.bd_year, self.person.bd_mon, self.person.bd_day)
         (macro, vit, mineral) = req.get_reqs(age_range, self.person.sex)
 
         self.macro_model = MacroModel(nutrients=macro)
@@ -65,9 +68,11 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.vit_view.setModel(self.vit_model)
         self.mineral_view.setModel(self.mineral_model)
 
-        self.macro_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.macro_view.horizontalHeader().setSectionResizeMode(
+            QHeaderView.ResizeToContents)
         self.vit_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        self.mineral_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.mineral_view.horizontalHeader().setSectionResizeMode(
+            QHeaderView.ResizeToContents)
 
     def cust_edit_changed(self):
         if self.cust_edit.isChecked():
@@ -78,12 +83,16 @@ class ReqWidget(QWidget, Ui_ReqWidget):
 
     def day_edit_changed(self, day):
         self.person.bd_day = int(day)
+
     def mon_edit_changed(self, mon):
         self.person.bd_mon = int(mon)
+
     def year_edit_changed(self, year):
         self.person.bd_year = int(year)
+
     def sex_edit_changed(self, index):
         self.person.sex = index_to_sex[index]
+
     def rec_edit_changed(self, rec_text):
         self.person.rec_text = rec_text
 

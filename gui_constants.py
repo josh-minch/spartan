@@ -89,6 +89,8 @@ L_INDEX = 1
 P_INDEX = 2
 M_INDEX = 3
 
+F_NAME = ''
+
 index_to_sex = {F_INDEX: 'f', L_INDEX: 'l', P_INDEX: 'p', M_INDEX: 'm'}
 sex_to_index = {'f': F_INDEX, 'l': L_INDEX, 'p': P_INDEX, 'm': M_INDEX}
 
@@ -106,7 +108,6 @@ R_MIN_UNIT_COL = 2
 R_MAX_COL = 3
 R_MAX_UNIT_COL = 4
 
-r_col_to_attr = {   R_NAME_COL: 'name',
-                    R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
-                    R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
-
+r_col_to_attr = {R_NAME_COL: 'name',
+                 R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
+                 R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}

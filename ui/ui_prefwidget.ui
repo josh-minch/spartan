@@ -177,16 +177,16 @@
             <number>8</number>
            </property>
            <item>
-            <widget class="QLabel" name="req_label">
+            <widget class="QLabel" name="rec_label">
              <property name="palette">
               <palette>
                <active>
                 <colorrole role="WindowText">
                  <brush brushstyle="SolidPattern">
                   <color alpha="255">
-                   <red>59</red>
-                   <green>59</green>
-                   <blue>59</blue>
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
                   </color>
                  </brush>
                 </colorrole>
@@ -195,9 +195,109 @@
                 <colorrole role="WindowText">
                  <brush brushstyle="SolidPattern">
                   <color alpha="255">
-                   <red>59</red>
-                   <green>59</green>
-                   <blue>59</blue>
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </inactive>
+               <disabled>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>120</red>
+                   <green>120</green>
+                   <blue>120</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </disabled>
+              </palette>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="age_label">
+             <property name="palette">
+              <palette>
+               <active>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </active>
+               <inactive>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </inactive>
+               <disabled>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>120</red>
+                   <green>120</green>
+                   <blue>120</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </disabled>
+              </palette>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="sex_label">
+             <property name="palette">
+              <palette>
+               <active>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
+                  </color>
+                 </brush>
+                </colorrole>
+               </active>
+               <inactive>
+                <colorrole role="WindowText">
+                 <brush brushstyle="SolidPattern">
+                  <color alpha="255">
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
                   </color>
                  </brush>
                 </colorrole>
@@ -297,9 +397,9 @@
                 <colorrole role="WindowText">
                  <brush brushstyle="SolidPattern">
                   <color alpha="255">
-                   <red>59</red>
-                   <green>59</green>
-                   <blue>59</blue>
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
                   </color>
                  </brush>
                 </colorrole>
@@ -308,9 +408,9 @@
                 <colorrole role="WindowText">
                  <brush brushstyle="SolidPattern">
                   <color alpha="255">
-                   <red>59</red>
-                   <green>59</green>
-                   <blue>59</blue>
+                   <red>50</red>
+                   <green>50</green>
+                   <blue>50</blue>
                   </color>
                  </brush>
                 </colorrole>

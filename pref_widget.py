@@ -1,3 +1,5 @@
+from datetime import date
+
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QWidget
 
@@ -15,15 +17,48 @@ class PrefWidget(QWidget, Ui_PrefWidget):
         self.res_btn.setIcon(QPixmap("images/food.png"))
 
     def set_preview_text(self):
-        # TODO: acount for age < 1 year
-        if self.person.rec and self.person.sex and self.person.age is not None:
-            req_label_text = self.person.rec + '\n' + self.person.sex + '\n' + str(self.person.age) + ' years old'
-            self.req_label.setText(req_label_text)
+        self.rec_label.setText((get_rec_text(self.person.rec)))
+        self.age_label.setText((get_age_text(self.person)))
+        self.sex_label.setText((get_sex_text(self.person.sex)))
 
-        if self.person.food_groups is not None:
-            res_label_text = 'No ' + str(self.person.food_groups)
-            self.res_food_label.setText(res_label_text)
+        if self.person.rec == 'custom':
+            self.age_label.hide()
+            self.sex_label.hide()
 
-        if self.person.restrict_types is not None:
-            res_type_label_text = 'Restricted foods will not appear in ' + str(self.person.restrict_types)
+        res_label_text = 'No ' + str(self.person.res_fds)
+        self.res_food_label.setText(res_label_text)
+
+        res_type_label_text = 'Restricted foods will not appear in ' + \
+            str(self.person.res_types)
+        self.res_type_label.setText(res_type_label_text)
+
+
+def get_rec_text(rec):
+    if rec == 'us':
+        return 'United States Health Department recommendations'
+    elif rec == 'eu':
+        return 'European Union Food Safety Authoriy recommendations'
+    elif rec == 'jp':
+        return 'Japanese Ministry of Health, Labour and Welfare recommendations'
+    elif rec == 'custom':
+        return 'Custom user recommendations'
+
+
+def get_age_text(person):
+    if person.age < 1:
+        age_months = req.calculate_age_months(
+            person.bd_mon, person.bd_day)
+        return str(age_months) + ' months old'
+    else:
+        return '{:.0f}'.format(person.age//1) + ' years old'
+
+def get_sex_text(sex):
+    if sex == 'f':
+        return 'Female'
+    elif sex == 'l':
+        return 'Female, lactating'
+    elif sex == 'p':
+        return 'Female, pregnant'
+    elif sex == 'm':
+        return 'Male'
 

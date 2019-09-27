@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Wed Sep 25 20:26:48 2019
+# Created: Thu Sep 26 13:37:35 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -75,21 +75,11 @@ class Ui_ReqWidget(object):
         self.back_btn.setIconSize(QtCore.QSize(24, 24))
         self.back_btn.setObjectName("back_btn")
         self.gridLayout.addWidget(self.back_btn, 0, 0, 1, 1)
-        self.label = QtWidgets.QLabel(ReqWidget)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(20)
-        font.setWeight(50)
-        font.setBold(False)
-        self.label.setFont(font)
-        self.label.setMargin(0)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 1, 1, 1)
         self.formLayout = QtWidgets.QFormLayout()
         self.formLayout.setVerticalSpacing(30)
         self.formLayout.setObjectName("formLayout")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
-        self.verticalLayout_8.setSpacing(15)
+        self.verticalLayout_8.setSpacing(8)
         self.verticalLayout_8.setObjectName("verticalLayout_8")
         self.horizontalLayout_13 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_13.setSpacing(4)
@@ -97,7 +87,7 @@ class Ui_ReqWidget(object):
         self.label_14 = QtWidgets.QLabel(ReqWidget)
         self.label_14.setMaximumSize(QtCore.QSize(20, 20))
         self.label_14.setText("")
-        self.label_14.setPixmap(QtGui.QPixmap("../images/person-outline.png"))
+        self.label_14.setPixmap(QtGui.QPixmap(":/images/person-outline.png"))
         self.label_14.setScaledContents(True)
         self.label_14.setObjectName("label_14")
         self.horizontalLayout_13.addWidget(self.label_14)
@@ -302,7 +292,7 @@ class Ui_ReqWidget(object):
         self.label_16 = QtWidgets.QLabel(ReqWidget)
         self.label_16.setMaximumSize(QtCore.QSize(20, 20))
         self.label_16.setText("")
-        self.label_16.setPixmap(QtGui.QPixmap("../images/info-outline.png"))
+        self.label_16.setPixmap(QtGui.QPixmap(":/images/info-outline.png"))
         self.label_16.setScaledContents(True)
         self.label_16.setObjectName("label_16")
         self.horizontalLayout_15.addWidget(self.label_16)
@@ -320,7 +310,7 @@ class Ui_ReqWidget(object):
         self.macro_view = QtWidgets.QTableView(ReqWidget)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.macro_view.setFont(font)
         self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
@@ -341,7 +331,7 @@ class Ui_ReqWidget(object):
         self.vit_view = QtWidgets.QTableView(ReqWidget)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.vit_view.setFont(font)
         self.vit_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
@@ -362,7 +352,7 @@ class Ui_ReqWidget(object):
         self.mineral_view = QtWidgets.QTableView(ReqWidget)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.mineral_view.setFont(font)
         self.mineral_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
@@ -382,8 +372,16 @@ class Ui_ReqWidget(object):
         self.horizontalLayout_16.addWidget(self.mineral_view)
         self.formLayout.setLayout(2, QtWidgets.QFormLayout.LabelRole, self.horizontalLayout_16)
         self.gridLayout.addLayout(self.formLayout, 1, 1, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout.addItem(spacerItem, 1, 0, 1, 1)
+        self.label = QtWidgets.QLabel(ReqWidget)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semilight")
+        font.setPointSize(20)
+        font.setWeight(50)
+        font.setBold(False)
+        self.label.setFont(font)
+        self.label.setMargin(0)
+        self.label.setObjectName("label")
+        self.gridLayout.addWidget(self.label, 0, 1, 1, 1)
         self.formLayout_2.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.gridLayout)
 
         self.retranslateUi(ReqWidget)
@@ -391,7 +389,6 @@ class Ui_ReqWidget(object):
 
     def retranslateUi(self, ReqWidget):
         ReqWidget.setWindowTitle(QtWidgets.QApplication.translate("ReqWidget", "Spartan - Preferences", None, -1))
-        self.label.setText(QtWidgets.QApplication.translate("ReqWidget", "Nutritional Requirements", None, -1))
         self.label_15.setText(QtWidgets.QApplication.translate("ReqWidget", "Set requirements according to national recommendations.", None, -1))
         self.req_label.setText(QtWidgets.QApplication.translate("ReqWidget", "Recommendation by", None, -1))
         self.rec_edit.setCurrentText(QtWidgets.QApplication.translate("ReqWidget", "United States (Health Department)", None, -1))
@@ -409,4 +406,6 @@ class Ui_ReqWidget(object):
         self.year_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWidget", "Year", None, -1))
         self.label_17.setText(QtWidgets.QApplication.translate("ReqWidget", "Select a recommendation as a guideline then customize it to your needs.", None, -1))
         self.cust_edit.setText(QtWidgets.QApplication.translate("ReqWidget", "Allow custom requirements", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("ReqWidget", "Nutritional Requirements", None, -1))
 
+import images_rc

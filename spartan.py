@@ -15,11 +15,14 @@ from constants import *
 
 
 class Person(object):
-    def __init__(self):
-        self.bd_day, self.bd_mon, self.bd_year = None, None, None
-        self.sex = None
-        # Nutritional recommendation agency
-        self.rec = None
+    def __init__(self, sex, bd_year, bd_mon, bd_day, rec):
+        self.sex = sex
+        self.bd_year = bd_year
+        self.bd_mon = bd_mon
+        self.bd_day = bd_day
+        self.rec = rec
+        self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
+        self.age = req.calculate_age(self.bd_year, self.bd_mon, self.bd_day)
 
         # Restricted food groups and type of restricton
         self.res_fds, self.res_types = [], []
