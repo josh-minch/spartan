@@ -2,7 +2,7 @@
 
 # Resource object code
 #
-# Created: Thu Sep 26 13:37:36 2019
+# Created: Sat Sep 28 14:28:17 2019
 #      by: The Resource Compiler for PySide2 (Qt v5.13.0)
 #
 # WARNING! All changes made in this file will be lost!
@@ -10,6 +10,42 @@
 from PySide2 import QtCore
 
 qt_resource_data = b"\
+\x00\x00\x02\x15\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 viewBox=\x22\
+0 0 24 24\x22>\x0d\x0a   \
+ <g data-name=\x22L\
+ayer 2\x22>\x0d\x0a      \
+  <g data-name=\x22\
+arrow-back-white\
+\x22>\x0d\x0a            \
+<rect width=\x2224\x22\
+ height=\x2224\x22 tra\
+nsform=\x22rotate(9\
+0 12 12)\x22 opacit\
+y=\x220\x22/>\x0d\x0a       \
+     <path fill=\
+'#FFFFFF' d=\x22M19\
+ 11H7.14l3.63-4.\
+36a1 1 0 1 0-1.5\
+4-1.28l-5 6a1.19\
+ 1.19 0 0 0-.09.\
+15c0 .05 0 .08-.\
+07.13A1 1 0 0 0 \
+4 12a1 1 0 0 0 .\
+07.36c0 .05 0 .0\
+8.07.13a1.19 1.1\
+9 0 0 0 .09.15l5\
+ 6A1 1 0 0 0 10 \
+19a1 1 0 0 0 .64\
+-.23 1 1 0 0 0 .\
+13-1.41L7.14 13H\
+19a1 1 0 0 0 0-2\
+z\x22/>\x0d\x0a        </\
+g>\x0d\x0a    </g>\x0d\x0a</\
+svg>\
 \x00\x00\x16\xb6\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -376,42 +412,6 @@ date:modify\x002019\
 -01-28T10:16:41+\
 03:00\xb4\x95\xce2\x00\x00\x00\x00IEN\
 D\xaeB`\x82\
-\x00\x00\x02\x15\
-<\
-svg xmlns=\x22http:\
-//www.w3.org/200\
-0/svg\x22 viewBox=\x22\
-0 0 24 24\x22>\x0d\x0a   \
- <g data-name=\x22L\
-ayer 2\x22>\x0d\x0a      \
-  <g data-name=\x22\
-arrow-back-white\
-\x22>\x0d\x0a            \
-<rect width=\x2224\x22\
- height=\x2224\x22 tra\
-nsform=\x22rotate(9\
-0 12 12)\x22 opacit\
-y=\x220\x22/>\x0d\x0a       \
-     <path fill=\
-'#FFFFFF' d=\x22M19\
- 11H7.14l3.63-4.\
-36a1 1 0 1 0-1.5\
-4-1.28l-5 6a1.19\
- 1.19 0 0 0-.09.\
-15c0 .05 0 .08-.\
-07.13A1 1 0 0 0 \
-4 12a1 1 0 0 0 .\
-07.36c0 .05 0 .0\
-8.07.13a1.19 1.1\
-9 0 0 0 .09.15l5\
- 6A1 1 0 0 0 10 \
-19a1 1 0 0 0 .64\
--.23 1 1 0 0 0 .\
-13-1.41L7.14 13H\
-19a1 1 0 0 0 0-2\
-z\x22/>\x0d\x0a        </\
-g>\x0d\x0a    </g>\x0d\x0a</\
-svg>\
 \x00\x00!*\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -983,15 +983,15 @@ qt_resource_name = b"\
 \x07\x03}\xc3\
 \x00i\
 \x00m\x00a\x00g\x00e\x00s\
+\x00\x0e\
+\x0f\x9c\xdb'\
+\x00b\
+\x00a\x00c\x00k\x00-\x00w\x00h\x00i\x00t\x00e\x00.\x00s\x00v\x00g\
 \x00\x12\
 \x00{\xa8\xe7\
 \x00p\
 \x00e\x00r\x00s\x00o\x00n\x00-\x00o\x00u\x00t\x00l\x00i\x00n\x00e\x00.\x00p\x00n\
 \x00g\
-\x00\x0e\
-\x0f\x9c\xdb'\
-\x00b\
-\x00a\x00c\x00k\x00-\x00w\x00h\x00i\x00t\x00e\x00.\x00s\x00v\x00g\
 \x00\x10\
 \x0c\xd9\xd2G\
 \x00i\
@@ -1005,10 +1005,10 @@ qt_resource_name = b"\
 qt_resource_struct = b"\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x01\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x04\x00\x00\x00\x02\
-\x00\x00\x00\x12\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
+\x00\x00\x004\x00\x00\x00\x00\x00\x01\x00\x00\x02\x19\
 \x00\x00\x00\x84\x00\x00\x00\x00\x00\x01\x00\x00:\x01\
 \x00\x00\x00^\x00\x00\x00\x00\x00\x01\x00\x00\x18\xd3\
-\x00\x00\x00<\x00\x00\x00\x00\x00\x01\x00\x00\x16\xba\
+\x00\x00\x00\x12\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
 "
 
 def qInitResources():

@@ -14,5 +14,5 @@ class SearchModel(QAbstractTableModel):
 
     def data(self, index, role):
         if role != Qt.DisplayRole:
-            return None
+            return Qt.NoItemFlags
         return self.search_result[index.row()]

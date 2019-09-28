@@ -63,7 +63,7 @@ class DietModel(QAbstractTableModel):
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
         if role == Qt.TextAlignmentRole:
-            if index.column() == O_QUANTITY_COL:
+            if index.column() == O_AMOUNT_COL:
                 return int(Qt.AlignRight | Qt.AlignVCenter)
 
         return None
@@ -75,17 +75,17 @@ class DietModel(QAbstractTableModel):
                     return "Food"
                 elif section == O_COST_COL:
                     return "Cost"
-                elif section == O_QUANTITY_COL:
+                elif section == O_AMOUNT_COL:
                     return "Quantity"
-                elif section == O_QUANTITY_COL:
-                    return ""
+                else:
+                    return
 
             if role == Qt.TextAlignmentRole:
                 if section == O_NAME_COL:
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
                 if section == O_COST_COL:
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
-                if section == O_QUANTITY_COL:
+                if section == O_AMOUNT_COL:
                     return int(Qt.AlignRight | Qt.AlignVCenter)
 
         return None
@@ -93,7 +93,7 @@ class DietModel(QAbstractTableModel):
     def insertRows(self, position, rows=1, index=QModelIndex()):
         self.beginInsertRows(QModelIndex(), position, position + rows - 1)
         for row in range(rows):
-            self.foods.insert(position + row, {"name":"", "cost":"",
+            self.foods.insert(position + row, {"id":"","name":"", "cost":"",
                                                    "quantity":"", "unit":""})
         self.endInsertRows()
 
@@ -122,6 +122,6 @@ class DietModel(QAbstractTableModel):
 
     def flags(self, index):
         if not index.isValid():
-            return Qt.ItemIsEnabled
+            return Qt.NoItemFlags
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)

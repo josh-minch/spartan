@@ -46,19 +46,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.resize(1500, 700)
         self.show()
 
-    def create_editor(self):
-
-        '''
-        self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_COL))
-
-        self.constraints_view.setItemDelegateForRow(row, ComboBoxDelegate(food))
-        self.prices_view.openPersistentEditor(self.fridge_model.index(row, PRICE_UNIT_COL))
-
-        self.constraints_view.openPersistentEditor(self.fridge_model.index(row, MIN_UNIT_COL))
-        self.constraints_view.openPersistentEditor(self.fridge_model.index(row, MAX_UNIT_COL))
-        self.constraints_view.openPersistentEditor(self.fridge_model.index(row, TARGET_UNIT_COL))
-        '''
-
     def setup_connections(self):
         #self.fridge_model.dataChanged.connect(self.update_foods)
         self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
@@ -248,6 +235,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for row in range(self.fridge_selected_model.rowCount()):
             index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
             amounts.append(self.fridge_selected_model.data(index))
+
+        if len(amounts) != len(self.selected_food_ids):
+            return
 
         macros, vits, minerals = get_nutrition(self.person, self.selected_food_ids, amounts)
 

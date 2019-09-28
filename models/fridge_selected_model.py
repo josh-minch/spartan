@@ -149,7 +149,7 @@ class FridgeSelectedModel(QAbstractTableModel):
 
     def flags(self, index):
         if not index.isValid():
-            return Qt.ItemIsEnabled
+            return Qt.NoItemFlags
         if index.column()  == S_NAME_COL:
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)

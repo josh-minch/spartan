@@ -165,7 +165,7 @@ class FridgeModel(QAbstractTableModel):
 
     def flags(self, index):
         if not index.isValid():
-            return None
+            return Qt.NoItemFlags
         # Cannot edit name, per col
         if index.column() in (NAME_COL, PER_COL):
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |

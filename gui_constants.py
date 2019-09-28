@@ -76,12 +76,14 @@ s_col_to_attr = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
                     S_CALORIES_COL: 'percent'}
 
 # Optimum diet view
-O_NAME_COL = 0
-O_COST_COL = 1
-O_QUANTITY_COL= 2
-O_UNIT_COL = 3
+O_ID_COL = 0
+O_NAME_COL = 1
+O_COST_COL = 2
+O_AMOUNT_COL= 3
+O_UNIT_COL = 4
 
-o_col_to_attr = {O_NAME_COL: 'name', O_COST_COL: 'cost', O_QUANTITY_COL: 'quantity', O_UNIT_COL: 'unit'}
+o_col_to_attr = {O_ID_COL: 'id', O_NAME_COL: 'name', O_COST_COL: 'cost',
+                 O_AMOUNT_COL: 'quantity', O_UNIT_COL: 'unit'}
 
 # Requirements window
 F_INDEX = 0

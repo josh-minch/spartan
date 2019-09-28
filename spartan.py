@@ -295,7 +295,8 @@ class Optimizier:
                 food_name = database.get_food_name(var.name)
                 cost = round(float(prices[i]) * var.varValue, 2)
                 quantity = round(DB_SCALER * var.varValue, 2)
-                foods.append({"name":food_name, "cost":cost, "quantity":quantity, "unit":'g'})
+                foods.append({'id': int(var.name), 'name': food_name,
+                              'cost': cost, 'quantity': quantity, 'unit': 'g'})
 
         return foods
 

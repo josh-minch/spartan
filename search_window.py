@@ -53,17 +53,6 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
             food_to_add = spartan.Food(name=food_name)
             self.fridge_model.insertRows(current_row+1, food_to_add)
 
-            '''
-            food_id = database.get_food_id(food_name)
-
-            ix = self.fridge_model.index(current_row, FOOD_ID_COL, QModelIndex())
-            self.fridge_model.setData(ix, food_id, Qt.EditRole)
-
-            ix = self.fridge_model.index(current_row, NAME_COL, QModelIndex())
-            self.fridge_model.setData(ix, food_name, Qt.EditRole)
-            '''
-
-            # Emit row
             self.food_added.emit()
             self.person.add_food_to_db(food_to_add)
 

@@ -20,6 +20,8 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         super().__init__(parent=None)
         self.setupUi(self)
 
+
+
         self.person = person
         self.optimizier = spartan.Optimizier(self.person)
         self.optimizier.optimize_diet()
@@ -29,6 +31,8 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.populate_nutrition_table()
 
         self.resize(1400, 700)
+
+        self.setup_connections()
         self.show()
 
     def populate_title(self):
@@ -37,10 +41,11 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def populate_diet_table(self):
         foods = self.optimizier.get_diet_report()
 
-        foods.append({"name":"", "cost":"","quantity":"", "unit":""})
+        # Insert empty row to give space before totals
+        foods.append({'id':'', 'name':'', 'cost':'','quantity':'', 'unit':''})
 
         num_value, cost_value, mass_value = self.optimizier.get_totals()
-        foods.append({"name":str(num_value) + ' items of food', "cost":cost_value, "quantity":mass_value, "unit":'g'})
+        foods.append({'id':-1, 'name':str(num_value) + ' items of food', 'cost':cost_value, 'quantity':mass_value, 'unit':'g'})
 
         self.diet_model = DietModel(foods=foods)
         self.diet_view.setModel(self.diet_model)
@@ -73,20 +78,36 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         set_view_header_weights(self.vits_view, QFont.DemiBold)
         set_view_header_weights(self.minerals_view, QFont.DemiBold)
 
-    def display_selected_food_nutrition(self):
-        amounts = []
-        for row in range(self.diet_.rowCount()):
-            index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
-            amounts.append(self.fridge_selected_model.data(index))
+    def display_selected_nutrition(self, selected, deselected):
+        food_ids, amounts = [], []
+        for ix in selected.indexes():
+            food_id_ix = ix.sibling(ix.row(), O_ID_COL)
+            amount_ix = ix.sibling(ix.row(), O_AMOUNT_COL)
 
-        nutrients = get_nutrition(self.person, self.selected_food_ids, amounts)
-        nutrition_model = NutritionTableModel(nutrients=nutrients)
-        self.nutrition_view.setModel(nutrition_model)
+            food_ids.append(food_id_ix.data(Qt.DisplayRole))
+            amounts.append(amount_ix.data(Qt.DisplayRole))
 
-        progress_bar_delegate = ProgressBarDelegate(self)
-        self.nutrition_view.setItemDelegate(progress_bar_delegate)
+        macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, amounts)
 
-if __name__ == "__main__":
+        macros_model = nutrition_model.MacroModel(nutrients=macros)
+        vits_model = nutrition_model.VitModel(nutrients=vits)
+        minerals_model = nutrition_model.MineralModel(nutrients=minerals)
+
+        self.macros_view.setModel(macros_model)
+        self.vits_view.setModel(vits_model)
+        self.minerals_view.setModel(minerals_model)
+
+        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
+        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
+        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
+
+        self.setup_nutrition()
+
+
+    def setup_connections(self):
+        self.diet_view.selectionModel().selectionChanged.connect(self.display_selected_nutrition)
+
+if __name__ == '__main__':
     person = spartan.Person(19, 'm')
 
     app = QApplication(sys.argv)
