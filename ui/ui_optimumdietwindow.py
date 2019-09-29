@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_optimumdietwindow.ui',
 # licensing of 'ui/ui_optimumdietwindow.ui' applies.
 #
-# Created: Sat Sep 28 14:28:15 2019
+# Created: Sun Sep 29 15:09:01 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -22,6 +22,7 @@ class Ui_OptimumDietWindow(object):
         self.diet_label.setObjectName("diet_label")
         self.gridLayout.addWidget(self.diet_label, 0, 0, 1, 1)
         self.diet_view = QtWidgets.QTableView(self.centralwidget)
+        self.diet_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.diet_view.setObjectName("diet_view")
         self.gridLayout.addWidget(self.diet_view, 1, 0, 1, 1)
         self.macros_view = QtWidgets.QTableView(self.centralwidget)

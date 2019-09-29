@@ -1,6 +1,6 @@
 import sys
 
-from PySide2.QtCore import Qt
+from PySide2.QtCore import Qt, QItemSelectionModel
 from PySide2.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView
 from PySide2.QtGui import QFont
 
@@ -19,8 +19,6 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def __init__(self, parent=None, person=None):
         super().__init__(parent=None)
         self.setupUi(self)
-
-
 
         self.person = person
         self.optimizier = spartan.Optimizier(self.person)
@@ -53,11 +51,12 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
     def populate_nutrition_table(self):
         (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
-        macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, food_amounts)
+        self.ttl_macros, self.ttl_vits, self.ttl_minerals = spartan.get_nutrition(self.person, food_ids, food_amounts)
 
-        macros_model = nutrition_model.MacroModel(nutrients=macros)
-        vits_model = nutrition_model.VitModel(nutrients=vits)
-        minerals_model = nutrition_model.MineralModel(nutrients=minerals)
+        macros_model = nutrition_model.MacroModel(nutrients=self.ttl_macros)
+        vits_model = nutrition_model.VitModel(nutrients=self.ttl_vits)
+        minerals_model = nutrition_model.MineralModel(
+            nutrients=self.ttl_minerals)
 
         self.macros_view.setModel(macros_model)
         self.vits_view.setModel(vits_model)
@@ -79,15 +78,30 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         set_view_header_weights(self.minerals_view, QFont.DemiBold)
 
     def display_selected_nutrition(self, selected, deselected):
-        food_ids, amounts = [], []
-        for ix in selected.indexes():
-            food_id_ix = ix.sibling(ix.row(), O_ID_COL)
-            amount_ix = ix.sibling(ix.row(), O_AMOUNT_COL)
+        total_food_ix = self.diet_model.index(
+            self.diet_model.rowCount() - 1, O_ID_COL)
 
-            food_ids.append(food_id_ix.data(Qt.DisplayRole))
-            amounts.append(amount_ix.data(Qt.DisplayRole))
+        # If user selects totals row, display nutrition totals
+        if selected.contains(total_food_ix):
+            macros = self.ttl_macros
+            vits = self.ttl_vits
+            minerals = self.ttl_minerals
+        # Otherwise display selected foods' nutrition
+        else:
+            food_ids, amounts = [], []
+            # Diet model selects every column in a row, but we only need one index per
+            # row. Therefore, skip over redundant indices
+            selected_row_ixs = self.diet_view.selectionModel().selectedRows()
+            for ix in selected_row_ixs:
+                food_id_ix = ix.sibling(ix.row(), O_ID_COL)
+                amount_ix = ix.sibling(ix.row(), O_AMOUNT_COL)
 
-        macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, amounts)
+                food_ids.append(food_id_ix.data(Qt.DisplayRole))
+                amounts.append(amount_ix.data(Qt.DisplayRole))
+
+            print(food_ids)
+            print(amounts)
+            macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, amounts)
 
         macros_model = nutrition_model.MacroModel(nutrients=macros)
         vits_model = nutrition_model.VitModel(nutrients=vits)
@@ -102,7 +116,6 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
 
         self.setup_nutrition()
-
 
     def setup_connections(self):
         self.diet_view.selectionModel().selectionChanged.connect(self.display_selected_nutrition)

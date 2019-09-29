@@ -231,13 +231,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.fridge_selected_model.setData(amount_ix, float(100), Qt.EditRole)
 
     def display_nutrition(self):
+        if self.fridge_selected_model.rowCount() != len(self.selected_food_ids):
+            return
+
         amounts = []
         for row in range(self.fridge_selected_model.rowCount()):
             index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
             amounts.append(self.fridge_selected_model.data(index))
-
-        if len(amounts) != len(self.selected_food_ids):
-            return
 
         macros, vits, minerals = get_nutrition(self.person, self.selected_food_ids, amounts)
 
