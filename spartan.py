@@ -354,6 +354,10 @@ def convert_quantity(food_id, quantity, old_unit, new_unit):
     '''
 
 def get_nutrition(person, food_ids, food_amounts):
+    # Sort input lists according to food ids in ascending order
+    food_tups = sorted(zip(food_ids, food_amounts))
+    food_ids, food_amounts = (list(food_tup) for food_tup in zip(*food_tups))
+
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
 
