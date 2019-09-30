@@ -8,11 +8,10 @@ from ui.ui_reswidget import Ui_ResWidget
 
 
 class ResWidget(QWidget, Ui_ResWidget):
-    def __init__(self, types, fd_grps, parent=None):
+    def __init__(self, person, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.types = types
-        self.fd_grps = fd_grps
+        self.person = person
 
         self.list_btns()
         self.assign_id(self.preset_btns, self.preset_btn_grp,
@@ -26,47 +25,6 @@ class ResWidget(QWidget, Ui_ResWidget):
         self.type_btn_grp.setExclusive(False)
         self.food_btn_grp.setExclusive(False)
         self.setup_connections()
-
-    def list_btns(self):
-        # List btns in order so their ids can be assigned programmatically
-        self.preset_btns = [self.vegan, self.vegetarian, self.pescatarian,
-                            self.carnivore, self.home]
-        self.food_btns = [self.dairy, self.spice, self.baby, self.fat,
-                          self.poultry, self.soup, self.sausage, self.breakfast,
-                          self.fruit, self.pork, self.veg, self.nut, self.beef,
-                          self.drink, self.seafood, self.legume, self.lamb, self.baked,
-                          self.sweet, self.cereal, self.fast, self.meal,
-                          self.snack, self.american, self.restaurant]
-        self.type_btns = [self.search, self.generated]
-        self.select_all_btns = [self.plant, self.animal, self.misc]
-
-        # Qt Designer apparently does not support the creation of intersectiong groups
-        # The remaining groups are enumerated here
-        self.plant_btns = {self.spice, self.breakfast, self.fruit,
-                           self.veg, self.nut, self.legume, self.cereal}
-        self.animal_btns = {self.dairy, self.poultry, self.sausage,
-                            self.pork, self.beef, self.seafood, self.lamb}
-        self.misc_btns = {self.baby, self.fat, self.soup, self.drink, self.baked,
-                          self.sweet, self.fast, self.meal, self.snack,
-                          self.american, self.restaurant}
-        self.select_all_btn_sets = [
-            self.plant_btns, self.animal_btns, self.misc_btns]
-
-        self.vegan_btns = self.animal_btns
-        self.vegetarian_btns = self.vegan_btns - {self.animal, self.dairy}
-        self.pesc_btns = self.vegetarian_btns - {self.seafood}
-        self.carnivore_btns = self.plant_btns
-        self.home_btns = {self.restaurant, self.fast, self.meal, self.snack}
-        self.preset_btn_sets = [self.vegan_btns, self.vegetarian_btns,
-                                self.pesc_btns, self.carnivore_btns, self.home_btns]
-
-    def assign_id(self, btns, group, values):
-        for btn, id in zip(btns, values):
-            group.setId(btn, id)
-
-    def toggle_group(self, btns, state):
-        for btn in btns:
-            btn.setChecked(state)
 
     # Update which foods are checked in restricted foods each time a preset btn
     # is toggled. This prevents unchecking button sets that should remain checked.
@@ -118,6 +76,10 @@ class ResWidget(QWidget, Ui_ResWidget):
             if checked_btns >= select_all_btn_set:
                 select_all_btn.setChecked(True)
 
+    def toggle_group(self, btns, state):
+        for btn in btns:
+            btn.setChecked(state)
+
     def change_res(self, res, id, checked):
         if checked:
             res.append(id)
@@ -130,12 +92,49 @@ class ResWidget(QWidget, Ui_ResWidget):
         else:
             self.checked_food_btns.remove(btn)
 
+    def assign_id(self, btns, group, values):
+        for btn, id in zip(btns, values):
+            group.setId(btn, id)
+
+    def list_btns(self):
+        # List btns in order so their ids can be assigned programmatically
+        self.preset_btns = [self.vegan, self.vegetarian, self.pescatarian,
+                            self.carnivore, self.home]
+        self.food_btns = [self.dairy, self.spice, self.baby, self.fat,
+                          self.poultry, self.soup, self.sausage, self.breakfast,
+                          self.fruit, self.pork, self.veg, self.nut, self.beef,
+                          self.drink, self.seafood, self.legume, self.lamb, self.baked,
+                          self.sweet, self.cereal, self.fast, self.meal,
+                          self.snack, self.american, self.restaurant]
+        self.type_btns = [self.search, self.generated]
+        self.select_all_btns = [self.plant, self.animal, self.misc]
+
+        # Qt Designer apparently does not support the creation of intersectiong groups
+        # The remaining groups are enumerated here
+        self.plant_btns = {self.spice, self.breakfast, self.fruit,
+                           self.veg, self.nut, self.legume, self.cereal}
+        self.animal_btns = {self.dairy, self.poultry, self.sausage,
+                            self.pork, self.beef, self.seafood, self.lamb}
+        self.misc_btns = {self.baby, self.fat, self.soup, self.drink, self.baked,
+                          self.sweet, self.fast, self.meal, self.snack,
+                          self.american, self.restaurant}
+        self.select_all_btn_sets = [
+            self.plant_btns, self.animal_btns, self.misc_btns]
+
+        self.vegan_btns = self.animal_btns
+        self.vegetarian_btns = self.vegan_btns - {self.animal, self.dairy}
+        self.pesc_btns = self.vegetarian_btns - {self.seafood}
+        self.carnivore_btns = self.plant_btns
+        self.home_btns = {self.restaurant, self.fast, self.meal, self.snack}
+        self.preset_btn_sets = [self.vegan_btns, self.vegetarian_btns,
+                                self.pesc_btns, self.carnivore_btns, self.home_btns]
+
     def setup_connections(self):
         # Update restriction values for external use
         self.type_btn_grp.buttonToggled[int, bool].connect(
-            partial(self.change_res, self.types))
+            partial(self.change_res, self.person.restrict_types))
         self.food_btn_grp.buttonToggled[int, bool].connect(
-            partial(self.change_res, self.fd_grps))
+            partial(self.change_res, self.person.restrict_fds))
 
         # Update GUI
         self.plant.stateChanged.connect(

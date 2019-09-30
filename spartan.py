@@ -24,8 +24,8 @@ class Person(object):
         self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
         self.age = req.calculate_age(self.bd_year, self.bd_mon, self.bd_day)
 
-        # Restricted food groups and type of restricton
-        self.res_fds, self.res_types = [], []
+        # Food groups restricted in search results and generated deits
+        self.restrict_fds, self.restrict_types = [], []
 
         # Personal nutrient requirements and foods in a person's fridge
         self.nuts = []

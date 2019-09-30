@@ -85,9 +85,9 @@ display_name_to_id = {
     'Saturated': 606
 }
 
-macro_names = ["Water", "Carbohydrates", "Sugar", "Fiber", "Protein", "Fat", "Saturated", "Monounsaturated", "Polyunsaturated", "Omega-3", "Omega-6", "Trans"]
+macro_names = ['Water', 'Energy', 'Carbohydrates', 'Sugar', 'Fiber', 'Protein', 'Fat', 'Saturated', 'Monounsaturated', 'Polyunsaturated', 'Omega-3', 'Omega-6', 'Trans']
 vit_names = ['A', 'B₁ (Thiamin)', 'B₂ (Riboflavin)', 'B₃ (Niacin)', 'B₅ (Pantothenic acid)', 'B₆', 'B₉ (Folate)', 'B₁₂ (Cobalamin)', 'C (Ascorbic acid)', 'D', 'E (Alpha-tocopherol)', 'K (Phylloquinone)', 'Choline']
-mineral_names = ["Calcium (Ca)", "Copper (Cu)", "Fluoride (F)", "Iron (Fe)", "Magnesium (Mg)", "Manganese (Mn)", "Phosphorus (P)", "Potassium (K)", "Selenium (Se)", "Sodium (Na)", "Zinc (Zn)", ]
+mineral_names = ['Calcium (Ca)', 'Copper (Cu)', 'Fluoride (F)', 'Iron (Fe)', 'Magnesium (Mg)', 'Manganese (Mn)', 'Phosphorus (P)', 'Potassium (K)', 'Selenium (Se)', 'Sodium (Na)', 'Zinc (Zn)', ]
 
 nut_names = macro_names + vit_names + mineral_names
 

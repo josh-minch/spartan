@@ -25,7 +25,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         self.show()
 
     def search_food(self):
-        search_result = database.search_food(self.search_box.text())
+        search_result = database.search_food(self.search_box.text(), self.person)
 
         self.search_model = SearchModel(search_result)
         self.search_list.setModel(self.search_model)

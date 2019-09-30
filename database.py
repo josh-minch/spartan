@@ -1,20 +1,25 @@
 '''
 Functions related to querying food database sr_legacy.db
 '''
-
 import sqlite3 as sql
-from timeit import default_timer as timer
-import pprint
 
+from gui_constants import Res
 
-def search_food(food_name):
+def search_food(food_name, person):
+    if Res.SEARCH_RESTRICT in person.restrict_types:
+        fd_grps = person.restrict_fds
+        fd_grps_tuple = '(?'+(len(fd_grps)-1)*',?'+')'
+    else:
+        fd_grps = []
+        fd_grps_tuple = '()'
+
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
 
     # Split search term for multi-word searches like eg, 'chocolate milk'
     split_food_names = food_name.split()
     wildcard_padded_split_food_names = ['%' + name + '%' for name in split_food_names]
-    
+
     # We need to call UPPER because INSTR is not case-sensitive.
     # Order by the sum of how early each term appears in the search result strings.
     if (len(split_food_names) > 0):
@@ -22,11 +27,12 @@ def search_food(food_name):
             'SELECT long_desc FROM food_des '
             'WHERE long_desc LIKE ?'
             + (len(wildcard_padded_split_food_names)-1) * ' AND long_desc LIKE ?' +
+            'AND food_group_id not in ' + fd_grps_tuple +
             ' ORDER BY INSTR(UPPER(long_desc), UPPER(?))'
             + (len(split_food_names)-1) * ' + INSTR(UPPER(long_desc), UPPER(?))' + ' ASC')
 
-        cur.execute(sql_statement, wildcard_padded_split_food_names + split_food_names)
-        
+        cur.execute(sql_statement, wildcard_padded_split_food_names + fd_grps + split_food_names)
+
     food_data=cur.fetchall()
 
     food_data=[food[0] for food in food_data]
@@ -68,10 +74,5 @@ def get_food_name(food_id):
 
     return food_name
 
-def main():
-    start = timer()
-    a = search_food('e')
-    end = timer()
-    print(end - start)
 if __name__ == '__main__':
-    main()
+    pass

@@ -33,7 +33,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.person.remove_nut('Fluoride (F)')
         #self.person.remove_nut('Water')
-        #self.person.add_nut(Nutrient('Energy', nut_id=208, max=2500))
+        self.person.remove_nut('Energy')
+        self.person.add_nut(Nutrient('Energy', nut_id=208, max=1000))
 
         self.setup_fridge_views()
         self.setup_selected_foods()
@@ -191,9 +192,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def open_search_window(self):
         self.search_window = SearchWindow(parent=None, person=self.person, fridge_model=self.fridge_model)
         self.search_window.setAttribute(Qt.WA_DeleteOnClose)
-
-        # Set unit columns in fridge when food added from search window
-        self.search_window.food_added.connect(self.create_editor)
 
     def open_pref(self):
         self.pref_window = PrefWindow(parent=None, person=self.person)

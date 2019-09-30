@@ -28,7 +28,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.populate_diet_table()
         self.populate_nutrition_table()
 
-        self.resize(1400, 700)
+        self.resize(1400, 900)
 
         self.setup_connections()
         self.show()

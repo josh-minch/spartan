@@ -25,11 +25,11 @@ class PrefWidget(QWidget, Ui_PrefWidget):
             self.age_label.hide()
             self.sex_label.hide()
 
-        res_label_text = 'No ' + str(self.person.res_fds)
+        res_label_text = 'No ' + str(self.person.restrict_fds)
         self.res_food_label.setText(res_label_text)
 
         res_type_label_text = 'Restricted foods will not appear in ' + \
-            str(self.person.res_types)
+            str(self.person.restrict_types)
         self.res_type_label.setText(res_type_label_text)
 
 

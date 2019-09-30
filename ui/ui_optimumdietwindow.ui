@@ -22,21 +22,42 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
+    <item row="1" column="1">
+     <widget class="QTableView" name="macros_view">
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QTableView" name="vits_view">
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QTableView" name="minerals_view">
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" rowspan="2">
      <widget class="QTableView" name="diet_view">
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
      </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QTableView" name="macros_view"/>
-    </item>
-    <item row="1" column="2">
-     <widget class="QTableView" name="vits_view"/>
-    </item>
-    <item row="2" column="2">
-     <widget class="QTableView" name="minerals_view"/>
     </item>
    </layout>
   </widget>

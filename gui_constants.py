@@ -1,3 +1,9 @@
+def enumerate_cols(col_names):
+    cols = {}
+    for i, col_name in enumerate(col_names):
+        cols[col_name] = i
+    return cols
+
 # Fridge view
 F_NUM_COLS = 13
 
@@ -31,7 +37,7 @@ TARGET_UNIT_COL_WIDTH = 10
 
 PER_COL_WIDTH = 1
 VALUE_COL_WIDTH = 50
-UNIT_COL_WIDTH = 10
+UNIT_COL_WIDTH = 100
 
 F_COLS_TO_HIDE = [FOOD_ID_COL, PRICE_COL, PER_COL, PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_COL,
                   MIN_UNIT_COL, MAX_COL, MAX_UNIT_COL, TARGET_COL, TARGET_UNIT_COL, SELECTABLE_UNITS_COL]
@@ -67,6 +73,7 @@ nut_col_to_attr = {NUT_NAME_COL: 'name', NUT_AMOUNT_COL: 'amount', NUT_UNIT_COL:
                     NUT_PERCENT_COL: 'percent'}
 
 # Selected foods view
+
 S_NAME_COL = 0
 S_AMOUNT_COL = 1
 S_UNIT_COL = 2
@@ -74,6 +81,12 @@ S_CALORIES_COL = 3
 
 s_col_to_attr = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
                     S_CALORIES_COL: 'percent'}
+
+# Search view
+class Search:
+    col_names = ['name', 'fd_grp']
+    enumerate_cols(col_names)
+
 
 # Optimum diet view
 O_ID_COL = 0
@@ -113,3 +126,7 @@ R_MAX_UNIT_COL = 4
 r_col_to_attr = {R_NAME_COL: 'name',
                  R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
                  R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
+
+class Res:
+    SEARCH_RESTRICT = 1
+    GEN_RESTRICT = 2
