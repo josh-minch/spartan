@@ -48,8 +48,8 @@ def read_csv(filename):
     with open(filename, newline='') as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
-            return [int(data) for data in row]
-        return []
+            return {int(data) for data in row}
+        return {}
 
 if __name__ == "__main__":
     fd_grps = []

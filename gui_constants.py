@@ -127,6 +127,7 @@ r_col_to_attr = {R_NAME_COL: 'name',
                  R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
                  R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
 
+# Restrictions
 class Res:
     SEARCH_RESTRICT = 1
     GEN_RESTRICT = 2

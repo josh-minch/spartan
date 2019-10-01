@@ -3,6 +3,7 @@ from datetime import date
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QWidget
 
+from constants import type_grp, fd_grp, fd_grp_display_name
 from ui.ui_prefwidget import Ui_PrefWidget
 
 
@@ -27,12 +28,40 @@ class PrefWidget(QWidget, Ui_PrefWidget):
             self.age_label.hide()
             self.sex_label.hide()
 
-        res_label_text = 'No ' + str(self.fd_res.res)
+        res_label_text = self.get_fd_res_text(self.fd_res.res)
         self.res_food_label.setText(res_label_text)
 
-        res_type_label_text = 'Restricted foods will not appear in ' + \
-            str(self.type_res.res)
+        res_type_label_text = self.get_type_res_text(self.type_res.res)
         self.res_type_label.setText(res_type_label_text)
+
+    def get_type_res_text(self, res):
+        if len(res) == 0:
+            #self.res_food_label.hide()
+            return 'Restricted foods will still appear in search results and generated diets'
+
+        #self.res_food_label.show()
+        text = 'Restricted foods will not appear in '
+        if {type_grp['search']} == res:
+            text += 'search results'
+        if {type_grp['generated']} == res:
+            text += 'generated diets'
+        if {type_grp['search'], type_grp['generated']} == res:
+            text += 'search results or generated diets'
+        return text
+
+    def get_fd_res_text(self, restrictions):
+        if len(restrictions) == 0:
+            #self.res_type_label.hide()
+            return 'No restricted foods'
+
+        #self.res_type_label.show()
+        text = 'Restricted food groups: '
+        res_fds = []
+        for restriction in restrictions:
+            res_fds.append(fd_grp_display_name[restriction])
+        text += ", ".join(res_fds)
+        return text
+
 
 def get_rec_text(rec):
     if rec == 'us':
@@ -61,4 +90,5 @@ def get_sex_text(sex):
         return 'Female, pregnant'
     elif sex == 'm':
         return 'Male'
+
 

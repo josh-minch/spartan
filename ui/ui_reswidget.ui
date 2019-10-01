@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>817</width>
-    <height>738</height>
+    <height>803</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -120,7 +120,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
+        <y>-85</y>
         <width>912</width>
         <height>888</height>
        </rect>
@@ -496,7 +496,7 @@ QPushButton:pressed {
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="text">
-              <string>Soups, sauces, and gravies</string>
+              <string>Soups and sauces</string>
              </property>
              <property name="tristate">
               <bool>false</bool>
@@ -591,7 +591,7 @@ QPushButton:pressed {
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="text">
-              <string>Babyfood</string>
+              <string>Baby food</string>
              </property>
              <property name="tristate">
               <bool>false</bool>
@@ -1055,7 +1055,7 @@ QPushButton:pressed {
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="text">
-              <string>American Indian/Alaska Native food</string>
+              <string>Native American foods</string>
              </property>
              <property name="tristate">
               <bool>false</bool>

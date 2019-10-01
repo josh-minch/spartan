@@ -139,7 +139,7 @@ class Restriction:
         self.res = res or storage.read_csv(filename)
 
     def add_res(self, res_to_add):
-        self.res.append(res_to_add)
+        self.res.add(res_to_add)
         storage.write_csv(self.filename, self.res)
 
     def remove_res(self, res_to_remove):
