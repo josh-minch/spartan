@@ -9,8 +9,10 @@ from datetime import date
 from timeit import default_timer as timer
 
 from pulp import *
+
 import req
 import database
+import storage
 from constants import *
 
 
@@ -127,6 +129,22 @@ class Person(object):
         cur.execute(sql_stmt, food_values + [food.food_id])
         con.commit()
         con.close()
+
+class Restriction:
+    def __repr__(self):
+        return str(self.__dict__)
+
+    def __init__(self, filename, res=None):
+        self.filename = filename
+        self.res = res or storage.read_csv(filename)
+
+    def add_res(self, res_to_add):
+        self.res.append(res_to_add)
+        storage.write_csv(self.filename, self.res)
+
+    def remove_res(self, res_to_remove):
+        self.res.remove(res_to_remove)
+        storage.write_csv(self.filename, self.res)
 
 class Food:
     def __init__(self, food_id=None, name=None, price=None, price_quantity=None, price_unit = 'g', min=None, min_unit='g',
