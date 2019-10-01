@@ -9,7 +9,7 @@ from PySide2.QtWidgets import (QApplication, QWidget, QStyleFactory, QDialog, QS
 from spartan import *
 import req
 from gui_constants import *
-from models.requirements_model import MacroModel, VitModel, MineralModel
+from model.requirements_model import MacroModel, VitModel, MineralModel
 from ui.ui_reqwidget import Ui_ReqWidget
 
 

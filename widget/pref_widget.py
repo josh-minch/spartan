@@ -7,10 +7,12 @@ from ui.ui_prefwidget import Ui_PrefWidget
 
 
 class PrefWidget(QWidget, Ui_PrefWidget):
-    def __init__(self, person, parent=None):
+    def __init__(self, person, type_res, fd_res, parent=None):
         super().__init__(parent)
         self.setupUi(self)
         self.person = person
+        self.type_res = type_res
+        self.fd_res = fd_res
         self.set_preview_text()
 
         self.req_btn.setIcon(QPixmap("images/person-outline.png"))
@@ -25,13 +27,12 @@ class PrefWidget(QWidget, Ui_PrefWidget):
             self.age_label.hide()
             self.sex_label.hide()
 
-        res_label_text = 'No ' + str(self.person.restrict_fds)
+        res_label_text = 'No ' + str(self.fd_res.res)
         self.res_food_label.setText(res_label_text)
 
         res_type_label_text = 'Restricted foods will not appear in ' + \
-            str(self.person.restrict_types)
+            str(self.type_res.res)
         self.res_type_label.setText(res_type_label_text)
-
 
 def get_rec_text(rec):
     if rec == 'us':
@@ -42,7 +43,6 @@ def get_rec_text(rec):
         return 'Japanese Ministry of Health, Labour and Welfare recommendations'
     elif rec == 'custom':
         return 'Custom user recommendations'
-
 
 def get_age_text(person):
     if person.age < 1:

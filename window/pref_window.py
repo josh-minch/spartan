@@ -5,20 +5,20 @@ from PySide2.QtWidgets import (QApplication, QMainWindow, QWidget, QStackedWidge
 
 import database
 from ui.ui_prefwindow import Ui_PrefWindow
-from pref_widget import PrefWidget
-from req_widget import ReqWidget
-from res_widget import ResWidget
+from widget.pref_widget import PrefWidget
+from widget.req_widget import ReqWidget
+from widget.res_widget import ResWidget
 
 
 class PrefWindow(QMainWindow, Ui_PrefWindow):
-    def __init__(self, parent=None, person=None):
+    def __init__(self, parent=None, person=None, type_res=None, fd_res=None):
         super().__init__(parent)
         self.setupUi(self)
         self.stacked_widget = QStackedWidget()
 
-        self.pref_widget = PrefWidget(person)
+        self.pref_widget = PrefWidget(person, type_res, fd_res)
         self.req_widget = ReqWidget(person)
-        self.res_widget = ResWidget(person)
+        self.res_widget = ResWidget(person, type_res, fd_res)
 
         self.stacked_widget.addWidget(self.pref_widget)
         self.stacked_widget.addWidget(self.req_widget)

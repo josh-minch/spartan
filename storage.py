@@ -1,14 +1,17 @@
 import os
 import sqlite3 as sql
+import csv
 
-def create_user_db():
+def create_spartan_db():
     if not os.path.isfile('spartan.db'):
         con = sql.connect("spartan.db")
         cur = con.cursor()
 
-        users_stmt = (
-            'CREATE TABLE users ( '
-            'name	TEXT, '
+        person_stmt = (
+            'CREATE TABLE person ( '
+            'bd_year INTEGER,'
+            'bd_mon INTEGER,'
+            'bd_day INTEGER,'
             'age	REAL, '
             'sex    TEXT)'
         )
@@ -36,15 +39,19 @@ def create_user_db():
     else:
         print("spartan.db already exists")
 
-def add_user_to_db(person):
-    con = sql.connect("spartan.db")
-    cur = con.cursor()
+def write_csv(filename, data):
+    with open(filename, 'w', newline='') as csvfile:
+        csv_writer = csv.writer(csvfile)
+        csv_writer.writerows([data])
 
-    sql_stmt = (
-        'INSERT INTO users(name, age, sex) '
-        'VALUES (?, ?, ?)'
-    )
+def read_csv(filename):
+    with open(filename, newline='') as csvfile:
+        csv_reader = csv.reader(csvfile)
+        for row in csv_reader:
+            return [int(data) for data in row]
+        return []
 
-    cur.execute(sql_stmt, [person.name] + [person.age] + [person.sex])
-    con.commit()
-    con.close()
+if __name__ == "__main__":
+    fd_grps = []
+    write_csv('example.csv', fd_grps)
+    print(read_csv('example.csv'))

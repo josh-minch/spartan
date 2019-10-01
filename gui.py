@@ -10,19 +10,19 @@ from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListW
                                QHeaderView, QShortcut)
 
 from spartan import *
+import database
+import storage
 from gui_constants import *
 from gui_helpers import *
-import database
-import user_db
-from search_window import SearchWindow
-from pref_window import PrefWindow
-from optimum_diet_window import OptimumDietWindow
-import models.nutrition_model as nutrition_model
-from models.fridge_model import FridgeModel
-from models.fridge_selected_model import FridgeSelectedModel
-from delegates.progress_bar_delegate import ProgressBarDelegate
-from delegates.align_right_delegate import AlignRightDelegate
-from delegates.combobox_delegate import ComboBoxDelegate
+from window.search_window import SearchWindow
+from window.pref_window import PrefWindow
+from window.optimum_diet_window import OptimumDietWindow
+from model.nutrition_model import MacroModel, VitModel, MineralModel
+from model.fridge_model import FridgeModel
+from model.fridge_selected_model import FridgeSelectedModel
+from delegate.progress_bar_delegate import ProgressBarDelegate
+from delegate.align_right_delegate import AlignRightDelegate
+from delegate.combobox_delegate import ComboBoxDelegate
 from ui.ui_mainwindow import Ui_MainWindow
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -30,11 +30,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.person = Person('m', 1993, 12, 1, 'us')
+        self.type_res = Restriction(RESTRICT_TYPES_FILE)
+        self.fd_res = Restriction(RESTRICT_FDS_FILE)
 
         self.person.remove_nut('Fluoride (F)')
         #self.person.remove_nut('Water')
         self.person.remove_nut('Energy')
-        self.person.add_nut(Nutrient('Energy', nut_id=208, max=1000))
+        self.person.add_nut(Nutrient('Energy', nut_id=208, target=2000))
 
         self.setup_fridge_views()
         self.setup_selected_foods()
@@ -194,7 +196,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.search_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def open_pref(self):
-        self.pref_window = PrefWindow(parent=None, person=self.person)
+        self.pref_window = PrefWindow(
+            parent=None, person=self.person, type_res=self.type_res, fd_res=self.fd_res, )
         self.pref_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def optimize(self):
@@ -266,11 +269,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
     def print_debug_info(self):
-        print(self.person)
-        p_ix = self.fridge_model.index(0, PRICE_UNIT_COL, QModelIndex())
-        s_ix = self.fridge_model.index(0, SELECTABLE_UNITS_COL, QModelIndex())
-        print(self.fridge_model.data(p_ix))
-        print(self.fridge_model.data(s_ix))
+        print(self.type_res)
+        print(self.fd_res)
 
     def closeEvent(self, event):
         for food in self.person.foods:
@@ -282,7 +282,7 @@ if __name__ == "__main__":
     myappid = u'spartan.0.5'
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
-    user_db.create_user_db()
+    storage.create_spartan_db()
     app = QApplication(sys.argv)
     #app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
 

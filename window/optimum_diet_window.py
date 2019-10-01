@@ -9,9 +9,9 @@ import database
 import basic_foods
 from gui_constants import *
 from gui_helpers import *
-from models.diet_model import DietModel
-import models.nutrition_model as nutrition_model
-from delegates.progress_bar_delegate import ProgressBarDelegate
+from model.diet_model import DietModel
+import model.nutrition_model as nutrition_model
+from delegate.progress_bar_delegate import ProgressBarDelegate
 from ui.ui_optimumdietwindow import Ui_OptimumDietWindow
 
 

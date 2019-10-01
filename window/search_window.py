@@ -6,7 +6,7 @@ import spartan
 import database
 from gui_constants import *
 from ui.ui_searchwindow import Ui_SearchWindow
-from models.search_model import SearchModel
+from model.search_model import SearchModel
 
 class SearchWindow(QMainWindow, Ui_SearchWindow):
     food_added = Signal()

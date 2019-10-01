@@ -1,6 +1,9 @@
 MAX_FOOD_ID_LEN = 5
 DB_SCALER = 100
 
+RESTRICT_FDS_FILE = 'restrict_fds.csv'
+RESTRICT_TYPES_FILE = 'restrict_types.csv'
+
 # Link restriction selections to unique id
 preset_grp = {'vegan': 1, 'vegetarian': 2, 'pescatarian': 3,
               'carnivore': 4, 'home': 5, 'custom': 6}
