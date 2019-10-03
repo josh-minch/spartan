@@ -39,13 +39,8 @@ class Person(object):
         return str(self.__dict__)
 
     def set_nuts(self):
-        (macro, vit, mineral) = req.get_reqs(self.age_range, self.sex)
-
-        for nut in macro + vit + mineral:
-            nut_id = req.display_name_to_id[nut['name']]
-            nut_to_append = Nutrient(name=nut['name'], nut_id=nut_id, min=nut['min'], max=nut['max'], target=None)
-            self.nuts.append(nut_to_append)
-
+        self.macro, self.vit, self.mineral = req.get_reqs(self.age_range, self.sex)
+        self.nuts = self.macro + self.vit + self.mineral
         self.nuts.sort(key=lambda nut: nut.nut_id)
 
     def add_nut(self, nutrient):
@@ -183,15 +178,30 @@ class Food:
         return ['g'] + [unit[0] for unit in units]
 
 class Nutrient:
-    def __init__(self, name, nut_id=None, min=None, target=None, max=None):
+    def __init__(self, name, nut_id=None, min=None, max=None, target=None):
         self.name = name
-        self.nut_id = nut_id
+        self.nut_id = req.display_name_to_id[self.name]
         self.min = min
-        self.target = target
         self.max = max
+        self.target = target
+        self.min_unit = self.max_unit = self.target_unit = self.get_unit()
 
     def __repr__(self):
         return str(self.__dict__)
+
+    def get_unit(self):
+        con = sql.connect("sr_legacy/sr_legacy.db")
+        cur = con.cursor()
+        sql_stmt = (
+            'SELECT units '
+            'FROM nutr_def '
+            'WHERE id = ?'
+        )
+        cur.execute(sql_stmt, [self.nut_id])
+        unit = cur.fetchall()[0][0]
+        con.commit()
+        con.close()
+        return unit
 
 class Optimizier:
     def __init__(self, person):
