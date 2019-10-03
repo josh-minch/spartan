@@ -2,9 +2,16 @@ import sqlite3
 import math
 import sqlite3 as sql
 from datetime import date
+
+import spartan
+
+
 DAYS_IN_YEAR = 365.2425
 
-
+life_stages = [(0, 'm'), (0.5, 'm'), (1, 'm'), (4, 'm'), (9, 'm'), (14, 'm'),
+               (19, 'm'), (31, 'm'), (51, 'm'), (71, 'm'), (0, 'f'), (0.5, 'f'),
+               (1, 'f'), (4, 'f'), (9, 'f'), (14, 'f'), (19, 'f'), (31, 'f'), (51, 'f'),
+               (71, 'f'), (14, 'p'), (19, 'p'), (31, 'p'), (14, 'l'), (19, 'l'), (31, 'l')]
 nuts = {
     203: 'Protein',
     204: 'Fat',
@@ -85,7 +92,7 @@ display_name_to_id = {
     'Saturated': 606
 }
 
-macro_names = ['Water', 'Energy', 'Carbohydrates', 'Sugar', 'Fiber', 'Protein', 'Fat', 'Saturated', 'Monounsaturated', 'Polyunsaturated', 'Omega-3', 'Omega-6', 'Trans']
+macro_names = ['Energy', 'Carbohydrates', 'Sugar', 'Fiber', 'Protein', 'Fat', 'Saturated', 'Monounsaturated', 'Polyunsaturated', 'Omega-3', 'Omega-6', 'Trans', 'Water']
 vit_names = ['A', 'B₁ (Thiamin)', 'B₂ (Riboflavin)', 'B₃ (Niacin)', 'B₅ (Pantothenic acid)', 'B₆', 'B₉ (Folate)', 'B₁₂ (Cobalamin)', 'C (Ascorbic acid)', 'D', 'E (Alpha-tocopherol)', 'K (Phylloquinone)', 'Choline']
 mineral_names = ['Calcium (Ca)', 'Copper (Cu)', 'Fluoride (F)', 'Iron (Fe)', 'Magnesium (Mg)', 'Manganese (Mn)', 'Phosphorus (P)', 'Potassium (K)', 'Selenium (Se)', 'Sodium (Na)', 'Zinc (Zn)', ]
 
@@ -95,32 +102,32 @@ nut_names = macro_names + vit_names + mineral_names
 # TODO: Handle folate, dfe, total, in food
 # TODO: Add "added" nutrients like vitamin b12 and vitamin e, as well as adjusted protein and kcal.
 min_macro = {
-    ( 0, 'm') : [700.0,60,None,None,9.1,31,None,None,None,0.5,4.4,None],
-    (0.5, 'm'): [800.0,95,None,None,11,30,None,None,None,0.5,4.6,None],
-    ( 1, 'm') : [1300.0,130,None,19,13,None,None,None,None,0.7,7,None],
-    ( 4, 'm') : [1700.0,130,None,25,19,None,None,None,None,0.9,10,None],
-    ( 9, 'm') : [2400.0,130,None,31,34,None,None,None,None,1.2,12,None],
-    (14, 'm') : [3300.0,130,None,38,52,None,None,None,None,1.6,16,None],
-    (19, 'm') : [3700.0,130,None,38,56,None,None,None,None,1.6,17,None],
-    (31, 'm') : [3700.0,130,None,38,56,None,None,None,None,1.6,17,None],
-    (51, 'm') : [3700.0,130,None,30,56,None,None,None,None,1.6,14,None],
-    (71, 'm') : [3700.0,130,None,30,56,None,None,None,None,1.6,14,None],
-    ( 0, 'f') : [700.0,60,None,None,9.1,31,None,None,None,0.5,4.4,None],
-    (0.5, 'f'): [800.0,95,None,None,11,30,None,None,None,0.5,4.6,None],
-    ( 1, 'f') : [1300.0,130,None,19,13,None,None,None,None,0.7,7,None],
-    ( 4, 'f') : [1700.0,130,None,25,19,None,None,None,None,0.9,10,None],
-    ( 9, 'f') : [2100.0,130,None,26,34,None,None,None,None,1,10,None],
-    (14, 'f') : [2300.0,130,None,26,46,None,None,None,None,1.1,11,None],
-    (19, 'f') : [2700.0,130,None,25,46,None,None,None,None,1.1,12,None],
-    (31, 'f') : [2700.0,130,None,25,46,None,None,None,None,1.1,12,None],
-    (51, 'f') : [2700.0,130,None,21,46,None,None,None,None,1.1,11,None],
-    (71, 'f') : [2700.0,130,None,21,46,None,None,None,None,1,11,None],
-    (14, 'p') : [3000.0,175,None,28,71,None,None,None,None,1,13,None],
-    (19, 'p') : [3000.0,175,None,28,71,None,None,None,None,1.4,13,None],
-    (31, 'p') : [3000.0,175,None,28,71,None,None,None,None,1.4,13,None],
-    (14, 'l') : [3800.0,210,None,29,71,None,None,None,None,1.3,13,None],
-    (19, 'l') : [3800.0,210,None,29,71,None,None,None,None,1.3,13,None],
-    (31, 'l') : [3800.0,210,None,29,71,None,None,None,None,1.3,13,None]
+    ( 0, 'm') : [None,60,None,None,9.1,31,None,None,None,0.5,4.4,None,700.0],
+    (0.5, 'm'): [None,95,None,None,11,30,None,None,None,0.5,4.6,None,800.0],
+    ( 1, 'm') : [None,130,None,19,13,None,None,None,None,0.7,7,None,1300.0],
+    ( 4, 'm') : [None,130,None,25,19,None,None,None,None,0.9,10,None,1700.0],
+    ( 9, 'm') : [None,130,None,31,34,None,None,None,None,1.2,12,None,2400.0],
+    (14, 'm') : [None,130,None,38,52,None,None,None,None,1.6,16,None,3300.0],
+    (19, 'm') : [None,130,None,38,56,None,None,None,None,1.6,17,None,3700.0],
+    (31, 'm') : [None,130,None,38,56,None,None,None,None,1.6,17,None,3700.0],
+    (51, 'm') : [None,130,None,30,56,None,None,None,None,1.6,14,None,3700.0],
+    (71, 'm') : [None,130,None,30,56,None,None,None,None,1.6,14,None,3700.0],
+    ( 0, 'f') : [None,60,None,None,9.1,31,None,None,None,0.5,4.4,None,700.0],
+    (0.5, 'f'): [None,95,None,None,11,30,None,None,None,0.5,4.6,None,800.0],
+    ( 1, 'f') : [None,130,None,19,13,None,None,None,None,0.7,7,None,1300.0],
+    ( 4, 'f') : [None,130,None,25,19,None,None,None,None,0.9,10,None,1700.0],
+    ( 9, 'f') : [None,130,None,26,34,None,None,None,None,1,10,None,2100.0],
+    (14, 'f') : [None,130,None,26,46,None,None,None,None,1.1,11,None,2300.0],
+    (19, 'f') : [None,130,None,25,46,None,None,None,None,1.1,12,None,2700.0],
+    (31, 'f') : [None,130,None,25,46,None,None,None,None,1.1,12,None,2700.0],
+    (51, 'f') : [None,130,None,21,46,None,None,None,None,1.1,11,None,2700.0],
+    (71, 'f') : [None,130,None,21,46,None,None,None,None,1,11,None,2700.0],
+    (14, 'p') : [None,175,None,28,71,None,None,None,None,1,13,None,3000.0],
+    (19, 'p') : [None,175,None,28,71,None,None,None,None,1.4,13,None,3000.0],
+    (31, 'p') : [None,175,None,28,71,None,None,None,None,1.4,13,None,3000.0],
+    (14, 'l') : [None,210,None,29,71,None,None,None,None,1.3,13,None,3800.0],
+    (19, 'l') : [None,210,None,29,71,None,None,None,None,1.3,13,None,3800.0],
+    (31, 'l') : [None,210,None,29,71,None,None,None,None,1.3,13,None,3800.0]
 }
 
 min_vit = {
@@ -180,6 +187,10 @@ min_mineral = {
     (19, 'l') : [1000,1.3,3000,9,310,2.6,700,2800,70,1500,12],
     (31, 'l') : [1000,1.3,3000,9,320,2.6,700,2800,70,1500,12]
 }
+
+max_macro = dict()
+for life_stage in life_stages:
+    max_macro[life_stage] = len(nut_names)* [None]
 
 max_vit = {
     ( 0, 'm') : [600,None,None,None,None,None,None,None,None,25,None,None,None],
@@ -244,11 +255,7 @@ age_ranges = [
 ]
 
 def get_reqs(age_range, sex):
-    macro = []
-    for (name, min) in zip(macro_names, min_macro[(age_range, sex)]):
-        unit = get_unit(name)
-        macro.append({'name': name, 'min': min, 'min_unit': unit, 'max': None, 'max_unit': unit})
-
+    macro = extract_req(age_range, sex, macro_names, min_macro, max_macro)
     vit = extract_req(age_range, sex, vit_names, min_vit, max_vit)
     mineral = extract_req(age_range, sex, mineral_names, min_mineral, max_mineral)
 
@@ -257,28 +264,8 @@ def get_reqs(age_range, sex):
 def extract_req(age_range, sex, nut_names, min_reqs, max_reqs):
     nuts = []
     for (name, min, max) in zip(nut_names, min_reqs[(age_range, sex)], max_reqs[(age_range, sex)]):
-        unit = get_unit(name)
-        nuts.append({'name': name, 'min': min, 'min_unit': unit, 'max': max, 'max_unit': unit})
-
+        nuts.append(spartan.Nutrient(name=name, min=min, max=max, target=None))
     return nuts
-
-def get_unit(nut_name):
-    con = sql.connect("sr_legacy/sr_legacy.db")
-    cur = con.cursor()
-
-    sql_stmt = (
-        'SELECT units '
-        'FROM nutr_def '
-        'WHERE id = ?'
-    )
-    nut_id = display_name_to_id[nut_name]
-
-    cur.execute(sql_stmt, [nut_id])
-    unit = cur.fetchall()[0][0]
-
-    con.commit()
-    con.close()
-    return unit
 
 def calculate_age_range(bd_year, bd_month, bd_day):
     age = calculate_age(bd_year, bd_month, bd_day)
@@ -295,4 +282,4 @@ def calculate_age_months(bd_month, bd_day):
     return date.today().month - bd_month - (date.today().day - bd_day)
 
 if __name__ == '__main__':
-    pass
+    print(get_reqs(19, 'm'))

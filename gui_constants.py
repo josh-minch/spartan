@@ -1,8 +1,4 @@
-def enumerate_cols(col_names):
-    cols = {}
-    for i, col_name in enumerate(col_names):
-        cols[col_name] = i
-    return cols
+from gui_helpers import enumerate_cols
 
 # Fridge view
 F_NUM_COLS = 13
@@ -85,8 +81,7 @@ s_col_to_attr = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
 # Search view
 class Search:
     col_names = ['name', 'fd_grp']
-    enumerate_cols(col_names)
-
+    col = enumerate_cols(col_names)
 
 # Optimum diet view
 O_ID_COL = 0
@@ -116,18 +111,7 @@ JP_INDEX = 2
 index_to_rec = {US_INDEX: 'us', EU_INDEX: 'eu', JP_INDEX: 'jp'}
 rec_to_index = {'us': US_INDEX, 'eu': EU_INDEX, 'jp': JP_INDEX}
 
-# Requirements view
-R_NAME_COL = 0
-R_MIN_COL = 1
-R_MIN_UNIT_COL = 2
-R_MAX_COL = 3
-R_MAX_UNIT_COL = 4
-
-r_col_to_attr = {R_NAME_COL: 'name',
-                 R_MIN_COL: 'min', R_MIN_UNIT_COL: 'min_unit',
-                 R_MAX_COL: 'max', R_MAX_UNIT_COL: 'max_unit'}
-
-# Restrictions
+# Restrictions widget
 class Res:
     SEARCH_RESTRICT = 1
     GEN_RESTRICT = 2

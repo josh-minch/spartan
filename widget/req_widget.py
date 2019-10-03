@@ -9,7 +9,8 @@ from PySide2.QtWidgets import (QApplication, QWidget, QStyleFactory, QDialog, QS
 from spartan import *
 import req
 from gui_constants import *
-from model.requirements_model import MacroModel, VitModel, MineralModel
+from model.requirements_model import RequirementsModel
+from delegate.lineedit_delegate import LineEditDelegate
 from ui.ui_reqwidget import Ui_ReqWidget
 
 
@@ -55,14 +56,13 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         if len(str(self.person.bd_year)) < 4:
             return
 
-        # Create req table
-        age_range = req.calculate_age_range(
-            self.person.bd_year, self.person.bd_mon, self.person.bd_day)
-        (macro, vit, mineral) = req.get_reqs(age_range, self.person.sex)
+        self.macro_model = RequirementsModel(nutrients=self.person.macro, nutrient_group='Macronutrients')
+        self.vit_model = RequirementsModel(nutrients=self.person.vit, nutrient_group='Vitamins')
+        self.mineral_model = RequirementsModel(nutrients=self.person.mineral, nutrient_group='Minerals')
 
-        self.macro_model = MacroModel(nutrients=macro)
-        self.vit_model = VitModel(nutrients=vit)
-        self.mineral_model = MineralModel(nutrients=mineral)
+        self.macro_view.setItemDelegate(LineEditDelegate())
+        self.vit_view.setItemDelegate(LineEditDelegate())
+        self.mineral_view.setItemDelegate(LineEditDelegate())
 
         self.macro_view.setModel(self.macro_model)
         self.vit_view.setModel(self.vit_model)
@@ -78,21 +78,14 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         if self.cust_edit.isChecked():
             pass
 
-    def print_debug_info(self):
-        pass
-
     def day_edit_changed(self, day):
         self.person.bd_day = int(day)
-
     def mon_edit_changed(self, mon):
         self.person.bd_mon = int(mon)
-
     def year_edit_changed(self, year):
         self.person.bd_year = int(year)
-
     def sex_edit_changed(self, index):
         self.person.sex = index_to_sex[index]
-
     def rec_edit_changed(self, rec_text):
         self.person.rec_text = rec_text
 
@@ -113,3 +106,6 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         # Debug
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
         debug_shortcut.activated.connect(self.print_debug_info)
+
+    def print_debug_info(self):
+        print(self.person.macro)

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reswidget.ui',
 # licensing of 'ui/ui_reswidget.ui' applies.
 #
-# Created: Mon Sep 30 00:34:22 2019
+# Created: Wed Oct  2 16:50:31 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_ResWidget(object):
     def setupUi(self, ResWidget):
         ResWidget.setObjectName("ResWidget")
-        ResWidget.resize(817, 738)
+        ResWidget.resize(817, 803)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -100,6 +100,7 @@ class Ui_ResWidget(object):
         self.gridLayout.setObjectName("gridLayout")
         self.vegetarian = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         self.vegetarian.setAutoExclusive(False)
+        self.vegetarian.setTristate(False)
         self.vegetarian.setObjectName("vegetarian")
         self.preset_btn_grp = QtWidgets.QButtonGroup(ResWidget)
         self.preset_btn_grp.setObjectName("preset_btn_grp")
@@ -236,6 +237,7 @@ class Ui_ResWidget(object):
         self.gridLayout.addItem(spacerItem1, 8, 2, 1, 1)
         self.carnivore = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         self.carnivore.setAutoExclusive(False)
+        self.carnivore.setTristate(False)
         self.carnivore.setObjectName("carnivore")
         self.preset_btn_grp.addButton(self.carnivore)
         self.gridLayout.addWidget(self.carnivore, 6, 2, 1, 1)
@@ -287,6 +289,7 @@ class Ui_ResWidget(object):
         self.gridLayout.addItem(spacerItem4, 2, 2, 1, 1)
         self.vegan = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         self.vegan.setAutoExclusive(False)
+        self.vegan.setTristate(False)
         self.vegan.setObjectName("vegan")
         self.preset_btn_grp.addButton(self.vegan)
         self.gridLayout.addWidget(self.vegan, 5, 0, 1, 2)
@@ -320,11 +323,6 @@ class Ui_ResWidget(object):
         self.breakfast.setObjectName("breakfast")
         self.food_btn_grp.addButton(self.breakfast)
         self.gridLayout.addWidget(self.breakfast, 14, 0, 1, 2)
-        self.custom = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
-        self.custom.setAutoExclusive(False)
-        self.custom.setObjectName("custom")
-        self.preset_btn_grp.addButton(self.custom)
-        self.gridLayout.addWidget(self.custom, 7, 2, 1, 1)
         self.poultry = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
@@ -432,6 +430,7 @@ class Ui_ResWidget(object):
         self.gridLayout.addWidget(self.plant, 10, 0, 1, 2)
         self.pescatarian = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         self.pescatarian.setAutoExclusive(False)
+        self.pescatarian.setTristate(False)
         self.pescatarian.setObjectName("pescatarian")
         self.preset_btn_grp.addButton(self.pescatarian)
         self.gridLayout.addWidget(self.pescatarian, 6, 0, 1, 2)
@@ -469,6 +468,7 @@ class Ui_ResWidget(object):
         self.gridLayout.addWidget(self.american, 26, 2, 1, 1)
         self.home = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         self.home.setAutoExclusive(False)
+        self.home.setTristate(False)
         self.home.setObjectName("home")
         self.preset_btn_grp.addButton(self.home)
         self.gridLayout.addWidget(self.home, 7, 0, 1, 2)
@@ -495,17 +495,16 @@ class Ui_ResWidget(object):
         self.drink.setText(QtWidgets.QApplication.translate("ResWidget", "Drinks", None, -1))
         self.label_38.setText(QtWidgets.QApplication.translate("ResWidget", "Restricted foods won\'t appear in  ", None, -1))
         self.generated.setText(QtWidgets.QApplication.translate("ResWidget", "Generated diets", None, -1))
-        self.soup.setText(QtWidgets.QApplication.translate("ResWidget", "Soups, sauces, and gravies", None, -1))
+        self.soup.setText(QtWidgets.QApplication.translate("ResWidget", "Soups and sauces", None, -1))
         self.carnivore.setText(QtWidgets.QApplication.translate("ResWidget", "Carnivore", None, -1))
         self.baked.setText(QtWidgets.QApplication.translate("ResWidget", "Baked products", None, -1))
         self.veg.setText(QtWidgets.QApplication.translate("ResWidget", "Vegetables", None, -1))
-        self.baby.setText(QtWidgets.QApplication.translate("ResWidget", "Babyfood", None, -1))
+        self.baby.setText(QtWidgets.QApplication.translate("ResWidget", "Baby food", None, -1))
         self.restaurant.setText(QtWidgets.QApplication.translate("ResWidget", "Restaurant food", None, -1))
         self.vegan.setText(QtWidgets.QApplication.translate("ResWidget", "Vegan", None, -1))
         self.sausage.setText(QtWidgets.QApplication.translate("ResWidget", "Sausages and deli meats", None, -1))
         self.lamb.setText(QtWidgets.QApplication.translate("ResWidget", "Lamb, veal, and game", None, -1))
         self.breakfast.setText(QtWidgets.QApplication.translate("ResWidget", "Breakfast cereals", None, -1))
-        self.custom.setText(QtWidgets.QApplication.translate("ResWidget", "Custom", None, -1))
         self.poultry.setText(QtWidgets.QApplication.translate("ResWidget", "Poultry", None, -1))
         self.label_6.setText(QtWidgets.QApplication.translate("ResWidget", "Presets", None, -1))
         self.fruit.setText(QtWidgets.QApplication.translate("ResWidget", "Fruits and fruit juices", None, -1))
@@ -520,7 +519,7 @@ class Ui_ResWidget(object):
         self.pescatarian.setText(QtWidgets.QApplication.translate("ResWidget", "Pescatarian", None, -1))
         self.nut.setText(QtWidgets.QApplication.translate("ResWidget", "Nuts and seeds", None, -1))
         self.seafood.setText(QtWidgets.QApplication.translate("ResWidget", "Seafood", None, -1))
-        self.american.setText(QtWidgets.QApplication.translate("ResWidget", "American Indian/Alaska Native food", None, -1))
+        self.american.setText(QtWidgets.QApplication.translate("ResWidget", "Native American foods", None, -1))
         self.home.setText(QtWidgets.QApplication.translate("ResWidget", "Home-cooked", None, -1))
 
 import images_rc

@@ -120,7 +120,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-85</y>
+        <y>0</y>
         <width>912</width>
         <height>888</height>
        </rect>
@@ -230,6 +230,9 @@ QPushButton:pressed {
               <string>Ovo-lacto vegetarian</string>
              </property>
              <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <property name="tristate">
               <bool>false</bool>
              </property>
              <attribute name="buttonGroup">
@@ -530,6 +533,9 @@ QPushButton:pressed {
              <property name="autoExclusive">
               <bool>false</bool>
              </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
              <attribute name="buttonGroup">
               <string notr="true">preset_btn_grp</string>
              </attribute>
@@ -679,6 +685,9 @@ QPushButton:pressed {
              <property name="autoExclusive">
               <bool>false</bool>
              </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
              <attribute name="buttonGroup">
               <string notr="true">preset_btn_grp</string>
              </attribute>
@@ -747,19 +756,6 @@ QPushButton:pressed {
              </property>
              <attribute name="buttonGroup">
               <string notr="true">food_btn_grp</string>
-             </attribute>
-            </widget>
-           </item>
-           <item row="7" column="2">
-            <widget class="QCheckBox" name="custom">
-             <property name="text">
-              <string>Custom</string>
-             </property>
-             <property name="autoExclusive">
-              <bool>false</bool>
-             </property>
-             <attribute name="buttonGroup">
-              <string notr="true">preset_btn_grp</string>
              </attribute>
             </widget>
            </item>
@@ -992,6 +988,9 @@ QPushButton:pressed {
              <property name="autoExclusive">
               <bool>false</bool>
              </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
              <attribute name="buttonGroup">
               <string notr="true">preset_btn_grp</string>
              </attribute>
@@ -1073,6 +1072,9 @@ QPushButton:pressed {
              <property name="autoExclusive">
               <bool>false</bool>
              </property>
+             <property name="tristate">
+              <bool>false</bool>
+             </property>
              <attribute name="buttonGroup">
               <string notr="true">preset_btn_grp</string>
              </attribute>
@@ -1093,12 +1095,12 @@ QPushButton:pressed {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="food_btn_grp"/>
   <buttongroup name="preset_btn_grp">
    <property name="exclusive">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
   </buttongroup>
+  <buttongroup name="food_btn_grp"/>
   <buttongroup name="type_btn_grp">
    <property name="exclusive">
     <bool>false</bool>

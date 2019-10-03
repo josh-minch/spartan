@@ -35,8 +35,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.person.remove_nut('Fluoride (F)')
         #self.person.remove_nut('Water')
-        self.person.remove_nut('Energy')
-        self.person.add_nut(Nutrient('Energy', nut_id=208, target=2000))
+        #self.person.remove_nut('Energy')
+        #self.person.add_nut(Nutrient('Energy', min=2000))
 
         self.setup_fridge_views()
         self.setup_selected_foods()

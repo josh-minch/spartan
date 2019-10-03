@@ -2,6 +2,13 @@ from PySide2.QtCore import Qt
 from PySide2.QtGui import QFont
 from PySide2.QtWidgets import QHeaderView
 
+def enumerate_cols(col_attrs):
+    col_to_attr, attr_to_col = {}, {}
+    for i, col_attr in enumerate(col_attrs):
+        col_to_attr[i] = col_attr
+        attr_to_col[col_attr] = i
+    return col_to_attr, attr_to_col
+
 def hide_view_cols(view, cols_to_hide):
     for col in cols_to_hide:
         view.setColumnHidden(col, True)

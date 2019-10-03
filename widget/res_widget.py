@@ -2,7 +2,7 @@ from functools import partial
 
 from PySide2.QtCore import Qt
 from PySide2.QtGui import QKeySequence
-from PySide2.QtWidgets import QWidget,  QShortcut
+from PySide2.QtWidgets import QWidget, QShortcut, QButtonGroup
 
 import storage
 from constants import preset_grp, fd_grp, type_grp, RESTRICT_FDS_FILE, RESTRICT_TYPES_FILE
@@ -22,23 +22,25 @@ class ResWidget(QWidget, Ui_ResWidget):
         self.assign_id(self.food_btns, self.food_btn_grp, fd_grp.values())
         self.assign_id(self.type_btns, self.type_btn_grp, type_grp.values())
 
-        self.preset_btn_grp.setExclusive(False)
         self.type_btn_grp.setExclusive(False)
         self.food_btn_grp.setExclusive(False)
         self.setup_connections()
         self.init_btn_states()
 
+
     def init_btn_states(self):
         self.check_btns(self.type_btn_grp, self.type_res.res)
         self.check_btns(self.food_btn_grp, self.fd_res.res)
+        self.update_select_all_after_btn_toggle()
 
     def check_btns(self, btn_grp, restrictions):
         for restriction in restrictions:
-                for btn in btn_grp.buttons():
-                    if btn_grp.id(btn) == restriction:
-                        btn_grp.blockSignals(True)
-                        btn.setChecked(True)
-                        btn_grp.blockSignals(False)
+            for btn in btn_grp.buttons():
+                if btn_grp.id(btn) == restriction:
+                    btn_grp.blockSignals(True)
+                    btn.setChecked(True)
+                    btn_grp.blockSignals(False)
+
 
     # Update which foods are checked in restricted foods each time a preset btn
     # is toggled. This prevents unchecking button sets that should remain checked.
@@ -64,20 +66,19 @@ class ResWidget(QWidget, Ui_ResWidget):
             preset_btn.blockSignals(True)
             preset_btn.setChecked(False)
             preset_btn.blockSignals(False)
-        self.custom.setChecked(False)
 
         checked_btns = {
             btn for btn in self.food_btn_grp.buttons() if btn.isChecked()}
         for preset_btn, preset_btn_set in zip(self.preset_btns, self.preset_btn_sets):
             if checked_btns == preset_btn_set:
-                # If currently checked btns match a preset, check that preset and return
-                preset_btn.setChecked(True)
-                return
+                # If currently checked btns match a preset, check that preset
+                preset_btn.setCheckState(Qt.Checked)
 
+        '''
         if len(checked_btns) > 0:
             # If btns are checked but no preset matches, set custom
             self.custom.setChecked(True)
-
+        '''
     def update_select_all_after_btn_toggle(self):
         for select_all_btn in self.select_all_btns:
             select_all_btn.blockSignals(True)
@@ -142,11 +143,6 @@ class ResWidget(QWidget, Ui_ResWidget):
         self.home_btns = {self.restaurant, self.fast, self.meal, self.snack}
         self.preset_btn_sets = [self.vegan_btns, self.vegetarian_btns,
                                 self.pesc_btns, self.carnivore_btns, self.home_btns]
-
-    def write_fds_to_csv(self):
-        storage.write_csv(RESTRICT_FDS_FILE, self.person.restrict_fds)
-    def write_types_to_csv(self):
-        storage.write_csv(RESTRICT_TYPES_FILE, self.person.restrict_types)
 
     def setup_connections(self):
         # Update restriction values for external use
