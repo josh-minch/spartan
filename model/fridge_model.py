@@ -171,4 +171,4 @@ class FridgeModel(QAbstractTableModel):
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                             ~Qt.ItemIsEditable)
         return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
-                            Qt.ItemIsEditable)
+                            Qt.ItemIsEnabled | Qt.ItemIsEditable | Qt.ItemIsSelectable)

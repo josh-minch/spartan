@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Wed Oct  2 16:50:29 2019
+# Created: Thu Oct  3 18:38:02 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -172,7 +172,9 @@ class Ui_MainWindow(object):
         font.setFamily("Segoe UI Semilight")
         font.setPointSize(10)
         self.tabWidget.setFont(font)
+        self.tabWidget.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.tabWidget.setStyleSheet("QTabWidget::pane { border: 0; }")
+        self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.tabWidget.setIconSize(QtCore.QSize(16, 16))
         self.tabWidget.setDocumentMode(False)
         self.tabWidget.setTabBarAutoHide(False)
@@ -183,7 +185,7 @@ class Ui_MainWindow(object):
         self.gridLayout.setSpacing(0)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.prices_view = QtWidgets.QTableView(self.tab)
+        self.prices_view = ComboTableView(self.tab)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -249,7 +251,7 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setSpacing(0)
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.constraints_view = QtWidgets.QTableView(self.tab_2)
+        self.constraints_view = ComboTableView(self.tab_2)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -627,3 +629,4 @@ class Ui_MainWindow(object):
         self.actionex.setText(QtWidgets.QApplication.translate("MainWindow", "ex", None, -1))
         self.actionaa.setText(QtWidgets.QApplication.translate("MainWindow", "aa[\\", None, -1))
 
+from view.combo_table_view import ComboTableView

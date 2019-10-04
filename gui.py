@@ -20,6 +20,7 @@ from window.optimum_diet_window import OptimumDietWindow
 from model.nutrition_model import MacroModel, VitModel, MineralModel
 from model.fridge_model import FridgeModel
 from model.fridge_selected_model import FridgeSelectedModel
+from view.combo_table_view import ComboTableView
 from delegate.progress_bar_delegate import ProgressBarDelegate
 from delegate.align_right_delegate import AlignRightDelegate
 from delegate.combobox_delegate import ComboBoxDelegate
@@ -51,8 +52,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
         #self.fridge_model.dataChanged.connect(self.update_foods)
-        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
-        self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
+        #self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
+        #self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
 
         # Synchronize fridge selection to prices and constraints
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
@@ -103,17 +104,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.constraints_view.setModel(self.fridge_model)
 
         # Add combobox delegates
-        self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(TARGET_UNIT_COL, ComboBoxDelegate(self))
+        #self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
+        #self.constraints_view.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(self))
+        #self.constraints_view.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(self))
+        #self.constraints_view.setItemDelegateForColumn(TARGET_UNIT_COL, ComboBoxDelegate(self))
 
         # Alignment delegates
-        self.prices_view.setItemDelegateForColumn(PRICE_COL, AlignRightDelegate(self))
-        self.prices_view.setItemDelegateForColumn(PRICE_QUANTITY_COL, AlignRightDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(MIN_COL, AlignRightDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(MAX_COL, AlignRightDelegate(self))
-        self.constraints_view.setItemDelegateForColumn(TARGET_COL, AlignRightDelegate(self))
+        #self.prices_view.setItemDelegateForColumn(PRICE_COL, AlignRightDelegate(self))
+        #self.prices_view.setItemDelegateForColumn(PRICE_QUANTITY_COL, AlignRightDelegate(self))
+        #self.constraints_view.setItemDelegateForColumn(MIN_COL, AlignRightDelegate(self))
+        #self.constraints_view.setItemDelegateForColumn(MAX_COL, AlignRightDelegate(self))
+        #self.constraints_view.setItemDelegateForColumn(TARGET_COL, AlignRightDelegate(self))
 
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
@@ -242,9 +243,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         macros, vits, minerals = get_nutrition(self.person, self.selected_food_ids, amounts)
 
-        macros_model = nutrition_model.MacroModel(nutrients=macros)
-        vits_model = nutrition_model.VitModel(nutrients=vits)
-        minerals_model = nutrition_model.MineralModel(nutrients=minerals)
+        macros_model = MacroModel(nutrients=macros)
+        vits_model = VitModel(nutrients=vits)
+        minerals_model = MineralModel(nutrients=minerals)
 
         self.macros_view.setModel(macros_model)
         self.vits_view.setModel(vits_model)
@@ -269,8 +270,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
     def print_debug_info(self):
-        print(self.type_res)
-        print(self.fd_res)
+        print(self.person.foods[0])
 
     def closeEvent(self, event):
         for food in self.person.foods:

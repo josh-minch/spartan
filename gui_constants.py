@@ -69,7 +69,6 @@ nut_col_to_attr = {NUT_NAME_COL: 'name', NUT_AMOUNT_COL: 'amount', NUT_UNIT_COL:
                     NUT_PERCENT_COL: 'percent'}
 
 # Selected foods view
-
 S_NAME_COL = 0
 S_AMOUNT_COL = 1
 S_UNIT_COL = 2

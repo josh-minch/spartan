@@ -35,9 +35,6 @@
 ** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
 **
 **************************************************************************"""
-
-from functools import partial
-
 from PySide2.QtCore import (Qt, QAbstractTableModel, QModelIndex)
 from PySide2.QtGui import QBrush
 

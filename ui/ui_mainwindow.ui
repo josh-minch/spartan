@@ -390,8 +390,14 @@ QTableView {
           <pointsize>10</pointsize>
          </font>
         </property>
+        <property name="focusPolicy">
+         <enum>Qt::StrongFocus</enum>
+        </property>
         <property name="styleSheet">
          <string notr="true">QTabWidget::pane { border: 0; }</string>
+        </property>
+        <property name="tabShape">
+         <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
          <number>0</number>
@@ -433,7 +439,7 @@ QTableView {
            <number>0</number>
           </property>
           <item row="0" column="2">
-           <widget class="QTableView" name="prices_view">
+           <widget class="ComboTableView" name="prices_view">
             <property name="palette">
              <palette>
               <active>
@@ -609,7 +615,7 @@ QTableView {
            <number>0</number>
           </property>
           <item row="0" column="0">
-           <widget class="QTableView" name="constraints_view">
+           <widget class="ComboTableView" name="constraints_view">
             <property name="palette">
              <palette>
               <active>
@@ -1530,6 +1536,13 @@ QTableView {
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ComboTableView</class>
+   <extends>QTableView</extends>
+   <header>view/combo_table_view.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
