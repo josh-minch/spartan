@@ -108,3 +108,4 @@ dri.db
 spartan.db
 
 restrict_fds.csv
+restrict_types.csv
