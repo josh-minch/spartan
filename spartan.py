@@ -39,6 +39,7 @@ class Person(object):
         return str(self.__dict__)
 
     def set_nuts(self):
+        self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
         self.macro, self.vit, self.mineral = req.get_reqs(self.age_range, self.sex)
         self.nuts = self.macro + self.vit + self.mineral
         self.nuts.sort(key=lambda nut: nut.nut_id)

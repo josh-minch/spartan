@@ -56,6 +56,8 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         if len(str(self.person.bd_year)) < 4:
             return
 
+        self.person.set_nuts()
+
         self.macro_model = RequirementsModel(nutrients=self.person.macro, nutrient_group='Macronutrients')
         self.vit_model = RequirementsModel(nutrients=self.person.vit, nutrient_group='Vitamins')
         self.mineral_model = RequirementsModel(nutrients=self.person.mineral, nutrient_group='Minerals')
