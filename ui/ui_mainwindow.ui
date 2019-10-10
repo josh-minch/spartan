@@ -325,6 +325,19 @@ QTableView {
        </widget>
       </item>
       <item>
+       <widget class="QLineEdit" name="fridge_line_edit">
+        <property name="font">
+         <font>
+          <family>Segoe UI Symbol</family>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="placeholderText">
+         <string>🔍 Search my fridge</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pref_btn">
         <property name="maximumSize">
          <size>

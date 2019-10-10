@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Thu Oct  3 18:38:02 2019
+# Created: Thu Oct 10 14:12:14 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -149,6 +149,13 @@ class Ui_MainWindow(object):
         self.fridge_view.verticalHeader().setVisible(False)
         self.fridge_view.verticalHeader().setDefaultSectionSize(25)
         self.verticalLayout.addWidget(self.fridge_view)
+        self.fridge_line_edit = QtWidgets.QLineEdit(self.centralwidget)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Symbol")
+        font.setPointSize(9)
+        self.fridge_line_edit.setFont(font)
+        self.fridge_line_edit.setObjectName("fridge_line_edit")
+        self.verticalLayout.addWidget(self.fridge_line_edit)
         self.pref_btn = QtWidgets.QPushButton(self.centralwidget)
         self.pref_btn.setMaximumSize(QtCore.QSize(100, 16777215))
         font = QtGui.QFont()
@@ -614,6 +621,7 @@ class Ui_MainWindow(object):
         self.add_foods_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Add food", None, -1))
         self.remove_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Remove selected food (delete)</p>", None, -1))
         self.remove_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Remove", None, -1))
+        self.fridge_line_edit.setPlaceholderText(QtWidgets.QApplication.translate("MainWindow", "🔍 Search my fridge", None, -1))
         self.pref_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Preferences", None, -1))
         self.pref_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F9", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtWidgets.QApplication.translate("MainWindow", "Prices", None, -1))

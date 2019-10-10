@@ -3,7 +3,7 @@ import ctypes
 from timeit import default_timer as timer
 
 from PySide2 import QtCore, QtWidgets, QtGui
-from PySide2.QtCore import Qt, QEvent, Slot, QModelIndex
+from PySide2.QtCore import Qt, QEvent, Slot, QModelIndex, QRegExp, QSortFilterProxyModel
 from PySide2.QtGui import QFont, QKeySequence, QPalette
 from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListWidget, QTableWidget,
                                QListWidgetItem, QTableWidgetItem, QAbstractItemView,
@@ -52,8 +52,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
         #self.fridge_model.dataChanged.connect(self.update_foods)
-        #self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
-        #self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
+        self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
+        self.fridge_line_edit.textChanged.connect(self.fridge_line_edit_changed)
 
         # Synchronize fridge selection to prices and constraints
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
@@ -97,11 +98,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
         debug_shortcut.activated.connect(self.print_debug_info)
 
+    def fridge_line_edit_changed(self):
+        reg_exp = QRegExp(self.fridge_line_edit.text(), Qt.CaseInsensitive)
+        self.fridge_filter_model.setFilterRegExp(reg_exp)
+
     def setup_fridge_views(self):
         self.fridge_model = FridgeModel(foods=self.person.foods, currency='$')
-        self.fridge_view.setModel(self.fridge_model)
-        self.prices_view.setModel(self.fridge_model)
-        self.constraints_view.setModel(self.fridge_model)
+        self.fridge_filter_model = QSortFilterProxyModel(self)
+        self.fridge_filter_model.setSourceModel(self.fridge_model)
+
+        self.fridge_view.setModel(self.fridge_filter_model)
+        self.prices_view.setModel(self.fridge_filter_model)
+        self.constraints_view.setModel(self.fridge_filter_model)
+
+        self.fridge_filter_model.setFilterKeyColumn(NAME_COL)
 
         # Add combobox delegates
         #self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
