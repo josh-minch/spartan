@@ -30,7 +30,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.blockSignals(True)
         self.person = Person('m', 1993, 12, 1, 'us')
+        self.blockSignals(False)
         self.type_res = Restriction(RESTRICT_TYPES_FILE)
         self.fd_res = Restriction(RESTRICT_FDS_FILE)
 
@@ -51,7 +53,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.show()
 
     def setup_connections(self):
-        #self.fridge_model.dataChanged.connect(self.update_foods)
+        self.fridge_model.dataChanged.connect(self.update_foods)
         self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
         self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
         self.fridge_line_edit.textChanged.connect(self.fridge_line_edit_changed)
@@ -282,10 +284,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def print_debug_info(self):
         print(self.person.foods[0])
 
+    '''
     def closeEvent(self, event):
         for food in self.person.foods:
             self.person.update_food_in_user_db(food)
         event.accept()
+    '''
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
