@@ -61,9 +61,7 @@ class Person(object):
         )
 
         for row in cur.execute(sql_stmt):
-            self.foods.append(
-                Food(row[0], row[1], row[2], row[3], row[4], row[5],
-                     row[6], row[7], row[8], row[9], row[10]))
+            self.foods.append(Food(*row))
 
         con.commit()
         con.close()
@@ -144,7 +142,7 @@ class Restriction:
 
 class Food:
     def __init__(self, food_id=None, name=None, price=None, price_quantity=None, price_unit = 'g', min=None, min_unit='g',
-                max=None, max_unit='g', target=None, target_unit='g'):
+                max=None, max_unit='g', target=None, target_unit='g', nut_quantity=100):
 
         self.food_id = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
@@ -153,6 +151,7 @@ class Food:
         self.min: float            = min
         self.max: float            = max
         self.target: float         = target
+        self.nut_quantity: float   = nut_quantity
 
         self.price_unit = price_unit
         self.min_unit = min_unit

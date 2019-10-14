@@ -9,8 +9,6 @@ from ui.ui_searchwindow import Ui_SearchWindow
 from model.search_model import SearchModel
 
 class SearchWindow(QMainWindow, Ui_SearchWindow):
-    food_added = Signal()
-
     def __init__(self, parent=None, person=None, fridge_model=None):
         super().__init__(parent)
         self.setupUi(self)
@@ -51,9 +49,12 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
             current_row = self.fridge_model.rowCount()
             food_name = self.search_model.data(item, Qt.DisplayRole)
             food_to_add = spartan.Food(name=food_name)
-            self.fridge_model.insertRows(current_row+1, food_to_add)
+            self.fridge_model.insertRows(current_row+1)
+            name_ix = self.fridge_model.index(current_row+1, NAME_COL)
+            self.blockSignals(True)
+            self.fridge_model.setData(name_ix, food_name)
+            self.blockSignals(False)
 
-            self.food_added.emit()
             self.person.add_food_to_db(food_to_add)
 
     def toggle_add_btn(self):

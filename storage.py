@@ -2,6 +2,7 @@ import os
 import sqlite3 as sql
 import csv
 
+
 def create_spartan_db():
     if not os.path.isfile('spartan.db'):
         con = sql.connect("spartan.db")
@@ -29,10 +30,11 @@ def create_spartan_db():
             'max_unit 	        TEXT, '
             'target	            REAL, '
             'target_unit 	    TEXT, '
+            'nut_quantity       REAL, '
             'PRIMARY KEY(food_id)) '
         )
 
-        cur.execute(users_stmt)
+        cur.execute(person_stmt)
         cur.execute(foods_stmt)
         con.commit()
         con.close()

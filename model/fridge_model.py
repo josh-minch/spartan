@@ -122,10 +122,10 @@ class FridgeModel(QAbstractTableModel):
 
         return None
 
-    def insertRows(self, row, food, count=1, index=QModelIndex()):
-        self.beginInsertRows(QModelIndex(), row, row + count - 1)
+    def insertRows(self, position, count=1, index=QModelIndex()):
+        self.beginInsertRows(index, position, position + count - 1)
         for row in range(count):
-            self.foods.insert(row + row, food)
+            self.foods.append(None)
         self.endInsertRows()
 
         return True
@@ -137,12 +137,6 @@ class FridgeModel(QAbstractTableModel):
 
         return True
 
-    def append_food(self, position, food):
-        self.beginInsertRows(QModelIndex(), position, position + rows - 1)
-        for row in range(rows):
-            self.foods.insert(position + row, food)
-        self.endInsertRows()
-
     def setData(self, index, value, role=Qt.EditRole):
         if role != Qt.EditRole:
             return False
@@ -152,7 +146,7 @@ class FridgeModel(QAbstractTableModel):
             attr_str = f_col_to_attr[index.column()]
             if index.column() == PRICE_COL:
                 value.strip(self.currency)
-            if attr_str in ('price', 'min', 'max', 'target'):
+            if attr_str in ('price', 'min', 'max', 'target', 'nut_quantity'):
                 if value == '':
                     value = None
                 else:

@@ -26,6 +26,7 @@ from delegate.align_right_delegate import AlignRightDelegate
 from delegate.combobox_delegate import ComboBoxDelegate
 from ui.ui_mainwindow import Ui_MainWindow
 
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -37,12 +38,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fd_res = Restriction(RESTRICT_FDS_FILE)
 
         self.person.remove_nut('Fluoride (F)')
-        #self.person.remove_nut('Water')
-        #self.person.remove_nut('Energy')
+        # self.person.remove_nut('Water')
+        # self.person.remove_nut('Energy')
         #self.person.add_nut(Nutrient('Energy', min=2000))
 
         self.setup_fridge_views()
-        self.setup_selected_foods()
+        # self.setup_selected_foods()
         self.setup_connections()
         self.setup_shortcuts()
         self.setup_selection_modes()
@@ -54,13 +55,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
         self.fridge_model.dataChanged.connect(self.update_foods)
-        self.fridge_view.selectionModel().selectionChanged.connect(self.change_fridge_selection)
-        self.fridge_selected_model.dataChanged.connect(self.display_nutrition)
-        self.fridge_line_edit.textChanged.connect(self.fridge_line_edit_changed)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
+        self.fridge_line_edit.textChanged.connect(
+            self.fridge_line_edit_changed)
 
         # Synchronize fridge selection to prices and constraints
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
-        self.constraints_view.setSelectionModel(self.fridge_view.selectionModel())
+        self.constraints_view.setSelectionModel(
+            self.fridge_view.selectionModel())
+        self.nut_quant_view.setSelectionModel(
+            self.fridge_view.selectionModel())
 
         # Synchronize scrollbars
         self.fridge_view.verticalScrollBar().valueChanged.connect(
@@ -71,6 +75,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_view.verticalScrollBar().valueChanged.connect(
             self.constraints_view.verticalScrollBar().setValue)
         self.constraints_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
+
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.nut_quant_view.verticalScrollBar().setValue)
+        self.nut_quant_view.verticalScrollBar().valueChanged.connect(
             self.fridge_view.verticalScrollBar().setValue)
 
         # Add to fridge button
@@ -112,14 +121,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_view.setModel(self.fridge_filter_model)
         self.prices_view.setModel(self.fridge_filter_model)
         self.constraints_view.setModel(self.fridge_filter_model)
+        self.nut_quant_view.setModel(self.fridge_filter_model)
 
         self.fridge_filter_model.setFilterKeyColumn(NAME_COL)
-
-        # Add combobox delegates
-        #self.prices_view.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
-        #self.constraints_view.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(self))
-        #self.constraints_view.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(self))
-        #self.constraints_view.setItemDelegateForColumn(TARGET_UNIT_COL, ComboBoxDelegate(self))
 
         # Alignment delegates
         #self.prices_view.setItemDelegateForColumn(PRICE_COL, AlignRightDelegate(self))
@@ -132,6 +136,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
         hide_view_cols(self.prices_view, P_COLS_TO_HIDE)
         hide_view_cols(self.constraints_view, C_COLS_TO_HIDE)
+        hide_view_cols(self.nut_quant_view, N_COLS_TO_HIDE)
 
         # Horizontal header
         f_header = self.fridge_view.horizontalHeader()
@@ -169,12 +174,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(c_header, QFont.DemiBold)
 
         # Hide fridge scrollbar
-        self.fridge_view.verticalScrollBar().setStyleSheet("QScrollBar {width:0px;}")
+        self.fridge_view.verticalScrollBar().setStyleSheet(
+            "QScrollBar {width:0px;}")
 
     def setup_nutrition(self):
-        set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
-        set_column_widths(self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
-        set_column_widths(self.minerals_view, nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(self.macros_view,
+                          nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(
+            self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
+        set_column_widths(self.minerals_view,
+                          nut_col_to_attr.keys(), nut_col_widths)
 
         set_view_header_weights(self.macros_view, QFont.DemiBold)
         set_view_header_weights(self.vits_view, QFont.DemiBold)
@@ -185,16 +194,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
         '''
-
+    '''
     def setup_selected_foods(self):
         self.fridge_selected_model = FridgeSelectedModel(foods=[])
         self.fridge_selected_view.setModel(self.fridge_selected_model)
         self.fridge_selected_view.setItemDelegateForColumn(S_AMOUNT_COL, AlignRightDelegate(self))
         self.fridge_selected_view.setItemDelegateForColumn(S_CALORIES_COL, AlignRightDelegate(self))
+    '''
 
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
-        food_ids = self.fridge_model.data(selected_food_id_indexes[0], Qt.DisplayRole)
+        food_ids = self.fridge_model.data(
+            selected_food_id_indexes[0], Qt.DisplayRole)
 
         self.fridge_model.removeRow(selected_food_id_indexes[0].row())
         self.person.remove_foods(food_ids=[food_ids])
@@ -205,7 +216,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.person.update_food_in_user_db(food=food)
 
     def open_search_window(self):
-        self.search_window = SearchWindow(parent=None, person=self.person, fridge_model=self.fridge_model)
+        self.search_window = SearchWindow(
+            parent=None, person=self.person, fridge_model=self.fridge_model)
         self.search_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def open_pref(self):
@@ -217,12 +229,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(self.person.foods) == 0:
             return
 
-        self.optimum_diet_window = OptimumDietWindow(parent=None, person=self.person)
+        self.optimum_diet_window = OptimumDietWindow(
+            parent=None, person=self.person)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def change_fridge_selection(self, selected, deselected):
         selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
-        selected_food_name_ixs = [ix.siblingAtColumn(NAME_COL) for ix in selected_food_id_ixs]
+        selected_food_name_ixs = [ix.siblingAtColumn(
+            NAME_COL) for ix in selected_food_id_ixs]
 
         self.selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
         food_names = [ix.data() for ix in selected_food_name_ixs]
@@ -233,27 +247,29 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for i, name in enumerate(food_names):
             self.fridge_selected_model.insertRows(i)
 
-            name_ix = self.fridge_selected_model.index(i, S_NAME_COL, QModelIndex())
-            amount_ix = self.fridge_selected_model.index(i, S_AMOUNT_COL, QModelIndex())
-            unit_ix = self.fridge_selected_model.index(i, S_UNIT_COL, QModelIndex())
+            name_ix = self.fridge_selected_model.index(
+                i, S_NAME_COL, QModelIndex())
+            amount_ix = self.fridge_selected_model.index(
+                i, S_AMOUNT_COL, QModelIndex())
+            unit_ix = self.fridge_selected_model.index(
+                i, S_UNIT_COL, QModelIndex())
 
             self.fridge_selected_model.blockSignals(True)
             self.fridge_selected_model.setData(name_ix, name, Qt.EditRole)
             self.fridge_selected_model.setData(unit_ix, 'g', Qt.EditRole)
             self.fridge_selected_model.blockSignals(False)
 
-            self.fridge_selected_model.setData(amount_ix, float(100), Qt.EditRole)
+            self.fridge_selected_model.setData(
+                amount_ix, float(100), Qt.EditRole)
 
     def display_nutrition(self):
-        if self.fridge_selected_model.rowCount() != len(self.selected_food_ids):
-            return
+        selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
+        selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
+        selected_food_amounts = [ix.siblingAtColumn(
+            NUT_QUANT_COL).data() for ix in selected_food_id_ixs]
 
-        amounts = []
-        for row in range(self.fridge_selected_model.rowCount()):
-            index = self.fridge_selected_model.index(row, S_AMOUNT_COL)
-            amounts.append(self.fridge_selected_model.data(index))
-
-        macros, vits, minerals = get_nutrition(self.person, self.selected_food_ids, amounts)
+        macros, vits, minerals = get_nutrition(
+            self.person, selected_food_ids, selected_food_amounts)
 
         macros_model = MacroModel(nutrients=macros)
         vits_model = VitModel(nutrients=vits)
@@ -278,7 +294,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.remove_btn.setEnabled(False)
 
     def setup_selection_modes(self):
-        #self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        # self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
         pass
 
     def print_debug_info(self):
@@ -291,6 +307,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         event.accept()
     '''
 
+
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
     myappid = u'spartan.0.5'
@@ -298,11 +315,11 @@ if __name__ == "__main__":
 
     storage.create_spartan_db()
     app = QApplication(sys.argv)
-    #app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
+    # app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
 
     #p = QPalette()
     #p.setColor(QPalette.Highlight, Qt.darkRed)
-    #app.setPalette(p)
+    # app.setPalette(p)
 
     window = MainWindow()
     sys.exit(app.exec_())
