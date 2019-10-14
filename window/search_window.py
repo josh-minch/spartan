@@ -49,12 +49,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
             current_row = self.fridge_model.rowCount()
             food_name = self.search_model.data(item, Qt.DisplayRole)
             food_to_add = spartan.Food(name=food_name)
-            self.fridge_model.insertRows(current_row+1)
-            name_ix = self.fridge_model.index(current_row+1, NAME_COL)
-            self.blockSignals(True)
-            self.fridge_model.setData(name_ix, food_name)
-            self.blockSignals(False)
-
+            self.fridge_model.insertRows(0, food_to_add)
             self.person.add_food_to_db(food_to_add)
 
     def toggle_add_btn(self):

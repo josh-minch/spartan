@@ -122,10 +122,10 @@ class FridgeModel(QAbstractTableModel):
 
         return None
 
-    def insertRows(self, position, count=1, index=QModelIndex()):
-        self.beginInsertRows(index, position, position + count - 1)
+    def insertRows(self, position, food, count=1, index=QModelIndex()):
+        self.beginInsertRows(QModelIndex(), position, position + count - 1)
         for row in range(count):
-            self.foods.append(None)
+            self.foods.append(food)
         self.endInsertRows()
 
         return True
