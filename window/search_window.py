@@ -9,11 +9,13 @@ from ui.ui_searchwindow import Ui_SearchWindow
 from model.search_model import SearchModel
 
 class SearchWindow(QMainWindow, Ui_SearchWindow):
-    def __init__(self, parent=None, person=None, fridge_model=None):
+    def __init__(self, parent=None, person=None, fridge_model=None, type_res=None, fd_res=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.fridge_model = fridge_model
         self.person = person
+        self.fridge_model = fridge_model
+        self.type_res = type_res
+        self.fd_res = fd_res
 
         self.setup_connections()
 
@@ -22,7 +24,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         self.show()
 
     def search_food(self):
-        search_result = database.search_food(self.search_box.text(), self.person)
+        search_result = database.search_food(self.search_box.text(), self.person, self.type_res, self.fd_res)
 
         self.search_model = SearchModel(search_result)
         self.search_view.setModel(self.search_model)
@@ -69,6 +71,5 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         debug_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
-        print(self.search_view)
-        print(self.search_view.selectionModel())
-        print(self.search_view.selectionModel().selectedRows())
+        print(self.person.restrict_types)
+        print(self.person.restrict_fds)

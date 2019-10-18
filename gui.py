@@ -213,12 +213,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def open_search_window(self):
         self.search_window = SearchWindow(
-            parent=None, person=self.person, fridge_model=self.fridge_model)
+            parent=None, person=self.person, fridge_model=self.fridge_model, type_res=self.type_res, fd_res=self.fd_res)
         self.search_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def open_pref(self):
         self.pref_window = PrefWindow(
-            parent=None, person=self.person, type_res=self.type_res, fd_res=self.fd_res, )
+            parent=None, person=self.person, type_res=self.type_res, fd_res=self.fd_res)
         self.pref_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def optimize(self):

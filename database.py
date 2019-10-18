@@ -5,9 +5,9 @@ import sqlite3 as sql
 
 from gui_constants import Res
 
-def search_food(food_name, person):
-    if Res.SEARCH_RESTRICT in person.restrict_types:
-        fd_grps = person.restrict_fds
+def search_food(food_name, person, type_res, fd_res):
+    if Res.SEARCH_RESTRICT in type_res.res:
+        fd_grps = list(fd_res.res)
         fd_grps_tuple = '(?'+(len(fd_grps)-1)*',?'+')'
     else:
         fd_grps = []

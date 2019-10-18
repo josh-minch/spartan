@@ -56,7 +56,7 @@ class RequirementsModel(QAbstractTableModel):
         return len(self.nutrients)
 
     def columnCount(self, index=QModelIndex()):
-        return len(col_attr)
+        return len(attr)
 
     def data(self, index, role):
         if not index.isValid() or not 0 <= index.row() < len(self.nutrients):
