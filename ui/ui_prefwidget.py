@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwidget.ui',
 # licensing of 'ui/ui_prefwidget.ui' applies.
 #
-# Created: Mon Oct 14 20:30:41 2019
+# Created: Fri Oct 18 13:36:54 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -78,25 +78,6 @@ class Ui_PrefWidget(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setSpacing(8)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.rec_label = QtWidgets.QLabel(PrefWidget)
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(50, 50, 50))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(50, 50, 50))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(120, 120, 120))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
-        self.rec_label.setPalette(palette)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(11)
-        self.rec_label.setFont(font)
-        self.rec_label.setText("")
-        self.rec_label.setObjectName("rec_label")
-        self.verticalLayout.addWidget(self.rec_label)
         self.age_label = QtWidgets.QLabel(PrefWidget)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(50, 50, 50))

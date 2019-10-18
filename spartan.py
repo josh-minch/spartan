@@ -17,12 +17,11 @@ from constants import *
 
 
 class Person(object):
-    def __init__(self, sex, bd_year, bd_mon, bd_day, rec):
+    def __init__(self, sex, bd_year, bd_mon, bd_day):
         self.sex = sex
         self.bd_year = bd_year
         self.bd_mon = bd_mon
         self.bd_day = bd_day
-        self.rec = rec
         self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
         self.age = req.calculate_age(self.bd_year, self.bd_mon, self.bd_day)
 

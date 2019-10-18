@@ -28,7 +28,6 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.mon_edit.setValidator(int_validator)
         self.year_edit.setValidator(int_validator)
 
-        self.rec_edit.setView(QListView())
         self.sex_edit.setView(QListView())
         self.display_req()
 
@@ -37,7 +36,6 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.mon_edit.setText(str(self.person.bd_mon))
         self.year_edit.setText(str(self.person.bd_year))
         self.sex_edit.setCurrentIndex(sex_to_index[self.person.sex])
-        self.rec_edit.setCurrentIndex(rec_to_index[self.person.rec])
 
     def valid_date(self):
         try:
@@ -88,22 +86,18 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.person.bd_year = int(year)
     def sex_edit_changed(self, index):
         self.person.sex = index_to_sex[index]
-    def rec_edit_changed(self, rec_text):
-        self.person.rec_text = rec_text
 
     def setup_connections(self):
         self.day_edit.textChanged.connect(self.day_edit_changed)
         self.mon_edit.textChanged.connect(self.mon_edit_changed)
         self.year_edit.textChanged.connect(self.year_edit_changed)
         self.sex_edit.currentIndexChanged[int].connect(self.sex_edit_changed)
-        self.rec_edit.currentIndexChanged[int].connect(self.rec_edit_changed)
         self.cust_edit.stateChanged.connect(self.cust_edit_changed)
 
         self.day_edit.textChanged.connect(self.display_req)
         self.mon_edit.textChanged.connect(self.display_req)
         self.year_edit.textChanged.connect(self.display_req)
         self.sex_edit.currentIndexChanged[int].connect(self.display_req)
-        self.rec_edit.currentIndexChanged[int].connect(self.display_req)
 
         # Debug
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)

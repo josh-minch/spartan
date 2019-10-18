@@ -20,13 +20,8 @@ class PrefWidget(QWidget, Ui_PrefWidget):
         self.res_btn.setIcon(QPixmap("images/food.png"))
 
     def set_preview_text(self):
-        self.rec_label.setText((get_rec_text(self.person.rec)))
         self.age_label.setText((get_age_text(self.person)))
         self.sex_label.setText((get_sex_text(self.person.sex)))
-
-        if self.person.rec == 'custom':
-            self.age_label.hide()
-            self.sex_label.hide()
 
         res_label_text = self.get_fd_res_text(self.fd_res.res)
         self.res_food_label.setText(res_label_text)
@@ -61,17 +56,6 @@ class PrefWidget(QWidget, Ui_PrefWidget):
             res_fds.append(fd_grp_display_name[restriction])
         text += ", ".join(res_fds)
         return text
-
-
-def get_rec_text(rec):
-    if rec == 'us':
-        return 'United States Health Department recommendations'
-    elif rec == 'eu':
-        return 'European Union Food Safety Authoriy recommendations'
-    elif rec == 'jp':
-        return 'Japanese Ministry of Health, Labour and Welfare recommendations'
-    elif rec == 'custom':
-        return 'Custom user recommendations'
 
 def get_age_text(person):
     if person.age < 1:

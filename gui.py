@@ -32,7 +32,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.blockSignals(True)
-        self.person = Person('m', 1993, 12, 1, 'us')
+        self.person = Person('m', 1993, 12, 1)
         self.blockSignals(False)
         self.type_res = Restriction(RESTRICT_TYPES_FILE)
         self.fd_res = Restriction(RESTRICT_FDS_FILE)

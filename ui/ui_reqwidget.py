@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Mon Oct 14 20:30:41 2019
+# Created: Fri Oct 18 13:36:55 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,7 +48,7 @@ class Ui_ReqWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1241, 1811))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1241, 1780))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_2.setContentsMargins(20, 20, -1, -1)
@@ -187,62 +187,6 @@ class Ui_ReqWidget(object):
         self.formLayout_4.setFieldGrowthPolicy(QtWidgets.QFormLayout.ExpandingFieldsGrow)
         self.formLayout_4.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.formLayout_4.setObjectName("formLayout_4")
-        self.req_label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(120, 120, 120))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
-        self.req_label.setPalette(palette)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(11)
-        font.setWeight(50)
-        font.setBold(False)
-        self.req_label.setFont(font)
-        self.req_label.setObjectName("req_label")
-        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.req_label)
-        self.rec_edit = QtWidgets.QComboBox(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.rec_edit.sizePolicy().hasHeightForWidth())
-        self.rec_edit.setSizePolicy(sizePolicy)
-        self.rec_edit.setMinimumSize(QtCore.QSize(0, 0))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        self.rec_edit.setFont(font)
-        self.rec_edit.setMouseTracking(False)
-        self.rec_edit.setFocusPolicy(QtCore.Qt.TabFocus)
-        self.rec_edit.setStyleSheet("QComboBox {\n"
-"    padding: 2px 0px 2px 2px;\n"
-"}\n"
-"\n"
-"QListView{\n"
-"    outline: none;\n"
-"}\n"
-"\n"
-"QListView::item:selected {\n"
-"    color: black;\n"
-"    background-color: rgb(204, 232, 255);\n"
-"}\n"
-"\n"
-"QListView::item {\n"
-"    min-height: 28px;\n"
-"}\n"
-"")
-        self.rec_edit.setFrame(True)
-        self.rec_edit.setObjectName("rec_edit")
-        self.rec_edit.addItem("")
-        self.rec_edit.addItem("")
-        self.rec_edit.addItem("")
-        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.rec_edit)
         self.sex_label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -262,7 +206,7 @@ class Ui_ReqWidget(object):
         font.setBold(False)
         self.sex_label.setFont(font)
         self.sex_label.setObjectName("sex_label")
-        self.formLayout_4.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.sex_label)
+        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.sex_label)
         self.sex_edit = QtWidgets.QComboBox(self.scrollAreaWidgetContents)
         self.sex_edit.setEnabled(True)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -298,7 +242,7 @@ class Ui_ReqWidget(object):
         self.sex_edit.addItem("")
         self.sex_edit.addItem("")
         self.sex_edit.addItem("")
-        self.formLayout_4.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.sex_edit)
+        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.sex_edit)
         self.birth_label_4 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -318,7 +262,7 @@ class Ui_ReqWidget(object):
         font.setBold(False)
         self.birth_label_4.setFont(font)
         self.birth_label_4.setObjectName("birth_label_4")
-        self.formLayout_4.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.birth_label_4)
+        self.formLayout_4.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.birth_label_4)
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_14.setSpacing(6)
         self.horizontalLayout_14.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
@@ -365,7 +309,7 @@ class Ui_ReqWidget(object):
         self.year_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.year_edit.setObjectName("year_edit")
         self.horizontalLayout_14.addWidget(self.year_edit)
-        self.formLayout_4.setLayout(2, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_14)
+        self.formLayout_4.setLayout(1, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_14)
         self.verticalLayout_8.addLayout(self.formLayout_4)
         self.formLayout.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_8)
         self.verticalLayout_9 = QtWidgets.QVBoxLayout()
@@ -403,12 +347,7 @@ class Ui_ReqWidget(object):
     def retranslateUi(self, ReqWidget):
         ReqWidget.setWindowTitle(QtWidgets.QApplication.translate("ReqWidget", "Spartan - Preferences", None, -1))
         self.label.setText(QtWidgets.QApplication.translate("ReqWidget", "Nutritional Requirements", None, -1))
-        self.label_15.setText(QtWidgets.QApplication.translate("ReqWidget", "Set requirements according to national recommendations.", None, -1))
-        self.req_label.setText(QtWidgets.QApplication.translate("ReqWidget", "Recommendation by", None, -1))
-        self.rec_edit.setCurrentText(QtWidgets.QApplication.translate("ReqWidget", "United States (Health Department)", None, -1))
-        self.rec_edit.setItemText(0, QtWidgets.QApplication.translate("ReqWidget", "United States (Health Department)", None, -1))
-        self.rec_edit.setItemText(1, QtWidgets.QApplication.translate("ReqWidget", "European Union (Food Safety Authority)", None, -1))
-        self.rec_edit.setItemText(2, QtWidgets.QApplication.translate("ReqWidget", "Japan (Ministry of Health, Labour and Welfare)", None, -1))
+        self.label_15.setText(QtWidgets.QApplication.translate("ReqWidget", "Set requirements according to United States Health Department recommendations", None, -1))
         self.sex_label.setText(QtWidgets.QApplication.translate("ReqWidget", "Sex", None, -1))
         self.sex_edit.setItemText(0, QtWidgets.QApplication.translate("ReqWidget", "Female", None, -1))
         self.sex_edit.setItemText(1, QtWidgets.QApplication.translate("ReqWidget", "Female, lactating", None, -1))
@@ -418,7 +357,7 @@ class Ui_ReqWidget(object):
         self.mon_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWidget", "Month", None, -1))
         self.day_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWidget", "Day", None, -1))
         self.year_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWidget", "Year", None, -1))
-        self.label_17.setText(QtWidgets.QApplication.translate("ReqWidget", "Select a recommendation as a guideline then customize it to your needs.", None, -1))
+        self.label_17.setText(QtWidgets.QApplication.translate("ReqWidget", "You can select a recommendation as a guideline then customize it to your needs.", None, -1))
         self.cust_edit.setText(QtWidgets.QApplication.translate("ReqWidget", "Allow custom requirements", None, -1))
 
 import images_rc
