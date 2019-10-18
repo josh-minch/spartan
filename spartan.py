@@ -142,7 +142,7 @@ class Restriction:
 
 class Food:
     def __init__(self, food_id=None, name=None, price=None, price_quantity=None, price_unit = 'g', min=None, min_unit='g',
-                max=None, max_unit='g', target=None, target_unit='g', nut_quantity=100):
+                max=None, max_unit='g', target=None, target_unit='g', nut_quantity=100, nut_quantity_unit='g'):
 
         self.food_id = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
@@ -157,6 +157,7 @@ class Food:
         self.min_unit = min_unit
         self.max_unit = max_unit
         self.target_unit = target_unit
+        self.nut_quantity_unit = nut_quantity_unit
         self.selectable_units = self.get_selectable_units()
 
     def __repr__(self):

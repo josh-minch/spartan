@@ -12,6 +12,7 @@ class ComboTableView(QTableView):
         self.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(self))
         self.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(self))
         self.setItemDelegateForColumn(TARGET_UNIT_COL, ComboBoxDelegate(self))
+        self.setItemDelegateForColumn(NUT_QUANT_UNIT_COL, ComboBoxDelegate(self))
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:

@@ -55,6 +55,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
         self.fridge_model.dataChanged.connect(self.update_foods)
+        self.fridge_model.dataChanged.connect(self.display_nutrition)
         self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
         self.fridge_line_edit.textChanged.connect(
             self.fridge_line_edit_changed)
@@ -142,6 +143,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         f_header = self.fridge_view.horizontalHeader()
         p_header = self.prices_view.horizontalHeader()
         c_header = self.constraints_view.horizontalHeader()
+        n_header = self.nut_quant_view.horizontalHeader()
 
         # Header must be explicitly set to visible even though it's already
         # set in Qt Designer or else it doesn't display for constraints view
@@ -172,6 +174,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(p_header, QFont.DemiBold)
         set_v_header_height(self.constraints_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(c_header, QFont.DemiBold)
+        set_v_header_height(self.nut_quant_view, FRIDGE_V_HEADER_SIZE)
+        set_header_weight(n_header, QFont.DemiBold)
 
         # Hide fridge scrollbar
         self.fridge_view.verticalScrollBar().setStyleSheet(
@@ -194,13 +198,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(V_HEADER_SIZE)
         '''
-    '''
-    def setup_selected_foods(self):
-        self.fridge_selected_model = FridgeSelectedModel(foods=[])
-        self.fridge_selected_view.setModel(self.fridge_selected_model)
-        self.fridge_selected_view.setItemDelegateForColumn(S_AMOUNT_COL, AlignRightDelegate(self))
-        self.fridge_selected_view.setItemDelegateForColumn(S_CALORIES_COL, AlignRightDelegate(self))
-    '''
 
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
@@ -267,6 +264,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
         selected_food_amounts = [ix.siblingAtColumn(
             NUT_QUANT_COL).data() for ix in selected_food_id_ixs]
+        selected_food_units = [ix.siblingAtColumn(
+            NUT_QUANT_UNIT_COL).data() for ix in selected_food_id_ixs]
+
+        # Convert non-gram quantities to grams
+        for i, (unit, food_id, amount) in enumerate(zip(selected_food_units, selected_food_ids, selected_food_amounts)):
+            if unit != 'g':
+                converted_amount = convert_quantity(food_id, amount, old_unit=unit, new_unit='g')
+                selected_food_amounts[i] = converted_amount
 
         macros, vits, minerals = get_nutrition(
             self.person, selected_food_ids, selected_food_amounts)

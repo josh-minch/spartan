@@ -1,1 +1,4 @@
+Bugs:
+    Open pref window, close, then optimize diet. Always fails with only water in generated diet.
+
 Should optimum diet window percentage bars show percentage of daily recommendation or percentage of amount given by generated diet?

@@ -46,7 +46,6 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
     def add_to_fridge(self, selected_items=None):
         selected_items = self.search_list.selectionModel().selectedRows()
         for item in selected_items:
-            current_row = self.fridge_model.rowCount()
             food_name = self.search_model.data(item, Qt.DisplayRole)
             food_to_add = spartan.Food(name=food_name)
             self.fridge_model.insertRows(0, food_to_add)

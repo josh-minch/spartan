@@ -31,6 +31,7 @@ def create_spartan_db():
             'target	            REAL, '
             'target_unit 	    TEXT, '
             'nut_quantity       REAL, '
+            'nut_quantity_unit  REAL, '
             'PRIMARY KEY(food_id)) '
         )
 
