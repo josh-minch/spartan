@@ -227,7 +227,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             return
 
         self.optimum_diet_window = OptimumDietWindow(
-            parent=None, person=self.person)
+             parent=self, person=self.person)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def change_fridge_selection(self, selected, deselected):
@@ -303,7 +303,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
     def print_debug_info(self):
-        print(self.person.foods[0])
+        print(self.person.macro)
+        print(self.person.vit)
+        print(self.person.mineral)
+        print(self.person.nuts)
 
     '''
     def closeEvent(self, event):
