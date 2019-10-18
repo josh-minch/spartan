@@ -37,7 +37,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.type_res = Restriction(RESTRICT_TYPES_FILE)
         self.fd_res = Restriction(RESTRICT_FDS_FILE)
 
-        self.person.remove_nut('Fluoride (F)')
         # self.person.remove_nut('Water')
         # self.person.remove_nut('Energy')
         #self.person.add_nut(Nutrient('Energy', min=2000))

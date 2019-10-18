@@ -87,8 +87,8 @@ s_col_to_attr = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
 
 # Search view
 class Search:
-    col_names = ['name', 'fd_grp']
-    col = enumerate_cols(col_names)
+    attrs = ['fd_grp', 'name']
+    col_to_attr, attr_to_col = enumerate_cols(attrs)
 
 # Optimum diet view
 O_ID_COL = 0

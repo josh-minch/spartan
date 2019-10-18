@@ -189,26 +189,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="add_custom_food_btn">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Add custom food</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>images/food.png</normaloff>images/food.png</iconset>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -224,7 +204,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QTableView" name="search_list">
+       <widget class="QTableView" name="search_view">
         <property name="palette">
          <palette>
           <active>
@@ -310,6 +290,9 @@
         <property name="alternatingRowColors">
          <bool>false</bool>
         </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
         <property name="showGrid">
          <bool>false</bool>
         </property>
@@ -334,9 +317,8 @@
  </widget>
  <tabstops>
   <tabstop>search_box</tabstop>
-  <tabstop>search_list</tabstop>
+  <tabstop>search_view</tabstop>
   <tabstop>add_to_fridge_btn</tabstop>
-  <tabstop>add_custom_food_btn</tabstop>
   <tabstop>debug_btn</tabstop>
  </tabstops>
  <resources/>

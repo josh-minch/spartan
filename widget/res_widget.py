@@ -27,7 +27,6 @@ class ResWidget(QWidget, Ui_ResWidget):
         self.setup_connections()
         self.init_btn_states()
 
-
     def init_btn_states(self):
         self.check_btns(self.type_btn_grp, self.type_res.res)
         self.check_btns(self.food_btn_grp, self.fd_res.res)
@@ -40,7 +39,6 @@ class ResWidget(QWidget, Ui_ResWidget):
                     btn_grp.blockSignals(True)
                     btn.setChecked(True)
                     btn_grp.blockSignals(False)
-
 
     # Update which foods are checked in restricted foods each time a preset btn
     # is toggled. This prevents unchecking button sets that should remain checked.

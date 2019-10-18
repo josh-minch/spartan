@@ -16,7 +16,6 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         self.person = person
 
         self.setup_connections()
-        #self.setup_selection_modes()
 
         self.search_box.setFocus()
         self.resize(850, 500)
@@ -26,27 +25,26 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         search_result = database.search_food(self.search_box.text(), self.person)
 
         self.search_model = SearchModel(search_result)
-        self.search_list.setModel(self.search_model)
+        self.search_view.setModel(self.search_model)
 
-        # Set horizontal header stretched so table fills horizontal space
-        h_header = self.search_list.horizontalHeader()
-        h_header.setSectionResizeMode(0, QHeaderView.Stretch)
+        self.search_view.setColumnWidth(Search.attr_to_col['fd_grp'], 180)
 
         # Set vertical header height to determine table's row height
-        v_header = self.search_list.verticalHeader()
+        v_header = self.search_view.verticalHeader()
         v_header.setSectionResizeMode(QHeaderView.Fixed)
         v_header.setDefaultSectionSize(20)
 
         # Toggle add button
-        self.search_selection_model = self.search_list.selectionModel()
+        self.search_selection_model = self.search_view.selectionModel()
         self.search_selection_model.selectionChanged.connect(self.toggle_add_btn)
 
-        self.search_list.show()
+        self.search_view.show()
 
-    def add_to_fridge(self, selected_items=None):
-        selected_items = self.search_list.selectionModel().selectedRows()
-        for item in selected_items:
-            food_name = self.search_model.data(item, Qt.DisplayRole)
+    def add_to_fridge(self):
+        selected_item_ixs = self.search_view.selectionModel().selectedRows()
+        for ix in selected_item_ixs:
+            food_name_ix = ix.siblingAtColumn(Search.attr_to_col['name'])
+            food_name = self.search_model.data(food_name_ix, Qt.DisplayRole)
             food_to_add = spartan.Food(name=food_name)
             self.fridge_model.insertRows(0, food_to_add)
             self.person.add_food_to_db(food_to_add)
@@ -63,7 +61,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         self.search_box.textChanged.connect(self.search_food)
         self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
 
-        add_shortcut = QShortcut(QKeySequence(Qt.Key_Return), self.search_list)
+        add_shortcut = QShortcut(QKeySequence(Qt.Key_Return), self.search_view)
         add_shortcut.activated.connect(self.add_to_fridge)
 
         self.debug_btn.clicked.connect(self.print_debug_info)
@@ -71,6 +69,6 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         debug_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
-        print(self.search_list)
-        print(self.search_list.selectionModel())
-        print(self.search_list.selectionModel().selectedRows())
+        print(self.search_view)
+        print(self.search_view.selectionModel())
+        print(self.search_view.selectionModel().selectedRows())

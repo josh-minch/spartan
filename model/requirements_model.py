@@ -42,9 +42,9 @@ from spartan import Nutrient
 from gui_helpers import enumerate_cols
 
 
-col_attr = ['nut_id', 'name', 'min', 'min_unit',
+attr = ['nut_id', 'name', 'min', 'min_unit',
                  'max', 'max_unit', 'target', 'target_unit']
-col_to_attr, attr_to_col = enumerate_cols(col_attr)
+col_to_attr, attr_to_col = enumerate_cols(attr)
 
 class RequirementsModel(QAbstractTableModel):
     def __init__(self, parent=None, nutrients=None, nutrient_group=None):

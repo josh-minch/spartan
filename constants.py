@@ -41,3 +41,10 @@ fd_grp_display_name = {100: 'dairy and eggs', 200: 'spices and herbs', 300: 'bab
                        1800: 'baked products',  1900: 'sweets', 2000: 'cereal grains and pasta', 2100: 'fast food', 2200: 'prepared meals',
                        2500: 'snacks', 3500: 'Native American foods',  3600: 'restaurant food'}
 
+fd_grp_search_name = {100: 'Dairy and Eggs', 200: 'Spices and Herbs', 300: 'Baby food', 400: 'Fats and Oils',
+                       500: 'Poultry', 600: 'Soups and Sauces', 700: 'Sausages and Deli Meats',
+                       800: 'Breakfast Cereals', 900: 'Fruits and Fruit juices', 1000: 'Pork', 1100: 'Vegetables', 1200: 'Nuts and Seeds',
+                       1300: 'Beef', 1400: 'Drinks', 1500: 'Seafood', 1600: 'Legumes', 1700: 'Lamb, Veal, Game',
+                       1800: 'Baked products',  1900: 'Sweets', 2000: 'Cereal grains and Pasta', 2100: 'Fast food', 2200: 'Prepared meals',
+                       2500: 'Snacks', 3500: 'Native American foods',  3600: 'Restaurant food'}
+

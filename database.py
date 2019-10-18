@@ -24,7 +24,7 @@ def search_food(food_name, person):
     # Order by the sum of how early each term appears in the search result strings.
     if (len(split_food_names) > 0):
         sql_statement = (
-            'SELECT long_desc FROM food_des '
+            'SELECT food_group_id, long_desc FROM food_des '
             'WHERE long_desc LIKE ?'
             + (len(wildcard_padded_split_food_names)-1) * ' AND long_desc LIKE ?' +
             'AND food_group_id not in ' + fd_grps_tuple +
@@ -33,10 +33,7 @@ def search_food(food_name, person):
 
         cur.execute(sql_statement, wildcard_padded_split_food_names + fd_grps + split_food_names)
 
-    food_data=cur.fetchall()
-
-    food_data=[food[0] for food in food_data]
-    return food_data
+    return cur.fetchall()
 
 def describe_food(food_id):
     con=sql.connect('sr_legacy/sr_legacy.db')
@@ -48,7 +45,6 @@ def describe_food(food_id):
         nut_values[i]=nut_values[i][0]
 
     return nut_values
-
 
 def get_food_id(food_name):
     con=sql.connect('sr_legacy/sr_legacy.db')
