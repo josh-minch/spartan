@@ -1318,7 +1318,7 @@ QTableView {
            </font>
           </property>
           <property name="text">
-           <string>Preferences</string>
+           <string>Settings</string>
           </property>
           <property name="icon">
            <iconset>
