@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwidget.ui',
 # licensing of 'ui/ui_prefwidget.ui' applies.
 #
-# Created: Fri Oct 18 16:42:44 2019
+# Created: Sat Oct 19 09:12:24 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -144,26 +144,6 @@ class Ui_PrefWidget(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setSpacing(8)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.res_food_label = QtWidgets.QLabel(PrefWidget)
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(50, 50, 50))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(50, 50, 50))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(120, 120, 120))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
-        self.res_food_label.setPalette(palette)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(11)
-        self.res_food_label.setFont(font)
-        self.res_food_label.setText("")
-        self.res_food_label.setWordWrap(False)
-        self.res_food_label.setObjectName("res_food_label")
-        self.verticalLayout_2.addWidget(self.res_food_label)
         self.res_type_label = QtWidgets.QLabel(PrefWidget)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(59, 59, 59))
