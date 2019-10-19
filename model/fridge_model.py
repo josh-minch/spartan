@@ -130,9 +130,9 @@ class FridgeModel(QAbstractTableModel):
 
         return True
 
-    def removeRows(self, position, rows=1, index=QModelIndex()):
-        self.beginRemoveRows(QModelIndex(), position, position + rows - 1)
-        del self.foods[position:position+rows]
+    def removeRows(self, row, count=1, index=QModelIndex()):
+        self.beginRemoveRows(QModelIndex(), row, row + count - 1)
+        del self.foods[row:row+count]
         self.endRemoveRows()
 
         return True

@@ -200,11 +200,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
-        food_ids = self.fridge_model.data(
-            selected_food_id_indexes[0], Qt.DisplayRole)
+        food_ids = []
+        for index in selected_food_id_indexes:
+            food_ids.append(index.data(Qt.DisplayRole))
 
-        self.fridge_model.removeRow(selected_food_id_indexes[0].row())
-        self.person.remove_foods(food_ids=[food_ids])
+        row = selected_food_id_indexes[0].row()
+        count = selected_food_id_indexes[-1].row() - row + 1
+
+        self.fridge_model.removeRows(row, count)
+        self.person.remove_foods_from_db(food_ids=food_ids)
 
     def update_foods(self, index):
         if index.column() != FOOD_ID_COL:

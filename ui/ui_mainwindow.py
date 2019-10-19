@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Fri Oct 18 14:45:04 2019
+# Created: Fri Oct 18 16:42:43 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -158,8 +158,9 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.fridge_view)
         self.horizontalLayout_2.addLayout(self.verticalLayout)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(13, 46, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem = QtWidgets.QSpacerItem(13, 44, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout_2.addItem(spacerItem)
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setMinimumSize(QtCore.QSize(300, 0))
@@ -180,10 +181,8 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.tab.setFont(font)
         self.tab.setObjectName("tab")
-        self.gridLayout = QtWidgets.QGridLayout(self.tab)
-        self.gridLayout.setSpacing(0)
-        self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setObjectName("gridLayout")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.tab)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.prices_view = ComboTableView(self.tab)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
@@ -240,7 +239,7 @@ class Ui_MainWindow(object):
         self.prices_view.horizontalHeader().setStretchLastSection(True)
         self.prices_view.verticalHeader().setVisible(False)
         self.prices_view.verticalHeader().setDefaultSectionSize(23)
-        self.gridLayout.addWidget(self.prices_view, 0, 2, 1, 1)
+        self.verticalLayout_5.addWidget(self.prices_view)
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("images/prices (2).png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tab, icon3, "")
@@ -250,8 +249,8 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.tab_2.setFont(font)
         self.tab_2.setObjectName("tab_2")
-        self.gridLayout_3 = QtWidgets.QGridLayout(self.tab_2)
-        self.gridLayout_3.setObjectName("gridLayout_3")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.tab_2)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.constraints_view = ComboTableView(self.tab_2)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
@@ -305,7 +304,7 @@ class Ui_MainWindow(object):
         self.constraints_view.horizontalHeader().setHighlightSections(False)
         self.constraints_view.verticalHeader().setVisible(False)
         self.constraints_view.verticalHeader().setDefaultSectionSize(23)
-        self.gridLayout_3.addWidget(self.constraints_view, 0, 0, 1, 1)
+        self.verticalLayout_4.addWidget(self.constraints_view)
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("images/balance.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tabWidget.addTab(self.tab_2, icon4, "")
@@ -586,7 +585,7 @@ class Ui_MainWindow(object):
         self.actionaa.setObjectName("actionaa")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

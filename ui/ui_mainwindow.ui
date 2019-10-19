@@ -334,6 +334,9 @@ QTableView {
     </item>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>0</number>
+      </property>
       <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
@@ -345,7 +348,7 @@ QTableView {
         <property name="sizeHint" stdset="0">
          <size>
           <width>13</width>
-          <height>46</height>
+          <height>44</height>
          </size>
         </property>
        </spacer>
@@ -374,7 +377,7 @@ QTableView {
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <property name="iconSize">
          <size>
@@ -402,23 +405,8 @@ QTableView {
          <attribute name="title">
           <string>Prices</string>
          </attribute>
-         <layout class="QGridLayout" name="gridLayout">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="2">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
            <widget class="ComboTableView" name="prices_view">
             <property name="palette">
              <palette>
@@ -584,8 +572,8 @@ QTableView {
          <attribute name="title">
           <string>Constraints</string>
          </attribute>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
            <widget class="ComboTableView" name="constraints_view">
             <property name="palette">
              <palette>

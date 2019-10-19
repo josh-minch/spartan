@@ -88,11 +88,11 @@ class Person(object):
         con.commit()
         con.close()
 
-    def remove_foods(self, food_ids):
+    def remove_foods_from_db(self, food_ids):
         con = sql.connect("spartan.db")
         cur = con.cursor()
 
-        foods_tuple = [(food_ids,) for food_ids in food_ids]
+        foods_tuple = [(food_id,) for food_id in food_ids]
         sql_stmt = (
             'DELETE FROM foods '
             'WHERE food_id = ?'
@@ -111,7 +111,8 @@ class Person(object):
 
         food_tuple = str(tuple(food_vars))
         food_values = [getattr(food, var) for var in food_vars]
-        # tuple comes from our dict of attr strings, so no need to sanitize
+
+        # Tuple comes from our dict of attr strings, so no need to sanitize
         sql_stmt = (
             "UPDATE foods "
             "SET "+ food_tuple +" = "
@@ -207,8 +208,7 @@ class Optimizier:
     def __init__(self, person):
         self.lp_prob = LpProblem("Diet", sense=LpMinimize)
         self.person = person
-        self.foods = copy.deepcopy(self.person.foods)
-        self.foods.sort(key=lambda f: f.food_id)
+        self.foods = sorted(self.person.foods, key=lambda f: f.food_id)
 
     def optimize_diet(self):
         self.make_nutrition_matrix()
