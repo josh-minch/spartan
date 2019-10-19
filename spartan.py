@@ -220,23 +220,54 @@ class Optimizier:
         self.lp_prob.solve()
 
     def make_nutrition_matrix(self):
+
         nut_ids = [nut.nut_id for nut in self.person.nuts]
         food_ids = [food.food_id for food in self.foods]
 
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
 
+        # Due to sqlite3 limitations, we must batch large queries
+        food_batch_size = SQL_VARIABLE_LIMIT - len(nut_ids)
+        q, final_batch_size = divmod(len(food_ids), food_batch_size)
+        n_batches = q + bool(final_batch_size)
+
+        nut_data = []
         # Get nutritional values for each of the nutrients for each user's food.
-        # The len(food_ids)-1 are to programmatically generate a SQL statement with
-        # a variable length number of parameters, since food_ids and nut_ids vary depending on user settings
+        # We must programmatically generate a SQL statement with a variable length number of parameters
+        # since food_ids and nut_ids vary depending on user settings
+        if n_batches > 1:
+            for batch in range(n_batches-1):
+                sql_stmnt = (
+                    'SELECT amount '
+                    'FROM nut_data '
+                    'WHERE food_id IN (?'+(food_batch_size - 1)*',?'+') '
+                    'AND nut_id IN (?'+(len(nut_ids) - 1)*',?'+')'
+                    'ORDER BY food_id, nut_id'
+                )
 
-        sql_stmnt = '''select amount from nut_data where food_id in \
-        (''' + (len(food_ids) - 1) * '?, ' + '?) and nut_id in \
-        (''' + (len(nut_ids) - 1) * '?, ' + '?) order by food_id, nut_id'''
+                batch_start = batch * food_batch_size
+                batch_end = batch * food_batch_size + food_batch_size
 
-        cur.execute(sql_stmnt, food_ids + nut_ids)
+                cur.execute(sql_stmnt, food_ids[batch_start:batch_end] + nut_ids)
+                nut_data = nut_data + cur.fetchall()
 
-        nut_data = cur.fetchall()
+        sql_stmnt = (
+            'SELECT amount '
+            'FROM nut_data '
+            'WHERE food_id IN (?'+(final_batch_size - 1)*',?'+') '
+            'AND nut_id IN (?'+(len(nut_ids) - 1)*',?'+')'
+            'ORDER BY food_id, nut_id'
+        )
+
+        if n_batches > 1:
+            batch_start = batch_end
+        else:
+            batch_start = 0
+        cur.execute(sql_stmnt, food_ids[batch_start:] + nut_ids)
+
+        nut_data = nut_data + cur.fetchall()
+
         self.nutrition_matrix = self.format_nutrition_matrix(nut_data)
 
     def format_nutrition_matrix(self, unformatted_data):
@@ -475,16 +506,37 @@ def check_if_sparse_nutrient(nut_amounts):
 
     return nut_has_data
 
-def add_random_foods():
+def get_random_foods_ids(n_foods):
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
-    cur.execute("SELECT food_id FROM food_des")
+    cur.execute("SELECT id FROM food_des")
     food_list = cur.fetchall()
-    food_list = random.sample(food_list, 300)
+    food_list = random.sample(food_list, n_foods)
 
     food_ids = [f[0] for f in food_list]
 
-    return food_ids.sort()
+    return food_ids
+
+def get_food_ids(n_foods):
+    con = sql.connect('sr_legacy/sr_legacy.db')
+    cur = con.cursor()
+    cur.execute("SELECT id FROM food_des")
+    food_list = cur.fetchall()
+    food_list = food_list[:n_foods]
+
+    food_ids = [f[0] for f in food_list]
+
+    return food_ids
+
+def get_all_food_ids():
+    con = sql.connect('sr_legacy/sr_legacy.db')
+    cur = con.cursor()
+    cur.execute("SELECT id FROM food_des")
+    food_list = cur.fetchall()
+
+    food_ids = [f[0] for f in food_list]
+
+    return food_ids
 
 def main():
     pass
