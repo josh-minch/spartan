@@ -229,8 +229,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if len(self.person.foods) == 0:
             return
 
-        self.optimum_diet_window = OptimumDietWindow(
-             parent=self, person=self.person)
+        self.optimum_diet_window = OptimumDietWindow(self.person, self.type_res, self.fd_res, self)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def change_fridge_selection(self, selected, deselected):

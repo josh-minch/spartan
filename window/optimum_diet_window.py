@@ -16,12 +16,12 @@ from ui.ui_optimumdietwindow import Ui_OptimumDietWindow
 
 
 class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
-    def __init__(self, parent=None, person=None):
+    def __init__(self, person, type_res, fd_res, parent=None):
         super().__init__(parent=None)
         self.setupUi(self)
 
         self.person = person
-        self.optimizier = spartan.Optimizier(self.person)
+        self.optimizier = spartan.Optimizier(self.person, type_res, fd_res)
         self.optimizier.optimize_diet()
         self.optimizier.describe_solution()
         self.populate_title()
