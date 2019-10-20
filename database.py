@@ -3,15 +3,15 @@ Functions related to querying food database sr_legacy.db
 '''
 import sqlite3 as sql
 
-from gui_constants import Res
+from constants import SEARCH_RESTRICT
 
 def search_food(food_name, person, type_res, fd_res):
-    if Res.SEARCH_RESTRICT in type_res.res:
-        fd_grps = list(fd_res.res)
-        fd_grps_tuple = '(?'+(len(fd_grps)-1)*',?'+')'
-    else:
-        fd_grps = []
+    if SEARCH_RESTRICT not in type_res.res:
         fd_grps_tuple = '()'
+
+    fd_grps = list(fd_res.res)
+    fd_grps_tuple = str(tuple(q_mark for q_mark in len(fd_grps)*'?'))
+    fd_grps_tuple = fd_grps_tuple.replace("'", "")
 
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
