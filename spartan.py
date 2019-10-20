@@ -25,9 +25,6 @@ class Person(object):
         self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
         self.age = req.calculate_age(self.bd_year, self.bd_mon, self.bd_day)
 
-        # Restricted food groups and whether they are restricted in search results or generated diets
-        self.restrict_fds, self.restrict_types = [], []
-
         # Personal nutrient requirements and foods in a person's fridge
         self.nuts = []
         self.foods = []
@@ -205,12 +202,18 @@ class Nutrient:
         return unit
 
 class Optimizier:
-    def __init__(self, person):
+    def __init__(self, person, type_res, fd_res):
         self.lp_prob = LpProblem("Diet", sense=LpMinimize)
         self.person = person
+        self.type_res = type_res
+        self.fd_res = fd_res
         self.foods = sorted(self.person.foods, key=lambda f: f.food_id)
 
     def optimize_diet(self):
+        if GEN_RESTRICT in self.type_res.res:
+            start = timer()
+            self.foods = self.filter_foods(self.foods, self.fd_res.res)
+            print(timer()-start)
         self.make_nutrition_matrix()
         self.construct_lp_problem()
         self.add_nutrient_constraints()
@@ -219,20 +222,42 @@ class Optimizier:
         self.lp_prob.writeLP("DietModel.lp")
         self.lp_prob.solve()
 
-    def make_nutrition_matrix(self):
+    def filter_foods(self, foods, fd_res):
+        food_ids = [food.food_id for food in foods]
 
-        nut_ids = [nut.nut_id for nut in self.person.nuts]
-        food_ids = [food.food_id for food in self.foods]
+        food_id_batches, fd_grps = [], []
+        for i in range(0, len(food_ids), SQL_VARIABLE_LIMIT):
+            food_id_batches.append(food_ids[i:i + SQL_VARIABLE_LIMIT])
 
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
+
+        for batch in food_id_batches:
+            sql_stmnt = (
+                'SELECT food_group_id '
+                'FROM food_des '
+                'WHERE id IN (?'+(len(batch) - 1)*',?'+') '
+                'ORDER BY id '
+            )
+            cur.execute(sql_stmnt, batch)
+            fd_grps = fd_grps + cur.fetchall()
+
+        filtered_foods = [food for fd_grp, food in zip(fd_grps, foods) if fd_grp[0] not in fd_res]
+        return filtered_foods
+
+    def make_nutrition_matrix(self):
+        nut_ids = [nut.nut_id for nut in self.person.nuts]
+        food_ids = [food.food_id for food in self.foods]
 
         # Due to sqlite3 limitations, we must batch large queries
         food_batch_size = SQL_VARIABLE_LIMIT - len(nut_ids)
         q, final_batch_size = divmod(len(food_ids), food_batch_size)
         n_batches = q + bool(final_batch_size)
 
+        con = sql.connect('sr_legacy/sr_legacy.db')
+        cur = con.cursor()
         nut_data = []
+
         # Get nutritional values for each of the nutrients for each user's food.
         # We must programmatically generate a SQL statement with a variable length number of parameters
         # since food_ids and nut_ids vary depending on user settings

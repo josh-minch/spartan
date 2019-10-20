@@ -118,7 +118,4 @@ JP_INDEX = 2
 index_to_rec = {US_INDEX: 'us', EU_INDEX: 'eu', JP_INDEX: 'jp'}
 rec_to_index = {'us': US_INDEX, 'eu': EU_INDEX, 'jp': JP_INDEX}
 
-# Restrictions widget
-class Res:
-    SEARCH_RESTRICT = 1
-    GEN_RESTRICT = 2
+
