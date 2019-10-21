@@ -46,6 +46,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setup_connections()
         self.setup_shortcuts()
         self.setup_selection_modes()
+        self.update_fridge_line_edit_placeholder()
 
         self.add_foods_btn.setFocus()
         #self.resize(QDesktopWidget().availableGeometry(self).size() * 0.90)
@@ -56,8 +57,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_model.dataChanged.connect(self.update_foods)
         self.fridge_model.dataChanged.connect(self.display_nutrition)
         self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
+
+        # Update filtered view
         self.fridge_line_edit.textChanged.connect(
             self.fridge_line_edit_changed)
+
+        # Update fridge search placeholder
+        self.fridge_model.rowsInserted.connect(
+            self.update_fridge_line_edit_placeholder)
+        self.fridge_model.rowsRemoved.connect(
+            self.update_fridge_line_edit_placeholder)
 
         # Synchronize fridge selection to prices and constraints
         self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
@@ -109,6 +118,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
         debug_shortcut.activated.connect(self.print_debug_info)
 
+    def update_fridge_line_edit_placeholder(self):
+        number = len(self.person.foods)
+        plural = '' if number == 1 else 's'
+        text = '🔍 Search my fridge ({number} item{plural})'.format(
+            number=number, plural=plural)
+        self.fridge_line_edit.setPlaceholderText(text)
+
     def fridge_line_edit_changed(self):
         reg_exp = QRegExp(self.fridge_line_edit.text(), Qt.CaseInsensitive)
         self.fridge_filter_model.setFilterRegExp(reg_exp)
@@ -149,23 +165,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         f_header.setVisible(True)
         p_header.setVisible(True)
         c_header.setVisible(True)
+        n_header.setVisible(True)
 
         # Set column width
         self.fridge_view.setColumnWidth(NAME_COL, 1)
         self.prices_view.setColumnWidth(PRICE_COL, VALUE_COL_WIDTH)
         self.prices_view.setColumnWidth(PER_COL, PER_COL_WIDTH)
         self.prices_view.setColumnWidth(PRICE_QUANTITY_COL, VALUE_COL_WIDTH)
-        self.prices_view.setColumnWidth(PRICE_UNIT_COL, UNIT_COL_WIDTH)
 
         self.constraints_view.setColumnWidth(MIN_COL, VALUE_COL_WIDTH)
-        self.constraints_view.setColumnWidth(MIN_UNIT_COL, UNIT_COL_WIDTH)
         self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
-        self.constraints_view.setColumnWidth(MAX_UNIT_COL, UNIT_COL_WIDTH)
         self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
-        self.constraints_view.setColumnWidth(TARGET_UNIT_COL, UNIT_COL_WIDTH)
 
-        f_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
-        c_header.setSectionResizeMode(NAME_COL, QHeaderView.Stretch)
+        n_header.setSectionResizeMode(QHeaderView.ResizeToContents)
 
         set_v_header_height(self.fridge_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(f_header, QFont.DemiBold)

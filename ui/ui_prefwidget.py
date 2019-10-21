@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwidget.ui',
 # licensing of 'ui/ui_prefwidget.ui' applies.
 #
-# Created: Sat Oct 19 09:12:24 2019
+# Created: Sun Oct 20 17:03:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -174,7 +174,7 @@ class Ui_PrefWidget(object):
 
     def retranslateUi(self, PrefWidget):
         PrefWidget.setWindowTitle(QtWidgets.QApplication.translate("PrefWidget", "Spartan - Preferences", None, -1))
-        self.label.setText(QtWidgets.QApplication.translate("PrefWidget", "Preferences", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("PrefWidget", "Settings", None, -1))
         self.req_btn.setText(QtWidgets.QApplication.translate("PrefWidget", " Nutritional requirements", None, -1))
         self.res_btn.setText(QtWidgets.QApplication.translate("PrefWidget", " Dietary restrictions", None, -1))
 
