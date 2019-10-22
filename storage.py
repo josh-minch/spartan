@@ -52,7 +52,7 @@ def read_csv(filename):
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
             return {int(data) for data in row}
-        return {}
+        return set()
 
 if __name__ == "__main__":
     fd_grps = []
