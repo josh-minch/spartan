@@ -13,6 +13,20 @@ def hide_view_cols(view, cols_to_hide):
     for col in cols_to_hide:
         view.setColumnHidden(col, True)
 
+def vertical_resize_table_view_to_contents(table_view):
+    height = 0
+
+    for i in range(table_view.verticalHeader().count()):
+        height += table_view.verticalHeader().sectionSize(i)
+
+    if table_view.horizontalScrollBar().isHidden() == False:
+        height += table_view.horizontalScrollBar().height()
+
+    if table_view.horizontalHeader().isHidden() == False:
+        height += table_view.horizontalHeader().height()
+
+    table_view.setMinimumHeight(height)
+
 def set_column_widths(view, cols, col_widths):
     for col, width in zip(cols, col_widths):
         view.setColumnWidth(col, width)
