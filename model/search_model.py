@@ -25,4 +25,8 @@ class SearchModel(QAbstractTableModel):
             else:
                 return value
 
+        if role == Qt.ToolTipRole:
+            if index.column() == Search.attr_to_col['name']:
+                return self.search_result[index.row()][index.column()]
+
         return None

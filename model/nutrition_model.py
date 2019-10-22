@@ -41,9 +41,10 @@ from PySide2.QtCore import (Qt, QAbstractTableModel, QModelIndex)
 from gui_constants import *
 
 class NutritionTableModel(QAbstractTableModel):
-    def __init__(self, parent=None, nutrients=None):
+    def __init__(self, parent=None, nutrients=None, nutrient_group=None):
         super().__init__(parent)
         self.nutrients = nutrients
+        self.nutrient_group = nutrient_group
 
     def rowCount(self, index=QModelIndex()):
         return len(self.nutrients)
@@ -61,16 +62,13 @@ class NutritionTableModel(QAbstractTableModel):
             unit = self.nutrients[index.row()]["unit"]
             percent = self.nutrients[index.row()]["percent"]
 
-            if index.column() == NUT_UNIT_COL and amount is None:
-                return None
-
             if index.column() == NUT_NAME_COL:
                 return name
             elif index.column() == NUT_AMOUNT_COL:
                 if amount is None:
-                    return "No data"
+                    return "-"
                 else:
-                    return str(round(amount,1))
+                    return str(round(amount,2))
             elif index.column() == NUT_UNIT_COL:
                 return unit
             elif index.column() == NUT_PERCENT_COL:
@@ -89,7 +87,7 @@ class NutritionTableModel(QAbstractTableModel):
         if orientation == Qt.Horizontal:
             if role == Qt.DisplayRole:
                 if section == NUT_NAME_COL:
-                    return "Nutrient"
+                    return self.nutrient_group
                 elif section == NUT_AMOUNT_COL:
                     return "Amount"
                 elif section == NUT_UNIT_COL:

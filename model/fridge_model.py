@@ -42,10 +42,9 @@ from spartan import Food
 from gui_constants import *
 
 class FridgeModel(QAbstractTableModel):
-    def __init__(self, parent=None, foods=None, currency=None):
+    def __init__(self, parent=None, foods=None):
         QAbstractTableModel.__init__(self, parent)
         self.foods = foods
-        self.currency = currency
 
     def rowCount(self, index=QModelIndex()):
         return len(self.foods)
@@ -78,11 +77,11 @@ class FridgeModel(QAbstractTableModel):
                 return 'per'
             attr_str = f_col_to_attr[index.column()]
             attr = getattr(self.foods[index.row()], attr_str)
-            '''
-            if index.column() == PRICE_COL and attr is not None:
-                attr = self.currency + '{:.2f}'.format(attr)
-            '''
             return attr
+
+        if role == Qt.ToolTipRole:
+            if index.column() == NAME_COL:
+                return self.foods[index.row()].name
 
         if role == Qt.TextAlignmentRole:
             if index.column() in (PRICE_QUANTITY_COL, PRICE_COL, MIN_COL, MAX_COL, TARGET_COL):
@@ -144,8 +143,6 @@ class FridgeModel(QAbstractTableModel):
         if index.isValid() and 0 <= index.row() < len(self.foods):
             food = self.foods[index.row()]
             attr_str = f_col_to_attr[index.column()]
-            if index.column() == PRICE_COL:
-                value.strip(self.currency)
             if attr_str in ('price', 'min', 'max', 'target', 'nut_quantity'):
                 if value == '':
                     value = None

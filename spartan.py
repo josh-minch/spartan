@@ -437,6 +437,18 @@ def convert_quantity(food_id, quantity, old_unit, new_unit):
         return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
     '''
 
+def get_empty_nutrition(person):
+    nut_ids = [nut.nut_id for nut in person.nuts]
+    units = get_nutrition_unit(nut_ids)
+
+    nutrition = []
+    nut_names = [nut.name for nut in person.nuts]
+    for nut_name, unit in zip(nut_names, units):
+        dv = calculate_dv(person, nut_name, None)
+        nutrition.append({'name': nut_name, 'amount': None, 'unit': unit[0], 'percent': dv})
+
+    return sort_nutrition(nutrition)
+
 def get_nutrition(person, food_ids, food_amounts):
     # Sort input lists according to food ids in ascending order
     food_tups = sorted(zip(food_ids, food_amounts))
@@ -485,7 +497,6 @@ def get_nutrition(person, food_ids, food_amounts):
     return sort_nutrition(nutrition)
 
 def sort_nutrition(nutrition):
-
     nutrition = sorted(nutrition, key=lambda n: req.nut_names.index(n['name']))
 
     macros, vits, minerals = [], [], []
@@ -506,8 +517,9 @@ def calculate_dv(person, nut_name, nutrient_amount):
 
         [min_value] = [nut.min for nut in person.nuts if nut.name == nut_name]
 
+        # -1 no recommendation flag
         if min_value is None:
-            return None
+            return -1
 
         return round(100 * (nutrient_amount / min_value), 1)
 

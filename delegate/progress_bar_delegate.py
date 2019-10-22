@@ -41,6 +41,13 @@ class ProgressBarDelegate (QStyledItemDelegate):
                 p.setColor(QPalette.HighlightedText, Qt.darkGray)
                 progress_bar_option.palette = p
 
+            elif progress == -1:
+                progress_bar_option.progress = 100
+                progress_bar_option.text = "-"
+                p.setColor(QPalette.Highlight, QColor(Qt.white))
+                p.setColor(QPalette.HighlightedText, Qt.darkGray)
+                progress_bar_option.palette = p
+
             elif round(progress) == 0:
                 progress_bar_option.progress = 100
                 progress_bar_option.text = "0%"

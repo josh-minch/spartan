@@ -40,11 +40,8 @@ from PySide2.QtGui import QBrush
 
 from spartan import Nutrient
 from gui_helpers import enumerate_cols
+from gui_constants import Req
 
-
-attr = ['nut_id', 'name', 'min', 'min_unit',
-                 'max', 'max_unit', 'target', 'target_unit']
-col_to_attr, attr_to_col = enumerate_cols(attr)
 
 class RequirementsModel(QAbstractTableModel):
     def __init__(self, parent=None, nutrients=None, nutrient_group=None):
@@ -56,13 +53,13 @@ class RequirementsModel(QAbstractTableModel):
         return len(self.nutrients)
 
     def columnCount(self, index=QModelIndex()):
-        return len(attr)
+        return len(Req.attrs)
 
     def data(self, index, role):
         if not index.isValid() or not 0 <= index.row() < len(self.nutrients):
             return None
 
-        attr_str = col_to_attr[index.column()]
+        attr_str = Req.col_to_attr[index.column()]
         attr_value = getattr(self.nutrients[index.row()], attr_str)
 
         if role in (Qt.DisplayRole, Qt.EditRole):
@@ -78,7 +75,7 @@ class RequirementsModel(QAbstractTableModel):
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20
         if role == Qt.TextAlignmentRole:
-            if index.column() in (attr_to_col['min'], attr_to_col['max'], attr_to_col['target']):
+            if index.column() in (Req.attr_to_col['min'], Req.attr_to_col['max'], Req.attr_to_col['target']):
                 return int(Qt.AlignRight | Qt.AlignVCenter)
 
         return None
@@ -86,18 +83,18 @@ class RequirementsModel(QAbstractTableModel):
     def headerData(self, section, orientation=Qt.Horizontal, role=Qt.DisplayRole):
         if orientation == Qt.Horizontal:
             if role == Qt.DisplayRole:
-                if section == attr_to_col['name']:
+                if section == Req.attr_to_col['name']:
                     return self.nutrient_group
-                elif section == attr_to_col['min']:
-                    return "Recommended"
-                elif section == attr_to_col['max']:
-                    return "Upper limit"
-                elif section == attr_to_col['target']:
+                elif section == Req.attr_to_col['min']:
+                    return "Minimum"
+                elif section == Req.attr_to_col['max']:
+                    return "Maximum"
+                elif section == Req.attr_to_col['target']:
                     return "Target"
             if role == Qt.TextAlignmentRole:
-                if section == attr_to_col['name']:
+                if section == Req.attr_to_col['name']:
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
-                if section in (attr_to_col['min'], attr_to_col['max'], attr_to_col['target']):
+                if section in (Req.attr_to_col['min'], Req.attr_to_col['max'], Req.attr_to_col['target']):
                     return int(Qt.AlignRight | Qt.AlignVCenter)
         return None
 
@@ -120,7 +117,7 @@ class RequirementsModel(QAbstractTableModel):
 
         if index.isValid() and 0 <= index.row() < len(self.nutrients):
             nutrient = self.nutrients[index.row()]
-            setattr(nutrient, col_to_attr[index.column()], value)
+            setattr(nutrient, Req.col_to_attr[index.column()], value)
             self.dataChanged.emit(index, index)
             return True
         return False
@@ -128,7 +125,7 @@ class RequirementsModel(QAbstractTableModel):
     def flags(self, index):
         if not index.isValid():
             return Qt.NoItemFlags
-        if index.column() in (attr_to_col['min'], attr_to_col['max'], attr_to_col['target']):
+        if index.column() in (Req.attr_to_col['min'], Req.attr_to_col['max'], Req.attr_to_col['target']):
             return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
                                 Qt.ItemIsEditable)
         else:
