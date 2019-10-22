@@ -17,7 +17,7 @@ from gui_helpers import *
 from window.search_window import SearchWindow
 from window.pref_window import PrefWindow
 from window.optimum_diet_window import OptimumDietWindow
-from model.nutrition_model import MacroModel, VitModel, MineralModel
+from model.nutrition_model import NutritionTableModel
 from model.fridge_model import FridgeModel
 from model.fridge_selected_model import FridgeSelectedModel
 from view.combo_table_view import ComboTableView
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         #self.person.add_nut(Nutrient('Energy', min=2000))
 
         self.setup_fridge_views()
-        # self.setup_selected_foods()
+        self.display_empty_nutrition()
         self.setup_connections()
         self.setup_shortcuts()
         self.setup_selection_modes()
@@ -130,7 +130,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fridge_filter_model.setFilterRegExp(reg_exp)
 
     def setup_fridge_views(self):
-        self.fridge_model = FridgeModel(foods=self.person.foods, currency='$')
+        self.fridge_model = FridgeModel(foods=self.person.foods)
         self.fridge_filter_model = QSortFilterProxyModel(self)
         self.fridge_filter_model.setSourceModel(self.fridge_model)
 
@@ -168,17 +168,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         n_header.setVisible(True)
 
         # Set column width
-        self.fridge_view.setColumnWidth(NAME_COL, 1)
         self.prices_view.setColumnWidth(PRICE_COL, VALUE_COL_WIDTH)
         self.prices_view.setColumnWidth(PER_COL, PER_COL_WIDTH)
         self.prices_view.setColumnWidth(PRICE_QUANTITY_COL, VALUE_COL_WIDTH)
+
+        self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         self.constraints_view.setColumnWidth(MIN_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
 
-        n_header.setSectionResizeMode(QHeaderView.ResizeToContents)
-
+        '''
         set_v_header_height(self.fridge_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(f_header, QFont.DemiBold)
         set_v_header_height(self.prices_view, FRIDGE_V_HEADER_SIZE)
@@ -187,12 +187,30 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(c_header, QFont.DemiBold)
         set_v_header_height(self.nut_quant_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(n_header, QFont.DemiBold)
-
+        '''
         # Hide fridge scrollbar
         self.fridge_view.verticalScrollBar().setStyleSheet(
             "QScrollBar {width:0px;}")
 
-    def setup_nutrition(self):
+    def display_empty_nutrition(self):
+        macros, vits, minerals = get_empty_nutrition(self.person)
+
+        macros_model = NutritionTableModel(nutrients=macros, nutrient_group='General')
+        vits_model = NutritionTableModel(nutrients=vits, nutrient_group='Vitamins')
+        minerals_model = NutritionTableModel(
+            nutrients=minerals, nutrient_group='Minerals')
+
+        self.macros_view.setModel(macros_model)
+        self.vits_view.setModel(vits_model)
+        self.minerals_view.setModel(minerals_model)
+
+        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
+        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
+        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
+
+        self.set_nutrition_size()
+
+    def set_nutrition_size(self):
         set_column_widths(self.macros_view,
                           nut_col_to_attr.keys(), nut_col_widths)
         set_column_widths(
@@ -203,6 +221,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_view_header_weights(self.macros_view, QFont.DemiBold)
         set_view_header_weights(self.vits_view, QFont.DemiBold)
         set_view_header_weights(self.minerals_view, QFont.DemiBold)
+
+        vertical_resize_table_view_to_contents(self.macros_view)
+        vertical_resize_table_view_to_contents(self.vits_view)
+        vertical_resize_table_view_to_contents(self.minerals_view)
         '''
         # Set vertical header height to determine table's row height
         v_header = self.nutrition_view.verticalHeader()
@@ -275,6 +297,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def display_nutrition(self):
         selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
+        if len(selected_food_id_ixs) == 0:
+            self.display_empty_nutrition()
+
         selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
         selected_food_amounts = [ix.siblingAtColumn(
             NUT_QUANT_COL).data() for ix in selected_food_id_ixs]
@@ -290,9 +315,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         macros, vits, minerals = get_nutrition(
             self.person, selected_food_ids, selected_food_amounts)
 
-        macros_model = MacroModel(nutrients=macros)
-        vits_model = VitModel(nutrients=vits)
-        minerals_model = MineralModel(nutrients=minerals)
+        macros_model = NutritionTableModel(nutrients=macros, nutrient_group='General')
+        vits_model = NutritionTableModel(
+            nutrients=vits, nutrient_group='Vitamins')
+        minerals_model = NutritionTableModel(
+            nutrients=minerals, nutrient_group='Minerals')
 
         self.macros_view.setModel(macros_model)
         self.vits_view.setModel(vits_model)
@@ -302,7 +329,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.vits_view.setItemDelegate(ProgressBarDelegate(self))
         self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
 
-        self.setup_nutrition()
+        self.set_nutrition_size()
 
     def toggle_remove_btn(self):
         if self.fridge_view.selectionModel() is None:
@@ -321,14 +348,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print(self.person.vit)
         print(self.person.mineral)
         print(self.person.nuts)
-
-    '''
-    def closeEvent(self, event):
-        for food in self.person.foods:
-            self.person.update_food_in_user_db(food)
-        event.accept()
-    '''
-
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar
