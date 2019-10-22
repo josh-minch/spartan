@@ -118,4 +118,8 @@ JP_INDEX = 2
 index_to_rec = {US_INDEX: 'us', EU_INDEX: 'eu', JP_INDEX: 'jp'}
 rec_to_index = {'us': US_INDEX, 'eu': EU_INDEX, 'jp': JP_INDEX}
 
-
+# Requirements model
+class Req:
+    attrs = ['nut_id', 'name', 'min', 'min_unit',
+            'max', 'max_unit', 'target', 'target_unit']
+    col_to_attr, attr_to_col = enumerate_cols(attrs)
