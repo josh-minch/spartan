@@ -9,6 +9,7 @@ from PySide2.QtWidgets import (QApplication, QWidget, QStyleFactory, QDialog, QS
 from spartan import *
 import req
 from gui_constants import *
+import gui_helpers
 from model.requirements_model import RequirementsModel
 from delegate.lineedit_delegate import LineEditDelegate
 from ui.ui_reqwidget import Ui_ReqWidget
@@ -56,7 +57,7 @@ class ReqWidget(QWidget, Ui_ReqWidget):
 
         self.person.set_nuts()
 
-        self.macro_model = RequirementsModel(nutrients=self.person.macro, nutrient_group='Macronutrients')
+        self.macro_model = RequirementsModel(nutrients=self.person.macro, nutrient_group='General')
         self.vit_model = RequirementsModel(nutrients=self.person.vit, nutrient_group='Vitamins')
         self.mineral_model = RequirementsModel(nutrients=self.person.mineral, nutrient_group='Minerals')
 
@@ -68,15 +69,26 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.vit_view.setModel(self.vit_model)
         self.mineral_view.setModel(self.mineral_model)
 
+        '''
         self.macro_view.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeToContents)
         self.vit_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.mineral_view.horizontalHeader().setSectionResizeMode(
             QHeaderView.ResizeToContents)
+        '''
 
-    def cust_edit_changed(self):
-        if self.cust_edit.isChecked():
-            pass
+        gui_helpers.hide_view_cols(self.macro_view, [Req.attr_to_col['nut_id']])
+        gui_helpers.hide_view_cols(self.vit_view, [Req.attr_to_col['nut_id']])
+        gui_helpers.hide_view_cols(
+            self.mineral_view, [Req.attr_to_col['nut_id']])
+
+        self.macro_view.setColumnWidth(Req.attr_to_col['name'], 100)
+        self.vit_view.setColumnWidth(Req.attr_to_col['name'], 100)
+        self.mineral_view.setColumnWidth(Req.attr_to_col['name'], 100)
+
+        gui_helpers.vertical_resize_table_view_to_contents(self.macro_view)
+        gui_helpers.vertical_resize_table_view_to_contents(self.vit_view)
+        gui_helpers.vertical_resize_table_view_to_contents(self.mineral_view)
 
     def day_edit_changed(self, day):
         self.person.bd_day = int(day)
@@ -92,7 +104,6 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.mon_edit.textChanged.connect(self.mon_edit_changed)
         self.year_edit.textChanged.connect(self.year_edit_changed)
         self.sex_edit.currentIndexChanged[int].connect(self.sex_edit_changed)
-        self.cust_edit.stateChanged.connect(self.cust_edit_changed)
 
         self.day_edit.textChanged.connect(self.display_req)
         self.mon_edit.textChanged.connect(self.display_req)
