@@ -43,7 +43,7 @@ class ProgressBarDelegate (QStyledItemDelegate):
 
             elif progress == -1:
                 progress_bar_option.progress = 100
-                progress_bar_option.text = "-"
+                progress_bar_option.text = "No minimum"
                 p.setColor(QPalette.Highlight, QColor(Qt.white))
                 p.setColor(QPalette.HighlightedText, Qt.darkGray)
                 progress_bar_option.palette = p
@@ -55,13 +55,15 @@ class ProgressBarDelegate (QStyledItemDelegate):
                 p.setColor(QPalette.HighlightedText, QColor(Qt.black))
                 progress_bar_option.palette = p
 
-            elif 0 < progress <= 100:
+            elif 0 < round(progress) < 100:
+                rounded_string = '{number:.{digits}f}%'.format(number=progress, digits=0)
                 progress_bar_option.progress = round(progress)
-                progress_bar_option.text = str(round(progress)) + "%"
+                progress_bar_option.text = rounded_string
 
-            elif 100 < progress:
+            elif 100 <= round(progress):
+                rounded_string = '{number:.{digits}f}%'.format(number=progress, digits=0)
                 progress_bar_option.progress = 100
-                progress_bar_option.text = str(round(progress)) + "%"
+                progress_bar_option.text = rounded_string
 
             #p.setColor(QPalette.Highlight, QColor(247, 202, 202))
             #progress_bar_option.palette = p

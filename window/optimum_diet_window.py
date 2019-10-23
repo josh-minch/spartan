@@ -8,9 +8,9 @@ import spartan
 import database
 import basic_foods
 from gui_constants import *
-from gui_helpers import *
+import gui_helpers
 from model.diet_model import DietModel
-import model.nutrition_model as nutrition_model
+from model.nutrition_model import NutritionTableModel
 from delegate.progress_bar_delegate import ProgressBarDelegate
 from ui.ui_optimumdietwindow import Ui_OptimumDietWindow
 
@@ -23,8 +23,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.person = person
         self.optimizier = spartan.Optimizier(self.person, type_res, fd_res)
         self.optimizier.optimize_diet()
-        self.optimizier.describe_solution()
-        self.populate_title()
+        self.set_description()
         self.populate_diet_table()
         self.populate_nutrition_table()
 
@@ -33,7 +32,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.setup_connections()
         self.show()
 
-    def populate_title(self):
+    def set_description(self):
         self.diet_label.setText(self.optimizier.get_solution_status())
 
     def populate_diet_table(self):
@@ -47,16 +46,19 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
         self.diet_model = DietModel(foods=foods)
         self.diet_view.setModel(self.diet_model)
-        self.diet_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+
+        gui_helpers.hide_view_cols(self.diet_view, [0])
+        gui_helpers.set_column_widths(self.diet_view, [1], [200])
 
     def populate_nutrition_table(self):
         (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
         self.ttl_macros, self.ttl_vits, self.ttl_minerals = spartan.get_nutrition(self.person, food_ids, food_amounts)
 
-        macros_model = nutrition_model.MacroModel(nutrients=self.ttl_macros)
-        vits_model = nutrition_model.VitModel(nutrients=self.ttl_vits)
-        minerals_model = nutrition_model.MineralModel(
-            nutrients=self.ttl_minerals)
+        macros_model = NutritionTableModel(nutrients=self.ttl_macros, nutrient_group='General')
+        vits_model = NutritionTableModel(
+            nutrients=self.ttl_vits, nutrient_group='Vitamins')
+        minerals_model = NutritionTableModel(
+            nutrients=self.ttl_minerals, nutrient_group='Minerals')
 
         self.macros_view.setModel(macros_model)
         self.vits_view.setModel(vits_model)
@@ -69,13 +71,30 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.setup_nutrition()
 
     def setup_nutrition(self):
-        set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
-        set_column_widths(self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
-        set_column_widths(self.minerals_view, nut_col_to_attr.keys(), nut_col_widths)
+        '''
+        gui_helpers.hide_view_cols(
+            self.macro_view, [Req.attr_to_col['nut_id']])
+        gui_helpers.hide_view_cols(self.vit_view, [Req.attr_to_col['nut_id']])
+        gui_helpers.hide_view_cols(
+            self.mineral_view, [Req.attr_to_col['nut_id']])
 
-        set_view_header_weights(self.macros_view, QFont.DemiBold)
-        set_view_header_weights(self.vits_view, QFont.DemiBold)
-        set_view_header_weights(self.minerals_view, QFont.DemiBold)
+
+        self.macro_view.setColumnWidth(0, 150)
+        self.vit_view.setColumnWidth(0, 150)
+        self.mineral_view.setColumnWidth(0, 150)
+        '''
+        gui_helpers.set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
+        gui_helpers.set_column_widths(self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
+        gui_helpers.set_column_widths(
+            self.minerals_view, nut_col_to_attr.keys(), nut_col_widths)
+
+        gui_helpers.set_view_header_weights(self.macros_view, QFont.DemiBold)
+        gui_helpers.set_view_header_weights(self.vits_view, QFont.DemiBold)
+        gui_helpers.set_view_header_weights(self.minerals_view, QFont.DemiBold)
+
+        gui_helpers.vertical_resize_table_view_to_contents(self.macros_view)
+        gui_helpers.vertical_resize_table_view_to_contents(self.vits_view)
+        gui_helpers.vertical_resize_table_view_to_contents(self.minerals_view)
 
     def display_selected_nutrition(self, selected, deselected):
         total_food_ix = self.diet_model.index(
@@ -99,13 +118,14 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
                 food_ids.append(food_id_ix.data(Qt.DisplayRole))
                 amounts.append(amount_ix.data(Qt.DisplayRole))
 
-            print(food_ids)
-            print(amounts)
             macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, amounts)
 
-        macros_model = nutrition_model.MacroModel(nutrients=macros)
-        vits_model = nutrition_model.VitModel(nutrients=vits)
-        minerals_model = nutrition_model.MineralModel(nutrients=minerals)
+        macros_model = NutritionTableModel(
+            nutrients=self.macros, nutrient_group='General')
+        vits_model = NutritionTableModel(
+            nutrients=self.vits, nutrient_group='Vitamins')
+        minerals_model = NutritionTableModel(
+            utrients=self.minerals, nutrient_group='Minerals')
 
         self.macros_view.setModel(macros_model)
         self.vits_view.setModel(vits_model)

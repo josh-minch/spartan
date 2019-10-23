@@ -56,22 +56,6 @@ class FridgeModel(QAbstractTableModel):
         if not index.isValid() or not 0 <= index.row() < len(self.foods):
             return None
 
-        '''
-        # Hide units unless corresponding attribute has a value
-        if index.column() == PRICE_QUANTITY_COL and self.foods[index.row()].price is None:
-            return
-        if index.column() == PER_COL and self.foods[index.row()].price is None:
-            return
-        if index.column() == PRICE_UNIT_COL and self.foods[index.row()].price is None:
-            return
-        if index.column() == MIN_UNIT_COL and self.foods[index.row()].min is None:
-            return
-        if index.column() == MAX_UNIT_COL and self.foods[index.row()].max is None:
-            return
-        if index.column() == TARGET_UNIT_COL and self.foods[index.row()].target is None:
-            return
-        '''
-
         if role in (Qt.DisplayRole, Qt.EditRole):
             if index.column() == PER_COL:
                 return 'per'
@@ -84,7 +68,7 @@ class FridgeModel(QAbstractTableModel):
                 return self.foods[index.row()].name
 
         if role == Qt.TextAlignmentRole:
-            if index.column() in (PRICE_QUANTITY_COL, PRICE_COL, MIN_COL, MAX_COL, TARGET_COL):
+            if index.column() in (PRICE_COL, PRICE_QUANTITY_COL, MIN_COL, MAX_COL, TARGET_COL, NUT_QUANT_COL):
                 return int(Qt.AlignRight | Qt.AlignVCenter)
             if index.column() == PER_COL:
                 return Qt.AlignCenter
@@ -102,21 +86,23 @@ class FridgeModel(QAbstractTableModel):
                     return "Price"
                 elif section == PRICE_QUANTITY_COL:
                     return 'Amount'
-                elif section == PRICE_UNIT_COL:
-                    return "Unit"
                 elif section == MIN_COL:
                     return "At least"
                 elif section == MAX_COL:
                     return "At most"
                 elif section == TARGET_COL:
                     return "Equal to"
+                elif section == NUT_QUANT_COL:
+                    return "Quantity"
+                '''
                 elif section in (PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_UNIT_COL, MAX_UNIT_COL, TARGET_UNIT_COL):
                     return ""
+                '''
 
             if role == Qt.TextAlignmentRole:
                 if section in (NAME_COL, PRICE_UNIT_COL):
                     return int(Qt.AlignLeft | Qt.AlignVCenter)
-                if section in (PRICE_COL, MIN_COL, MAX_COL, TARGET_COL):
+                if section in (PRICE_COL, PRICE_QUANTITY_COL, MIN_COL, MAX_COL, TARGET_COL, NUT_QUANT_COL):
                     return int(Qt.AlignRight | Qt.AlignVCenter)
 
         return None
@@ -144,8 +130,8 @@ class FridgeModel(QAbstractTableModel):
             food = self.foods[index.row()]
             attr_str = f_col_to_attr[index.column()]
             if attr_str in ('price', 'min', 'max', 'target', 'nut_quantity'):
-                if value == '':
-                    value = None
+                if value == None:
+                    setattr(self.foods[index.row()], attr_str, None)
                 else:
                     value = float(value)
             setattr(self.foods[index.row()], attr_str, value)

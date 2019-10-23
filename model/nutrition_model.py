@@ -68,7 +68,7 @@ class NutritionTableModel(QAbstractTableModel):
                 if amount is None:
                     return "-"
                 else:
-                    return str(round(amount,2))
+                    return '{number:.{digits}f}'.format(number=amount, digits=1)
             elif index.column() == NUT_UNIT_COL:
                 return unit
             elif index.column() == NUT_PERCENT_COL:
@@ -88,12 +88,6 @@ class NutritionTableModel(QAbstractTableModel):
             if role == Qt.DisplayRole:
                 if section == NUT_NAME_COL:
                     return self.nutrient_group
-                elif section == NUT_AMOUNT_COL:
-                    return "Amount"
-                elif section == NUT_UNIT_COL:
-                    return
-                elif section == NUT_PERCENT_COL:
-                    return
 
             if role == Qt.TextAlignmentRole:
                 if section == NUT_NAME_COL:

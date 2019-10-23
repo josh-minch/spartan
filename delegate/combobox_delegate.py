@@ -19,11 +19,14 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
         return editor
 
     def commit_and_close(self, editor, text):
-        self.commitData.emit(editor)
-        self.closeEditor.emit(editor)
+        if editor.isVisible():
+            self.commitData.emit(editor)
+            self.closeEditor.emit(editor)
 
     def setEditorData(self, editor, index):
         print('setEditorData')
+        if not editor:
+            return
         current_text = index.data(QtCore.Qt.EditRole)
         current_index = editor.findText(current_text)
         if current_index >= 0:

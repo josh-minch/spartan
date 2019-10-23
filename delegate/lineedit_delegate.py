@@ -1,6 +1,6 @@
 from PySide2.QtCore import Qt, QRegExp
 from PySide2.QtGui import QIntValidator, QRegExpValidator
-from PySide2.QtWidgets import QStyledItemDelegate, QLineEdit
+from PySide2.QtWidgets import QStyledItemDelegate, QDoubleSpinBox, QLineEdit
 
 
 class LineEditDelegate(QStyledItemDelegate):
@@ -10,22 +10,23 @@ class LineEditDelegate(QStyledItemDelegate):
     def createEditor(self, parent, option, index):
         editor = QLineEdit(parent)
         editor.setAlignment(Qt.AlignRight)
-        regex = QRegExp('^[0-9]*$')
+        # Editor only accepts integers, period, or nothing
+        regex = QRegExp('[0-9]*(\.[0-9]+)?')
         editor.setValidator(QRegExpValidator(regex, self))
         return editor
 
     def setEditorData(self, editor, index):
         value = index.model().data(index, Qt.EditRole)
-        if (value == '-'):
+        if value in ('', '-', None):
             value = ''
         editor.setText(str(value))
 
     def setModelData(self, editor, model, index):
         value = editor.text()
-        if value in ('', '-', 'None'):
-             model.setData(index, None, Qt.EditRole)
+        if value in ('', '-', None):
+            model.setData(index, None, Qt.EditRole)
         else:
-            model.setData(index, int(value), Qt.EditRole)
+            model.setData(index, float(value), Qt.EditRole)
 
     def updateEditorGeometry(self, editor, option, index):
         editor.setGeometry(option.rect)

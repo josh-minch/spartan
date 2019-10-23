@@ -69,22 +69,14 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.vit_view.setModel(self.vit_model)
         self.mineral_view.setModel(self.mineral_model)
 
-        '''
-        self.macro_view.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeToContents)
-        self.vit_view.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
-        self.mineral_view.horizontalHeader().setSectionResizeMode(
-            QHeaderView.ResizeToContents)
-        '''
-
         gui_helpers.hide_view_cols(self.macro_view, [Req.attr_to_col['nut_id']])
         gui_helpers.hide_view_cols(self.vit_view, [Req.attr_to_col['nut_id']])
         gui_helpers.hide_view_cols(
             self.mineral_view, [Req.attr_to_col['nut_id']])
 
-        self.macro_view.setColumnWidth(Req.attr_to_col['name'], 100)
-        self.vit_view.setColumnWidth(Req.attr_to_col['name'], 100)
-        self.mineral_view.setColumnWidth(Req.attr_to_col['name'], 100)
+        self.macro_view.setColumnWidth(Req.attr_to_col['name'], 150)
+        self.vit_view.setColumnWidth(Req.attr_to_col['name'], 150)
+        self.mineral_view.setColumnWidth(Req.attr_to_col['name'], 150)
 
         gui_helpers.vertical_resize_table_view_to_contents(self.macro_view)
         gui_helpers.vertical_resize_table_view_to_contents(self.vit_view)

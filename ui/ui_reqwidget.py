@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Mon Oct 21 22:19:07 2019
+# Created: Tue Oct 22 17:10:40 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -56,7 +56,7 @@ class Ui_ReqWidget(object):
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
-        self.mineral_view = QtWidgets.QTableView(self.scrollAreaWidgetContents)
+        self.mineral_view = ReqView(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
@@ -77,7 +77,7 @@ class Ui_ReqWidget(object):
         self.mineral_view.setObjectName("mineral_view")
         self.mineral_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.mineral_view, 3, 0, 1, 1)
-        self.macro_view = QtWidgets.QTableView(self.scrollAreaWidgetContents)
+        self.macro_view = ReqView(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
@@ -98,7 +98,7 @@ class Ui_ReqWidget(object):
         self.macro_view.setObjectName("macro_view")
         self.macro_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.macro_view, 0, 0, 2, 1)
-        self.vit_view = QtWidgets.QTableView(self.scrollAreaWidgetContents)
+        self.vit_view = ReqView(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
@@ -357,4 +357,5 @@ class Ui_ReqWidget(object):
         self.year_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWidget", "Year", None, -1))
         self.label_17.setText(QtWidgets.QApplication.translate("ReqWidget", "You can select a recommendation as a guideline then customize it to your needs.", None, -1))
 
+from view.req_view import ReqView
 import images_rc

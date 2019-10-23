@@ -118,7 +118,7 @@
        <item row="2" column="1">
         <layout class="QGridLayout" name="gridLayout">
          <item row="3" column="0">
-          <widget class="QTableView" name="mineral_view">
+          <widget class="ReqView" name="mineral_view">
            <property name="font">
             <font>
              <family>Segoe UI</family>
@@ -156,7 +156,7 @@ QTableView {
           </widget>
          </item>
          <item row="0" column="0" rowspan="2">
-          <widget class="QTableView" name="macro_view">
+          <widget class="ReqView" name="macro_view">
            <property name="font">
             <font>
              <family>Segoe UI</family>
@@ -194,7 +194,7 @@ QTableView {
           </widget>
          </item>
          <item row="2" column="0">
-          <widget class="QTableView" name="vit_view">
+          <widget class="ReqView" name="vit_view">
            <property name="font">
             <font>
              <family>Segoe UI</family>
@@ -691,6 +691,13 @@ QListView::item {
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ReqView</class>
+   <extends>QTableView</extends>
+   <header>view/req_view.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../images/images.qrc"/>
  </resources>
