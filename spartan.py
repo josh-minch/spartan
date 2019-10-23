@@ -306,8 +306,14 @@ class Optimizier:
 
     def construct_lp_problem(self):
         food_ids = [food.food_id for food in self.foods]
-        ## TODO: Require prices on all foods? SETTING PRICE = 1 TEMPORARY FOR TESTING
-        prices = [float(food.price) if food.price is not None else 1 for food in self.foods]
+        prices = [food.price for food in self.foods]
+
+        # Optimize by price or weight depending on if user has prices for all their foods
+        if None in prices:
+            prices = len(prices) * [1]
+            self.optimization_type = 'w'
+        else:
+            self.optimization_type = 'p'
 
         self.food_quantity_vector = np.array(
             [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
@@ -352,13 +358,13 @@ class Optimizier:
                 self.lp_prob += lpSum(self.nutrition_matrix[i] * self.food_quantity_vector) <= maxes[i]
 
     def get_solution_status(self):
-        status_statement = ""
-
-        if (self.lp_prob.status == LpStatusOptimal):
-            status_statement = "Optimum diet"
-        elif (self.lp_prob.status == LpStatusInfeasible):
-            status_statement = "A diet that meets your current constraints is infeasible"
-
+        if self.lp_prob.status == LpStatusOptimal:
+            if self.optimization_type == 'p':
+                status_statement = "Optimized by price"
+            elif self.optimization_type == 'w':
+                status_statement = "Optimized by nutritional density\nBecause some of your foods lack prices, your generated diet instead minimizes its total weight."
+        elif self.lp_prob.status == LpStatusInfeasible:
+            status_statement = "Given the foods in your fridge, a diet that satisfies your nutritional requirements is infeasible"
         return status_statement
 
     def describe_solution(self):
@@ -488,11 +494,11 @@ def get_nutrition(person, food_ids, food_amounts):
     nutrition = []
     nut_names = [nut.name for nut in person.nuts]
     for nut_name, nut_amount, has_data, unit in zip(nut_names, nut_amounts, nut_has_data, units):
-        dv = calculate_dv(person, nut_name, nut_amount)
         if has_data:
+            dv = calculate_dv(person, nut_name, nut_amount)
             nutrition.append({'name':nut_name, 'amount': nut_amount, 'unit': unit[0], 'percent': dv})
         else:
-            nutrition.append({'name':nut_name, 'amount': None, 'unit': unit[0], 'percent': dv})
+            nutrition.append({'name':nut_name, 'amount': None, 'unit': unit[0], 'percent': None})
 
     return sort_nutrition(nutrition)
 
@@ -512,16 +518,17 @@ def sort_nutrition(nutrition):
     return macros, vits, minerals
 
 def calculate_dv(person, nut_name, nutrient_amount):
+        # No data
         if nutrient_amount is None:
             return None
 
         [min_value] = [nut.min for nut in person.nuts if nut.name == nut_name]
 
-        # -1 no recommendation flag
+        # No recommendation flag of -1
         if min_value is None:
             return -1
 
-        return round(100 * (nutrient_amount / min_value), 1)
+        return 100 * (nutrient_amount / min_value)
 
 def get_nutrition_unit(nut_ids):
     con = sql.connect('sr_legacy/sr_legacy.db')
