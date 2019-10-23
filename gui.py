@@ -22,8 +22,6 @@ from model.fridge_model import FridgeModel
 from model.fridge_selected_model import FridgeSelectedModel
 from view.combo_table_view import ComboTableView
 from delegate.progress_bar_delegate import ProgressBarDelegate
-from delegate.align_right_delegate import AlignRightDelegate
-from delegate.combobox_delegate import ComboBoxDelegate
 from ui.ui_mainwindow import Ui_MainWindow
 
 
@@ -36,10 +34,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.blockSignals(False)
         self.type_res = Restriction(RESTRICT_TYPES_FILE)
         self.fd_res = Restriction(RESTRICT_FDS_FILE)
-
-        # self.person.remove_nut('Water')
-        # self.person.remove_nut('Energy')
-        #self.person.add_nut(Nutrient('Energy', min=2000))
 
         self.setup_fridge_views()
         self.display_empty_nutrition()
@@ -55,7 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
         self.fridge_model.dataChanged.connect(self.update_foods)
-        self.fridge_model.dataChanged.connect(self.display_nutrition)
+        #self.fridge_model.dataChanged.connect(self.display_nutrition)
         self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
 
         # Update filtered view
@@ -141,12 +135,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.fridge_filter_model.setFilterKeyColumn(NAME_COL)
 
-        # Alignment delegates
-        #self.prices_view.setItemDelegateForColumn(PRICE_COL, AlignRightDelegate(self))
-        #self.prices_view.setItemDelegateForColumn(PRICE_QUANTITY_COL, AlignRightDelegate(self))
-        #self.constraints_view.setItemDelegateForColumn(MIN_COL, AlignRightDelegate(self))
-        #self.constraints_view.setItemDelegateForColumn(MAX_COL, AlignRightDelegate(self))
-        #self.constraints_view.setItemDelegateForColumn(TARGET_COL, AlignRightDelegate(self))
+        # Delegates set in view
 
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
@@ -160,8 +149,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         c_header = self.constraints_view.horizontalHeader()
         n_header = self.nut_quant_view.horizontalHeader()
 
-        # Header must be explicitly set to visible even though it's already
-        # set in Qt Designer or else it doesn't display for constraints view
+        # Header must be explicitly set to visible even if set in Designer
         f_header.setVisible(True)
         p_header.setVisible(True)
         c_header.setVisible(True)
@@ -178,7 +166,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
 
-        '''
         set_v_header_height(self.fridge_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(f_header, QFont.DemiBold)
         set_v_header_height(self.prices_view, FRIDGE_V_HEADER_SIZE)
@@ -187,7 +174,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(c_header, QFont.DemiBold)
         set_v_header_height(self.nut_quant_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(n_header, QFont.DemiBold)
-        '''
+
         # Hide fridge scrollbar
         self.fridge_view.verticalScrollBar().setStyleSheet(
             "QScrollBar {width:0px;}")
@@ -299,6 +286,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
         if len(selected_food_id_ixs) == 0:
             self.display_empty_nutrition()
+            return
 
         selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
         selected_food_amounts = [ix.siblingAtColumn(
