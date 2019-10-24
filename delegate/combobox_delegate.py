@@ -14,6 +14,11 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
         items_ix = index.model().index(index.row(), SELECTABLE_UNITS_COL)
         items = index.model().data(items_ix)
         editor.addItems(items)
+
+        width = [editor.fontMetrics().boundingRect(item).width() for item in items]
+        editor.view().setMinimumWidth(max(width) + 9)
+
+        editor.view().window().setWindowFlags(QtCore.Qt.Popup | QtCore.Qt.NoDropShadowWindowHint )
         # When current item is changed, commit the data and close immedtiately
         editor.currentTextChanged[str].connect(partial(self.commit_and_close, editor))
         return editor
@@ -52,6 +57,7 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
             QtWidgets.QStyle.CC_ComboBox, box, painter)
         QtWidgets.QApplication.style().drawControl(QtWidgets.QStyle.CE_ComboBoxLabel, box, painter)
 
+
     def sizeHint(self, option, index):
         box = QtWidgets.QStyleOptionComboBox()
         box.state = option.state
@@ -66,6 +72,16 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
             size = size.expandedTo(QtWidgets.QApplication.style().sizeFromContents(QtWidgets.QStyle.ContentsType.CT_ComboBox,
                 box, rect.size(), option.widget))
         return size
+
+def get_max_item_width(rect, items):
+    max_width = 0
+
+    for item in items:
+        width = QtGui.QFontMetrics.boundingRect(rect, 0, item, 0, None).width()
+        if width > max_width:
+            max_width = width
+
+    return max_width
 
 if __name__ == '__main__':
     pass

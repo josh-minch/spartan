@@ -19,7 +19,6 @@ from window.pref_window import PrefWindow
 from window.optimum_diet_window import OptimumDietWindow
 from model.nutrition_model import NutritionTableModel
 from model.fridge_model import FridgeModel
-from model.fridge_selected_model import FridgeSelectedModel
 from view.combo_table_view import ComboTableView
 from delegate.progress_bar_delegate import ProgressBarDelegate
 from ui.ui_mainwindow import Ui_MainWindow
@@ -166,6 +165,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
 
+        self.nut_quant_view.setColumnWidth(NUT_QUANT_COL, VALUE_COL_WIDTH)
+
+        # Set row height
         set_v_header_height(self.fridge_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(f_header, QFont.DemiBold)
         set_v_header_height(self.prices_view, FRIDGE_V_HEADER_SIZE)
@@ -174,6 +176,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_weight(c_header, QFont.DemiBold)
         set_v_header_height(self.nut_quant_view, FRIDGE_V_HEADER_SIZE)
         set_header_weight(n_header, QFont.DemiBold)
+
+        # Set header fixed
+        #self.fridge_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        #self.prices_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        #self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        #self.nut_quant_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
         # Hide fridge scrollbar
         self.fridge_view.verticalScrollBar().setStyleSheet(
@@ -212,12 +220,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         vertical_resize_table_view_to_contents(self.macros_view)
         vertical_resize_table_view_to_contents(self.vits_view)
         vertical_resize_table_view_to_contents(self.minerals_view)
-        '''
-        # Set vertical header height to determine table's row height
-        v_header = self.nutrition_view.verticalHeader()
-        v_header.setSectionResizeMode(QHeaderView.Fixed)
-        v_header.setDefaultSectionSize(V_HEADER_SIZE)
-        '''
+
+        self.macros_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.vits_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.minerals_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
@@ -252,35 +258,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.optimum_diet_window = OptimumDietWindow(self.person, self.type_res, self.fd_res, self)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
-
-    def change_fridge_selection(self, selected, deselected):
-        selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
-        selected_food_name_ixs = [ix.siblingAtColumn(
-            NAME_COL) for ix in selected_food_id_ixs]
-
-        self.selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
-        food_names = [ix.data() for ix in selected_food_name_ixs]
-
-        while self.fridge_selected_model.rowCount() > 0:
-            self.fridge_selected_model.removeRow(0)
-
-        for i, name in enumerate(food_names):
-            self.fridge_selected_model.insertRows(i)
-
-            name_ix = self.fridge_selected_model.index(
-                i, S_NAME_COL, QModelIndex())
-            amount_ix = self.fridge_selected_model.index(
-                i, S_AMOUNT_COL, QModelIndex())
-            unit_ix = self.fridge_selected_model.index(
-                i, S_UNIT_COL, QModelIndex())
-
-            self.fridge_selected_model.blockSignals(True)
-            self.fridge_selected_model.setData(name_ix, name, Qt.EditRole)
-            self.fridge_selected_model.setData(unit_ix, 'g', Qt.EditRole)
-            self.fridge_selected_model.blockSignals(False)
-
-            self.fridge_selected_model.setData(
-                amount_ix, float(100), Qt.EditRole)
 
     def display_nutrition(self):
         selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()

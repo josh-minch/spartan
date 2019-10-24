@@ -88,9 +88,9 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         gui_helpers.set_column_widths(
             self.minerals_view, nut_col_to_attr.keys(), nut_col_widths)
 
-        gui_helpers.set_view_header_weights(self.macros_view, QFont.DemiBold)
-        gui_helpers.set_view_header_weights(self.vits_view, QFont.DemiBold)
-        gui_helpers.set_view_header_weights(self.minerals_view, QFont.DemiBold)
+        #gui_helpers.set_view_header_weights(self.macros_view, QFont.DemiBold)
+        #gui_helpers.set_view_header_weights(self.vits_view, QFont.DemiBold)
+        #gui_helpers.set_view_header_weights(self.minerals_view, QFont.DemiBold)
 
         gui_helpers.vertical_resize_table_view_to_contents(self.macros_view)
         gui_helpers.vertical_resize_table_view_to_contents(self.vits_view)

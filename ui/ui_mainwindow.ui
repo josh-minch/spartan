@@ -62,7 +62,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>images/icon_trimmed.png</normaloff>images/icon_trimmed.png</iconset>
+    <normaloff>../../../../../.designer/backup/images/icon_trimmed.png</normaloff>../../../../../.designer/backup/images/icon_trimmed.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -149,7 +149,7 @@
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>images/add.png</normaloff>images/add.png</iconset>
+            <normaloff>../../../../../.designer/backup/images/add.png</normaloff>../../../../../.designer/backup/images/add.png</iconset>
           </property>
          </widget>
         </item>
@@ -178,7 +178,7 @@
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>images/minus.svg</normaloff>images/minus.svg</iconset>
+            <normaloff>../../../../../.designer/backup/images/minus.svg</normaloff>../../../../../.designer/backup/images/minus.svg</iconset>
           </property>
          </widget>
         </item>
@@ -304,12 +304,12 @@
         </property>
         <property name="styleSheet">
          <string notr="true">QHeaderView::section{
-	background-color: white;
 	border: 0px;
+	background-color: white;
+	padding-left: 3px;
 }
 
 QTableView {
-	outline: none;
 	alternate-background-color: rgb(247, 247, 247);
 }</string>
         </property>
@@ -363,7 +363,7 @@ QTableView {
         <property name="sizeHint" stdset="0">
          <size>
           <width>13</width>
-          <height>34</height>
+          <height>35</height>
          </size>
         </property>
        </spacer>
@@ -523,11 +523,13 @@ QTableView {
             </property>
             <property name="styleSheet">
              <string notr="true">QHeaderView::section{
-	background-color: white;
 	border: 0px;
+	background-color: white;
+	padding-right: 5px;
 }
 
 QTableView {
+	
 	alternate-background-color: rgb(247, 247, 247);
 }</string>
             </property>
@@ -686,8 +688,8 @@ QTableView {
             </property>
             <property name="styleSheet">
              <string notr="true">QHeaderView::section{
-	background-color: white;
 	border: 0px;
+	background-color: white;
 }
 
 QTableView {
@@ -851,8 +853,8 @@ QTableView {
             </property>
             <property name="styleSheet">
              <string notr="true">QHeaderView::section{
-	background-color: white;
 	border: 0px;
+	background-color: white;
 }
 
 QTableView {
@@ -950,7 +952,7 @@ QTableView {
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>images/settings.svg</normaloff>images/settings.svg</iconset>
+            <normaloff>../../../../../.designer/backup/images/settings.svg</normaloff>../../../../../.designer/backup/images/settings.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1002,6 +1004,15 @@ QTableView {
                </color>
               </brush>
              </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
+               </color>
+              </brush>
+             </colorrole>
             </active>
             <inactive>
              <colorrole role="Highlight">
@@ -1019,6 +1030,15 @@ QTableView {
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
                </color>
               </brush>
              </colorrole>
@@ -1042,6 +1062,15 @@ QTableView {
                </color>
               </brush>
              </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
+               </color>
+              </brush>
+             </colorrole>
             </disabled>
            </palette>
           </property>
@@ -1059,10 +1088,14 @@ QTableView {
           </property>
           <property name="styleSheet">
            <string notr="true">QHeaderView::section{
-	background-color: white;
 	border: 0px;
+	background-color: white;
+	padding-left: 3px;
 }
-</string>
+
+QTableView {
+	alternate-background-color: rgb(247, 247, 247);
+}</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
@@ -1093,6 +1126,9 @@ QTableView {
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>false</bool>
@@ -1134,6 +1170,15 @@ QTableView {
                </color>
               </brush>
              </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
+               </color>
+              </brush>
+             </colorrole>
             </active>
             <inactive>
              <colorrole role="Highlight">
@@ -1151,6 +1196,15 @@ QTableView {
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
                </color>
               </brush>
              </colorrole>
@@ -1174,6 +1228,15 @@ QTableView {
                </color>
               </brush>
              </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
+               </color>
+              </brush>
+             </colorrole>
             </disabled>
            </palette>
           </property>
@@ -1191,10 +1254,14 @@ QTableView {
           </property>
           <property name="styleSheet">
            <string notr="true">QHeaderView::section{
-	background-color: white;
 	border: 0px;
+	background-color: white;
+	padding-left: 3px;
 }
-</string>
+
+QTableView {
+	alternate-background-color: rgb(247, 247, 247);
+}</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
@@ -1225,6 +1292,9 @@ QTableView {
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>false</bool>
@@ -1266,6 +1336,15 @@ QTableView {
                </color>
               </brush>
              </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
+               </color>
+              </brush>
+             </colorrole>
             </active>
             <inactive>
              <colorrole role="Highlight">
@@ -1283,6 +1362,15 @@ QTableView {
                 <red>0</red>
                 <green>0</green>
                 <blue>0</blue>
+               </color>
+              </brush>
+             </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
                </color>
               </brush>
              </colorrole>
@@ -1306,6 +1394,15 @@ QTableView {
                </color>
               </brush>
              </colorrole>
+             <colorrole role="AlternateBase">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>247</red>
+                <green>247</green>
+                <blue>247</blue>
+               </color>
+              </brush>
+             </colorrole>
             </disabled>
            </palette>
           </property>
@@ -1323,10 +1420,14 @@ QTableView {
           </property>
           <property name="styleSheet">
            <string notr="true">QHeaderView::section{
-	background-color: white;
 	border: 0px;
+	background-color: white;
+	padding-left: 3px;
 }
-</string>
+
+QTableView {
+	alternate-background-color: rgb(247, 247, 247);
+}</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::NoFrame</enum>
@@ -1357,6 +1458,9 @@ QTableView {
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderHighlightSections">
+           <bool>false</bool>
           </attribute>
           <attribute name="horizontalHeaderStretchLastSection">
            <bool>false</bool>
@@ -1394,7 +1498,7 @@ QTableView {
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>images/diet_btn.png</normaloff>images/diet_btn.png</iconset>
+            <normaloff>../../../../../.designer/backup/images/diet_btn.png</normaloff>../../../../../.designer/backup/images/diet_btn.png</iconset>
           </property>
           <property name="iconSize">
            <size>

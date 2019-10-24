@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Tue Oct 22 17:10:38 2019
+# Created: Wed Oct 23 20:53:44 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         MainWindow.setFocusPolicy(QtCore.Qt.StrongFocus)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(True)
         MainWindow.setIconSize(QtCore.QSize(30, 30))
@@ -73,7 +73,7 @@ class Ui_MainWindow(object):
         self.add_foods_btn.setFont(font)
         self.add_foods_btn.setStyleSheet("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("images/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.add_foods_btn.setIcon(icon1)
         self.add_foods_btn.setObjectName("add_foods_btn")
         self.horizontalLayout.addWidget(self.add_foods_btn)
@@ -89,7 +89,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.remove_btn.setFont(font)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("images/minus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/minus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.remove_btn.setIcon(icon2)
         self.remove_btn.setObjectName("remove_btn")
         self.horizontalLayout.addWidget(self.remove_btn)
@@ -138,12 +138,12 @@ class Ui_MainWindow(object):
         self.fridge_view.setFont(font)
         self.fridge_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.fridge_view.setStyleSheet("QHeaderView::section{\n"
-"    background-color: white;\n"
 "    border: 0px;\n"
+"    background-color: white;\n"
+"    padding-left: 3px;\n"
 "}\n"
 "\n"
 "QTableView {\n"
-"    outline: none;\n"
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.fridge_view.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -162,7 +162,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(13, 34, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem = QtWidgets.QSpacerItem(13, 35, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout_2.addItem(spacerItem)
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
         self.tabWidget.setMinimumSize(QtCore.QSize(300, 0))
@@ -221,11 +221,13 @@ class Ui_MainWindow(object):
         self.nut_quant_view.setFont(font)
         self.nut_quant_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.nut_quant_view.setStyleSheet("QHeaderView::section{\n"
-"    background-color: white;\n"
 "    border: 0px;\n"
+"    background-color: white;\n"
+"    padding-right: 5px;\n"
 "}\n"
 "\n"
 "QTableView {\n"
+"    \n"
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.nut_quant_view.setFrameShape(QtWidgets.QFrame.NoFrame)
@@ -287,8 +289,8 @@ class Ui_MainWindow(object):
         self.prices_view.setFont(font)
         self.prices_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.prices_view.setStyleSheet("QHeaderView::section{\n"
-"    background-color: white;\n"
 "    border: 0px;\n"
+"    background-color: white;\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -353,8 +355,8 @@ class Ui_MainWindow(object):
         self.constraints_view.setFont(font)
         self.constraints_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.constraints_view.setStyleSheet("QHeaderView::section{\n"
-"    background-color: white;\n"
 "    border: 0px;\n"
+"    background-color: white;\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -398,7 +400,7 @@ class Ui_MainWindow(object):
         self.pref_btn.setFont(font)
         self.pref_btn.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("images/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pref_btn.setIcon(icon3)
         self.pref_btn.setIconSize(QtCore.QSize(20, 20))
         self.pref_btn.setObjectName("pref_btn")
@@ -421,18 +423,27 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Highlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 120, 215))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Highlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
         self.macros_view.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
@@ -441,10 +452,14 @@ class Ui_MainWindow(object):
         self.macros_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.macros_view.setAutoFillBackground(False)
         self.macros_view.setStyleSheet("QHeaderView::section{\n"
-"    background-color: white;\n"
 "    border: 0px;\n"
+"    background-color: white;\n"
+"    padding-left: 3px;\n"
 "}\n"
-"")
+"\n"
+"QTableView {\n"
+"    alternate-background-color: rgb(247, 247, 247);\n"
+"}")
         self.macros_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.macros_view.setFrameShadow(QtWidgets.QFrame.Plain)
         self.macros_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -456,6 +471,7 @@ class Ui_MainWindow(object):
         self.macros_view.setShowGrid(False)
         self.macros_view.setObjectName("macros_view")
         self.macros_view.horizontalHeader().setVisible(True)
+        self.macros_view.horizontalHeader().setHighlightSections(False)
         self.macros_view.horizontalHeader().setStretchLastSection(False)
         self.macros_view.verticalHeader().setVisible(False)
         self.macros_view.verticalHeader().setDefaultSectionSize(25)
@@ -473,18 +489,27 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Highlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 120, 215))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Highlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
         self.vits_view.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
@@ -493,10 +518,14 @@ class Ui_MainWindow(object):
         self.vits_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.vits_view.setAutoFillBackground(False)
         self.vits_view.setStyleSheet("QHeaderView::section{\n"
-"    background-color: white;\n"
 "    border: 0px;\n"
+"    background-color: white;\n"
+"    padding-left: 3px;\n"
 "}\n"
-"")
+"\n"
+"QTableView {\n"
+"    alternate-background-color: rgb(247, 247, 247);\n"
+"}")
         self.vits_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.vits_view.setFrameShadow(QtWidgets.QFrame.Plain)
         self.vits_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -508,6 +537,7 @@ class Ui_MainWindow(object):
         self.vits_view.setShowGrid(False)
         self.vits_view.setObjectName("vits_view")
         self.vits_view.horizontalHeader().setVisible(True)
+        self.vits_view.horizontalHeader().setHighlightSections(False)
         self.vits_view.horizontalHeader().setStretchLastSection(False)
         self.vits_view.verticalHeader().setVisible(False)
         self.vits_view.verticalHeader().setDefaultSectionSize(25)
@@ -525,18 +555,27 @@ class Ui_MainWindow(object):
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(218, 236, 249))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Highlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.AlternateBase, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 120, 215))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Highlight, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
+        brush = QtGui.QBrush(QtGui.QColor(247, 247, 247))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
         self.minerals_view.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
@@ -545,10 +584,14 @@ class Ui_MainWindow(object):
         self.minerals_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.minerals_view.setAutoFillBackground(False)
         self.minerals_view.setStyleSheet("QHeaderView::section{\n"
-"    background-color: white;\n"
 "    border: 0px;\n"
+"    background-color: white;\n"
+"    padding-left: 3px;\n"
 "}\n"
-"")
+"\n"
+"QTableView {\n"
+"    alternate-background-color: rgb(247, 247, 247);\n"
+"}")
         self.minerals_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.minerals_view.setFrameShadow(QtWidgets.QFrame.Plain)
         self.minerals_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -560,6 +603,7 @@ class Ui_MainWindow(object):
         self.minerals_view.setShowGrid(False)
         self.minerals_view.setObjectName("minerals_view")
         self.minerals_view.horizontalHeader().setVisible(True)
+        self.minerals_view.horizontalHeader().setHighlightSections(False)
         self.minerals_view.horizontalHeader().setStretchLastSection(False)
         self.minerals_view.verticalHeader().setVisible(False)
         self.minerals_view.verticalHeader().setDefaultSectionSize(25)
@@ -576,7 +620,7 @@ class Ui_MainWindow(object):
         self.optimize_btn.setFont(font)
         self.optimize_btn.setStyleSheet("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("images/diet_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/diet_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.optimize_btn.setIcon(icon4)
         self.optimize_btn.setIconSize(QtCore.QSize(20, 20))
         self.optimize_btn.setObjectName("optimize_btn")

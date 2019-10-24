@@ -362,7 +362,7 @@ class Optimizier:
             if self.optimization_type == 'p':
                 status_statement = "Optimized by price"
             elif self.optimization_type == 'w':
-                status_statement = "Optimized by nutritional density\nBecause some of your foods lack prices, your generated diet instead minimizes its total weight."
+                status_statement = "Optimized by nutritional density\nBecause some of your foods lack prices, your generated diet has instead been optimized to minimize its total weight."
         elif self.lp_prob.status == LpStatusInfeasible:
             status_statement = "Given the foods in your fridge, a diet that satisfies your nutritional requirements is infeasible"
         return status_statement
