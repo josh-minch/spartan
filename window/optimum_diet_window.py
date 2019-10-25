@@ -121,11 +121,11 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
             macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, amounts)
 
         macros_model = NutritionTableModel(
-            nutrients=self.macros, nutrient_group='General')
+            nutrients=macros, nutrient_group='General')
         vits_model = NutritionTableModel(
-            nutrients=self.vits, nutrient_group='Vitamins')
+            nutrients=vits, nutrient_group='Vitamins')
         minerals_model = NutritionTableModel(
-            utrients=self.minerals, nutrient_group='Minerals')
+            nutrients=minerals, nutrient_group='Minerals')
 
         self.macros_view.setModel(macros_model)
         self.vits_view.setModel(vits_model)

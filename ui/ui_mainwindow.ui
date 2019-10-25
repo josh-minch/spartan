@@ -62,7 +62,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../../.designer/backup/images/icon_trimmed.png</normaloff>../../../../../.designer/backup/images/icon_trimmed.png</iconset>
+    <normaloff>../../../../../../../.designer/backup/images/icon_trimmed.png</normaloff>../../../../../../../.designer/backup/images/icon_trimmed.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -149,7 +149,7 @@
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../../../../../.designer/backup/images/add.png</normaloff>../../../../../.designer/backup/images/add.png</iconset>
+            <normaloff>../../../../../../../.designer/backup/images/add.png</normaloff>../../../../../../../.designer/backup/images/add.png</iconset>
           </property>
          </widget>
         </item>
@@ -178,7 +178,7 @@
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../../../../../.designer/backup/images/minus.svg</normaloff>../../../../../.designer/backup/images/minus.svg</iconset>
+            <normaloff>../../../../../../../.designer/backup/images/minus.svg</normaloff>../../../../../../../.designer/backup/images/minus.svg</iconset>
           </property>
          </widget>
         </item>
@@ -392,7 +392,7 @@ QTableView {
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="iconSize">
          <size>
@@ -558,7 +558,7 @@ QTableView {
              <bool>false</bool>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
-             <bool>true</bool>
+             <bool>false</bool>
             </attribute>
             <attribute name="verticalHeaderVisible">
              <bool>false</bool>
@@ -724,7 +724,7 @@ QTableView {
              <bool>false</bool>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
-             <bool>true</bool>
+             <bool>false</bool>
             </attribute>
             <attribute name="verticalHeaderVisible">
              <bool>false</bool>
@@ -952,7 +952,7 @@ QTableView {
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../../../../../.designer/backup/images/settings.svg</normaloff>../../../../../.designer/backup/images/settings.svg</iconset>
+            <normaloff>../../../../../../../.designer/backup/images/settings.svg</normaloff>../../../../../../../.designer/backup/images/settings.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1498,7 +1498,7 @@ QTableView {
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../../../../../.designer/backup/images/diet_btn.png</normaloff>../../../../../.designer/backup/images/diet_btn.png</iconset>
+            <normaloff>../../../../../../../.designer/backup/images/diet_btn.png</normaloff>../../../../../../../.designer/backup/images/diet_btn.png</iconset>
           </property>
           <property name="iconSize">
            <size>

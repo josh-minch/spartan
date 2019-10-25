@@ -47,9 +47,12 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         for ix in selected_item_ixs:
             food_name_ix = ix.siblingAtColumn(Search.attr_to_col['name'])
             food_name = self.search_model.data(food_name_ix, Qt.DisplayRole)
-            food_to_add = spartan.Food(name=food_name)
-            self.fridge_model.insertRows(0, food_to_add)
-            self.person.add_food_to_db(food_to_add)
+
+            # Fridge can only have one entry for each food
+            if food_name not in set([food.name for food in self.person.foods]):
+                food_to_add = spartan.Food(name=food_name)
+                self.fridge_model.insertRows(0, food_to_add)
+                self.person.add_food_to_db(food_to_add)
 
     def toggle_add_btn(self):
         if self.search_selection_model is None:

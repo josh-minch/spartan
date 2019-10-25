@@ -53,7 +53,8 @@ class Person(object):
 
         sql_stmt = (
             'SELECT * '
-            'FROM foods'
+            'FROM foods '
+            'ORDER BY rowid '
         )
 
         for row in cur.execute(sql_stmt):
@@ -141,7 +142,7 @@ class Food:
     def __init__(self, food_id=None, name=None, price=None, price_quantity=None, price_unit = 'g', min=None, min_unit='g',
                 max=None, max_unit='g', target=None, target_unit='g', nut_quantity=100, nut_quantity_unit='g'):
 
-        self.food_id = food_id if food_id is not None else database.get_food_id(name)
+        self.food_id: int = food_id if food_id is not None else database.get_food_id(name)
         self.name = name or database.get_food_name(food_id)
         self.price: float          = price
         self.price_quantity: float = price_quantity
@@ -207,7 +208,7 @@ class Optimizier:
         self.person = person
         self.type_res = type_res
         self.fd_res = fd_res
-        self.foods = sorted(self.person.foods, key=lambda f: f.food_id)
+        self.foods = sorted(self.person.foods, key=lambda f: int(f.food_id))
 
     def optimize_diet(self):
         if GEN_RESTRICT in self.type_res.res:

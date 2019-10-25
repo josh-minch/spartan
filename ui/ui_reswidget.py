@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reswidget.ui',
 # licensing of 'ui/ui_reswidget.ui' applies.
 #
-# Created: Wed Oct 23 20:53:46 2019
+# Created: Thu Oct 24 17:25:42 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!

@@ -129,7 +129,7 @@ class FridgeModel(QAbstractTableModel):
         if index.isValid() and 0 <= index.row() < len(self.foods):
             food = self.foods[index.row()]
             attr_str = f_col_to_attr[index.column()]
-            if attr_str in ('price', 'min', 'max', 'target', 'nut_quantity'):
+            if attr_str in ('price', 'price_quantity', 'min', 'max', 'target', 'nut_quantity'):
                 if value == None:
                     setattr(self.foods[index.row()], attr_str, None)
                 else:

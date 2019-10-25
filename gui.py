@@ -309,10 +309,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
     def print_debug_info(self):
-        print(self.person.macro)
-        print(self.person.vit)
-        print(self.person.mineral)
-        print(self.person.nuts)
+        print(self.person.foods)
 
 if __name__ == "__main__":
     # Necessarry to get icon in Windows Taskbar

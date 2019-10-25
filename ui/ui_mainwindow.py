@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Wed Oct 23 20:53:44 2019
+# Created: Thu Oct 24 17:25:40 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         MainWindow.setFocusPolicy(QtCore.Qt.StrongFocus)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../../../../../../.designer/backup/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(True)
         MainWindow.setIconSize(QtCore.QSize(30, 30))
@@ -73,7 +73,7 @@ class Ui_MainWindow(object):
         self.add_foods_btn.setFont(font)
         self.add_foods_btn.setStyleSheet("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../../../../../../../.designer/backup/images/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.add_foods_btn.setIcon(icon1)
         self.add_foods_btn.setObjectName("add_foods_btn")
         self.horizontalLayout.addWidget(self.add_foods_btn)
@@ -89,7 +89,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.remove_btn.setFont(font)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/minus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("../../../../../../../.designer/backup/images/minus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.remove_btn.setIcon(icon2)
         self.remove_btn.setObjectName("remove_btn")
         self.horizontalLayout.addWidget(self.remove_btn)
@@ -239,7 +239,7 @@ class Ui_MainWindow(object):
         self.nut_quant_view.setObjectName("nut_quant_view")
         self.nut_quant_view.horizontalHeader().setVisible(False)
         self.nut_quant_view.horizontalHeader().setHighlightSections(False)
-        self.nut_quant_view.horizontalHeader().setStretchLastSection(True)
+        self.nut_quant_view.horizontalHeader().setStretchLastSection(False)
         self.nut_quant_view.verticalHeader().setVisible(False)
         self.nut_quant_view.verticalHeader().setDefaultSectionSize(23)
         self.gridLayout_4.addWidget(self.nut_quant_view, 0, 0, 1, 1)
@@ -306,7 +306,7 @@ class Ui_MainWindow(object):
         self.prices_view.setObjectName("prices_view")
         self.prices_view.horizontalHeader().setVisible(False)
         self.prices_view.horizontalHeader().setHighlightSections(False)
-        self.prices_view.horizontalHeader().setStretchLastSection(True)
+        self.prices_view.horizontalHeader().setStretchLastSection(False)
         self.prices_view.verticalHeader().setVisible(False)
         self.prices_view.verticalHeader().setDefaultSectionSize(23)
         self.verticalLayout_5.addWidget(self.prices_view)
@@ -400,7 +400,7 @@ class Ui_MainWindow(object):
         self.pref_btn.setFont(font)
         self.pref_btn.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("../../../../../../../.designer/backup/images/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pref_btn.setIcon(icon3)
         self.pref_btn.setIconSize(QtCore.QSize(20, 20))
         self.pref_btn.setObjectName("pref_btn")
@@ -620,7 +620,7 @@ class Ui_MainWindow(object):
         self.optimize_btn.setFont(font)
         self.optimize_btn.setStyleSheet("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("../../../../../.designer/backup/images/diet_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("../../../../../../../.designer/backup/images/diet_btn.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.optimize_btn.setIcon(icon4)
         self.optimize_btn.setIconSize(QtCore.QSize(20, 20))
         self.optimize_btn.setObjectName("optimize_btn")
@@ -644,7 +644,7 @@ class Ui_MainWindow(object):
         self.actionaa.setObjectName("actionaa")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
