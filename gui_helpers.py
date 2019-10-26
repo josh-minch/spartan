@@ -16,8 +16,8 @@ def hide_view_cols(view, cols_to_hide):
         view.setColumnHidden(col, True)
 
 # by default, Qt doesn't change a table's header to reflect that of its body
-def fix_header_font(table_view):
-    font = QFont(gui_constants.system_font_family(), gui_constants.FONT_BODY_SIZE, QFont.Normal)
+def fix_header_font(table_view, font_size, font_weight):
+    font = QFont(gui_constants.system_font_family(), font_size, font_weight)
     table_view.horizontalHeader().setFont(font)
 
 def vertical_resize_table_view_to_contents(table_view):
@@ -38,10 +38,11 @@ def set_column_widths(view, cols, col_widths):
     for col, width in zip(cols, col_widths):
         view.setColumnWidth(col, width)
 
-def set_header_weight(header, weight):
-    header_font = QFont()
-    header_font.setWeight(weight)
-    header.setFont(header_font)
+def set_header_font(table_view, size, weight):
+    font = QFont(gui_constants.system_font_family(),
+                 size,
+                 weight)
+    table_view.horizontalHeader().setFont(font)
 
 def set_view_header_weights(view, weight):
     header = view.horizontalHeader()

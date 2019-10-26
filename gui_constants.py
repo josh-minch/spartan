@@ -10,7 +10,8 @@ def system_font_family():
     else:
         return QFont.defaultFamily()
 
-FONT_BODY_SIZE = 11
+FONT_MAIN_SIZE = 10
+FONT_SECONDARY_SIZE = 11
 
 # Fridge view
 F_NUM_COLS = 15

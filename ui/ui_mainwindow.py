@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Fri Oct 25 13:26:17 2019
+# Created: Sat Oct 26 12:51:09 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -401,12 +401,13 @@ class Ui_MainWindow(object):
         self.pref_btn.setCursor(QtCore.Qt.PointingHandCursor)
         self.pref_btn.setStyleSheet("QPushButton {\n"
 "    border: white;\n"
-"}")
+"}\n"
+"")
         self.pref_btn.setText("")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(":/images/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pref_btn.setIcon(icon3)
-        self.pref_btn.setIconSize(QtCore.QSize(25, 25))
+        self.pref_btn.setIconSize(QtCore.QSize(30, 30))
         self.pref_btn.setObjectName("pref_btn")
         self.horizontalLayout_5.addWidget(self.pref_btn)
         self.verticalLayout_3.addLayout(self.horizontalLayout_5)
@@ -664,6 +665,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtWidgets.QApplication.translate("MainWindow", "Prices", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtWidgets.QApplication.translate("MainWindow", "Constraints", None, -1))
         self.label_8.setText(QtWidgets.QApplication.translate("MainWindow", "Nutrition", None, -1))
+        self.pref_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "Settings (Ctrl+,)", None, -1))
         self.pref_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Ctrl+,", None, -1))
         self.optimize_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Generate optimum diet (F5)</p>", None, -1))
         self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Generate diet", None, -1))

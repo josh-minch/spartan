@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_welcomewindow.ui',
 # licensing of 'ui/ui_welcomewindow.ui' applies.
 #
-# Created: Fri Oct 25 22:08:24 2019
+# Created: Sat Oct 26 12:51:30 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -40,28 +40,19 @@ class Ui_WelcomeWindow(object):
         self.centralwidget = QtWidgets.QWidget(WelcomeWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setSpacing(20)
         self.verticalLayout.setContentsMargins(20, 20, -1, -1)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(26)
-        self.label.setFont(font)
-        self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        self.widget = ReqWizWidget(self.centralwidget)
+        self.req_wiz_widget = ReqWizWidget(self.centralwidget)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(11)
-        self.widget.setFont(font)
-        self.widget.setObjectName("widget")
-        self.verticalLayout.addWidget(self.widget)
-        self.buttonBox = QtWidgets.QDialogButtonBox(self.centralwidget)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Save)
-        self.buttonBox.setObjectName("buttonBox")
-        self.verticalLayout.addWidget(self.buttonBox)
-        self.verticalLayout.setStretch(1, 1)
+        self.req_wiz_widget.setFont(font)
+        self.req_wiz_widget.setObjectName("req_wiz_widget")
+        self.verticalLayout.addWidget(self.req_wiz_widget)
+        self.button_box = QtWidgets.QDialogButtonBox(self.centralwidget)
+        self.button_box.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.button_box.setObjectName("button_box")
+        self.verticalLayout.addWidget(self.button_box)
         WelcomeWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(WelcomeWindow)
@@ -69,6 +60,5 @@ class Ui_WelcomeWindow(object):
 
     def retranslateUi(self, WelcomeWindow):
         WelcomeWindow.setWindowTitle(QtWidgets.QApplication.translate("WelcomeWindow", "MainWindow", None, -1))
-        self.label.setText(QtWidgets.QApplication.translate("WelcomeWindow", "Welcome to Spartan", None, -1))
 
 from widget.req_wiz_widget import ReqWizWidget

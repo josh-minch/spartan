@@ -2,6 +2,7 @@ import os
 import sqlite3 as sql
 import csv
 
+import req
 
 def create_spartan_db():
     if os.path.isfile('spartan.db'):
@@ -13,7 +14,7 @@ def create_spartan_db():
 
     person_stmt = (
         'CREATE TABLE person ( '
-        'sex     TEXT'
+        'sex     TEXT, '
         'bd_year INTEGER,'
         'bd_mon  INTEGER,'
         'bd_day  INTEGER)'
@@ -47,9 +48,24 @@ def create_spartan_db():
     cur.execute(person_stmt)
     cur.execute(nuts_stmt)
     cur.execute(foods_stmt)
+    insert_nuts()
     con.commit()
     con.close()
 
+def insert_nuts():
+    con = sql.connect("spartan.db")
+    cur = con.cursor()
+
+    sql_stmt=(
+        'INSERT INTO nuts '
+        'VALUES (?,?,?,?)'
+    )
+    for nut_name in req.nut_names:
+        parameters = [nut_name, None, None, None]
+        cur.execute(sql_stmt, parameters)
+
+    con.commit()
+    con.close()
 
 def write_csv(filename, data):
     with open(filename, 'w', newline='') as csvfile:

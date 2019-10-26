@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwizwidget.ui',
 # licensing of 'ui/ui_reqwizwidget.ui' applies.
 #
-# Created: Fri Oct 25 22:08:24 2019
+# Created: Sat Oct 26 12:51:30 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_ReqWizWidget(object):
     def setupUi(self, ReqWizWidget):
         ReqWizWidget.setObjectName("ReqWizWidget")
-        ReqWizWidget.resize(825, 794)
+        ReqWizWidget.resize(973, 652)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -49,11 +49,11 @@ class Ui_ReqWizWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 825, 794))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -189, 956, 841))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_2.setVerticalSpacing(10)
+        self.gridLayout_2.setVerticalSpacing(20)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
@@ -66,6 +66,7 @@ class Ui_ReqWizWidget(object):
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
+"    padding-left: 3px\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -89,6 +90,7 @@ class Ui_ReqWizWidget(object):
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
+"    padding-left: 3px\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -112,6 +114,7 @@ class Ui_ReqWizWidget(object):
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
+"    padding-left: 3px\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -129,7 +132,7 @@ class Ui_ReqWizWidget(object):
         self.gridLayout_2.addLayout(self.gridLayout, 2, 0, 1, 1)
         self.formLayout = QtWidgets.QFormLayout()
         self.formLayout.setRowWrapPolicy(QtWidgets.QFormLayout.WrapLongRows)
-        self.formLayout.setVerticalSpacing(10)
+        self.formLayout.setVerticalSpacing(20)
         self.formLayout.setObjectName("formLayout")
         self.verticalLayout_8 = QtWidgets.QVBoxLayout()
         self.verticalLayout_8.setSpacing(10)
@@ -282,7 +285,7 @@ class Ui_ReqWizWidget(object):
         self.horizontalLayout_14.addWidget(self.year_edit)
         self.formLayout_4.setLayout(1, QtWidgets.QFormLayout.FieldRole, self.horizontalLayout_14)
         self.verticalLayout_8.addLayout(self.formLayout_4)
-        self.formLayout.setLayout(0, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_8)
+        self.formLayout.setLayout(2, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_8)
         self.verticalLayout_9 = QtWidgets.QVBoxLayout()
         self.verticalLayout_9.setSpacing(8)
         self.verticalLayout_9.setObjectName("verticalLayout_9")
@@ -304,7 +307,14 @@ class Ui_ReqWizWidget(object):
         self.label_17.setObjectName("label_17")
         self.horizontalLayout_15.addWidget(self.label_17)
         self.verticalLayout_9.addLayout(self.horizontalLayout_15)
-        self.formLayout.setLayout(1, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_9)
+        self.formLayout.setLayout(3, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_9)
+        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semilight")
+        font.setPointSize(26)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
         self.gridLayout_2.addLayout(self.formLayout, 0, 0, 1, 1)
         self.gridLayout_2.setRowStretch(2, 1)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
@@ -315,7 +325,7 @@ class Ui_ReqWizWidget(object):
 
     def retranslateUi(self, ReqWizWidget):
         ReqWizWidget.setWindowTitle(QtWidgets.QApplication.translate("ReqWizWidget", "Spartan - Preferences", None, -1))
-        self.label_15.setText(QtWidgets.QApplication.translate("ReqWizWidget", "Let\'s set your nutritional requirements.", None, -1))
+        self.label_15.setText(QtWidgets.QApplication.translate("ReqWizWidget", "Let\'s set your nutritional requirements to get started", None, -1))
         self.sex_label.setText(QtWidgets.QApplication.translate("ReqWizWidget", "Sex", None, -1))
         self.sex_edit.setItemText(0, QtWidgets.QApplication.translate("ReqWizWidget", "Female", None, -1))
         self.sex_edit.setItemText(1, QtWidgets.QApplication.translate("ReqWizWidget", "Female, lactating", None, -1))
@@ -326,6 +336,7 @@ class Ui_ReqWizWidget(object):
         self.day_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWizWidget", "Day", None, -1))
         self.year_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWizWidget", "Year", None, -1))
         self.label_17.setText(QtWidgets.QApplication.translate("ReqWizWidget", "You can select a recommendation as a guideline then customize it to your needs.", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("ReqWizWidget", "Welcome to Spartan", None, -1))
 
 from view.req_view import ReqView
 import images_rc

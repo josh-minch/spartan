@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python: main",
+            "type": "python",
+            "request": "launch",
+            "program": "C:/Users/joshm/Misc/Projects/python/frugal-nutrition/main.py",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
@@ -12,7 +19,7 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Python: Spartan",
+            "name": "Python: gui",
             "type": "python",
             "request": "launch",
             "program": "C:/Users/joshm/Misc/Projects/python/frugal-nutrition/gui.py",

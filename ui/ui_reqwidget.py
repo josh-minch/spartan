@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Fri Oct 25 13:26:18 2019
+# Created: Sat Oct 26 12:51:11 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -54,6 +54,16 @@ class Ui_ReqWidget(object):
         self.gridLayout_2.setContentsMargins(20, 20, -1, -1)
         self.gridLayout_2.setVerticalSpacing(20)
         self.gridLayout_2.setObjectName("gridLayout_2")
+        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semilight")
+        font.setPointSize(20)
+        font.setWeight(50)
+        font.setBold(False)
+        self.label.setFont(font)
+        self.label.setMargin(0)
+        self.label.setObjectName("label")
+        self.gridLayout_2.addWidget(self.label, 0, 1, 1, 1)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
         self.mineral_view = ReqView(self.scrollAreaWidgetContents)
@@ -120,43 +130,6 @@ class Ui_ReqWidget(object):
         self.vit_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.vit_view, 2, 0, 1, 1)
         self.gridLayout_2.addLayout(self.gridLayout, 2, 1, 1, 1)
-        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(20)
-        font.setWeight(50)
-        font.setBold(False)
-        self.label.setFont(font)
-        self.label.setMargin(0)
-        self.label.setObjectName("label")
-        self.gridLayout_2.addWidget(self.label, 0, 1, 1, 1)
-        self.back_btn = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.back_btn.sizePolicy().hasHeightForWidth())
-        self.back_btn.setSizePolicy(sizePolicy)
-        self.back_btn.setMinimumSize(QtCore.QSize(45, 35))
-        self.back_btn.setCursor(QtCore.Qt.PointingHandCursor)
-        self.back_btn.setStyleSheet("QPushButton {\n"
-"    border: none;\n"
-"}\n"
-"\n"
-"QPushButton:hover:!pressed{\n"
-"    background-color: #daecf9;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: #c0e1f9;\n"
-"}\n"
-"")
-        self.back_btn.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../images/back-black.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.back_btn.setIcon(icon1)
-        self.back_btn.setIconSize(QtCore.QSize(24, 24))
-        self.back_btn.setObjectName("back_btn")
-        self.gridLayout_2.addWidget(self.back_btn, 0, 0, 1, 1)
         self.formLayout = QtWidgets.QFormLayout()
         self.formLayout.setVerticalSpacing(10)
         self.formLayout.setObjectName("formLayout")
@@ -334,7 +307,33 @@ class Ui_ReqWidget(object):
         self.verticalLayout_9.addLayout(self.horizontalLayout_15)
         self.formLayout.setLayout(1, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_9)
         self.gridLayout_2.addLayout(self.formLayout, 1, 1, 1, 1)
-        self.gridLayout_2.setRowStretch(2, 1)
+        self.back_btn = QtWidgets.QPushButton(self.scrollAreaWidgetContents)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.back_btn.sizePolicy().hasHeightForWidth())
+        self.back_btn.setSizePolicy(sizePolicy)
+        self.back_btn.setMinimumSize(QtCore.QSize(45, 35))
+        self.back_btn.setCursor(QtCore.Qt.PointingHandCursor)
+        self.back_btn.setStyleSheet("QPushButton {\n"
+"    border: none;\n"
+"}\n"
+"\n"
+"QPushButton:hover:!pressed{\n"
+"    background-color: #daecf9;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: #c0e1f9;\n"
+"}\n"
+"")
+        self.back_btn.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../images/back-black.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.back_btn.setIcon(icon1)
+        self.back_btn.setIconSize(QtCore.QSize(24, 24))
+        self.back_btn.setObjectName("back_btn")
+        self.gridLayout_2.addWidget(self.back_btn, 0, 0, 1, 1)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.gridLayout_3.addWidget(self.scrollArea, 0, 0, 1, 1)
 

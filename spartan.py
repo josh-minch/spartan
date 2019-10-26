@@ -239,6 +239,8 @@ class Optimizier:
         self.lp_prob.writeLP("DietModel.lp")
         self.lp_prob.solve()
 
+        self.describe_solution()
+
     def filter_foods(self, foods, fd_res):
         food_ids = [food.food_id for food in foods]
 
@@ -411,11 +413,16 @@ class Optimizier:
         food_ids = []
         food_amounts = []
 
-        vars = self.lp_prob.variables()
-        vars = [v for v in vars if v.varValue is not None and v.varValue > 0]
-        vars.sort(key = lambda v : int(v.name))
+        variables = []
+        for var in self.lp_prob.variables():
+            if var.varValue is None:
+                continue
+            if var.varValue <= 0:
+                continue
+            variables.append(var)
+        variables.sort(key = lambda v : int(v.name))
 
-        for var in vars:
+        for var in variables:
             food_ids.append(int(var.name))
             food_amounts.append(DB_SCALER * var.varValue)
 
@@ -566,6 +573,38 @@ def check_if_sparse_nutrient(nut_amounts):
             nut_has_data.append(True)
 
     return nut_has_data
+
+def update_sex_bd_in_db(sex, year, mon, day):
+    con = sql.connect('spartan.db')
+    cur = con.cursor()
+
+    sql_stmt = (
+        'UPDATE person '
+        'SET (sex, bd_year, bd_mon, bd_day) = '
+        '(?,?,?,?)'
+    )
+    parameters = [sex, year, mon, day]
+    cur.execute(sql_stmt, parameters)
+
+    con.commit()
+    con.close()
+
+def update_nuts_in_db(nutrients):
+    con = sql.connect('spartan.db')
+    cur = con.cursor()
+    for nutrient in nutrients:
+        sql_stmt = (
+            'UPDATE nuts '
+            'SET (min, max, target) = '
+            '(?,?,?) '
+            'WHERE name = ?'
+        )
+
+        parameters = [nutrient.min, nutrient.max, nutrient.target, nutrient.name]
+        cur.execute(sql_stmt, parameters)
+
+    con.commit()
+    con.close()
 
 def get_random_foods_ids(n_foods):
     con = sql.connect('sr_legacy/sr_legacy.db')

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
-    <height>794</height>
+    <width>973</width>
+    <height>652</height>
    </rect>
   </property>
   <property name="palette">
@@ -112,9 +112,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>825</width>
-        <height>794</height>
+        <y>-189</y>
+        <width>956</width>
+        <height>841</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,1">
@@ -131,7 +131,7 @@
         <number>0</number>
        </property>
        <property name="verticalSpacing">
-        <number>10</number>
+        <number>20</number>
        </property>
        <item row="2" column="0">
         <layout class="QGridLayout" name="gridLayout">
@@ -150,6 +150,7 @@
             <string notr="true">QHeaderView::section{
 	background-color: white;
 	border: 0px;
+	padding-left: 3px
 }
 
 QTableView {
@@ -194,6 +195,7 @@ QTableView {
             <string notr="true">QHeaderView::section{
 	background-color: white;
 	border: 0px;
+	padding-left: 3px
 }
 
 QTableView {
@@ -238,6 +240,7 @@ QTableView {
             <string notr="true">QHeaderView::section{
 	background-color: white;
 	border: 0px;
+	padding-left: 3px
 }
 
 QTableView {
@@ -275,9 +278,9 @@ QTableView {
           <enum>QFormLayout::WrapLongRows</enum>
          </property>
          <property name="verticalSpacing">
-          <number>10</number>
+          <number>20</number>
          </property>
-         <item row="0" column="0">
+         <item row="2" column="0">
           <layout class="QVBoxLayout" name="verticalLayout_8">
            <property name="spacing">
             <number>10</number>
@@ -314,7 +317,7 @@ QTableView {
                 </font>
                </property>
                <property name="text">
-                <string>Let's set your nutritional requirements.</string>
+                <string>Let's set your nutritional requirements to get started</string>
                </property>
                <property name="scaledContents">
                 <bool>false</bool>
@@ -612,7 +615,7 @@ QListView::item {
            </item>
           </layout>
          </item>
-         <item row="1" column="0">
+         <item row="3" column="0">
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <property name="spacing">
             <number>8</number>
@@ -659,6 +662,19 @@ QListView::item {
             </layout>
            </item>
           </layout>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <family>Segoe UI Semilight</family>
+             <pointsize>26</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Welcome to Spartan</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

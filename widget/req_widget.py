@@ -85,6 +85,9 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         gui_helpers.vertical_resize_table_view_to_contents(self.vit_view)
         gui_helpers.vertical_resize_table_view_to_contents(self.mineral_view)
 
+    def update_req(self):
+        pass
+
     def day_edit_changed(self, day):
         self.person.bd_day = int(day)
     def mon_edit_changed(self, mon):

@@ -83,10 +83,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0">
-    <property name="spacing">
-     <number>20</number>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
     <property name="leftMargin">
      <number>20</number>
     </property>
@@ -94,20 +91,7 @@
      <number>20</number>
     </property>
     <item>
-     <widget class="QLabel" name="label">
-      <property name="font">
-       <font>
-        <family>Segoe UI Semilight</family>
-        <pointsize>26</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Welcome to Spartan</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="ReqWizWidget" name="widget" native="true">
+     <widget class="ReqWizWidget" name="req_wiz_widget" native="true">
       <property name="font">
        <font>
         <family>Segoe UI</family>
@@ -117,9 +101,9 @@
      </widget>
     </item>
     <item>
-     <widget class="QDialogButtonBox" name="buttonBox">
+     <widget class="QDialogButtonBox" name="button_box">
       <property name="standardButtons">
-       <set>QDialogButtonBox::Save</set>
+       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
       </property>
      </widget>
     </item>
