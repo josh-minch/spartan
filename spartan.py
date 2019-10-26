@@ -18,6 +18,7 @@ from constants import *
 
 class Person(object):
     def __init__(self, sex, bd_year, bd_mon, bd_day):
+        #self.sex, self.bd_year, self.bd_mon, self.bd_day = self.populate_sex_bd_from_db()
         self.sex = sex
         self.bd_year = bd_year
         self.bd_mon = bd_mon
@@ -47,8 +48,23 @@ class Person(object):
     def remove_nut(self, nut_name):
         self.nuts = [nut for nut in self.nuts if nut.name not in nut_name]
 
+    def populate_sex_bd_from_db(self):
+        con = sql.connect('spartan.db')
+        cur = con.cursor()
+        sql_stmt = (
+            'SELECT * '
+            'FROM person '
+            'ORDER BY rowid '
+        )
+
+        cur.execute(sql_stmt)
+        sex, bd_year, bd_mon, bd_day = cur.fetchall()
+
+    def populate_nuts_from_db(self):
+        pass
+
     def populate_foods_from_db(self):
-        con = sql.connect("spartan.db")
+        con = sql.connect('spartan.db')
         cur = con.cursor()
 
         sql_stmt = (

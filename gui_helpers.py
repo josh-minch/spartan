@@ -2,6 +2,8 @@ from PySide2.QtCore import Qt
 from PySide2.QtGui import QFont
 from PySide2.QtWidgets import QHeaderView
 
+import gui_constants
+
 def enumerate_cols(attrs):
     col_to_attr, attr_to_col = {}, {}
     for i, col_attr in enumerate(attrs):
@@ -12,6 +14,11 @@ def enumerate_cols(attrs):
 def hide_view_cols(view, cols_to_hide):
     for col in cols_to_hide:
         view.setColumnHidden(col, True)
+
+# by default, Qt doesn't change a table's header to reflect that of its body
+def fix_header_font(table_view):
+    font = QFont(gui_constants.system_font_family(), gui_constants.FONT_BODY_SIZE, QFont.Normal)
+    table_view.horizontalHeader().setFont(font)
 
 def vertical_resize_table_view_to_contents(table_view):
     height = 0

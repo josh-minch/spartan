@@ -4,11 +4,13 @@ from PySide2.QtWidgets import QTableView
 from delegate.combobox_delegate import ComboBoxDelegate
 from delegate.lineedit_delegate import LineEditDelegate
 from gui_constants import *
+import gui_helpers
 
 
 class ComboTableView(QTableView):
     def __init__(self, parent=None):
         super().__init__(parent)
+        gui_helpers.fix_header_font(self)
         self.setItemDelegateForColumn(PRICE_UNIT_COL, ComboBoxDelegate(self))
         self.setItemDelegateForColumn(MIN_UNIT_COL, ComboBoxDelegate(self))
         self.setItemDelegateForColumn(MAX_UNIT_COL, ComboBoxDelegate(self))

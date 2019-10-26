@@ -12,28 +12,21 @@ from gui_constants import *
 import gui_helpers
 from model.requirements_model import RequirementsModel
 from delegate.lineedit_delegate import LineEditDelegate
-from ui.ui_reqwidget import Ui_ReqWidget
+from ui.ui_reqwizwidget import Ui_ReqWizWidget
 
 
-class ReqWidget(QWidget, Ui_ReqWidget):
-    def __init__(self, person, parent=None):
+class ReqWizWidget(QWidget, Ui_ReqWizWidget):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.person = person
-        self.back_btn.setIcon(QPixmap("images/back-black.svg"))
-        self.set_defaults()
         self.setup_connections()
         self.set_validators()
-
-
+        self.set_defaults()
+        self.init_req()
         self.sex_edit.setView(QListView())
-        self.display_req()
 
     def set_defaults(self):
-        self.day_edit.setText(str(self.person.bd_day))
-        self.mon_edit.setText(str(self.person.bd_mon))
-        self.year_edit.setText(str(self.person.bd_year))
-        self.sex_edit.setCurrentIndex(sex_to_index[self.person.sex])
+        self.sex = 'f'
 
     def set_validators(self):
         int_validator = QIntValidator()
@@ -41,28 +34,25 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.mon_edit.setValidator(int_validator)
         self.year_edit.setValidator(int_validator)
 
+    def init_req(self):
+        self.macro, self.vit, self.mineral = req.get_empty_reqs()
+        self.display_req()
+
     def valid_date(self):
         try:
-            datetime.datetime(self.person.bd_year,
-                              self.person.bd_mon, self.person.bd_day)
+            datetime.datetime(self.bd_year, self.bd_mon, self.bd_day)
             date_validity = True
         except ValueError:
             date_validity = False
         return date_validity
 
     def display_req(self):
-        if None in (self.person.bd_day, self.person.bd_mon, self.person.bd_year):
-            return
-        if not self.valid_date():
-            return
-        if len(str(self.person.bd_year)) < 4:
-            return
-
-        self.person.set_nuts()
-
-        self.macro_model = RequirementsModel(nutrients=self.person.macro, nutrient_group='General')
-        self.vit_model = RequirementsModel(nutrients=self.person.vit, nutrient_group='Vitamins')
-        self.mineral_model = RequirementsModel(nutrients=self.person.mineral, nutrient_group='Minerals')
+        self.macro_model = RequirementsModel(
+            nutrients=self.macro, nutrient_group='General')
+        self.vit_model = RequirementsModel(
+            nutrients=self.vit, nutrient_group='Vitamins')
+        self.mineral_model = RequirementsModel(
+            nutrients=self.mineral, nutrient_group='Minerals')
 
         self.macro_view.setItemDelegate(LineEditDelegate())
         self.vit_view.setItemDelegate(LineEditDelegate())
@@ -72,7 +62,8 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.vit_view.setModel(self.vit_model)
         self.mineral_view.setModel(self.mineral_model)
 
-        gui_helpers.hide_view_cols(self.macro_view, [Req.attr_to_col['nut_id']])
+        gui_helpers.hide_view_cols(
+            self.macro_view, [Req.attr_to_col['nut_id']])
         gui_helpers.hide_view_cols(self.vit_view, [Req.attr_to_col['nut_id']])
         gui_helpers.hide_view_cols(
             self.mineral_view, [Req.attr_to_col['nut_id']])
@@ -85,14 +76,29 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         gui_helpers.vertical_resize_table_view_to_contents(self.vit_view)
         gui_helpers.vertical_resize_table_view_to_contents(self.mineral_view)
 
+    def update_displayed_req(self):
+        if None in (self.bd_day, self.bd_mon, self.bd_year):
+            return
+        if not self.valid_date():
+            return
+        if len(str(self.bd_year)) < 4:
+            return
+
+        self.age_range = req.calculate_age_range(
+            self.bd_year, self.bd_mon, self.bd_day)
+        self.macro, self.vit, self.mineral = req.get_reqs(
+            self.age_range, self.sex)
+
+        self.display_req()
+
     def day_edit_changed(self, day):
-        self.person.bd_day = int(day)
+        self.bd_day = int(day)
     def mon_edit_changed(self, mon):
-        self.person.bd_mon = int(mon)
+        self.bd_mon = int(mon)
     def year_edit_changed(self, year):
-        self.person.bd_year = int(year)
+        self.bd_year = int(year)
     def sex_edit_changed(self, index):
-        self.person.sex = index_to_sex[index]
+        self.sex = index_to_sex[index]
 
     def setup_connections(self):
         self.day_edit.textChanged.connect(self.day_edit_changed)
@@ -100,10 +106,10 @@ class ReqWidget(QWidget, Ui_ReqWidget):
         self.year_edit.textChanged.connect(self.year_edit_changed)
         self.sex_edit.currentIndexChanged[int].connect(self.sex_edit_changed)
 
-        self.day_edit.textChanged.connect(self.display_req)
-        self.mon_edit.textChanged.connect(self.display_req)
-        self.year_edit.textChanged.connect(self.display_req)
-        self.sex_edit.currentIndexChanged[int].connect(self.display_req)
+        self.day_edit.textChanged.connect(self.update_displayed_req)
+        self.mon_edit.textChanged.connect(self.update_displayed_req)
+        self.year_edit.textChanged.connect(self.update_displayed_req)
+        self.sex_edit.currentIndexChanged[int].connect(self.update_displayed_req)
 
         # Debug
         debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)

@@ -252,6 +252,19 @@ age_ranges = [
     (0, 0.5), (0.5, 1), (1, 4), (4, 9), (9, 14), (14, 19), (19, 31), (31, 51), (51, 71), (71, math.inf)
 ]
 
+def get_empty_reqs():
+    macro = extract_empty_req(macro_names)
+    vit = extract_empty_req(vit_names)
+    mineral = extract_empty_req(mineral_names)
+
+    return (macro, vit, mineral)
+
+def extract_empty_req(nut_names):
+    nuts = []
+    for name in nut_names:
+        nuts.append(spartan.Nutrient(name=name, min=None, max=None, target=None))
+    return nuts
+
 def get_reqs(age_range, sex):
     macro = extract_req(age_range, sex, macro_names, min_macro, max_macro)
     vit = extract_req(age_range, sex, vit_names, min_vit, max_vit)

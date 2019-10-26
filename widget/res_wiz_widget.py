@@ -6,32 +6,23 @@ from PySide2.QtWidgets import QWidget, QShortcut, QButtonGroup
 
 import storage
 from constants import preset_grp, fd_grp, type_grp, RESTRICT_FDS_FILE, RESTRICT_TYPES_FILE
-from ui.ui_reswidget import Ui_ResWidget
+from ui.ui_reswizwidget import Ui_ResWizWidget
 
 
-class ResWidget(QWidget, Ui_ResWidget):
-    def __init__(self, person, type_res, fd_res, parent=None):
+class ResWizWidget(QWidget, Ui_ResWizWidget):
+    def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.person = person
-        self.type_res = type_res
-        self.fd_res = fd_res
-
         self.list_btns()
         self.assign_id(self.preset_btns, self.preset_btn_grp, preset_grp.values())
         self.assign_id(self.food_btns, self.food_btn_grp, fd_grp.values())
-        self.assign_id(self.type_btns, self.type_btn_grp, type_grp.values())
 
-        self.type_btn_grp.setExclusive(False)
         self.food_btn_grp.setExclusive(False)
         self.preset_btn_grp.setExclusive(False)
-        self.setup_connections()
-        self.init_btn_states()
 
-    def init_btn_states(self):
-        self.check_btns(self.type_btn_grp, self.type_res.res)
-        self.check_btns(self.food_btn_grp, self.fd_res.res)
-        self.update_preset_after_btn_toggle()
+        self.fd_res = set()
+
+        self.setup_connections()
 
     def check_btns(self, btn_grp, restrictions):
         for restriction in restrictions:
@@ -74,9 +65,9 @@ class ResWidget(QWidget, Ui_ResWidget):
 
     def change_res(self, res, id, checked):
         if checked:
-            res.add_res(id)
+            res.add(id)
         else:
-            res.remove_res(id)
+            res.remove(id)
 
     def update_checked_food_btns(self, btn, checked):
         if checked:
@@ -98,7 +89,6 @@ class ResWidget(QWidget, Ui_ResWidget):
                           self.drink, self.seafood, self.legume, self.lamb, self.baked,
                           self.sweet, self.cereal, self.fast, self.meal,
                           self.snack, self.american, self.restaurant]
-        self.type_btns = [self.search, self.generated]
 
         # Qt Designer apparently does not support the creation of intersectiong groups
         # The remaining groups are enumerated here
@@ -114,8 +104,6 @@ class ResWidget(QWidget, Ui_ResWidget):
 
     def setup_connections(self):
         # Update restriction values for external use
-        self.type_btn_grp.buttonToggled[int, bool].connect(
-            partial(self.change_res, self.type_res))
         self.food_btn_grp.buttonToggled[int, bool].connect(
             partial(self.change_res, self.fd_res))
 

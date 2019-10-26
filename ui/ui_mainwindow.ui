@@ -141,6 +141,9 @@
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add food (Ctrl+F)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -150,6 +153,9 @@
           <property name="icon">
            <iconset>
             <normaloff>../../../../../../../.designer/backup/images/add.png</normaloff>../../../../../../../.designer/backup/images/add.png</iconset>
+          </property>
+          <property name="shortcut">
+           <string>Ctrl+F</string>
           </property>
          </widget>
         </item>
@@ -171,7 +177,7 @@
            </font>
           </property>
           <property name="toolTip">
-           <string>&lt;p style='white-space:pre'&gt;Remove selected food (delete)&lt;/p&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;pre style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Remove selected food (Delete)&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>Remove</string>
@@ -947,21 +953,33 @@ QTableView {
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="toolTip">
+           <string>Settings (Ctrl+,)</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton {
+    border: white;
+}
+</string>
+          </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>../../../../../../../.designer/backup/images/settings.svg</normaloff>../../../../../../../.designer/backup/images/settings.svg</iconset>
+           <iconset resource="../images/images.qrc">
+            <normaloff>:/images/settings.svg</normaloff>:/images/settings.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
-            <width>20</width>
-            <height>20</height>
+            <width>30</width>
+            <height>30</height>
            </size>
           </property>
           <property name="shortcut">
-           <string>F9</string>
+           <string>Ctrl+,</string>
           </property>
          </widget>
         </item>
@@ -1555,6 +1573,8 @@ QTableView {
    <header>view/combo_table_view.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../images/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

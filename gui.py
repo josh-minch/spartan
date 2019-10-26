@@ -99,8 +99,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.pref_btn.clicked.connect(self.open_pref)
 
     def setup_shortcuts(self):
-        add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
-        add_foods_shortcut.activated.connect(self.open_search_window)
+        #add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
+        #add_foods_shortcut.activated.connect(self.open_search_window)
 
         remove_shortcut = QShortcut(QKeySequence(Qt.Key_Delete), self)
         remove_shortcut.activated.connect(self.remove_from_fridge)

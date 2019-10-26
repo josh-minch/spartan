@@ -1,4 +1,16 @@
-from gui_helpers import enumerate_cols
+import platform
+from PySide2.QtGui import QFont
+import gui_helpers
+
+def system_font_family():
+    if platform.system() == 'Windows':
+        return 'Segoe UI'
+    elif platform.system() == 'Darwin':
+        return 'SF Pro Text'
+    else:
+        return QFont.defaultFamily()
+
+FONT_BODY_SIZE = 11
 
 # Fridge view
 F_NUM_COLS = 15
@@ -88,7 +100,7 @@ s_col_to_attr = {S_NAME_COL: 'name', S_AMOUNT_COL: 'amount', S_UNIT_COL: 'unit',
 # Search view
 class Search:
     attrs = ['fd_grp', 'name']
-    col_to_attr, attr_to_col = enumerate_cols(attrs)
+    col_to_attr, attr_to_col = gui_helpers.enumerate_cols(attrs)
 
 # Optimum diet view
 O_ID_COL = 0
@@ -122,4 +134,4 @@ rec_to_index = {'us': US_INDEX, 'eu': EU_INDEX, 'jp': JP_INDEX}
 class Req:
     attrs = ['nut_id', 'name', 'min', 'min_unit',
             'max', 'max_unit', 'target', 'target_unit']
-    col_to_attr, attr_to_col = enumerate_cols(attrs)
+    col_to_attr, attr_to_col = gui_helpers.enumerate_cols(attrs)
