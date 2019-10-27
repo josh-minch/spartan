@@ -57,7 +57,6 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
             QtWidgets.QStyle.CC_ComboBox, box, painter)
         QtWidgets.QApplication.style().drawControl(QtWidgets.QStyle.CE_ComboBoxLabel, box, painter)
 
-
     def sizeHint(self, option, index):
         box = QtWidgets.QStyleOptionComboBox()
         box.state = option.state

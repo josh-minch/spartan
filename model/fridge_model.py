@@ -142,7 +142,5 @@ class FridgeModel(QAbstractTableModel):
             return Qt.NoItemFlags
         # Cannot edit name, per col
         if index.column() in (NAME_COL, PER_COL):
-            return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
-                            ~Qt.ItemIsEditable)
-        return Qt.ItemFlags(QAbstractTableModel.flags(self, index) |
-                            Qt.ItemIsEnabled | Qt.ItemIsEditable | Qt.ItemIsSelectable)
+            return Qt.ItemFlags(QAbstractTableModel.flags(self, index) | ~Qt.ItemIsEditable)
+        return Qt.ItemFlags(QAbstractTableModel.flags(self, index) | Qt.ItemIsEditable)

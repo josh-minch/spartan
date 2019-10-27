@@ -462,11 +462,13 @@ def get_nut_groups(nuts):
     return macro, vit, mineral
 
 def get_empty_nutrition(person):
-    nut_ids = [nut.nut_id for nut in sorted(person.nuts, key=lambda n: int(n.nut_id))]
+    sorted_nuts = sorted(person.nuts, key=lambda n: int(n.nut_id))
+    nut_ids = [nut.nut_id for nut in sorted_nuts]
+    nut_names = [nut.name for nut in sorted_nuts]
     units = get_nutrition_units(nut_ids)
 
     nutrition = []
-    nut_names = [nut.name for nut in person.nuts]
+
     for nut_name, unit in zip(nut_names, units):
         dv = calculate_dv(person, nut_name, None)
         nutrition.append({'name': nut_name, 'amount': None, 'unit': unit[0], 'percent': dv})

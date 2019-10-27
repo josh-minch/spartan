@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Sat Oct 26 17:29:22 2019
+# Created: Sat Oct 26 23:00:55 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -362,7 +362,8 @@ class Ui_MainWindow(object):
 "QTableView {\n"
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
-        self.constraints_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.constraints_view.setFrameShape(QtWidgets.QFrame.Box)
+        self.constraints_view.setFrameShadow(QtWidgets.QFrame.Plain)
         self.constraints_view.setTabKeyNavigation(False)
         self.constraints_view.setAlternatingRowColors(True)
         self.constraints_view.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
@@ -477,6 +478,7 @@ class Ui_MainWindow(object):
         self.minerals_view.setObjectName("minerals_view")
         self.minerals_view.horizontalHeader().setVisible(True)
         self.minerals_view.horizontalHeader().setHighlightSections(False)
+        self.minerals_view.horizontalHeader().setMinimumSectionSize(0)
         self.minerals_view.horizontalHeader().setStretchLastSection(False)
         self.minerals_view.verticalHeader().setVisible(False)
         self.minerals_view.verticalHeader().setDefaultSectionSize(25)
@@ -543,6 +545,7 @@ class Ui_MainWindow(object):
         self.vits_view.setObjectName("vits_view")
         self.vits_view.horizontalHeader().setVisible(True)
         self.vits_view.horizontalHeader().setHighlightSections(False)
+        self.vits_view.horizontalHeader().setMinimumSectionSize(0)
         self.vits_view.horizontalHeader().setStretchLastSection(False)
         self.vits_view.verticalHeader().setVisible(False)
         self.vits_view.verticalHeader().setDefaultSectionSize(25)
@@ -609,6 +612,7 @@ class Ui_MainWindow(object):
         self.macros_view.setObjectName("macros_view")
         self.macros_view.horizontalHeader().setVisible(True)
         self.macros_view.horizontalHeader().setHighlightSections(False)
+        self.macros_view.horizontalHeader().setMinimumSectionSize(0)
         self.macros_view.horizontalHeader().setStretchLastSection(False)
         self.macros_view.verticalHeader().setVisible(False)
         self.macros_view.verticalHeader().setDefaultSectionSize(25)
@@ -648,7 +652,7 @@ class Ui_MainWindow(object):
         self.actionaa.setObjectName("actionaa")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

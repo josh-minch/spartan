@@ -43,7 +43,7 @@ class ProgressBarDelegate (QStyledItemDelegate):
 
             elif progress == -1:
                 progress_bar_option.progress = 100
-                progress_bar_option.text = "No minimum"
+                progress_bar_option.text = "None set"
                 p.setColor(QPalette.Highlight, QColor(Qt.white))
                 p.setColor(QPalette.HighlightedText, Qt.darkGray)
                 progress_bar_option.palette = p

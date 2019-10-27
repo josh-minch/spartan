@@ -1,4 +1,4 @@
-from PySide2.QtCore import Qt, QItemSelectionModel, QTimer
+from PySide2.QtCore import Qt, QItemSelectionModel, QItemSelection, QTimer
 from PySide2.QtWidgets import QTableView
 
 from delegate.combobox_delegate import ComboBoxDelegate
@@ -30,9 +30,13 @@ class ComboTableView(QTableView):
             # When opening combobox, also select current row
             selection = self.selectionModel()
             if selection:
-                row_ix = self.model().index(ix.row(), 0)
-                selection.setCurrentIndex(
-                    row_ix, QItemSelectionModel.ClearAndSelect)
+                # select entire row of currently selected index
+                top_left = self.model().index(ix.row(), 0)
+                bottom_right = self.model().index(ix.row(), 14)
+                item_selection = QItemSelection(top_left, bottom_right)
+
+                selection.select(
+                    item_selection, QItemSelectionModel.ClearAndSelect)
 
             QTimer.singleShot(1, self, self.edit(ix))
             event.setAccepted(True)

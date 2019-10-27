@@ -35,7 +35,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fd_res = Restriction(RESTRICT_FDS_FILE)
 
         self.setup_fridge_views()
-        self.display_empty_nutrition()
+
         self.setup_connections()
         self.setup_shortcuts()
         self.setup_selection_modes()
@@ -44,6 +44,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.add_foods_btn.setFocus()
         #self.resize(QDesktopWidget().availableGeometry(self).size() * 0.90)
         self.resize(1500, 700)
+        self.display_empty_nutrition()
         self.show()
 
     def setup_connections(self):
@@ -159,8 +160,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.prices_view.setColumnWidth(PER_COL, PER_COL_WIDTH)
         self.prices_view.setColumnWidth(PRICE_QUANTITY_COL, VALUE_COL_WIDTH)
 
-        #self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
+        '''
         self.constraints_view.setColumnWidth(MIN_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
@@ -168,7 +170,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.constraints_view.setColumnWidth(MIN_UNIT_COL, 50)
         self.constraints_view.setColumnWidth(MAX_UNIT_COL, 50)
         self.constraints_view.setColumnWidth(TARGET_UNIT_COL, 50)
-
+        '''
         self.nut_quant_view.setColumnWidth(NUT_QUANT_COL, VALUE_COL_WIDTH)
 
         # Set row height
@@ -185,7 +187,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Set header fixed
         self.fridge_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
         self.prices_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        #self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
         self.nut_quant_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
         # Hide fridge scrollbar
@@ -200,23 +202,49 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         minerals_model = NutritionTableModel(
             nutrients=minerals, nutrient_group='Minerals')
 
-        self.macros_view.setModel(macros_model)
-        self.vits_view.setModel(vits_model)
-        self.minerals_view.setModel(minerals_model)
+        self.setup_nutrition_view(self.macros_view, macros_model)
+        self.setup_nutrition_view(self.vits_view, vits_model)
+        self.setup_nutrition_view(self.minerals_view, minerals_model)
 
-        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
-        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
-        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
+    def display_nutrition(self):
+        selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
+        if len(selected_food_id_ixs) == 0:
+            self.display_empty_nutrition()
+            return
 
-        self.setup_nutrition_view(self.macros_view)
-        self.setup_nutrition_view(self.vits_view)
-        self.setup_nutrition_view(self.minerals_view)
+        selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
+        selected_food_amounts = [ix.siblingAtColumn(
+            NUT_QUANT_COL).data() for ix in selected_food_id_ixs]
+        selected_food_units = [ix.siblingAtColumn(
+            NUT_QUANT_UNIT_COL).data() for ix in selected_food_id_ixs]
 
-    def setup_nutrition_view(self, view):
-        set_column_widths(view, nut_col_to_attr.keys(), nut_col_widths)
+        # Convert non-gram quantities to grams
+        for i, (unit, food_id, amount) in enumerate(zip(selected_food_units, selected_food_ids, selected_food_amounts)):
+            if unit != 'g':
+                converted_amount = convert_quantity(
+                    food_id, amount, old_unit=unit, new_unit='g')
+                selected_food_amounts[i] = converted_amount
+
+        macros, vits, minerals = get_nutrition(
+            self.person, selected_food_ids, selected_food_amounts)
+
+        macros_model = NutritionTableModel(nutrients=macros, nutrient_group='General')
+        vits_model = NutritionTableModel(nutrients=vits, nutrient_group='Vitamins')
+        minerals_model = NutritionTableModel(nutrients=minerals, nutrient_group='Minerals')
+
+        self.setup_nutrition_view(self.macros_view, macros_model)
+        self.setup_nutrition_view(self.vits_view, vits_model)
+        self.setup_nutrition_view(self.minerals_view, minerals_model)
+
+    def setup_nutrition_view(self, view, model):
+        view.setModel(model)
+
+        view.setItemDelegate(ProgressBarDelegate(self))
+
         set_header_font(view, FONT_MAIN_SIZE, QFont.DemiBold)
-        vertical_resize_table_view_to_contents(view)
+        set_column_widths(view, nut_col_to_attr.keys(), nut_col_widths)
         view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        vertical_resize_table_view_to_contents(view)
 
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
@@ -252,49 +280,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.optimum_diet_window = OptimumDietWindow(self.person, self.type_res, self.fd_res, self)
         self.optimum_diet_window.setAttribute(Qt.WA_DeleteOnClose)
 
-    def display_nutrition(self):
-        selected_food_id_ixs = self.fridge_view.selectionModel().selectedRows()
-        if len(selected_food_id_ixs) == 0:
-            self.display_empty_nutrition()
-            return
-
-        selected_food_ids = [ix.data() for ix in selected_food_id_ixs]
-        selected_food_amounts = [ix.siblingAtColumn(
-            NUT_QUANT_COL).data() for ix in selected_food_id_ixs]
-        selected_food_units = [ix.siblingAtColumn(
-            NUT_QUANT_UNIT_COL).data() for ix in selected_food_id_ixs]
-
-        # Convert non-gram quantities to grams
-        for i, (unit, food_id, amount) in enumerate(zip(selected_food_units, selected_food_ids, selected_food_amounts)):
-            if unit != 'g':
-                converted_amount = convert_quantity(food_id, amount, old_unit=unit, new_unit='g')
-                selected_food_amounts[i] = converted_amount
-
-        macros, vits, minerals = get_nutrition(
-            self.person, selected_food_ids, selected_food_amounts)
-
-        macros_model = NutritionTableModel(nutrients=macros, nutrient_group='General')
-        vits_model = NutritionTableModel(
-            nutrients=vits, nutrient_group='Vitamins')
-        minerals_model = NutritionTableModel(
-            nutrients=minerals, nutrient_group='Minerals')
-
-        self.macros_view.setModel(macros_model)
-        self.vits_view.setModel(vits_model)
-        self.minerals_view.setModel(minerals_model)
-
-        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
-        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
-        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
-
-        self.setup_nutrition_view(self.macros_view)
-        self.setup_nutrition_view(self.vits_view)
-        self.setup_nutrition_view(self.minerals_view)
-
     def toggle_remove_btn(self):
         if self.fridge_view.selectionModel() is None:
             self.remove_btn.setEnabled(False)
-        elif self.fridge_view.selectionModel().hasSelection():
+        elif len(self.fridge_view.selectionModel().selectedRows()) > 0:
             self.remove_btn.setEnabled(True)
         else:
             self.remove_btn.setEnabled(False)
