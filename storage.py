@@ -49,6 +49,7 @@ def create_spartan_db():
     cur.execute(nuts_stmt)
     cur.execute(foods_stmt)
     insert_nuts()
+    insert_default_person()
     con.commit()
     con.close()
 
@@ -56,13 +57,26 @@ def insert_nuts():
     con = sql.connect("spartan.db")
     cur = con.cursor()
 
-    sql_stmt=(
+    sql_stmt = (
         'INSERT INTO nuts '
         'VALUES (?,?,?,?)'
     )
     for nut_name in req.nut_names:
         parameters = [nut_name, None, None, None]
         cur.execute(sql_stmt, parameters)
+
+    con.commit()
+    con.close()
+
+def insert_default_person():
+    con = sql.connect("spartan.db")
+    cur = con.cursor()
+
+    sql_stmt = (
+        'INSERT INTO person '
+        'VALUES (?,?,?,?) '
+    )
+    cur.execute(sql_stmt, [None, None, None, None])
 
     con.commit()
     con.close()

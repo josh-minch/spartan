@@ -10,10 +10,9 @@ from ui.ui_reswidget import Ui_ResWidget
 
 
 class ResWidget(QWidget, Ui_ResWidget):
-    def __init__(self, person, type_res, fd_res, parent=None):
+    def __init__(self, type_res, fd_res, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.person = person
         self.type_res = type_res
         self.fd_res = fd_res
 

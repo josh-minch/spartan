@@ -17,51 +17,37 @@ from constants import *
 
 
 class Person(object):
-    def __init__(self, sex, bd_year, bd_mon, bd_day):
-        #self.sex, self.bd_year, self.bd_mon, self.bd_day = self.populate_sex_bd_from_db()
-        self.sex = sex
-        self.bd_year = bd_year
-        self.bd_mon = bd_mon
-        self.bd_day = bd_day
-        self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
-        self.age = req.calculate_age(self.bd_year, self.bd_mon, self.bd_day)
-
+    def __init__(self):
         # Personal nutrient requirements and foods in a person's fridge
         self.nuts = []
         self.foods = []
-        self.set_nuts()
         self.populate_foods_from_db()
+        self.populate_nuts_from_db()
 
     def __repr__(self):
         return str(self.__dict__)
 
-    def set_nuts(self):
-        self.age_range = req.calculate_age_range(self.bd_year, self.bd_mon, self.bd_day)
-        self.macro, self.vit, self.mineral = req.get_reqs(self.age_range, self.sex)
-        self.nuts = self.macro + self.vit + self.mineral
-        self.nuts.sort(key=lambda nut: nut.nut_id)
+    def set_nuts(self, nuts):
+        self.nuts = nuts
+        update_nuts_in_db(nuts)
 
-    def add_nut(self, nutrient):
-        self.nuts.append(nutrient)
-        self.nuts.sort(key=lambda nut: nut.nut_id)
+    def set_nut(self, nut, attr, value):
+        setattr(nut, attr, value)
+        update_nut_in_db(nut, attr, value)
 
-    def remove_nut(self, nut_name):
-        self.nuts = [nut for nut in self.nuts if nut.name not in nut_name]
-
-    def populate_sex_bd_from_db(self):
+    def populate_nuts_from_db(self):
         con = sql.connect('spartan.db')
         cur = con.cursor()
         sql_stmt = (
             'SELECT * '
-            'FROM person '
-            'ORDER BY rowid '
+            'FROM nuts '
+            'ORDER BY rowid'
         )
+        for row in cur.execute(sql_stmt):
+            self.nuts.append(Nutrient(name=row[0], min=row[1], max=row[2], target=row[3]))
 
-        cur.execute(sql_stmt)
-        sex, bd_year, bd_mon, bd_day = cur.fetchall()
-
-    def populate_nuts_from_db(self):
-        pass
+        con.commit()
+        con.close()
 
     def populate_foods_from_db(self):
         con = sql.connect('spartan.db')
@@ -221,16 +207,14 @@ class Nutrient:
 class Optimizier:
     def __init__(self, person, type_res, fd_res):
         self.lp_prob = LpProblem("Diet", sense=LpMinimize)
-        self.person = person
         self.type_res = type_res
         self.fd_res = fd_res
-        self.foods = sorted(self.person.foods, key=lambda f: int(f.food_id))
+        self.foods = sorted(person.foods, key=lambda f: int(f.food_id))
+        self.nuts = sorted(person.nuts, key=lambda n: int(n.nut_id))
 
     def optimize_diet(self):
         if GEN_RESTRICT in self.type_res.res:
-            start = timer()
             self.foods = self.filter_foods(self.foods, self.fd_res.res)
-            print(timer()-start)
         self.make_nutrition_matrix()
         self.construct_lp_problem()
         self.add_nutrient_constraints()
@@ -265,7 +249,7 @@ class Optimizier:
         return filtered_foods
 
     def make_nutrition_matrix(self):
-        nut_ids = [nut.nut_id for nut in self.person.nuts]
+        nut_ids = [nut.nut_id for nut in self.nuts]
         food_ids = [food.food_id for food in self.foods]
 
         # Due to sqlite3 limitations, we must batch large queries
@@ -318,7 +302,7 @@ class Optimizier:
         # Construct formatted matrix where each row is a food and each col is a nutrient
         unformatted_data = np.array(unformatted_data)
         unformatted_data[unformatted_data == None] = 0
-        unformatted_data = unformatted_data.reshape(len(self.foods), len(self.person.nuts))
+        unformatted_data = unformatted_data.reshape(len(self.foods), len(self.nuts))
 
         formatted_data = np.transpose(unformatted_data)
         return formatted_data
@@ -364,9 +348,9 @@ class Optimizier:
         self.lp_prob += comparator(var, constraint_value)
 
     def add_nutrient_constraints(self):
-        mins = [nut.min for nut in self.person.nuts]
-        targets = [nut.target for nut in self.person.nuts]
-        maxes = [nut.max for nut in self.person.nuts]
+        mins = [nut.min for nut in self.nuts]
+        targets = [nut.target for nut in self.nuts]
+        maxes = [nut.max for nut in self.nuts]
 
         for i in range(len(self.nutrition_matrix)):
             if mins[i] is not None:
@@ -467,9 +451,19 @@ def convert_quantity(food_id, quantity, old_unit, new_unit):
         return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
     '''
 
+def get_nut_groups(nuts):
+    macro_end = vit_start = len(req.macro_names)
+    vit_end = mineral_start = len(req.vit_names)+len(req.mineral_names)
+
+    macro = [nut for nut in nuts[0:macro_end]]
+    vit = [nut for nut in nuts[vit_start:vit_end]]
+    mineral = [nut for nut in nuts[mineral_start:]]
+
+    return macro, vit, mineral
+
 def get_empty_nutrition(person):
-    nut_ids = [nut.nut_id for nut in person.nuts]
-    units = get_nutrition_unit(nut_ids)
+    nut_ids = [nut.nut_id for nut in sorted(person.nuts, key=lambda n: int(n.nut_id))]
+    units = get_nutrition_units(nut_ids)
 
     nutrition = []
     nut_names = [nut.name for nut in person.nuts]
@@ -483,12 +477,13 @@ def get_nutrition(person, food_ids, food_amounts):
     # Sort input lists according to food ids in ascending order
     food_tups = sorted(zip(food_ids, food_amounts))
     food_ids, food_amounts = (list(food_tup) for food_tup in zip(*food_tups))
+    sorted_nuts = sorted(person.nuts, key=lambda n: int(n.nut_id))
+    nut_ids = [nut.nut_id for nut in sorted_nuts]
+    nut_names = [nut.name for nut in sorted_nuts]
+    units = get_nutrition_units(nut_ids)
 
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
-
-    nut_ids = [nut.nut_id for nut in person.nuts]
-
     sql_stmt = (
         'SELECT amount '
         'FROM nut_data WHERE food_id IN (' + (len(food_ids) - 1) * '?, ' + '?) '
@@ -513,10 +508,7 @@ def get_nutrition(person, food_ids, food_amounts):
     food_amounts = np.reshape(food_amounts, (len(food_amounts), 1))
     nut_amounts = sum(food_amounts * (nut_amounts / DB_SCALER))
 
-    units = get_nutrition_unit(nut_ids)
-
     nutrition = []
-    nut_names = [nut.name for nut in person.nuts]
     for nut_name, nut_amount, has_data, unit in zip(nut_names, nut_amounts, nut_has_data, units):
         if has_data:
             dv = calculate_dv(person, nut_name, nut_amount)
@@ -542,27 +534,34 @@ def sort_nutrition(nutrition):
     return macros, vits, minerals
 
 def calculate_dv(person, nut_name, nutrient_amount):
-        # No data
-        if nutrient_amount is None:
-            return None
+    # No data
+    if nutrient_amount is None:
+        return None
 
-        [min_value] = [nut.min for nut in person.nuts if nut.name == nut_name]
+    [min_value] = [nut.min for nut in person.nuts if nut.name == nut_name]
 
-        # No recommendation flag of -1
-        if min_value is None:
-            return -1
+    # No recommendation flag of -1
+    if min_value is None:
+        return -1
 
-        return 100 * (nutrient_amount / min_value)
+    return 100 * (nutrient_amount / min_value)
 
-def get_nutrition_unit(nut_ids):
+def get_nutrition_units(nut_ids):
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
     sql_stmt = (
         'SELECT units '
-        'FROM nutr_def WHERE id IN (' + (len(nut_ids) - 1) * '?, ' + '?) '
+        'FROM nutr_def '
+        'WHERE id = ?'
     )
-    cur.execute(sql_stmt, nut_ids)
-    return cur.fetchall()
+    units = []
+    for nut_id in nut_ids:
+        cur.execute(sql_stmt, [nut_id])
+        units.append(cur.fetchall()[0])
+
+    cur.close()
+    con.commit()
+    return units
 
 def check_if_sparse_nutrient(nut_amounts):
     nut_has_data = []
@@ -599,12 +598,63 @@ def update_nuts_in_db(nutrients):
             '(?,?,?) '
             'WHERE name = ?'
         )
-
         parameters = [nutrient.min, nutrient.max, nutrient.target, nutrient.name]
         cur.execute(sql_stmt, parameters)
 
     con.commit()
     con.close()
+
+def update_nut_in_db(nut, attr, value):
+    con = sql.connect('spartan.db')
+    cur = con.cursor()
+
+    # attr comes from our dict, no need to sanitize.
+    # In addition, columns cannot be parameterized in SQLite3
+    sql_stmt = (
+        'UPDATE nuts '
+        'SET '+attr+' = '
+        '(?) '
+        'WHERE name = ?'
+    )
+    parameters = [value, nut.name]
+    cur.execute(sql_stmt, parameters)
+
+    con.commit()
+    con.close()
+
+def get_sex_bd_from_db():
+    con = sql.connect('spartan.db')
+    cur = con.cursor()
+    sql_stmt = (
+        'SELECT * '
+        'FROM person '
+        'ORDER BY rowid '
+    )
+
+    cur.execute(sql_stmt)
+    (sex, bd_year, bd_mon, bd_day) = cur.fetchall()[0]
+    return sex, bd_year, bd_mon, bd_day
+
+def get_nuts_from_db():
+    con = sql.connect('spartan.db')
+    cur = con.cursor()
+    sql_stmt = (
+        'SELECT * '
+        'FROM nuts '
+        'ORDER BY rowid '
+    )
+
+    cur.execute(sql_stmt)
+    nuts = cur.fetchall()
+
+    macro_end = vit_start = len(req.macro_names)
+    vit_end = mineral_start = len(req.vit_names)+len(req.mineral_names)
+
+    macro = [Nutrient(name=n[0], min=n[1], max=n[2], target=n[3]) for n in nuts[0:macro_end]]
+    vit = [Nutrient(name=n[0], min=n[1], max=n[2], target=n[3]) for n in nuts[vit_start:vit_end]]
+    mineral = [Nutrient(name=n[0], min=n[1], max=n[2], target=n[3]) for n in nuts[mineral_start:]]
+
+    return macro, vit, mineral
 
 def get_random_foods_ids(n_foods):
     con = sql.connect('sr_legacy/sr_legacy.db')

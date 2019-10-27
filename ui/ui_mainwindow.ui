@@ -83,7 +83,7 @@
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="3,2,0">
+   <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0,0">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -398,7 +398,7 @@ QTableView {
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="iconSize">
          <size>
@@ -420,7 +420,7 @@ QTableView {
           </font>
          </property>
          <attribute name="title">
-          <string>Nutrition quantities</string>
+          <string>Nutrition amounts</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_4">
           <property name="leftMargin">
@@ -993,8 +993,8 @@ QTableView {
         <property name="verticalSpacing">
          <number>0</number>
         </property>
-        <item row="0" column="0">
-         <widget class="QTableView" name="macros_view">
+        <item row="1" column="1">
+         <widget class="QTableView" name="minerals_view">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1140,7 +1140,7 @@ QTableView {
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <property name="showGrid">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>true</bool>
@@ -1306,7 +1306,7 @@ QTableView {
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <property name="showGrid">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>true</bool>
@@ -1325,8 +1325,8 @@ QTableView {
           </attribute>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QTableView" name="minerals_view">
+        <item row="0" column="0">
+         <widget class="QTableView" name="macros_view">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -1472,7 +1472,7 @@ QTableView {
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <property name="showGrid">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderVisible">
            <bool>true</bool>

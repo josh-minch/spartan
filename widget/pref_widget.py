@@ -3,28 +3,47 @@ from datetime import date
 from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QWidget
 
+import req
 from constants import type_grp, fd_grp, fd_grp_display_name
 from ui.ui_prefwidget import Ui_PrefWidget
 
 
 class PrefWidget(QWidget, Ui_PrefWidget):
-    def __init__(self, person, type_res, fd_res, parent=None):
+    def __init__(self, sex, bd, type_res, fd_res, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-        self.person = person
+        self.sex = sex
+        self.bd = bd
         self.type_res = type_res
         self.fd_res = fd_res
+
         self.set_preview_text()
 
-        self.req_btn.setIcon(QPixmap("images/person-outline.png"))
-        self.res_btn.setIcon(QPixmap("images/food.png"))
-
     def set_preview_text(self):
-        self.age_label.setText((get_age_text(self.person)))
-        self.sex_label.setText((get_sex_text(self.person.sex)))
+        self.age_label.setText(self.get_age_text())
+        self.sex_label.setText(self.get_sex_text())
 
         res_type_label_text = get_type_res_text(self.type_res.res)
         self.res_type_label.setText(res_type_label_text)
+
+    def get_age_text(self):
+        age = req.calculate_age(*self.bd)
+        if age < 1:
+            bd_year, bd_mon, bd_day = self.bd
+            age_months = req.calculate_age_months(bd_mon, bd_day)
+            return str(age_months) + ' months old'
+        else:
+            return '{:.0f}'.format(age//1) + ' years old'
+
+    def get_sex_text(self):
+        if self.sex == 'f':
+            return 'Female'
+        elif self.sex == 'l':
+            return 'Female, lactating'
+        elif self.sex == 'p':
+            return 'Female, pregnant'
+        elif self.sex == 'm':
+            return 'Male'
 
 def get_type_res_text(res):
     if len(res) == 0:
@@ -39,22 +58,6 @@ def get_type_res_text(res):
         text += 'search results or generated diets'
     return text
 
-def get_age_text(person):
-    if person.age < 1:
-        age_months = req.calculate_age_months(
-            person.bd_mon, person.bd_day)
-        return str(age_months) + ' months old'
-    else:
-        return '{:.0f}'.format(person.age//1) + ' years old'
 
-def get_sex_text(sex):
-    if sex == 'f':
-        return 'Female'
-    elif sex == 'l':
-        return 'Female, lactating'
-    elif sex == 'p':
-        return 'Female, pregnant'
-    elif sex == 'm':
-        return 'Male'
 
 

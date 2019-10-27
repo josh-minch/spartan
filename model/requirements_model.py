@@ -38,16 +38,17 @@
 from PySide2.QtCore import (Qt, QAbstractTableModel, QModelIndex)
 from PySide2.QtGui import QBrush
 
-from spartan import Nutrient
+import spartan
 from gui_helpers import enumerate_cols
 from gui_constants import Req
 
 
 class RequirementsModel(QAbstractTableModel):
-    def __init__(self, parent=None, nutrients=None, nutrient_group=None):
+    def __init__(self, parent=None, nutrients=None, nutrient_group=None, person=None):
         super().__init__(parent)
         self.nutrients = nutrients
         self.nutrient_group = nutrient_group
+        self.person = person
 
     def rowCount(self, index=QModelIndex()):
         return len(self.nutrients)
@@ -101,7 +102,7 @@ class RequirementsModel(QAbstractTableModel):
     def insertRows(self, position, rows=1, index=QModelIndex()):
         self.beginInsertRows(QModelIndex(), position, position + rows - 1)
         for row in range(rows):
-            self.nutrients.insert(position + row, Nutrient())
+            self.nutrients.insert(position + row, spartan.Nutrient())
         self.endInsertRows()
         return True
 
@@ -117,8 +118,10 @@ class RequirementsModel(QAbstractTableModel):
 
         if index.isValid() and 0 <= index.row() < len(self.nutrients):
             nutrient = self.nutrients[index.row()]
-            setattr(nutrient, Req.col_to_attr[index.column()], value)
+            attr = Req.col_to_attr[index.column()]
+            self.person.set_nut(nutrient, attr, value)
             self.dataChanged.emit(index, index)
+
             return True
         return False
 

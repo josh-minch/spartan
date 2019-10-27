@@ -93,11 +93,8 @@ class FridgeModel(QAbstractTableModel):
                 elif section == TARGET_COL:
                     return "Equal to"
                 elif section == NUT_QUANT_COL:
-                    return "Quantity"
-                '''
-                elif section in (PRICE_QUANTITY_COL, PRICE_UNIT_COL, MIN_UNIT_COL, MAX_UNIT_COL, TARGET_UNIT_COL):
-                    return ""
-                '''
+                    return "Amount"
+
 
             if role == Qt.TextAlignmentRole:
                 if section in (NAME_COL, PRICE_UNIT_COL):

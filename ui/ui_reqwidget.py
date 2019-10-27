@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Sat Oct 26 12:51:11 2019
+# Created: Sat Oct 26 17:29:23 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,7 +13,7 @@ from PySide2 import QtCore, QtGui, QtWidgets
 class Ui_ReqWidget(object):
     def setupUi(self, ReqWidget):
         ReqWidget.setObjectName("ReqWidget")
-        ReqWidget.resize(1276, 749)
+        ReqWidget.resize(911, 749)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -48,7 +48,7 @@ class Ui_ReqWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 1258, 731))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 893, 731))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_2.setContentsMargins(20, 20, -1, -1)
@@ -69,12 +69,13 @@ class Ui_ReqWidget(object):
         self.mineral_view = ReqView(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.mineral_view.setFont(font)
         self.mineral_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
+"    padding-left: 3px;\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -90,12 +91,13 @@ class Ui_ReqWidget(object):
         self.macro_view = ReqView(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.macro_view.setFont(font)
         self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
+"    padding-left: 3px;\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -111,12 +113,13 @@ class Ui_ReqWidget(object):
         self.vit_view = ReqView(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.vit_view.setFont(font)
         self.vit_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
+"    padding-left: 3px;\n"
 "}\n"
 "\n"
 "QTableView {\n"
@@ -148,7 +151,7 @@ class Ui_ReqWidget(object):
         self.horizontalLayout_13.addWidget(self.label_14)
         self.label_15 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_15.setFont(font)
         self.label_15.setScaledContents(False)
         self.label_15.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -173,7 +176,7 @@ class Ui_ReqWidget(object):
         self.sex_label.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setWeight(50)
         font.setBold(False)
         self.sex_label.setFont(font)
@@ -189,7 +192,7 @@ class Ui_ReqWidget(object):
         self.sex_edit.setMinimumSize(QtCore.QSize(130, 0))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.sex_edit.setFont(font)
         self.sex_edit.setFocusPolicy(QtCore.Qt.TabFocus)
         self.sex_edit.setStyleSheet("QComboBox {\n"
@@ -229,7 +232,7 @@ class Ui_ReqWidget(object):
         self.birth_label_4.setPalette(palette)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(10)
+        font.setPointSize(11)
         font.setWeight(50)
         font.setBold(False)
         self.birth_label_4.setFont(font)
@@ -247,7 +250,7 @@ class Ui_ReqWidget(object):
         self.mon_edit.setSizePolicy(sizePolicy)
         self.mon_edit.setMaximumSize(QtCore.QSize(50, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.mon_edit.setFont(font)
         self.mon_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.mon_edit.setAlignment(QtCore.Qt.AlignCenter)
@@ -261,7 +264,7 @@ class Ui_ReqWidget(object):
         self.day_edit.setSizePolicy(sizePolicy)
         self.day_edit.setMaximumSize(QtCore.QSize(50, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.day_edit.setFont(font)
         self.day_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.day_edit.setAlignment(QtCore.Qt.AlignCenter)
@@ -275,7 +278,7 @@ class Ui_ReqWidget(object):
         self.year_edit.setSizePolicy(sizePolicy)
         self.year_edit.setMaximumSize(QtCore.QSize(75, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.year_edit.setFont(font)
         self.year_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.year_edit.setAlignment(QtCore.Qt.AlignCenter)
@@ -299,7 +302,7 @@ class Ui_ReqWidget(object):
         self.horizontalLayout_15.addWidget(self.label_16)
         self.label_17 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(11)
         self.label_17.setFont(font)
         self.label_17.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_17.setObjectName("label_17")

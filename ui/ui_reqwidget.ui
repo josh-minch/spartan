@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1276</width>
+    <width>911</width>
     <height>749</height>
    </rect>
   </property>
@@ -101,7 +101,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>1258</width>
+        <width>893</width>
         <height>731</height>
        </rect>
       </property>
@@ -140,7 +140,7 @@
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>10</pointsize>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -150,6 +150,7 @@
             <string notr="true">QHeaderView::section{
 	background-color: white;
 	border: 0px;
+	padding-left: 3px;
 }
 
 QTableView {
@@ -178,7 +179,7 @@ QTableView {
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>10</pointsize>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -188,6 +189,7 @@ QTableView {
             <string notr="true">QHeaderView::section{
 	background-color: white;
 	border: 0px;
+	padding-left: 3px;
 }
 
 QTableView {
@@ -216,7 +218,7 @@ QTableView {
            <property name="font">
             <font>
              <family>Segoe UI</family>
-             <pointsize>10</pointsize>
+             <pointsize>11</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -226,6 +228,7 @@ QTableView {
             <string notr="true">QHeaderView::section{
 	background-color: white;
 	border: 0px;
+	padding-left: 3px;
 }
 
 QTableView {
@@ -289,7 +292,7 @@ QTableView {
               <widget class="QLabel" name="label_15">
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                 </font>
                </property>
                <property name="text">
@@ -355,7 +358,7 @@ QTableView {
                <property name="font">
                 <font>
                  <family>Segoe UI</family>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                  <weight>50</weight>
                  <bold>false</bold>
                 </font>
@@ -385,7 +388,7 @@ QTableView {
                <property name="font">
                 <font>
                  <family>Segoe UI</family>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                 </font>
                </property>
                <property name="focusPolicy">
@@ -474,7 +477,7 @@ QListView::item {
                <property name="font">
                 <font>
                  <family>Segoe UI</family>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                  <weight>50</weight>
                  <bold>false</bold>
                 </font>
@@ -508,7 +511,7 @@ QListView::item {
                  </property>
                  <property name="font">
                   <font>
-                   <pointsize>10</pointsize>
+                   <pointsize>11</pointsize>
                   </font>
                  </property>
                  <property name="focusPolicy">
@@ -538,7 +541,7 @@ QListView::item {
                  </property>
                  <property name="font">
                   <font>
-                   <pointsize>10</pointsize>
+                   <pointsize>11</pointsize>
                   </font>
                  </property>
                  <property name="focusPolicy">
@@ -568,7 +571,7 @@ QListView::item {
                  </property>
                  <property name="font">
                   <font>
-                   <pointsize>10</pointsize>
+                   <pointsize>11</pointsize>
                   </font>
                  </property>
                  <property name="focusPolicy">
@@ -621,7 +624,7 @@ QListView::item {
               <widget class="QLabel" name="label_17">
                <property name="font">
                 <font>
-                 <pointsize>10</pointsize>
+                 <pointsize>11</pointsize>
                 </font>
                </property>
                <property name="text">

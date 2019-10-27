@@ -173,7 +173,6 @@
            <property name="styleSheet">
             <string notr="true">QPushButton {
     border: none;
-	border-radius: 8px;
 }
 
 QPushButton:hover:!pressed{
@@ -1015,7 +1014,6 @@ QPushButton:pressed {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="preset_btn_grp"/>
   <buttongroup name="type_btn_grp">
    <property name="exclusive">
     <bool>false</bool>
@@ -1026,5 +1024,6 @@ QPushButton:pressed {
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="preset_btn_grp"/>
  </buttongroups>
 </ui>

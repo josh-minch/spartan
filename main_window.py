@@ -29,7 +29,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.blockSignals(True)
-        self.person = Person('m', 1993, 12, 1)
+        self.person = Person()
         self.blockSignals(False)
         self.type_res = Restriction(RESTRICT_TYPES_FILE)
         self.fd_res = Restriction(RESTRICT_FDS_FILE)
@@ -159,11 +159,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.prices_view.setColumnWidth(PER_COL, PER_COL_WIDTH)
         self.prices_view.setColumnWidth(PRICE_QUANTITY_COL, VALUE_COL_WIDTH)
 
-        self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        #self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
         self.constraints_view.setColumnWidth(MIN_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
         self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
+
+        self.constraints_view.setColumnWidth(MIN_UNIT_COL, 50)
+        self.constraints_view.setColumnWidth(MAX_UNIT_COL, 50)
+        self.constraints_view.setColumnWidth(TARGET_UNIT_COL, 50)
 
         self.nut_quant_view.setColumnWidth(NUT_QUANT_COL, VALUE_COL_WIDTH)
 
@@ -179,10 +183,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         set_header_font(self.nut_quant_view, FONT_MAIN_SIZE, QFont.DemiBold)
 
         # Set header fixed
-        #self.fridge_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        #self.prices_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        #self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        #self.nut_quant_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.fridge_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.prices_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.nut_quant_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
         # Hide fridge scrollbar
         self.fridge_view.verticalScrollBar().setStyleSheet(
@@ -204,27 +208,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.vits_view.setItemDelegate(ProgressBarDelegate(self))
         self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
 
-        self.set_nutrition_size()
+        self.setup_nutrition_view(self.macros_view)
+        self.setup_nutrition_view(self.vits_view)
+        self.setup_nutrition_view(self.minerals_view)
 
-    def set_nutrition_size(self):
-        set_column_widths(self.macros_view,
-                          nut_col_to_attr.keys(), nut_col_widths)
-        set_column_widths(
-            self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
-        set_column_widths(self.minerals_view,
-                          nut_col_to_attr.keys(), nut_col_widths)
-
-        set_header_font(self.macros_view, FONT_MAIN_SIZE, QFont.DemiBold)
-        set_header_font(self.vits_view, FONT_MAIN_SIZE, QFont.DemiBold)
-        set_header_font(self.minerals_view, FONT_MAIN_SIZE, QFont.DemiBold)
-
-        vertical_resize_table_view_to_contents(self.macros_view)
-        vertical_resize_table_view_to_contents(self.vits_view)
-        vertical_resize_table_view_to_contents(self.minerals_view)
-
-        self.macros_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        self.vits_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        self.minerals_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+    def setup_nutrition_view(self, view):
+        set_column_widths(view, nut_col_to_attr.keys(), nut_col_widths)
+        set_header_font(view, FONT_MAIN_SIZE, QFont.DemiBold)
+        vertical_resize_table_view_to_contents(view)
+        view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
     def remove_from_fridge(self):
         selected_food_id_indexes = self.fridge_view.selectionModel().selectedRows()
@@ -295,7 +287,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.vits_view.setItemDelegate(ProgressBarDelegate(self))
         self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
 
-        self.set_nutrition_size()
+        self.setup_nutrition_view(self.macros_view)
+        self.setup_nutrition_view(self.vits_view)
+        self.setup_nutrition_view(self.minerals_view)
 
     def toggle_remove_btn(self):
         if self.fridge_view.selectionModel() is None:

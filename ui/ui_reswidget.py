@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reswidget.ui',
 # licensing of 'ui/ui_reswidget.ui' applies.
 #
-# Created: Sat Oct 26 12:51:11 2019
+# Created: Sat Oct 26 17:29:24 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -74,7 +74,6 @@ class Ui_ResWidget(object):
         self.back_btn.setCursor(QtCore.Qt.PointingHandCursor)
         self.back_btn.setStyleSheet("QPushButton {\n"
 "    border: none;\n"
-"    border-radius: 8px;\n"
 "}\n"
 "\n"
 "QPushButton:hover:!pressed{\n"

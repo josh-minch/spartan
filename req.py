@@ -293,4 +293,4 @@ def calculate_age_months(bd_month, bd_day):
     return date.today().month - bd_month - (date.today().day - bd_day)
 
 if __name__ == '__main__':
-    print(get_reqs(19, 'm'))
+    pass
