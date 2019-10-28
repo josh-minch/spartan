@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwidget.ui',
 # licensing of 'ui/ui_prefwidget.ui' applies.
 #
-# Created: Sat Oct 26 23:00:56 2019
+# Created: Sun Oct 27 22:08:16 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!

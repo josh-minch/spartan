@@ -1,4 +1,6 @@
 Bugs:
     Open pref window, close, then optimize diet. Always fails with only water in generated diet.
 
+	filter then delete food. selecting filtered view doesnt actually select the item which is apparently selected. selects 1st item in fridge instead. deleting deletes the 1st item. moves selection to 2nd item after etc
+
 Should optimum diet window percentage bars show percentage of daily recommendation or percentage of amount given by generated diet?

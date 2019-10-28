@@ -255,7 +255,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         row = selected_food_id_indexes[0].row()
         count = selected_food_id_indexes[-1].row() - row + 1
 
-        self.fridge_model.removeRows(row, count)
+        self.fridge_filter_model.removeRows(row, count)
         self.person.remove_foods_from_db(food_ids=food_ids)
 
     def update_foods(self, index):
