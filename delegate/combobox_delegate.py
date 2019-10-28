@@ -36,7 +36,8 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
         current_index = editor.findText(current_text)
         if current_index >= 0:
             editor.setCurrentIndex(current_index)
-        editor.showPopup()
+        if not editor.isVisible():
+            editor.showPopup()
 
     def setModelData(self, editor, model, index):
         print('setModelData')
@@ -57,6 +58,7 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
             QtWidgets.QStyle.CC_ComboBox, box, painter)
         QtWidgets.QApplication.style().drawControl(QtWidgets.QStyle.CE_ComboBoxLabel, box, painter)
 
+    '''
     def sizeHint(self, option, index):
         box = QtWidgets.QStyleOptionComboBox()
         box.state = option.state
@@ -71,16 +73,6 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
             size = size.expandedTo(QtWidgets.QApplication.style().sizeFromContents(QtWidgets.QStyle.ContentsType.CT_ComboBox,
                 box, rect.size(), option.widget))
         return size
-
-def get_max_item_width(rect, items):
-    max_width = 0
-
-    for item in items:
-        width = QtGui.QFontMetrics.boundingRect(rect, 0, item, 0, None).width()
-        if width > max_width:
-            max_width = width
-
-    return max_width
-
+    '''
 if __name__ == '__main__':
     pass

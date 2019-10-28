@@ -1,4 +1,4 @@
-from PySide2.QtCore import Qt, QItemSelectionModel, QItemSelection, QTimer
+from PySide2.QtCore import Qt, QItemSelectionModel, QItemSelection, QTimer, Signal
 from PySide2.QtWidgets import QTableView
 
 from delegate.combobox_delegate import ComboBoxDelegate
@@ -40,5 +40,6 @@ class ComboTableView(QTableView):
 
             QTimer.singleShot(1, self, self.edit(ix))
             event.setAccepted(True)
+            return
 
-        super().mousePressEvent(event)
+        QTableView.mousePressEvent(event)

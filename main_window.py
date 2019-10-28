@@ -49,7 +49,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setup_connections(self):
         self.fridge_model.dataChanged.connect(self.update_foods)
-        #self.fridge_model.dataChanged.connect(self.display_nutrition)
+        self.fridge_model.dataChanged.connect(self.display_nutrition)
+
         self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
 
         # Update filtered view
@@ -134,8 +135,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.nut_quant_view.setModel(self.fridge_filter_model)
 
         self.fridge_filter_model.setFilterKeyColumn(NAME_COL)
-
-        # Delegates set in view
 
         # Hide col
         hide_view_cols(self.fridge_view, F_COLS_TO_HIDE)
