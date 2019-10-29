@@ -119,7 +119,9 @@ class RequirementsModel(QAbstractTableModel):
         if index.isValid() and 0 <= index.row() < len(self.nutrients):
             nutrient = self.nutrients[index.row()]
             attr = Req.col_to_attr[index.column()]
-            self.person.set_nut(nutrient, attr, value)
+            setattr(nutrient, attr, value)
+            if self.person:
+                self.person.set_nut(nutrient, attr, value)
             self.dataChanged.emit(index, index)
 
             return True

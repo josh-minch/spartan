@@ -32,6 +32,7 @@ class WelcomeWindow(QMainWindow, Ui_WelcomeWindow):
         nutrients = macro_nuts + vit_nuts + mineral_nuts
 
         spartan.update_nuts_in_db(nutrients)
+
         self.update_wel_check()
         self.run_main_window()
         self.hide()
