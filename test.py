@@ -5,8 +5,8 @@ from timeit import default_timer
 
 if __name__ == '__main__':
     person = spartan.Person('m', 1993, 12, 1)
-    type_res = spartan.Restriction('restrict_types.csv')
-    fd_res = spartan.Restriction('restrict_fds.csv')
+    type_res = spartan.Restriction('type_res.csv')
+    fd_res = spartan.Restriction('fd_res.csv')
 
     person.remove_nut('Water')
 

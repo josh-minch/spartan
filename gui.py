@@ -2,7 +2,7 @@ import sys
 import platform
 import ctypes
 
-from PySide2 import QtWidgets
+from PySide2 import QtWidgets, QtGui, QtCore
 
 import storage
 import main_window

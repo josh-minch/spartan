@@ -11,6 +11,7 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
 
     def createEditor(self, parent, option, index):
         editor = QtWidgets.QComboBox(parent)
+        editor.setView(QtWidgets.QListView())
         items_ix = index.model().index(index.row(), SELECTABLE_UNITS_COL)
         items = index.model().data(items_ix)
         editor.addItems(items)

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Sun Oct 27 22:08:17 2019
+# Created: Tue Oct 29 15:21:00 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -332,7 +332,7 @@ class Ui_ReqWidget(object):
 "")
         self.back_btn.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../images/back-black.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/images/back-black.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.back_btn.setIcon(icon1)
         self.back_btn.setIconSize(QtCore.QSize(24, 24))
         self.back_btn.setObjectName("back_btn")

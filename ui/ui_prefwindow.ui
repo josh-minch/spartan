@@ -81,14 +81,16 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Spartan - Preferences</string>
+   <string>Spartan - Settings</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../images/icon_trimmed.png</normaloff>../images/icon_trimmed.png</iconset>
+   <iconset resource="../images/images.qrc">
+    <normaloff>:/images/icon_trimmed.png</normaloff>:/images/icon_trimmed.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../images/images.qrc"/>
+ </resources>
  <connections/>
 </ui>

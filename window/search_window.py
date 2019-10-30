@@ -20,11 +20,12 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         self.setup_connections()
 
         self.search_box.setFocus()
+        self.search_food()
         self.resize(850, 500)
         self.show()
 
     def search_food(self):
-        search_result = database.search_food(self.search_box.text(), self.person, self.type_res, self.fd_res)
+        search_result = database.search_food(self.search_box.text(), self.type_res, self.fd_res)
 
         self.search_model = SearchModel(search_result)
         self.search_view.setModel(self.search_model)
@@ -74,5 +75,5 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         debug_shortcut.activated.connect(self.print_debug_info)
 
     def print_debug_info(self):
-        print(self.person.restrict_types)
-        print(self.person.restrict_fds)
+        print(self.person.type_res)
+        print(self.person.fd_res)

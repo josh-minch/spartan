@@ -107,5 +107,5 @@ fridge.txt
 dri.db
 spartan.db
 
-restrict_fds.csv
-restrict_types.csv
+fd_res.csv
+type_res.csv

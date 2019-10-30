@@ -4,8 +4,8 @@ DB_SCALER = 100
 SEARCH_RESTRICT = 1
 GEN_RESTRICT = 2
 
-RESTRICT_FDS_FILE = 'restrict_fds.csv'
-RESTRICT_TYPES_FILE = 'restrict_types.csv'
+RESTRICT_FDS_FILE = 'fd_res.csv'
+RESTRICT_TYPES_FILE = 'type_res.csv'
 
 # Link restriction selections to unique id
 preset_grp = {'vegan': 1, 'vegetarian': 2, 'pescatarian': 3,

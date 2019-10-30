@@ -95,18 +95,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # Optimize button
         self.optimize_btn.clicked.connect(self.optimize)
-        # optimize button shortcut set in Qt Designer
 
-        # Preferences button
+        # Settings button
         self.pref_btn.clicked.connect(self.open_pref)
 
     def setup_shortcuts(self):
-        #add_foods_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_F), self)
-        #add_foods_shortcut.activated.connect(self.open_search_window)
-
-        remove_shortcut = QShortcut(QKeySequence(Qt.Key_Delete), self)
-        remove_shortcut.activated.connect(self.remove_from_fridge)
-
         close_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_W), self)
         close_shortcut.activated.connect(self.close)
 
@@ -263,13 +256,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.person.update_food_in_user_db(food=food)
 
     def open_search_window(self):
-        self.search_window = SearchWindow(
-            parent=None, person=self.person, fridge_model=self.fridge_model, type_res=self.type_res, fd_res=self.fd_res)
+        self.search_window = SearchWindow(self, self.person, self.fridge_model, self.type_res, self.fd_res)
         self.search_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def open_pref(self):
         self.pref_window = PrefWindow(
-            parent=None, person=self.person, type_res=self.type_res, fd_res=self.fd_res)
+            parent=self, person=self.person, type_res=self.type_res, fd_res=self.fd_res)
         self.pref_window.setAttribute(Qt.WA_DeleteOnClose)
 
     def optimize(self):

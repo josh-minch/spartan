@@ -676,8 +676,8 @@ QPushButton:pressed {
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normaloff>../images/back-black.svg</normaloff>../images/back-black.svg</iconset>
+          <iconset resource="../images/images.qrc">
+           <normaloff>:/images/back-black.svg</normaloff>:/images/back-black.svg</iconset>
          </property>
          <property name="iconSize">
           <size>

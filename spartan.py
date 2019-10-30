@@ -167,16 +167,21 @@ class Food:
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
         sql_stmnt = (
-            'SELECT description '
+            'SELECT amount, description '
             'FROM weight '
             'WHERE food_id = ?'
         )
         cur.execute(sql_stmnt, [self.food_id])
         units = cur.fetchall()
+
         con.commit()
         cur.close()
 
-        return ['g'] + [unit[0] for unit in units]
+        for unit in units:
+            amount = '{amount}'.format(amount=unit[0]).rstrip('0').rstrip('.')
+            desc = unit[1]
+            unit = amount + desc
+        return ['g'] + ['{amount} {unit}'.format(amount=unit[0], unit=unit[1]) for unit in units]
 
 class Nutrient:
     def __init__(self, name, nut_id=None, min=None, max=None, target=None):
@@ -363,12 +368,23 @@ class Optimizier:
     def get_solution_status(self):
         if self.lp_prob.status == LpStatusOptimal:
             if self.optimization_type == 'p':
-                status_statement = "Optimized by price"
+                title = "Diet: Optimized by price"
+                subtitle = (
+                    'The cheapest nutritionally complete diet given the foods in your fridge and their prices'
+                )
             elif self.optimization_type == 'w':
-                status_statement = "Optimized by nutritional density\nBecause some of your foods lack prices, your generated diet has instead been optimized to minimize its total weight."
+                title = "Diet: Optimized by nutritional density"
+                subtitle = (
+                    'Because some of your foods lack prices, your generated diet '
+                    'has instead been optimized to minimize its total weight.'
+                )
         elif self.lp_prob.status == LpStatusInfeasible:
-            status_statement = "Given the foods in your fridge, a diet that satisfies your nutritional requirements is infeasible"
-        return status_statement
+            title = 'Diet: No feasible solution'
+            status_statement = (
+                'Given the foods in your fridge, '
+                'a diet that satisfies your nutritional requirements is not possible without also exceeding your maximums'
+            )
+        return title, subtitle
 
     def describe_solution(self):
         print("Status: " + LpStatus[self.lp_prob.status])

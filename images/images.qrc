@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="images/">
+    <file>icon_trimmed.png</file>
     <file>settings.svg</file>
     <file>person-outline.png</file>
     <file>back-black.svg</file>

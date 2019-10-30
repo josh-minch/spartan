@@ -17,7 +17,7 @@ from ui.ui_optimumdietwindow import Ui_OptimumDietWindow
 
 class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def __init__(self, person, type_res, fd_res, parent=None):
-        super().__init__(parent=None)
+        super().__init__(parent)
         self.setupUi(self)
 
         self.person = person
@@ -33,7 +33,9 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.show()
 
     def set_description(self):
-        self.diet_label.setText(self.optimizier.get_solution_status())
+        title, subtitle = self.optimizier.get_solution_status()
+        self.title_label.setText(title)
+        self.diet_label.setText(subtitle)
 
     def populate_diet_table(self):
         foods = self.optimizier.get_diet_report()
@@ -46,65 +48,39 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
 
         self.diet_model = DietModel(foods=foods)
         self.diet_view.setModel(self.diet_model)
+        self.setup_diet_view()
 
-        gui_helpers.hide_view_cols(self.diet_view, [0])
-        gui_helpers.set_column_widths(self.diet_view, [1], [200])
+    def setup_diet_view(self):
+        cols_to_hide = [O_ID_COL]
+        col_to_set_width = [O_NAME_COL, O_COST_COL, O_AMOUNT_COL, O_UNIT_COL]
+        if self.optimizier.optimization_type == 'w':
+            cols_to_hide.append(O_COST_COL)
+            col_to_set_width.remove(O_COST_COL)
+            o_col_widths.remove(O_COST_WIDTH)
+
+        gui_helpers.hide_view_cols(self.diet_view, cols_to_hide)
+        gui_helpers.set_header_font(self.diet_view, FONT_SECONDARY_SIZE, QFont.DemiBold)
+        gui_helpers.set_column_widths(self.diet_view, col_to_set_width, o_col_widths)
+        self.diet_label.setMaximumWidth(sum(o_col_widths))
+        #self.diet_view.setMinimumWidth(sum(o_col_widths))
+        self.diet_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
     def populate_nutrition_table(self):
         (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
         self.ttl_macros, self.ttl_vits, self.ttl_minerals = spartan.get_nutrition(self.person, food_ids, food_amounts)
 
-        macros_model = NutritionTableModel(nutrients=self.ttl_macros, nutrient_group='General')
-        vits_model = NutritionTableModel(
-            nutrients=self.ttl_vits, nutrient_group='Vitamins')
-        minerals_model = NutritionTableModel(
-            nutrients=self.ttl_minerals, nutrient_group='Minerals')
-
-        self.macros_view.setModel(macros_model)
-        self.vits_view.setModel(vits_model)
-        self.minerals_view.setModel(minerals_model)
-
-        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
-        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
-        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
-
-        self.setup_nutrition()
-
-    def setup_nutrition(self):
-        '''
-        gui_helpers.hide_view_cols(
-            self.macro_view, [Req.attr_to_col['nut_id']])
-        gui_helpers.hide_view_cols(self.vit_view, [Req.attr_to_col['nut_id']])
-        gui_helpers.hide_view_cols(
-            self.mineral_view, [Req.attr_to_col['nut_id']])
-
-
-        self.macro_view.setColumnWidth(0, 150)
-        self.vit_view.setColumnWidth(0, 150)
-        self.mineral_view.setColumnWidth(0, 150)
-        '''
-        gui_helpers.set_column_widths(self.macros_view, nut_col_to_attr.keys(), nut_col_widths)
-        gui_helpers.set_column_widths(self.vits_view, nut_col_to_attr.keys(), nut_col_widths)
-        gui_helpers.set_column_widths(
-            self.minerals_view, nut_col_to_attr.keys(), nut_col_widths)
-
-        #gui_helpers.set_view_header_weights(self.macros_view, QFont.DemiBold)
-        #gui_helpers.set_view_header_weights(self.vits_view, QFont.DemiBold)
-        #gui_helpers.set_view_header_weights(self.minerals_view, QFont.DemiBold)
-
-        gui_helpers.vertical_resize_table_view_to_contents(self.macros_view)
-        gui_helpers.vertical_resize_table_view_to_contents(self.vits_view)
-        gui_helpers.vertical_resize_table_view_to_contents(self.minerals_view)
+        self.setup_nutrition_view_group(
+            self.ttl_macros, self.ttl_vits, self.ttl_minerals)
 
     def display_selected_nutrition(self, selected, deselected):
         total_food_ix = self.diet_model.index(
             self.diet_model.rowCount() - 1, O_ID_COL)
 
         # If user selects totals row, display nutrition totals
-        if selected.contains(total_food_ix):
-            macros = self.ttl_macros
-            vits = self.ttl_vits
-            minerals = self.ttl_minerals
+        if selected == [] or selected.contains(total_food_ix):
+            macro = self.ttl_macros
+            vit = self.ttl_vits
+            mineral = self.ttl_minerals
         # Otherwise display selected foods' nutrition
         else:
             food_ids, amounts = [], []
@@ -118,31 +94,26 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
                 food_ids.append(food_id_ix.data(Qt.DisplayRole))
                 amounts.append(amount_ix.data(Qt.DisplayRole))
 
-            macros, vits, minerals = spartan.get_nutrition(self.person, food_ids, amounts)
+            macro, vit, mineral = spartan.get_nutrition(self.person, food_ids, amounts)
 
-        macros_model = NutritionTableModel(
-            nutrients=macros, nutrient_group='General')
-        vits_model = NutritionTableModel(
-            nutrients=vits, nutrient_group='Vitamins')
-        minerals_model = NutritionTableModel(
-            nutrients=minerals, nutrient_group='Minerals')
+        self.setup_nutrition_view_group(macro, vit, mineral)
 
-        self.macros_view.setModel(macros_model)
-        self.vits_view.setModel(vits_model)
-        self.minerals_view.setModel(minerals_model)
+    def setup_nutrition_view_group(self, macro_data, vit_data, mineral_data):
+        self.setup_nutrition_view(self.macro_view, macro_data, 'General')
+        self.setup_nutrition_view(self.vit_view, vit_data, 'Vitamins')
+        self.setup_nutrition_view(self.mineral_view, mineral_data, 'Minerals')
 
-        self.macros_view.setItemDelegate(ProgressBarDelegate(self))
-        self.vits_view.setItemDelegate(ProgressBarDelegate(self))
-        self.minerals_view.setItemDelegate(ProgressBarDelegate(self))
+    # Create model with data and nutrient group, then assign delegate and font, col widths, size
+    def setup_nutrition_view(self, view, model_data, nutrient_group):
+        model = NutritionTableModel(nutrients=model_data, nutrient_group=nutrient_group)
+        view.setModel(model)
+        view.setItemDelegate(ProgressBarDelegate(self))
 
-        self.setup_nutrition()
+        gui_helpers.set_header_font(view, FONT_SECONDARY_SIZE, QFont.DemiBold)
+        gui_helpers.set_column_widths(view, nut_col_to_attr.keys(), on_col_widths)
+        view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        gui_helpers.vertical_resize_table_view_to_contents(view)
 
     def setup_connections(self):
         self.diet_view.selectionModel().selectionChanged.connect(self.display_selected_nutrition)
 
-if __name__ == '__main__':
-    person = spartan.Person(19, 'm')
-
-    app = QApplication(sys.argv)
-    window = OptimumDietWindow(person=person)
-    sys.exit(app.exec_())
