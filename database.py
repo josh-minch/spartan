@@ -6,13 +6,6 @@ import sqlite3 as sql
 from constants import SEARCH_RESTRICT
 
 def search_food(food_name, type_res, fd_res):
-    if SEARCH_RESTRICT not in type_res.res:
-        fd_grps_tuple = '()'
-
-    fd_grps = list(fd_res.res)
-    fd_grps_tuple = str(tuple(q_mark for q_mark in len(fd_grps)*'?'))
-    fd_grps_tuple = fd_grps_tuple.replace("'", "")
-
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
 
@@ -28,13 +21,14 @@ def search_food(food_name, type_res, fd_res):
         )
         parameters = []
 
+    fd_grps, fd_grps_tuple = get_fd_grps(type_res, fd_res)
     # Otherwise, return filtered search result
     # We need to call UPPER because INSTR is not case-sensitive.
     # Order by the sum of how early each term appears in the search result strings.
-    elif len(split_food_names) > 0:
+    if len(split_food_names) > 0:
         sql_stmt = (
             'SELECT food_group_id, long_desc FROM food_des '
-            'WHERE long_desc LIKE ?'
+            'WHERE long_desc LIKE ? '
             + (len(wildcard_padded_split_food_names)-1) * ' AND long_desc LIKE ?' +
             'AND food_group_id not in ' + fd_grps_tuple +
             ' ORDER BY INSTR(UPPER(long_desc), UPPER(?))'
@@ -44,6 +38,21 @@ def search_food(food_name, type_res, fd_res):
 
     cur.execute(sql_stmt, parameters)
     return cur.fetchall()
+
+# Create string of the form (?,?,?) where number of ? == number of restricted food groups
+def get_fd_grps(type_res, fd_res):
+    if SEARCH_RESTRICT not in type_res.res:
+        fd_grps_tuple = '()'
+        fd_grps = []
+    else:
+        fd_grps = list(fd_res.res)
+        if len(fd_res.res) == 1:
+            fd_grps_tuple = '(?)'
+        elif len(fd_res.res) > 1:
+            fd_grps_tuple = str(tuple(q_mark for q_mark in len(fd_grps)*'?'))
+            fd_grps_tuple = fd_grps_tuple.replace("'", "")
+
+    return fd_grps, fd_grps_tuple
 
 def describe_food(food_id):
     con=sql.connect('sr_legacy/sr_legacy.db')
