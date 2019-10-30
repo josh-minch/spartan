@@ -1,8 +1,12 @@
+foreign_key_stmt = '''
+    PRAGMA foreign_keys=ON;
+'''
+
 create_food_des_stmt = '''
 DROP TABLE IF EXISTS 'food_des';
 CREATE TABLE 'food_des' (
   id int PRIMARY KEY NOT NULL,
-  food_group_id int REFERENCES food_group(id) NOT NULL,
+  food_group_id int REFERENCES fd_group(id) NOT NULL,
   long_desc text NOT NULL DEFAULT '',
   short_desc text NOT NULL DEFAULT '',
   common_name text NOT NULL DEFAULT '',
@@ -31,14 +35,14 @@ CREATE TABLE `fd_group` (
 create_nut_data_stmt = '''
 DROP TABLE IF EXISTS 'nut_data';
 CREATE TABLE 'nut_data' (
-    food_id int REFERENCES food(id) NOT NULL,
-    nut_id int REFERENCES nutrient(id) NOT NULL,
+    food_id int REFERENCES food_des(id) NOT NULL,
+    nut_id int REFERENCES nut_data(id) NOT NULL,
     amount float,
     num_data_points int,
     std_error float,
     source_code text,
     derivation_code text,
-    reference_food_id REFERENCES food(id),
+    reference_food_id REFERENCES food_des(id),
     added_nutrient text,
     num_studies int,
     min float,
@@ -68,7 +72,7 @@ CREATE INDEX nutr_def_name_search_index ON nutr_def(name);
 create_weight_stmnt = '''
 DROP TABLE IF EXISTS `weight`;
 CREATE TABLE `weight` (
-    food_id int REFERENCES food(id) NOT NULL,
+    food_id int REFERENCES food_des(id) NOT NULL,
     sequence_num int NOT NULL,
     amount float NOT NULL,
     description text NOT NULL,
@@ -95,8 +99,6 @@ insert_weight_stmt = '''
     INSERT INTO weight VALUES (?, ?, ?, ?, ?, ?, ?)
 '''
 
-file_names = ['FOOD_DES.txt', 'FD_GROUP.txt', 'NUT_DATA.txt', 'NUTR_DEF.txt', 'WEIGHT.txt']
-
 file_name_to_insert = {
     'FOOD_DES.txt': insert_food_des_stmt,
     'FD_GROUP.txt': insert_fd_group_stmt,
@@ -104,33 +106,3 @@ file_name_to_insert = {
     'NUTR_DEF.txt': insert_nutr_def_stmt,
     'WEIGHT.txt': insert_weight_stmt
 }
-
-def add_missing_nut_ids():
-
-    con = sql.connect('sr_legacy.db')
-    cur = con.cursor()
-
-    cur.execute('select id from food_des')
-    food_ids = cur.fetchall()
-
-    for food_id in food_ids:
-
-        cur.execute('CREATE TEMPORARY TABLE temptable(food_id INT, nut_id INT, amount FLOAT)')
-
-        cur.execute('''
-        insert into temptable (nut_id) 
-        select id from nutr_def
-        except
-        select (nut_id) from nut_data where food_id = ? ''', food_id)
-
-        cur.execute('update temptable set food_id = ?', food_id)
-        cur.execute('update temptable set amount = NULL')
-
-        cur.execute('''
-        insert into nut_data (food_id, nut_id, amount) 
-        select food_id, nut_id, amount from temptable ''')
-
-        cur.execute('drop table temptable')
-
-    con.commit()
-    con.close()
