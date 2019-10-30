@@ -177,11 +177,16 @@ class Food:
         con.commit()
         cur.close()
 
+        unit_display = []
         for unit in units:
-            amount = '{amount}'.format(amount=unit[0]).rstrip('0').rstrip('.')
-            desc = unit[1]
-            unit = amount + desc
-        return ['g'] + ['{amount} {unit}'.format(amount=unit[0], unit=unit[1]) for unit in units]
+            if unit[0] == 1.0:
+                amount_display = ''
+            else:
+                amount_display = '{:f}'.format(unit[0]).rstrip('0').rstrip('.') + ' '
+            description_display = unit[1]
+            unit_display.append(amount_display + description_display)
+
+        return ['g'] + unit_display
 
 class Nutrient:
     def __init__(self, name, nut_id=None, min=None, max=None, target=None):
