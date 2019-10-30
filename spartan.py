@@ -108,7 +108,6 @@ class Person(object):
 
         food_vars = list(vars(food).keys())
         food_vars.remove('selectable_units')
-
         food_tuple = str(tuple(food_vars))
         food_values = [getattr(food, var) for var in food_vars]
 
@@ -167,7 +166,7 @@ class Food:
         con = sql.connect('sr_legacy/sr_legacy.db')
         cur = con.cursor()
         sql_stmnt = (
-            'SELECT amount, description '
+            'SELECT amount, description, gm_weight '
             'FROM weight '
             'WHERE food_id = ?'
         )
@@ -177,16 +176,18 @@ class Food:
         con.commit()
         cur.close()
 
-        unit_display = []
+        selectable_units = ['g']
         for unit in units:
             if unit[0] == 1.0:
                 amount_display = ''
             else:
                 amount_display = '{:f}'.format(unit[0]).rstrip('0').rstrip('.') + ' '
-            description_display = unit[1]
-            unit_display.append(amount_display + description_display)
+            description = unit[1]
+            gm_weight_display = '{:f}'.format(unit[2]).rstrip('0').rstrip('.')
+            gm_weight_display = ' (' + gm_weight_display + ' g)'
+            selectable_units.append(amount_display + description + gm_weight_display)
 
-        return ['g'] + unit_display
+        return selectable_units
 
 class Nutrient:
     def __init__(self, name, nut_id=None, min=None, max=None, target=None):
@@ -343,15 +344,10 @@ class Optimizier:
 
             for constraint, unit, op in zip(constraints, units, operators):
                 if constraint is not None:
-                    converted_constraint = self.convert_constraint(food.food_id, constraint, unit)
+                    if unit != 'g':
+                        constraint = convert_quantity(constraint, unit)
                     self.add_constraint(self.food_quantity_vector[i], op,
-                                        converted_constraint/DB_SCALER)
-
-    def convert_constraint(self, food_id, constraint_value, constraint_unit):
-        if constraint_unit == 'g':
-            return constraint_value
-        else:
-            return convert_quantity(food_id, constraint_value, constraint_unit, 'g')
+                                        constraint/DB_SCALER)
 
     def add_constraint(self, var, comparator, constraint_value):
         # parameterized <=, >=, and == comparators with operator
@@ -385,7 +381,7 @@ class Optimizier:
                 )
         elif self.lp_prob.status == LpStatusInfeasible:
             title = 'Diet: No feasible solution'
-            status_statement = (
+            subtitle = (
                 'Given the foods in your fridge, '
                 'a diet that satisfies your nutritional requirements is not possible without also exceeding your maximums'
             )
@@ -443,6 +439,16 @@ class Optimizier:
 
         return total_number, total_cost, running_total_mass
 
+# Unit includes a parenthetical suffic that gives the equivalent
+# quantity in grams, eg oz (85g). Instead of actually converting by
+# looking at the appropriate table, simply trim off this suffix
+def convert_quantity(quantity, old_unit):
+    gm_weight_index_start = old_unit.rfind('(') + 1
+    gm_weight_index_end = old_unit.rfind('g')
+    gm_weight = float(old_unit[gm_weight_index_start:gm_weight_index_end])
+    converted_quantity = quantity * gm_weight
+    return converted_quantity
+'''
 def convert_quantity(food_id, quantity, old_unit, new_unit):
 
     con = sql.connect('sr_legacy/sr_legacy.db')
@@ -462,16 +468,16 @@ def convert_quantity(food_id, quantity, old_unit, new_unit):
         unit_scale_factors = cur.fetchall()
         return quantity * unit_scale_factors[0][0]
 
-    '''
-    Bug: sql query always returns an ordering which may not correspond to the order
-    passed to unit_scale_factors. explicitly return which gm_weight corresponds to which
-    unit description
-    else:
-        cur.execute(sql_stmnt, [self.food_id, old_unit, new_unit])
-        unit_scale_factors = cur.fetchall()
-        return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
-    '''
 
+    #Bug: sql query always returns an ordering which may not correspond to the order
+    #passed to unit_scale_factors. explicitly return which gm_weight corresponds to which
+    #unit description
+    #else:
+    #    cur.execute(sql_stmnt, [self.food_id, old_unit, new_unit])
+    #    unit_scale_factors = cur.fetchall()
+    #    return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
+
+'''
 def get_nut_groups(nuts):
     macro_end = vit_start = len(req.macro_names)
     vit_end = mineral_start = len(req.vit_names)+len(req.mineral_names)

@@ -105,7 +105,8 @@ O_COST_WIDTH = 100
 O_AMOUNT_WIDTH = 100
 O_UNIT_WIDTH = 25
 
-o_col_widths = [O_NAME_WIDTH, O_COST_WIDTH, O_AMOUNT_WIDTH, O_UNIT_WIDTH]
+o_p_col_widths = [O_NAME_WIDTH, O_COST_WIDTH, O_AMOUNT_WIDTH, O_UNIT_WIDTH]
+o_w_col_widths = [O_NAME_WIDTH, O_AMOUNT_WIDTH, O_UNIT_WIDTH]
 
 o_col_to_attr = {O_ID_COL: 'id', O_NAME_COL: 'name', O_COST_COL: 'cost',
                  O_AMOUNT_COL: 'quantity', O_UNIT_COL: 'unit'}

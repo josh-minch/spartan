@@ -56,12 +56,14 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         if self.optimizier.optimization_type == 'w':
             cols_to_hide.append(O_COST_COL)
             col_to_set_width.remove(O_COST_COL)
-            o_col_widths.remove(O_COST_WIDTH)
+            col_widths = o_p_col_widths
+        elif self.optimizer.optimization_type == 'p':
+            col_widths = o_w_col_widths
 
         gui_helpers.hide_view_cols(self.diet_view, cols_to_hide)
         gui_helpers.set_header_font(self.diet_view, FONT_SECONDARY_SIZE, QFont.DemiBold)
-        gui_helpers.set_column_widths(self.diet_view, col_to_set_width, o_col_widths)
-        self.diet_label.setMaximumWidth(sum(o_col_widths))
+        gui_helpers.set_column_widths(self.diet_view, col_to_set_width, col_widths)
+        self.diet_label.setMaximumWidth(sum(col_widths))
         #self.diet_view.setMinimumWidth(sum(o_col_widths))
         self.diet_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 

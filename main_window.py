@@ -213,8 +213,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # Convert non-gram quantities to grams
         for i, (unit, food_id, amount) in enumerate(zip(selected_food_units, selected_food_ids, selected_food_amounts)):
             if unit != 'g':
-                converted_amount = convert_quantity(
-                    food_id, amount, old_unit=unit, new_unit='g')
+                converted_amount = convert_quantity(amount, unit)
                 selected_food_amounts[i] = converted_amount
 
         macros, vits, minerals = get_nutrition(
