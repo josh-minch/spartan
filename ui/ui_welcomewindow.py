@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_welcomewindow.ui',
 # licensing of 'ui/ui_welcomewindow.ui' applies.
 #
-# Created: Sat Oct 26 12:51:30 2019
+# Created: Wed Oct 30 22:38:12 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,10 +43,6 @@ class Ui_WelcomeWindow(object):
         self.verticalLayout.setContentsMargins(20, 20, -1, -1)
         self.verticalLayout.setObjectName("verticalLayout")
         self.req_wiz_widget = ReqWizWidget(self.centralwidget)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(11)
-        self.req_wiz_widget.setFont(font)
         self.req_wiz_widget.setObjectName("req_wiz_widget")
         self.verticalLayout.addWidget(self.req_wiz_widget)
         self.button_box = QtWidgets.QDialogButtonBox(self.centralwidget)

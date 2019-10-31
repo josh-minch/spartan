@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>973</width>
+    <width>978</width>
     <height>652</height>
    </rect>
   </property>
@@ -112,9 +112,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-189</y>
-        <width>956</width>
-        <height>841</height>
+        <y>-177</y>
+        <width>961</width>
+        <height>829</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,1">
@@ -139,7 +139,6 @@
           <widget class="ReqView" name="mineral_view">
            <property name="font">
             <font>
-             <family>Segoe UI</family>
              <pointsize>11</pointsize>
             </font>
            </property>
@@ -175,6 +174,9 @@ QTableView {
            <property name="showGrid">
             <bool>false</bool>
            </property>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
@@ -184,7 +186,6 @@ QTableView {
           <widget class="ReqView" name="macro_view">
            <property name="font">
             <font>
-             <family>Segoe UI</family>
              <pointsize>11</pointsize>
             </font>
            </property>
@@ -220,6 +221,9 @@ QTableView {
            <property name="showGrid">
             <bool>false</bool>
            </property>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
@@ -229,7 +233,6 @@ QTableView {
           <widget class="ReqView" name="vit_view">
            <property name="font">
             <font>
-             <family>Segoe UI</family>
              <pointsize>11</pointsize>
             </font>
            </property>
@@ -265,6 +268,9 @@ QTableView {
            <property name="showGrid">
             <bool>false</bool>
            </property>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
@@ -313,6 +319,7 @@ QTableView {
               <widget class="QLabel" name="label_15">
                <property name="font">
                 <font>
+                 <family>Segoe UI</family>
                  <pointsize>11</pointsize>
                 </font>
                </property>
@@ -383,8 +390,6 @@ QTableView {
                 <font>
                  <family>Segoe UI</family>
                  <pointsize>11</pointsize>
-                 <weight>50</weight>
-                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -411,7 +416,6 @@ QTableView {
                </property>
                <property name="font">
                 <font>
-                 <family>Segoe UI</family>
                  <pointsize>11</pointsize>
                 </font>
                </property>
@@ -502,8 +506,6 @@ QListView::item {
                 <font>
                  <family>Segoe UI</family>
                  <pointsize>11</pointsize>
-                 <weight>50</weight>
-                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -535,6 +537,7 @@ QListView::item {
                  </property>
                  <property name="font">
                   <font>
+                   <family>Segoe UI</family>
                    <pointsize>11</pointsize>
                   </font>
                  </property>
@@ -565,6 +568,7 @@ QListView::item {
                  </property>
                  <property name="font">
                   <font>
+                   <family>Segoe UI</family>
                    <pointsize>11</pointsize>
                   </font>
                  </property>
@@ -595,6 +599,7 @@ QListView::item {
                  </property>
                  <property name="font">
                   <font>
+                   <family>Segoe UI</family>
                    <pointsize>11</pointsize>
                   </font>
                  </property>
@@ -648,6 +653,7 @@ QListView::item {
               <widget class="QLabel" name="label_17">
                <property name="font">
                 <font>
+                 <family>Segoe UI</family>
                  <pointsize>11</pointsize>
                 </font>
                </property>
@@ -664,11 +670,11 @@ QListView::item {
           </layout>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="title">
            <property name="font">
             <font>
              <family>Segoe UI Semilight</family>
-             <pointsize>26</pointsize>
+             <pointsize>20</pointsize>
             </font>
            </property>
            <property name="text">

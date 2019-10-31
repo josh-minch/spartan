@@ -169,6 +169,9 @@ QTableView {
            <property name="showGrid">
             <bool>false</bool>
            </property>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
@@ -208,6 +211,9 @@ QTableView {
            <property name="showGrid">
             <bool>false</bool>
            </property>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>
@@ -247,6 +253,9 @@ QTableView {
            <property name="showGrid">
             <bool>false</bool>
            </property>
+           <attribute name="horizontalHeaderHighlightSections">
+            <bool>false</bool>
+           </attribute>
            <attribute name="verticalHeaderVisible">
             <bool>false</bool>
            </attribute>

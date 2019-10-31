@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Tue Oct 29 21:58:25 2019
+# Created: Wed Oct 30 22:38:10 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -86,6 +86,7 @@ class Ui_ReqWidget(object):
         self.mineral_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.mineral_view.setShowGrid(False)
         self.mineral_view.setObjectName("mineral_view")
+        self.mineral_view.horizontalHeader().setHighlightSections(False)
         self.mineral_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.mineral_view, 3, 0, 1, 1)
         self.macro_view = ReqView(self.scrollAreaWidgetContents)
@@ -108,6 +109,7 @@ class Ui_ReqWidget(object):
         self.macro_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.macro_view.setShowGrid(False)
         self.macro_view.setObjectName("macro_view")
+        self.macro_view.horizontalHeader().setHighlightSections(False)
         self.macro_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.macro_view, 0, 0, 2, 1)
         self.vit_view = ReqView(self.scrollAreaWidgetContents)
@@ -130,6 +132,7 @@ class Ui_ReqWidget(object):
         self.vit_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.vit_view.setShowGrid(False)
         self.vit_view.setObjectName("vit_view")
+        self.vit_view.horizontalHeader().setHighlightSections(False)
         self.vit_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.vit_view, 2, 0, 1, 1)
         self.gridLayout_2.addLayout(self.gridLayout, 2, 1, 1, 1)
