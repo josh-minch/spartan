@@ -104,7 +104,15 @@
     <number>30</number>
    </property>
    <item row="0" column="0">
-    <widget class="QLabel" name="title">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <family>Segoe UI Semilight</family>
+       <pointsize>20</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="text">
       <string>Settings</string>
      </property>
@@ -125,6 +133,14 @@
        </property>
        <item>
         <widget class="QCommandLinkButton" name="req_btn">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -199,6 +215,12 @@
                </disabled>
               </palette>
              </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -243,6 +265,12 @@
                </disabled>
               </palette>
              </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="text">
               <string/>
              </property>
@@ -261,6 +289,15 @@
        </property>
        <item>
         <widget class="QCommandLinkButton" name="res_btn">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>14</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+           <kerning>true</kerning>
+          </font>
+         </property>
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -340,6 +377,12 @@
                 </colorrole>
                </disabled>
               </palette>
+             </property>
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
              </property>
              <property name="text">
               <string/>

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwindow.ui',
 # licensing of 'ui/ui_prefwindow.ui' applies.
 #
-# Created: Wed Oct 30 19:30:46 2019
+# Created: Tue Oct 29 21:58:25 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -34,6 +34,10 @@ class Ui_PrefWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         PrefWindow.setPalette(palette)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        PrefWindow.setFont(font)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         PrefWindow.setWindowIcon(icon)

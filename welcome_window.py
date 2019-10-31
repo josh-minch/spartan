@@ -19,8 +19,6 @@ class WelcomeWindow(QMainWindow, Ui_WelcomeWindow):
         if not self.req_wiz_widget.fields_are_valid():
             return
 
-        storage.create_spartan_db()
-
         sex = self.req_wiz_widget.sex
         year = self.req_wiz_widget.bd_year
         mon = self.req_wiz_widget.bd_mon

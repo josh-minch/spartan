@@ -74,6 +74,11 @@
     </disabled>
    </palette>
   </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -86,7 +91,14 @@
      <number>20</number>
     </property>
     <item>
-     <widget class="ReqWizWidget" name="req_wiz_widget" native="true"/>
+     <widget class="ReqWizWidget" name="req_wiz_widget" native="true">
+      <property name="font">
+       <font>
+        <family>Segoe UI</family>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QDialogButtonBox" name="button_box">

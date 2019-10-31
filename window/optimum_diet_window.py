@@ -61,7 +61,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
             col_widths = o_w_col_widths
 
         gui_helpers.hide_view_cols(self.diet_view, cols_to_hide)
-        #gui_helpers.set_header_font(self.diet_view, FONT_SECONDARY_SIZE, QFont.DemiBold)
+        gui_helpers.set_header_font(self.diet_view, FONT_SECONDARY_SIZE, QFont.DemiBold)
         gui_helpers.set_column_widths(self.diet_view, col_to_set_width, col_widths)
         self.diet_label.setMaximumWidth(sum(col_widths))
         #self.diet_view.setMinimumWidth(sum(o_col_widths))
@@ -111,7 +111,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         view.setModel(model)
         view.setItemDelegate(ProgressBarDelegate(self))
 
-        #gui_helpers.set_header_font(view, FONT_SECONDARY_SIZE, QFont.DemiBold)
+        gui_helpers.set_header_font(view, FONT_SECONDARY_SIZE, QFont.DemiBold)
         gui_helpers.set_column_widths(view, nut_col_to_attr.keys(), on_col_widths)
         view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
         gui_helpers.vertical_resize_table_view_to_contents(view)

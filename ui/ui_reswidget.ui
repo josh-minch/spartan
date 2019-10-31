@@ -80,6 +80,12 @@
     </disabled>
    </palette>
   </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Spartan - Preferences</string>
   </property>
@@ -142,6 +148,12 @@
          </property>
          <item row="0" column="1">
           <widget class="QLabel" name="label_4">
+           <property name="font">
+            <font>
+             <family>Segoe UI Semilight</family>
+             <pointsize>20</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Dietary Restrictions</string>
            </property>
@@ -197,6 +209,12 @@ QPushButton:pressed {
            </property>
            <item row="24" column="0" colspan="2">
             <widget class="QCheckBox" name="snack">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -252,6 +270,12 @@ QPushButton:pressed {
            </item>
            <item row="13" column="0" colspan="2">
             <widget class="QCheckBox" name="breakfast">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -268,6 +292,12 @@ QPushButton:pressed {
            </item>
            <item row="21" column="2">
             <widget class="QCheckBox" name="fast">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -284,6 +314,12 @@ QPushButton:pressed {
            </item>
            <item row="20" column="0" colspan="2">
             <widget class="QCheckBox" name="fat">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -300,6 +336,12 @@ QPushButton:pressed {
            </item>
            <item row="12" column="0" colspan="2">
             <widget class="QCheckBox" name="cereal">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -316,6 +358,11 @@ QPushButton:pressed {
            </item>
            <item row="14" column="0">
             <widget class="QLabel" name="label_2">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+              </font>
+             </property>
              <property name="text">
               <string>Animal products</string>
              </property>
@@ -336,6 +383,12 @@ QPushButton:pressed {
            </item>
            <item row="11" column="0" colspan="2">
             <widget class="QCheckBox" name="fruit">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -358,6 +411,14 @@ QPushButton:pressed {
            </item>
            <item row="15" column="2">
             <widget class="QCheckBox" name="seafood">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -374,6 +435,12 @@ QPushButton:pressed {
            </item>
            <item row="24" column="2">
             <widget class="QCheckBox" name="drink">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -390,6 +457,12 @@ QPushButton:pressed {
            </item>
            <item row="20" column="2">
             <widget class="QCheckBox" name="restaurant">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -419,6 +492,12 @@ QPushButton:pressed {
            </item>
            <item row="17" column="2">
             <widget class="QCheckBox" name="lamb">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -435,6 +514,14 @@ QPushButton:pressed {
            </item>
            <item row="3" column="0" colspan="2">
             <widget class="QLabel" name="label_6">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
              <property name="text">
               <string>Presets</string>
              </property>
@@ -455,6 +542,12 @@ QPushButton:pressed {
            </item>
            <item row="16" column="0" colspan="2">
             <widget class="QCheckBox" name="pork">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -481,6 +574,12 @@ QPushButton:pressed {
            </item>
            <item row="25" column="0" colspan="2">
             <widget class="QCheckBox" name="sweet">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -497,6 +596,14 @@ QPushButton:pressed {
            </item>
            <item row="8" column="0" colspan="3">
             <widget class="QLabel" name="label_8">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+               <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
+              </font>
+             </property>
              <property name="text">
               <string>Restricted food groups</string>
              </property>
@@ -504,6 +611,12 @@ QPushButton:pressed {
            </item>
            <item row="10" column="0">
             <widget class="QCheckBox" name="veg">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -520,6 +633,12 @@ QPushButton:pressed {
            </item>
            <item row="11" column="2">
             <widget class="QCheckBox" name="nut">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -546,6 +665,11 @@ QPushButton:pressed {
            </item>
            <item row="19" column="0">
             <widget class="QLabel" name="label_3">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+              </font>
+             </property>
              <property name="text">
               <string>Miscellaneous</string>
              </property>
@@ -553,6 +677,12 @@ QPushButton:pressed {
            </item>
            <item row="12" column="2">
             <widget class="QCheckBox" name="spice">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -569,6 +699,12 @@ QPushButton:pressed {
            </item>
            <item row="10" column="2">
             <widget class="QCheckBox" name="legume">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -585,6 +721,12 @@ QPushButton:pressed {
            </item>
            <item row="23" column="2">
             <widget class="QCheckBox" name="american">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -614,6 +756,12 @@ QPushButton:pressed {
            </item>
            <item row="16" column="2">
             <widget class="QCheckBox" name="sausage">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -646,6 +794,12 @@ QPushButton:pressed {
            </item>
            <item row="21" column="0" colspan="2">
             <widget class="QCheckBox" name="meal">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -662,6 +816,12 @@ QPushButton:pressed {
            </item>
            <item row="15" column="0" colspan="2">
             <widget class="QCheckBox" name="poultry">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -691,6 +851,12 @@ QPushButton:pressed {
            </item>
            <item row="17" column="0" colspan="2">
             <widget class="QCheckBox" name="beef">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -707,6 +873,12 @@ QPushButton:pressed {
            </item>
            <item row="22" column="2">
             <widget class="QCheckBox" name="baby">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -723,6 +895,12 @@ QPushButton:pressed {
            </item>
            <item row="22" column="0" colspan="2">
             <widget class="QCheckBox" name="baked">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -755,6 +933,11 @@ QPushButton:pressed {
            </item>
            <item row="9" column="0">
             <widget class="QLabel" name="label">
+             <property name="font">
+              <font>
+               <family>Segoe UI Semibold</family>
+              </font>
+             </property>
              <property name="text">
               <string>Plant products</string>
              </property>
@@ -772,6 +955,14 @@ QPushButton:pressed {
            </item>
            <item row="18" column="0">
             <widget class="QCheckBox" name="dairy">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -788,6 +979,12 @@ QPushButton:pressed {
            </item>
            <item row="23" column="0" colspan="2">
             <widget class="QCheckBox" name="soup">
+             <property name="font">
+              <font>
+               <family>Segoe UI</family>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
              <property name="layoutDirection">
               <enum>Qt::LeftToRight</enum>
              </property>
@@ -817,16 +1014,16 @@ QPushButton:pressed {
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="type_btn_grp">
+   <property name="exclusive">
+    <bool>false</bool>
+   </property>
+  </buttongroup>
   <buttongroup name="food_btn_grp">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
   <buttongroup name="preset_btn_grp"/>
-  <buttongroup name="type_btn_grp">
-   <property name="exclusive">
-    <bool>false</bool>
-   </property>
-  </buttongroup>
  </buttongroups>
 </ui>

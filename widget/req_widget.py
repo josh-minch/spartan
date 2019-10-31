@@ -96,7 +96,7 @@ class ReqWidget(QWidget, Ui_ReqWidget):
     def setup_req_view(self, view):
         gui_helpers.hide_view_cols(view, [Req.attr_to_col['nut_id']])
         view.setColumnWidth(Req.attr_to_col['name'], 150)
-        #gui_helpers.set_header_font(view, FONT_SECONDARY_SIZE, QFont.DemiBold)
+        gui_helpers.set_header_font(view, FONT_SECONDARY_SIZE, QFont.DemiBold)
         gui_helpers.vertical_resize_table_view_to_contents(view)
 
     def update_req(self):

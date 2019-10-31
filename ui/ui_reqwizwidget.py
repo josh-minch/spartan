@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwizwidget.ui',
 # licensing of 'ui/ui_reqwizwidget.ui' applies.
 #
-# Created: Wed Oct 30 19:30:46 2019
+# Created: Sat Oct 26 12:51:30 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -34,6 +34,10 @@ class Ui_ReqWizWidget(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         ReqWizWidget.setPalette(palette)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        ReqWizWidget.setFont(font)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         ReqWizWidget.setWindowIcon(icon)
@@ -45,7 +49,7 @@ class Ui_ReqWizWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 956, 795))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -189, 956, 841))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -54,6 +58,10 @@ class Ui_ReqWizWidget(object):
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
         self.mineral_view = ReqView(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        self.mineral_view.setFont(font)
         self.mineral_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
@@ -74,6 +82,10 @@ class Ui_ReqWizWidget(object):
         self.mineral_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.mineral_view, 3, 0, 1, 1)
         self.macro_view = ReqView(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        self.macro_view.setFont(font)
         self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
@@ -94,6 +106,10 @@ class Ui_ReqWizWidget(object):
         self.macro_view.verticalHeader().setVisible(False)
         self.gridLayout.addWidget(self.macro_view, 0, 0, 2, 1)
         self.vit_view = ReqView(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        self.vit_view.setFont(font)
         self.vit_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
@@ -132,6 +148,9 @@ class Ui_ReqWizWidget(object):
         self.label_14.setObjectName("label_14")
         self.horizontalLayout_13.addWidget(self.label_14)
         self.label_15 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.label_15.setFont(font)
         self.label_15.setScaledContents(False)
         self.label_15.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_15.setWordWrap(False)
@@ -154,6 +173,12 @@ class Ui_ReqWizWidget(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         self.sex_label.setPalette(palette)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        font.setWeight(50)
+        font.setBold(False)
+        self.sex_label.setFont(font)
         self.sex_label.setObjectName("sex_label")
         self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.sex_label)
         self.sex_edit = QtWidgets.QComboBox(self.scrollAreaWidgetContents)
@@ -164,6 +189,10 @@ class Ui_ReqWizWidget(object):
         sizePolicy.setHeightForWidth(self.sex_edit.sizePolicy().hasHeightForWidth())
         self.sex_edit.setSizePolicy(sizePolicy)
         self.sex_edit.setMinimumSize(QtCore.QSize(130, 0))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        self.sex_edit.setFont(font)
         self.sex_edit.setFocusPolicy(QtCore.Qt.TabFocus)
         self.sex_edit.setStyleSheet("QComboBox {\n"
 "    padding: 2px 0px 2px 2px;\n"
@@ -200,6 +229,12 @@ class Ui_ReqWizWidget(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         self.birth_label_4.setPalette(palette)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(11)
+        font.setWeight(50)
+        font.setBold(False)
+        self.birth_label_4.setFont(font)
         self.birth_label_4.setObjectName("birth_label_4")
         self.formLayout_4.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.birth_label_4)
         self.horizontalLayout_14 = QtWidgets.QHBoxLayout()
@@ -213,6 +248,9 @@ class Ui_ReqWizWidget(object):
         sizePolicy.setHeightForWidth(self.mon_edit.sizePolicy().hasHeightForWidth())
         self.mon_edit.setSizePolicy(sizePolicy)
         self.mon_edit.setMaximumSize(QtCore.QSize(50, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.mon_edit.setFont(font)
         self.mon_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.mon_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.mon_edit.setObjectName("mon_edit")
@@ -224,6 +262,9 @@ class Ui_ReqWizWidget(object):
         sizePolicy.setHeightForWidth(self.day_edit.sizePolicy().hasHeightForWidth())
         self.day_edit.setSizePolicy(sizePolicy)
         self.day_edit.setMaximumSize(QtCore.QSize(50, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.day_edit.setFont(font)
         self.day_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.day_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.day_edit.setObjectName("day_edit")
@@ -235,6 +276,9 @@ class Ui_ReqWizWidget(object):
         sizePolicy.setHeightForWidth(self.year_edit.sizePolicy().hasHeightForWidth())
         self.year_edit.setSizePolicy(sizePolicy)
         self.year_edit.setMaximumSize(QtCore.QSize(75, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.year_edit.setFont(font)
         self.year_edit.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.year_edit.setAlignment(QtCore.Qt.AlignCenter)
         self.year_edit.setObjectName("year_edit")
@@ -256,14 +300,21 @@ class Ui_ReqWizWidget(object):
         self.label_16.setObjectName("label_16")
         self.horizontalLayout_15.addWidget(self.label_16)
         self.label_17 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.label_17.setFont(font)
         self.label_17.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.label_17.setObjectName("label_17")
         self.horizontalLayout_15.addWidget(self.label_17)
         self.verticalLayout_9.addLayout(self.horizontalLayout_15)
         self.formLayout.setLayout(3, QtWidgets.QFormLayout.LabelRole, self.verticalLayout_9)
-        self.title = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.title.setObjectName("title")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.title)
+        self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI Semilight")
+        font.setPointSize(26)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
         self.gridLayout_2.addLayout(self.formLayout, 0, 0, 1, 1)
         self.gridLayout_2.setRowStretch(2, 1)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
@@ -285,7 +336,7 @@ class Ui_ReqWizWidget(object):
         self.day_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWizWidget", "Day", None, -1))
         self.year_edit.setPlaceholderText(QtWidgets.QApplication.translate("ReqWizWidget", "Year", None, -1))
         self.label_17.setText(QtWidgets.QApplication.translate("ReqWizWidget", "You can select a recommendation as a guideline then customize it to your needs.", None, -1))
-        self.title.setText(QtWidgets.QApplication.translate("ReqWizWidget", "Welcome to Spartan", None, -1))
+        self.label.setText(QtWidgets.QApplication.translate("ReqWizWidget", "Welcome to Spartan", None, -1))
 
 from view.req_view import ReqView
 import images_rc

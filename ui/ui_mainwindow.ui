@@ -47,6 +47,12 @@
     </disabled>
    </palette>
   </property>
+  <property name="font">
+   <font>
+    <family>Segoe UI</family>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
   <property name="focusPolicy">
    <enum>Qt::StrongFocus</enum>
   </property>
@@ -98,7 +104,13 @@
        <number>6</number>
       </property>
       <item>
-       <widget class="QLabel" name="fridge_label">
+       <widget class="QLabel" name="label_9">
+        <property name="font">
+         <font>
+          <family>Segoe UI Semilight</family>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
@@ -112,7 +124,7 @@
         <property name="spacing">
          <number>4</number>
         </property>
-        <item>
+        <item alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="add_foods_btn">
           <property name="enabled">
            <bool>true</bool>
@@ -122,6 +134,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Add food (Ctrl+F)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -134,7 +152,7 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="remove_btn">
           <property name="enabled">
            <bool>false</bool>
@@ -144,6 +162,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;pre style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Courier New';&quot;&gt;Remove selected food (Ctrl+D)&lt;/span&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -163,6 +187,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI</family>
+            <pointsize>10</pointsize>
+           </font>
           </property>
           <property name="toolTip">
            <string>&lt;p style='white-space:pre'&gt;Generate optimum diet (F5)&lt;/p&gt;</string>
@@ -192,6 +222,12 @@
             <height>16777215</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI Symbol</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string/>
           </property>
@@ -214,22 +250,6 @@
          </spacer>
         </item>
        </layout>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
       </item>
       <item>
        <widget class="QTableView" name="fridge_view">
@@ -324,11 +344,22 @@
           </disabled>
          </palette>
         </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="focusPolicy">
          <enum>Qt::StrongFocus</enum>
         </property>
         <property name="styleSheet">
-         <string notr="true">QTableView {
+         <string notr="true">QHeaderView::section{
+	border: 0px;
+	background-color: white;
+	padding-left: 3px;
+}
+
+QTableView {
 	alternate-background-color: rgb(247, 247, 247);
 }</string>
         </property>
@@ -358,6 +389,9 @@
         </attribute>
         <attribute name="verticalHeaderVisible">
          <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderDefaultSectionSize">
+         <number>25</number>
         </attribute>
        </widget>
       </item>
@@ -392,6 +426,12 @@
           <height>0</height>
          </size>
         </property>
+        <property name="font">
+         <font>
+          <family>Segoe UI</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
         <property name="focusPolicy">
          <enum>Qt::StrongFocus</enum>
         </property>
@@ -402,7 +442,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="iconSize">
          <size>
@@ -417,15 +457,18 @@
          <bool>false</bool>
         </property>
         <widget class="QWidget" name="tab_3">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <attribute name="title">
           <string>Nutrition amounts</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_4">
           <property name="leftMargin">
            <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>1</number>
           </property>
           <property name="bottomMargin">
            <number>0</number>
@@ -523,6 +566,11 @@
               </disabled>
              </palette>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="focusPolicy">
              <enum>Qt::StrongFocus</enum>
             </property>
@@ -530,9 +578,11 @@
              <string notr="true">QHeaderView::section{
 	border: 0px;
 	background-color: white;
+	padding-right: 5px;
 }
 
 QTableView {
+	
 	alternate-background-color: rgb(247, 247, 247);
 }</string>
             </property>
@@ -574,14 +624,17 @@ QTableView {
          </layout>
         </widget>
         <widget class="QWidget" name="tab">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <attribute name="title">
           <string>Prices</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
            <number>0</number>
           </property>
           <property name="bottomMargin">
@@ -680,6 +733,12 @@ QTableView {
               </disabled>
              </palette>
             </property>
+            <property name="font">
+             <font>
+              <family>Segoe UI</family>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="focusPolicy">
              <enum>Qt::StrongFocus</enum>
             </property>
@@ -734,14 +793,17 @@ QTableView {
          </layout>
         </widget>
         <widget class="QWidget" name="tab_2">
+         <property name="font">
+          <font>
+           <family>Segoe UI</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
          <attribute name="title">
           <string>Constraints</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
            <number>0</number>
           </property>
           <property name="bottomMargin">
@@ -840,6 +902,11 @@ QTableView {
               </disabled>
              </palette>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
             <property name="focusPolicy">
              <enum>Qt::StrongFocus</enum>
             </property>
@@ -899,7 +966,13 @@ QTableView {
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
-         <widget class="QLabel" name="nut_label">
+         <widget class="QLabel" name="label_8">
+          <property name="font">
+           <font>
+            <family>Segoe UI Semilight</family>
+            <pointsize>18</pointsize>
+           </font>
+          </property>
           <property name="autoFillBackground">
            <bool>false</bool>
           </property>
@@ -928,6 +1001,12 @@ QTableView {
             <width>30</width>
             <height>30</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>Segoe UI</family>
+            <pointsize>9</pointsize>
+           </font>
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
@@ -1068,6 +1147,11 @@ QTableView {
             </disabled>
            </palette>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="focusPolicy">
            <enum>Qt::NoFocus</enum>
           </property>
@@ -1128,7 +1212,7 @@ QTableView {
            <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderDefaultSectionSize">
-           <number>28</number>
+           <number>25</number>
           </attribute>
          </widget>
         </item>
@@ -1231,6 +1315,11 @@ QTableView {
             </disabled>
            </palette>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="focusPolicy">
            <enum>Qt::NoFocus</enum>
           </property>
@@ -1291,7 +1380,7 @@ QTableView {
            <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderDefaultSectionSize">
-           <number>28</number>
+           <number>25</number>
           </attribute>
          </widget>
         </item>
@@ -1394,6 +1483,11 @@ QTableView {
             </disabled>
            </palette>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="focusPolicy">
            <enum>Qt::NoFocus</enum>
           </property>
@@ -1451,7 +1545,7 @@ QTableView {
            <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderDefaultSectionSize">
-           <number>28</number>
+           <number>25</number>
           </attribute>
          </widget>
         </item>
