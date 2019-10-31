@@ -59,21 +59,5 @@ class ComboBoxDelegate(QtWidgets.QStyledItemDelegate):
             QtWidgets.QStyle.CC_ComboBox, box, painter)
         QtWidgets.QApplication.style().drawControl(QtWidgets.QStyle.CE_ComboBoxLabel, box, painter)
 
-    '''
-    def sizeHint(self, option, index):
-        box = QtWidgets.QStyleOptionComboBox()
-        box.state = option.state
-        box.rect = option.rect
-        size = QtCore.QSize(0, 0)
-
-        items_ix = index.model().index(index.row(), SELECTABLE_UNITS_COL)
-        items = index.model().data(items_ix)
-        for item in items:
-            box.currentText = text
-            rect = QtWidgets.QApplication.style().itemTextRect(option.fontMetrics, option.rect, QtCore.Qt.AlignCenter, True, item)
-            size = size.expandedTo(QtWidgets.QApplication.style().sizeFromContents(QtWidgets.QStyle.ContentsType.CT_ComboBox,
-                box, rect.size(), option.widget))
-        return size
-    '''
 if __name__ == '__main__':
     pass
