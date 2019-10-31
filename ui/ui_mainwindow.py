@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Thu Oct 31 13:32:37 2019
+# Created: Thu Oct 31 16:10:28 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,7 +31,7 @@ class Ui_MainWindow(object):
         MainWindow.setFont(font)
         MainWindow.setFocusPolicy(QtCore.Qt.StrongFocus)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icon/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setAutoFillBackground(True)
         MainWindow.setIconSize(QtCore.QSize(30, 30))
@@ -69,6 +69,9 @@ class Ui_MainWindow(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.add_foods_btn.setFont(font)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icon/plus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.add_foods_btn.setIcon(icon1)
         self.add_foods_btn.setObjectName("add_foods_btn")
         self.horizontalLayout.addWidget(self.add_foods_btn)
         self.remove_btn = QtWidgets.QPushButton(self.centralwidget)
@@ -82,6 +85,9 @@ class Ui_MainWindow(object):
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         self.remove_btn.setFont(font)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icon/minus.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.remove_btn.setIcon(icon2)
         self.remove_btn.setObjectName("remove_btn")
         self.horizontalLayout.addWidget(self.remove_btn)
         self.optimize_btn = QtWidgets.QPushButton(self.centralwidget)
@@ -95,10 +101,13 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.optimize_btn.setFont(font)
         self.optimize_btn.setStyleSheet("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/icon/chevron-right.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.optimize_btn.setIcon(icon3)
         self.optimize_btn.setObjectName("optimize_btn")
         self.horizontalLayout.addWidget(self.optimize_btn)
         self.fridge_line_edit = QtWidgets.QLineEdit(self.centralwidget)
-        self.fridge_line_edit.setMinimumSize(QtCore.QSize(200, 0))
+        self.fridge_line_edit.setMinimumSize(QtCore.QSize(100, 0))
         self.fridge_line_edit.setMaximumSize(QtCore.QSize(400, 16777215))
         font = QtGui.QFont()
         font.setFamily("Segoe UI Symbol")
@@ -411,9 +420,9 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.pref_btn.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/images/settings.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pref_btn.setIcon(icon1)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(":/icon/index.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.pref_btn.setIcon(icon4)
         self.pref_btn.setIconSize(QtCore.QSize(30, 30))
         self.pref_btn.setObjectName("pref_btn")
         self.horizontalLayout_5.addWidget(self.pref_btn)
@@ -657,7 +666,7 @@ class Ui_MainWindow(object):
         self.remove_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Remove", None, -1))
         self.remove_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "Ctrl+D", None, -1))
         self.optimize_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Generate optimum diet (F5)</p>", None, -1))
-        self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Generate diet", None, -1))
+        self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Make diet", None, -1))
         self.optimize_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F5", None, -1))
         self.fridge_line_edit.setPlaceholderText(QtWidgets.QApplication.translate("MainWindow", "🔍 Search my fridge", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtWidgets.QApplication.translate("MainWindow", "Nutrition amounts", None, -1))
@@ -674,4 +683,4 @@ class Ui_MainWindow(object):
         self.actionaa.setText(QtWidgets.QApplication.translate("MainWindow", "aa[\\", None, -1))
 
 from view.combo_table_view import ComboTableView
-import images_rc
+import icon_rc

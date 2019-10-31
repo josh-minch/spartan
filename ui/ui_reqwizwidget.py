@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwizwidget.ui',
 # licensing of 'ui/ui_reqwizwidget.ui' applies.
 #
-# Created: Thu Oct 31 13:32:40 2019
+# Created: Thu Oct 31 16:10:31 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -49,7 +49,7 @@ class Ui_ReqWizWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -177, 961, 829))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 961, 831))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -61,7 +61,7 @@ class Ui_ReqWizWidget(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.mineral_view.setFont(font)
-        self.mineral_view.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.mineral_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
@@ -85,7 +85,7 @@ class Ui_ReqWizWidget(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.macro_view.setFont(font)
-        self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.macro_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
@@ -109,7 +109,7 @@ class Ui_ReqWizWidget(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         self.vit_view.setFont(font)
-        self.vit_view.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.vit_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
@@ -143,7 +143,7 @@ class Ui_ReqWizWidget(object):
         self.label_14 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label_14.setMaximumSize(QtCore.QSize(20, 20))
         self.label_14.setText("")
-        self.label_14.setPixmap(QtGui.QPixmap(":/images/person-outline.png"))
+        self.label_14.setPixmap(QtGui.QPixmap(":/icon/user.svg"))
         self.label_14.setScaledContents(True)
         self.label_14.setObjectName("label_14")
         self.horizontalLayout_13.addWidget(self.label_14)
@@ -294,7 +294,7 @@ class Ui_ReqWizWidget(object):
         self.label_16 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label_16.setMaximumSize(QtCore.QSize(20, 20))
         self.label_16.setText("")
-        self.label_16.setPixmap(QtGui.QPixmap(":/images/info-outline.png"))
+        self.label_16.setPixmap(QtGui.QPixmap(":/icon/info.svg"))
         self.label_16.setScaledContents(True)
         self.label_16.setObjectName("label_16")
         self.horizontalLayout_15.addWidget(self.label_16)
@@ -339,4 +339,5 @@ class Ui_ReqWizWidget(object):
         self.title.setText(QtWidgets.QApplication.translate("ReqWizWidget", "Welcome to Spartan", None, -1))
 
 from view.req_view import ReqView
-import images_rc
+import icon_rc
+import icon_rc

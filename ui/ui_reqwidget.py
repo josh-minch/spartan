@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Thu Oct 31 13:32:39 2019
+# Created: Thu Oct 31 16:10:29 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,7 +71,7 @@ class Ui_ReqWidget(object):
         font.setFamily("Segoe UI")
         font.setPointSize(11)
         self.mineral_view.setFont(font)
-        self.mineral_view.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.mineral_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
@@ -94,7 +94,7 @@ class Ui_ReqWidget(object):
         font.setFamily("Segoe UI")
         font.setPointSize(11)
         self.macro_view.setFont(font)
-        self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.macro_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
@@ -117,7 +117,7 @@ class Ui_ReqWidget(object):
         font.setFamily("Segoe UI")
         font.setPointSize(11)
         self.vit_view.setFont(font)
-        self.vit_view.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.vit_view.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
 "    background-color: white;\n"
 "    border: 0px;\n"
@@ -148,7 +148,7 @@ class Ui_ReqWidget(object):
         self.label_14 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label_14.setMaximumSize(QtCore.QSize(20, 20))
         self.label_14.setText("")
-        self.label_14.setPixmap(QtGui.QPixmap(":/images/person-outline.png"))
+        self.label_14.setPixmap(QtGui.QPixmap(":/icon/user.svg"))
         self.label_14.setScaledContents(True)
         self.label_14.setObjectName("label_14")
         self.horizontalLayout_13.addWidget(self.label_14)
@@ -299,7 +299,7 @@ class Ui_ReqWidget(object):
         self.label_16 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label_16.setMaximumSize(QtCore.QSize(20, 20))
         self.label_16.setText("")
-        self.label_16.setPixmap(QtGui.QPixmap(":/images/info-outline.png"))
+        self.label_16.setPixmap(QtGui.QPixmap(":/icon/info.svg"))
         self.label_16.setScaledContents(True)
         self.label_16.setObjectName("label_16")
         self.horizontalLayout_15.addWidget(self.label_16)
@@ -335,7 +335,7 @@ class Ui_ReqWidget(object):
 "")
         self.back_btn.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/images/back-black.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/icon/arrow-left.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.back_btn.setIcon(icon1)
         self.back_btn.setIconSize(QtCore.QSize(24, 24))
         self.back_btn.setObjectName("back_btn")
@@ -362,4 +362,5 @@ class Ui_ReqWidget(object):
         self.label_17.setText(QtWidgets.QApplication.translate("ReqWidget", "You can select a recommendation as a guideline then customize it to your needs.", None, -1))
 
 from view.req_view import ReqView
-import images_rc
+import icon_rc
+import icon_rc

@@ -89,6 +89,10 @@
   <property name="windowTitle">
    <string>Spartan - Preferences</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../icon/icon.qrc">
+    <normaloff>:/icon/icon_trimmed.png</normaloff>:/icon/icon_trimmed.png</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <property name="spacing">
     <number>0</number>
@@ -188,8 +192,8 @@ QPushButton:pressed {
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../images/images.qrc">
-             <normaloff>:/images/back-black.svg</normaloff>:/images/back-black.svg</iconset>
+            <iconset resource="../icon/icon.qrc">
+             <normaloff>:/icon/arrow-left.svg</normaloff>:/icon/arrow-left.svg</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -236,23 +240,23 @@ QPushButton:pressed {
              </property>
              <item>
               <widget class="QLabel" name="label_37">
-               <property name="minimumSize">
-                <size>
-                 <width>24</width>
-                 <height>24</height>
-                </size>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>24</width>
-                 <height>24</height>
+                 <width>20</width>
+                 <height>20</height>
                 </size>
                </property>
                <property name="text">
                 <string/>
                </property>
                <property name="pixmap">
-                <pixmap resource="../images/images.qrc">:/images/info-outline.png</pixmap>
+                <pixmap resource="../icon/icon.qrc">:/icon/info.svg</pixmap>
                </property>
                <property name="scaledContents">
                 <bool>true</bool>
@@ -787,7 +791,7 @@ QPushButton:pressed {
              <property name="sizeHint" stdset="0">
               <size>
                <width>13</width>
-               <height>20</height>
+               <height>15</height>
               </size>
              </property>
             </spacer>
@@ -926,7 +930,7 @@ QPushButton:pressed {
              <property name="sizeHint" stdset="0">
               <size>
                <width>13</width>
-               <height>20</height>
+               <height>15</height>
               </size>
              </property>
             </spacer>
@@ -1010,7 +1014,8 @@ QPushButton:pressed {
   </layout>
  </widget>
  <resources>
-  <include location="../images/images.qrc"/>
+  <include location="../icon/icon.qrc"/>
+  <include location="../icon/icon.qrc"/>
  </resources>
  <connections/>
  <buttongroups>

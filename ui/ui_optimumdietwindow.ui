@@ -83,8 +83,8 @@
    <string>Spartan - Generated Diet</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../images/images.qrc">
-    <normaloff>:/images/icon_trimmed.png</normaloff>:/images/icon_trimmed.png</iconset>
+   <iconset resource="../icon/icon.qrc">
+    <normaloff>:/icon/icon_trimmed.png</normaloff>:/icon/icon_trimmed.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -114,11 +114,11 @@
       </item>
       <item>
        <widget class="QLabel" name="diet_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="font">
          <font>
@@ -127,7 +127,10 @@
          </font>
         </property>
         <property name="text">
-         <string>Optimum diet</string>
+         <string>Optimum diet filler text. This text must reach two lines in length, or else Qt does not correctly resize the label to fit the screen when the window is maximized. It clips the top and bottom.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
         </property>
         <property name="wordWrap">
          <bool>true</bool>
@@ -469,7 +472,7 @@ QTableView {
   </widget>
  </widget>
  <resources>
-  <include location="../images/images.qrc"/>
+  <include location="../icon/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

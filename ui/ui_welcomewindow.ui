@@ -80,7 +80,11 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Welcome to Spartan</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../icon/icon.qrc">
+    <normaloff>:/icon/icon_trimmed.png</normaloff>:/icon/icon_trimmed.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -111,6 +115,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../icon/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

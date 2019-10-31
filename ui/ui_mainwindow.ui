@@ -60,8 +60,8 @@
    <string>Spartan</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../images/images.qrc">
-    <normaloff>:/images/icon_trimmed.png</normaloff>:/images/icon_trimmed.png</iconset>
+   <iconset resource="../icon/icon.qrc">
+    <normaloff>:/icon/icon_trimmed.png</normaloff>:/icon/icon_trimmed.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -147,6 +147,10 @@
           <property name="text">
            <string>Add food</string>
           </property>
+          <property name="icon">
+           <iconset resource="../icon/icon.qrc">
+            <normaloff>:/icon/plus.svg</normaloff>:/icon/plus.svg</iconset>
+          </property>
           <property name="shortcut">
            <string>Ctrl+F</string>
           </property>
@@ -175,6 +179,10 @@
           <property name="text">
            <string>Remove</string>
           </property>
+          <property name="icon">
+           <iconset resource="../icon/icon.qrc">
+            <normaloff>:/icon/minus.svg</normaloff>:/icon/minus.svg</iconset>
+          </property>
           <property name="shortcut">
            <string>Ctrl+D</string>
           </property>
@@ -201,7 +209,11 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Generate diet</string>
+           <string>Make diet</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../icon/icon.qrc">
+            <normaloff>:/icon/chevron-right.svg</normaloff>:/icon/chevron-right.svg</iconset>
           </property>
           <property name="shortcut">
            <string>F5</string>
@@ -212,7 +224,7 @@
          <widget class="QLineEdit" name="fridge_line_edit">
           <property name="minimumSize">
            <size>
-            <width>200</width>
+            <width>100</width>
             <height>0</height>
            </size>
           </property>
@@ -1024,8 +1036,8 @@ QTableView {
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="../images/images.qrc">
-            <normaloff>:/images/settings.svg</normaloff>:/images/settings.svg</iconset>
+           <iconset resource="../icon/icon.qrc">
+            <normaloff>:/icon/index.svg</normaloff>:/icon/index.svg</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1604,7 +1616,7 @@ QTableView {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../images/images.qrc"/>
+  <include location="../icon/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

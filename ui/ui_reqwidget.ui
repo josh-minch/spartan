@@ -144,7 +144,7 @@
             </font>
            </property>
            <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="styleSheet">
             <string notr="true">QHeaderView::section{
@@ -159,6 +159,12 @@ QTableView {
            </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
            </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
@@ -186,7 +192,7 @@ QTableView {
             </font>
            </property>
            <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="styleSheet">
             <string notr="true">QHeaderView::section{
@@ -201,6 +207,12 @@ QTableView {
            </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
            </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
@@ -228,7 +240,7 @@ QTableView {
             </font>
            </property>
            <property name="focusPolicy">
-            <enum>Qt::NoFocus</enum>
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="styleSheet">
             <string notr="true">QHeaderView::section{
@@ -243,6 +255,12 @@ QTableView {
            </property>
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
+           </property>
+           <property name="verticalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
+           </property>
+           <property name="horizontalScrollBarPolicy">
+            <enum>Qt::ScrollBarAlwaysOff</enum>
            </property>
            <property name="alternatingRowColors">
             <bool>true</bool>
@@ -290,7 +308,7 @@ QTableView {
                 <string/>
                </property>
                <property name="pixmap">
-                <pixmap resource="../images/images.qrc">:/images/person-outline.png</pixmap>
+                <pixmap resource="../icon/icon.qrc">:/icon/user.svg</pixmap>
                </property>
                <property name="scaledContents">
                 <bool>true</bool>
@@ -622,7 +640,7 @@ QListView::item {
                 <string/>
                </property>
                <property name="pixmap">
-                <pixmap resource="../images/images.qrc">:/images/info-outline.png</pixmap>
+                <pixmap resource="../icon/icon.qrc">:/icon/info.svg</pixmap>
                </property>
                <property name="scaledContents">
                 <bool>true</bool>
@@ -685,8 +703,8 @@ QPushButton:pressed {
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="../images/images.qrc">
-           <normaloff>:/images/back-black.svg</normaloff>:/images/back-black.svg</iconset>
+          <iconset resource="../icon/icon.qrc">
+           <normaloff>:/icon/arrow-left.svg</normaloff>:/icon/arrow-left.svg</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -710,7 +728,8 @@ QPushButton:pressed {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../images/images.qrc"/>
+  <include location="../icon/icon.qrc"/>
+  <include location="../icon/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

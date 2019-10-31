@@ -8,6 +8,6 @@ pyside2-uic ui/ui_prefwindow.ui > ui/ui_prefwindow.py
 pyside2-uic ui/ui_reqwizwidget.ui > ui/ui_reqwizwidget.py
 pyside2-uic ui/ui_welcomewindow.ui > ui/ui_welcomewindow.py
 
-pyside2-rcc images/images.qrc -o images_rc.py
+pyside2-rcc icon/icon.qrc -o icon_rc.py
 
 python main.py

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_prefwindow.ui',
 # licensing of 'ui/ui_prefwindow.ui' applies.
 #
-# Created: Thu Oct 31 13:32:40 2019
+# Created: Thu Oct 31 16:10:30 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -39,7 +39,7 @@ class Ui_PrefWindow(object):
         font.setPointSize(10)
         PrefWindow.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icon/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         PrefWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(PrefWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -51,4 +51,4 @@ class Ui_PrefWindow(object):
     def retranslateUi(self, PrefWindow):
         PrefWindow.setWindowTitle(QtWidgets.QApplication.translate("PrefWindow", "Spartan - Settings", None, -1))
 
-import images_rc
+import icon_rc

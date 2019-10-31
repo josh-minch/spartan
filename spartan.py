@@ -215,7 +215,7 @@ class Nutrient:
         con.close()
         return unit
 
-class Optimizier:
+class Optimizer:
     def __init__(self, person, type_res, fd_res):
         self.lp_prob = LpProblem("Diet", sense=LpMinimize)
         self.type_res = type_res
@@ -376,8 +376,8 @@ class Optimizier:
             elif self.optimization_type == 'w':
                 title = "Diet: Optimized by nutritional density"
                 subtitle = (
-                    'Because some of your foods lack prices, your generated diet '
-                    'has instead been optimized to minimize its total weight.'
+                    'Some of your foods lack prices, so your generated diet '
+                    'has been optimized to minimize its total weight.'
                 )
         elif self.lp_prob.status == LpStatusInfeasible:
             title = 'Diet: No feasible solution'

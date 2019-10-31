@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reswidget.ui',
 # licensing of 'ui/ui_reswidget.ui' applies.
 #
-# Created: Thu Oct 31 13:32:39 2019
+# Created: Thu Oct 31 16:10:30 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,6 +43,9 @@ class Ui_ResWidget(object):
         font.setFamily("Segoe UI")
         font.setPointSize(11)
         ResWidget.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icon/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        ResWidget.setWindowIcon(icon)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(ResWidget)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -85,9 +88,9 @@ class Ui_ResWidget(object):
 "}\n"
 "")
         self.back_btn.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/images/back-black.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.back_btn.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icon/arrow-left.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.back_btn.setIcon(icon1)
         self.back_btn.setIconSize(QtCore.QSize(24, 24))
         self.back_btn.setObjectName("back_btn")
         self.gridLayout_3.addWidget(self.back_btn, 0, 0, 1, 1)
@@ -111,10 +114,14 @@ class Ui_ResWidget(object):
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_37 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
-        self.label_37.setMinimumSize(QtCore.QSize(24, 24))
-        self.label_37.setMaximumSize(QtCore.QSize(24, 24))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_37.sizePolicy().hasHeightForWidth())
+        self.label_37.setSizePolicy(sizePolicy)
+        self.label_37.setMaximumSize(QtCore.QSize(20, 20))
         self.label_37.setText("")
-        self.label_37.setPixmap(QtGui.QPixmap(":/images/info-outline.png"))
+        self.label_37.setPixmap(QtGui.QPixmap(":/icon/info.svg"))
         self.label_37.setScaledContents(True)
         self.label_37.setObjectName("label_37")
         self.horizontalLayout.addWidget(self.label_37)
@@ -358,7 +365,7 @@ class Ui_ResWidget(object):
         self.sausage.setObjectName("sausage")
         self.food_btn_grp.addButton(self.sausage)
         self.gridLayout.addWidget(self.sausage, 16, 2, 1, 1)
-        spacerItem = QtWidgets.QSpacerItem(13, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem = QtWidgets.QSpacerItem(13, 15, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout.addItem(spacerItem, 2, 2, 1, 1)
         self.meal = QtWidgets.QCheckBox(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
@@ -415,7 +422,7 @@ class Ui_ResWidget(object):
         self.baked.setObjectName("baked")
         self.food_btn_grp.addButton(self.baked)
         self.gridLayout.addWidget(self.baked, 22, 0, 1, 2)
-        spacerItem1 = QtWidgets.QSpacerItem(13, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem1 = QtWidgets.QSpacerItem(13, 15, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout.addItem(spacerItem1, 7, 2, 1, 1)
         self.label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         font = QtGui.QFont()
@@ -500,4 +507,5 @@ class Ui_ResWidget(object):
         self.dairy.setText(QtWidgets.QApplication.translate("ResWidget", "Dairy and eggs", None, -1))
         self.soup.setText(QtWidgets.QApplication.translate("ResWidget", "Soups and sauces", None, -1))
 
-import images_rc
+import icon_rc
+import icon_rc

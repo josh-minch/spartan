@@ -78,8 +78,8 @@
    <string>Spartan - Search</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>images/icon_trimmed.png</normaloff>images/icon_trimmed.png</iconset>
+   <iconset resource="../icon/icon.qrc">
+    <normaloff>:/icon/icon_trimmed.png</normaloff>:/icon/icon_trimmed.png</iconset>
   </property>
   <property name="iconSize">
    <size>
@@ -93,31 +93,6 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <widget class="QPushButton" name="debug_btn">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>70</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Debug</string>
-          </property>
-         </widget>
-        </item>
         <item>
          <spacer name="horizontalSpacer_4">
           <property name="orientation">
@@ -183,8 +158,8 @@
            <string>Add to Fridge</string>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>images/fridge.png</normaloff>images/fridge.png</iconset>
+           <iconset resource="../icon/icon.qrc">
+            <normaloff>:/icon/plus.svg</normaloff>:/icon/plus.svg</iconset>
           </property>
          </widget>
         </item>
@@ -319,8 +294,9 @@
   <tabstop>search_box</tabstop>
   <tabstop>search_view</tabstop>
   <tabstop>add_to_fridge_btn</tabstop>
-  <tabstop>debug_btn</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../icon/icon.qrc"/>
+ </resources>
  <connections/>
 </ui>

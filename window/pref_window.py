@@ -1,6 +1,6 @@
 import sys
 
-from PySide2.QtCore import Qt
+from PySide2.QtCore import Qt, QSettings
 from PySide2.QtWidgets import (QApplication, QMainWindow, QWidget, QStackedWidget, QVBoxLayout, QStyleFactory)
 
 import spartan
@@ -22,7 +22,8 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
         self.add_widgets()
 
         self.setup_connections()
-        self.resize(900,600)
+        #self.resize(900,600)
+        self.read_settings()
         self.show()
 
     def get_sex_bd(self):
@@ -63,6 +64,17 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
 
         self.req_widget.back_btn.clicked.connect(self.show_pref)
         self.res_widget.back_btn.clicked.connect(self.show_pref)
+
+    def closeEvent(self, event):
+        settings = QSettings("spartan", "spartan")
+        settings.setValue("pref/geometry", self.saveGeometry())
+        settings.setValue("pref/windowState", self.saveState())
+        super().closeEvent(self, event)
+
+    def read_settings(self):
+        settings = QSettings("spartan", "spartan")
+        self.restoreGeometry(settings.value("pref/geometry"))
+        self.restoreState(settings.value("pref/windowState"))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

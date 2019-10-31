@@ -17,7 +17,7 @@ if __name__ == '__main__':
     for food_id in food_ids:
         person.foods.append(spartan.Food(food_id=food_id))
 
-    optimizer = spartan.Optimizier(person, type_res, fd_res)
+    optimizer = spartan.Optimizer(person, type_res, fd_res)
     start = default_timer()
     optimizer.optimize_diet()
     print(default_timer() - start)

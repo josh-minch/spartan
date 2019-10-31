@@ -1,4 +1,4 @@
-from PySide2.QtCore import Qt, QModelIndex, Signal
+from PySide2.QtCore import Qt, QModelIndex, Signal, QSettings
 from PySide2.QtGui import QKeySequence
 from PySide2.QtWidgets import (QApplication, QMainWindow, QHeaderView, QShortcut)
 
@@ -21,7 +21,8 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
 
         self.search_box.setFocus()
         self.search_food()
-        self.resize(850, 500)
+        #self.resize(850, 500)
+        self.read_settings()
         self.show()
 
     def search_food(self):
@@ -70,10 +71,13 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         add_shortcut = QShortcut(QKeySequence(Qt.Key_Return), self.search_view)
         add_shortcut.activated.connect(self.add_to_fridge)
 
-        self.debug_btn.clicked.connect(self.print_debug_info)
-        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
-        debug_shortcut.activated.connect(self.print_debug_info)
+    def closeEvent(self, event):
+        settings = QSettings("spartan", "spartan")
+        settings.setValue("search/geometry", self.saveGeometry())
+        settings.setValue("search/windowState", self.saveState())
+        super().closeEvent(self, event)
 
-    def print_debug_info(self):
-        print(self.person.type_res)
-        print(self.person.fd_res)
+    def read_settings(self):
+        settings = QSettings("spartan", "spartan")
+        self.restoreGeometry(settings.value("search/geometry"))
+        self.restoreState(settings.value("search/windowState"))

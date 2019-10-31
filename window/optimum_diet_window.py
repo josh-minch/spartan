@@ -1,6 +1,6 @@
 import sys
 
-from PySide2.QtCore import Qt, QItemSelectionModel
+from PySide2.QtCore import Qt, QItemSelectionModel, QSettings
 from PySide2.QtWidgets import QApplication, QMainWindow, QTableWidgetItem, QHeaderView
 from PySide2.QtGui import QFont
 
@@ -19,31 +19,32 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def __init__(self, person, type_res, fd_res, parent=None):
         super().__init__(parent)
         self.setupUi(self)
-
         self.person = person
-        self.optimizier = spartan.Optimizier(self.person, type_res, fd_res)
-        self.optimizier.optimize_diet()
-        self.set_description()
+        self.optimizer = spartan.Optimizer(self.person, type_res, fd_res)
+
+        self.optimizer.optimize_diet()
         self.populate_diet_table()
         self.populate_nutrition_table()
 
-        self.resize(1400, 900)
-
         self.setup_connections()
+
+        self.showMaximized()
+        self.read_settings()
+        self.set_description()
         self.show()
 
     def set_description(self):
-        title, subtitle = self.optimizier.get_solution_status()
+        title, subtitle = self.optimizer.get_solution_status()
         self.title_label.setText(title)
         self.diet_label.setText(subtitle)
 
     def populate_diet_table(self):
-        foods = self.optimizier.get_diet_report()
+        foods = self.optimizer.get_diet_report()
 
         # Insert empty row to give space before totals
         foods.append({'id':'', 'name':'', 'cost':'','quantity':'', 'unit':''})
 
-        num_value, cost_value, mass_value = self.optimizier.get_totals()
+        num_value, cost_value, mass_value = self.optimizer.get_totals()
         foods.append({'id':-1, 'name':str(num_value) + ' items of food', 'cost':cost_value, 'quantity':mass_value, 'unit':'g'})
 
         self.diet_model = DietModel(foods=foods)
@@ -53,22 +54,21 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def setup_diet_view(self):
         cols_to_hide = [O_ID_COL]
         col_to_set_width = [O_NAME_COL, O_COST_COL, O_AMOUNT_COL, O_UNIT_COL]
-        if self.optimizier.optimization_type == 'w':
+        if self.optimizer.optimization_type == 'w':
             cols_to_hide.append(O_COST_COL)
             col_to_set_width.remove(O_COST_COL)
-            col_widths = o_p_col_widths
-        elif self.optimizer.optimization_type == 'p':
             col_widths = o_w_col_widths
+        elif self.optimizer.optimization_type == 'p':
+            col_widths = o_p_col_widths
 
         gui_helpers.hide_view_cols(self.diet_view, cols_to_hide)
         gui_helpers.set_header_font(self.diet_view, FONT_SECONDARY_SIZE, QFont.DemiBold)
         gui_helpers.set_column_widths(self.diet_view, col_to_set_width, col_widths)
         self.diet_label.setMaximumWidth(sum(col_widths))
-        #self.diet_view.setMinimumWidth(sum(o_col_widths))
         self.diet_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
 
     def populate_nutrition_table(self):
-        (food_ids, food_amounts) = self.optimizier.get_data_for_nutrition_lookup()
+        (food_ids, food_amounts) = self.optimizer.get_data_for_nutrition_lookup()
         self.ttl_macros, self.ttl_vits, self.ttl_minerals = spartan.get_nutrition(self.person, food_ids, food_amounts)
 
         self.setup_nutrition_view_group(
@@ -119,3 +119,13 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
     def setup_connections(self):
         self.diet_view.selectionModel().selectionChanged.connect(self.display_selected_nutrition)
 
+    def closeEvent(self, event):
+        settings = QSettings("spartan", "spartan")
+        settings.setValue("diet/geometry", self.saveGeometry())
+        settings.setValue("diet/windowState", self.saveState())
+        super().closeEvent(self, event)
+
+    def read_settings(self):
+        settings = QSettings("spartan", "spartan")
+        self.restoreGeometry(settings.value("diet/geometry"))
+        self.restoreState(settings.value("diet/windowState"))

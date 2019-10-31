@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_optimumdietwindow.ui',
 # licensing of 'ui/ui_optimumdietwindow.ui' applies.
 #
-# Created: Thu Oct 31 13:32:38 2019
+# Created: Thu Oct 31 16:10:29 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -38,7 +38,7 @@ class Ui_OptimumDietWindow(object):
         font.setFamily("Segoe UI")
         OptimumDietWindow.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icon/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         OptimumDietWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(OptimumDietWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -57,15 +57,12 @@ class Ui_OptimumDietWindow(object):
         self.title_label.setObjectName("title_label")
         self.verticalLayout.addWidget(self.title_label)
         self.diet_label = QtWidgets.QLabel(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Preferred)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.diet_label.sizePolicy().hasHeightForWidth())
-        self.diet_label.setSizePolicy(sizePolicy)
+        self.diet_label.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(11)
         self.diet_label.setFont(font)
+        self.diet_label.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.diet_label.setWordWrap(True)
         self.diet_label.setObjectName("diet_label")
         self.verticalLayout.addWidget(self.diet_label)
@@ -219,6 +216,6 @@ class Ui_OptimumDietWindow(object):
     def retranslateUi(self, OptimumDietWindow):
         OptimumDietWindow.setWindowTitle(QtWidgets.QApplication.translate("OptimumDietWindow", "Spartan - Generated Diet", None, -1))
         self.title_label.setText(QtWidgets.QApplication.translate("OptimumDietWindow", "Diet", None, -1))
-        self.diet_label.setText(QtWidgets.QApplication.translate("OptimumDietWindow", "Optimum diet", None, -1))
+        self.diet_label.setText(QtWidgets.QApplication.translate("OptimumDietWindow", "Optimum diet filler text. This text must reach two lines in length, or else Qt does not correctly resize the label to fit the screen when the window is maximized. It clips the top and bottom.", None, -1))
 
-import images_rc
+import icon_rc

@@ -84,13 +84,13 @@
    <string>Spartan - Settings</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../images/images.qrc">
-    <normaloff>:/images/icon_trimmed.png</normaloff>:/images/icon_trimmed.png</iconset>
+   <iconset resource="../icon/icon.qrc">
+    <normaloff>:/icon/icon_trimmed.png</normaloff>:/icon/icon_trimmed.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget"/>
  </widget>
  <resources>
-  <include location="../images/images.qrc"/>
+  <include location="../icon/icon.qrc"/>
  </resources>
  <connections/>
 </ui>

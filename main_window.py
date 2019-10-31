@@ -3,7 +3,7 @@ import ctypes
 from timeit import default_timer as timer
 
 from PySide2 import QtCore, QtWidgets, QtGui
-from PySide2.QtCore import Qt, QEvent, Slot, QModelIndex, QRegExp, QSortFilterProxyModel
+from PySide2.QtCore import Qt, QEvent, Slot, QModelIndex, QRegExp, QSortFilterProxyModel, QSettings
 from PySide2.QtGui import QFont, QKeySequence, QPalette
 from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListWidget, QTableWidget,
                                QListWidgetItem, QTableWidgetItem, QAbstractItemView,
@@ -35,81 +35,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.fd_res = Restriction(RESTRICT_FDS_FILE)
 
         self.setup_fridge_views()
-
         self.setup_connections()
-        self.setup_shortcuts()
-        self.setup_selection_modes()
         self.update_fridge_line_edit_placeholder()
 
         self.add_foods_btn.setFocus()
-        #self.resize(QDesktopWidget().availableGeometry(self).size() * 0.90)
-        self.resize(1500, 700)
         self.display_empty_nutrition()
+        self.showMaximized()
+        self.read_settings()
         self.show()
-
-    def setup_connections(self):
-        self.fridge_model.dataChanged.connect(self.update_foods)
-        self.fridge_model.dataChanged.connect(self.display_nutrition)
-
-        self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
-
-        # Update filtered view
-        self.fridge_line_edit.textChanged.connect(
-            self.fridge_line_edit_changed)
-
-        # Update fridge search placeholder
-        self.fridge_model.rowsInserted.connect(
-            self.update_fridge_line_edit_placeholder)
-        self.fridge_model.rowsRemoved.connect(
-            self.update_fridge_line_edit_placeholder)
-
-        # Synchronize fridge selection to prices and constraints
-        self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
-        self.constraints_view.setSelectionModel(
-            self.fridge_view.selectionModel())
-        self.nut_quant_view.setSelectionModel(
-            self.fridge_view.selectionModel())
-
-        # Synchronize scrollbars
-        self.fridge_view.verticalScrollBar().valueChanged.connect(
-            self.prices_view.verticalScrollBar().setValue)
-        self.prices_view.verticalScrollBar().valueChanged.connect(
-            self.fridge_view.verticalScrollBar().setValue)
-
-        self.fridge_view.verticalScrollBar().valueChanged.connect(
-            self.constraints_view.verticalScrollBar().setValue)
-        self.constraints_view.verticalScrollBar().valueChanged.connect(
-            self.fridge_view.verticalScrollBar().setValue)
-
-        self.fridge_view.verticalScrollBar().valueChanged.connect(
-            self.nut_quant_view.verticalScrollBar().setValue)
-        self.nut_quant_view.verticalScrollBar().valueChanged.connect(
-            self.fridge_view.verticalScrollBar().setValue)
-
-        # Add to fridge button
-        self.add_foods_btn.clicked.connect(self.open_search_window)
-
-        # Remove button
-        self.remove_btn.clicked.connect(self.remove_from_fridge)
-        self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
-
-        # Optimize button
-        self.optimize_btn.clicked.connect(self.optimize)
-
-        # Settings button
-        self.pref_btn.clicked.connect(self.open_pref)
-
-    def setup_shortcuts(self):
-        close_shortcut = QShortcut(QKeySequence(Qt.CTRL + Qt.Key_W), self)
-        close_shortcut.activated.connect(self.close)
-
-        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
-        debug_shortcut.activated.connect(self.print_debug_info)
 
     def update_fridge_line_edit_placeholder(self):
         number = len(self.person.foods)
         plural = '' if number == 1 else 's'
-        text = '🔍 Search my fridge ({number} item{plural})'.format(
+        text = '🔍 Search fridge ({number} item{plural})'.format(
             number=number, plural=plural)
         self.fridge_line_edit.setPlaceholderText(text)
 
@@ -135,17 +73,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         hide_view_cols(self.constraints_view, C_COLS_TO_HIDE)
         hide_view_cols(self.nut_quant_view, N_COLS_TO_HIDE)
 
-        # Horizontal header
-        f_header = self.fridge_view.horizontalHeader()
-        p_header = self.prices_view.horizontalHeader()
-        c_header = self.constraints_view.horizontalHeader()
-        n_header = self.nut_quant_view.horizontalHeader()
-
         # Header must be explicitly set to visible even if set in Designer
-        f_header.setVisible(True)
-        p_header.setVisible(True)
-        c_header.setVisible(True)
-        n_header.setVisible(True)
+        self.fridge_view.horizontalHeader().setVisible(True)
+        self.prices_view.horizontalHeader().setVisible(True)
+        self.constraints_view.horizontalHeader().setVisible(True)
+        self.nut_quant_view.horizontalHeader().setVisible(True)
 
         # Set column width
         self.prices_view.setColumnWidth(PRICE_COL, VALUE_COL_WIDTH)
@@ -153,16 +85,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.prices_view.setColumnWidth(PRICE_QUANTITY_COL, VALUE_COL_WIDTH)
 
         self.constraints_view.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
-        '''
-        self.constraints_view.setColumnWidth(MIN_COL, VALUE_COL_WIDTH)
-        self.constraints_view.setColumnWidth(MAX_COL, VALUE_COL_WIDTH)
-        self.constraints_view.setColumnWidth(TARGET_COL, VALUE_COL_WIDTH)
-
-        self.constraints_view.setColumnWidth(MIN_UNIT_COL, 50)
-        self.constraints_view.setColumnWidth(MAX_UNIT_COL, 50)
-        self.constraints_view.setColumnWidth(TARGET_UNIT_COL, 50)
-        '''
         self.nut_quant_view.setColumnWidth(NUT_QUANT_COL, VALUE_COL_WIDTH)
 
         # Set row height
@@ -278,30 +200,71 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.remove_btn.setEnabled(False)
 
-    def setup_selection_modes(self):
-        # self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        pass
+    def setup_connections(self):
+        self.fridge_model.dataChanged.connect(self.update_foods)
+        self.fridge_model.dataChanged.connect(self.display_nutrition)
 
-    def print_debug_info(self):
-        print(self.fridge_view.horizontalHeader().font())
-        print(self.constraints_view.horizontalHeader().font())
-        print(self.macros_view.horizontalHeader().font())
+        self.fridge_view.selectionModel().selectionChanged.connect(self.display_nutrition)
+
+        # Update filtered view
+        self.fridge_line_edit.textChanged.connect(
+            self.fridge_line_edit_changed)
+
+        # Update fridge search placeholder
+        self.fridge_model.rowsInserted.connect(
+            self.update_fridge_line_edit_placeholder)
+        self.fridge_model.rowsRemoved.connect(
+            self.update_fridge_line_edit_placeholder)
+
+        # Synchronize fridge selection to prices and constraints
+        self.prices_view.setSelectionModel(self.fridge_view.selectionModel())
+        self.constraints_view.setSelectionModel(
+            self.fridge_view.selectionModel())
+        self.nut_quant_view.setSelectionModel(
+            self.fridge_view.selectionModel())
+
+        # Synchronize scrollbars
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.prices_view.verticalScrollBar().setValue)
+        self.prices_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
+
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.constraints_view.verticalScrollBar().setValue)
+        self.constraints_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
+
+        self.fridge_view.verticalScrollBar().valueChanged.connect(
+            self.nut_quant_view.verticalScrollBar().setValue)
+        self.nut_quant_view.verticalScrollBar().valueChanged.connect(
+            self.fridge_view.verticalScrollBar().setValue)
+
+        # Add to fridge button
+        self.add_foods_btn.clicked.connect(self.open_search_window)
+
+        # Remove button
+        self.remove_btn.clicked.connect(self.remove_from_fridge)
+        self.fridge_view.selectionModel().selectionChanged.connect(self.toggle_remove_btn)
+
+        # Optimize button
+        self.optimize_btn.clicked.connect(self.optimize)
+
+        # Settings button
+        self.pref_btn.clicked.connect(self.open_pref)
+
+    def closeEvent(self, event):
+        settings = QSettings("spartan", "spartan")
+        settings.setValue("geometry", self.saveGeometry())
+        settings.setValue("windowState", self.saveState())
+        super().closeEvent(self, event)
+
+    def read_settings(self):
+        settings = QSettings("spartan", "spartan")
+        self.restoreGeometry(settings.value("geometry"))
+        self.restoreState(settings.value("windowState"))
 
 def main():
-    # Necessarry to get icon in Windows Taskbar
-    myappid = u'spartan.0.5'
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
-
-    storage.create_spartan_db()
-    app = QApplication(sys.argv)
-    # app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
-
-    #p = QPalette()
-    #p.setColor(QPalette.Highlight, Qt.darkRed)
-    # app.setPalette(p)
-
-    window = MainWindow()
-    sys.exit(app.exec_())
+    pass
 
 if __name__ == "__main__":
     main()

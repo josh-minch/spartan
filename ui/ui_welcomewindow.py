@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_welcomewindow.ui',
 # licensing of 'ui/ui_welcomewindow.ui' applies.
 #
-# Created: Thu Oct 31 13:32:41 2019
+# Created: Thu Oct 31 16:10:31 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -37,6 +37,9 @@ class Ui_WelcomeWindow(object):
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         WelcomeWindow.setFont(font)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/icon/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        WelcomeWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(WelcomeWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -55,6 +58,7 @@ class Ui_WelcomeWindow(object):
         QtCore.QMetaObject.connectSlotsByName(WelcomeWindow)
 
     def retranslateUi(self, WelcomeWindow):
-        WelcomeWindow.setWindowTitle(QtWidgets.QApplication.translate("WelcomeWindow", "MainWindow", None, -1))
+        WelcomeWindow.setWindowTitle(QtWidgets.QApplication.translate("WelcomeWindow", "Welcome to Spartan", None, -1))
 
 from widget.req_wiz_widget import ReqWizWidget
+import icon_rc
