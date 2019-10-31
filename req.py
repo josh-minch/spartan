@@ -62,9 +62,6 @@ mineral_names = ['Calcium (Ca)', 'Copper (Cu)', 'Iron (Fe)', 'Magnesium (Mg)', '
 
 nut_names = macro_names + vit_names + mineral_names
 
-# Nutritional requirements. Rows correspond to life stages and cols to nutrients
-# TODO: Handle folate, dfe, total, in food
-# TODO: Add "added" nutrients like vitamin b12 and vitamin e, as well as adjusted protein and kcal.
 min_macro = {
     ( 0, 'm') : [None,60,None,None,9.1,31,None,None,None,0.5,4.4,None,None,700.0,None,None],
     (0.5, 'm'): [None,95,None,None,11,30,None,None,None,0.5,4.6,None,None,800.0,None,None],
@@ -232,6 +229,9 @@ def extract_empty_req(nut_names):
     return nuts
 
 def get_reqs(age_range, sex):
+    if (age_range, sex) not in life_stages:
+        return
+
     macro = extract_req(age_range, sex, macro_names, min_macro, max_macro)
     vit = extract_req(age_range, sex, vit_names, min_vit, max_vit)
     mineral = extract_req(age_range, sex, mineral_names, min_mineral, max_mineral)
@@ -256,7 +256,7 @@ def calculate_age(bd_year, bd_month, bd_day):
     return age.days / DAYS_IN_YEAR
 
 def calculate_age_months(bd_month, bd_day):
-    return date.today().month - bd_month - (date.today().day - bd_day)
+    return date.today().month - bd_month - (date.today().day < bd_day)
 
 if __name__ == '__main__':
     pass

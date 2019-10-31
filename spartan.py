@@ -371,7 +371,7 @@ class Optimizier:
             if self.optimization_type == 'p':
                 title = "Diet: Optimized by price"
                 subtitle = (
-                    'The cheapest nutritionally complete diet given the foods in your fridge and their prices'
+                    'The cheapest nutritionally complete diet given the foods in your fridge and their prices.'
                 )
             elif self.optimization_type == 'w':
                 title = "Diet: Optimized by nutritional density"
@@ -383,7 +383,8 @@ class Optimizier:
             title = 'Diet: No feasible solution'
             subtitle = (
                 'Given the foods in your fridge, '
-                'a diet that satisfies your nutritional requirements is not possible without also exceeding your maximums'
+                'a diet that satisfies your nutritional requirements is '
+                'not possible without also exceeding your daily upper limits.'
             )
         return title, subtitle
 
