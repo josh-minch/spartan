@@ -10,6 +10,7 @@ from spartan import *
 import req
 from gui_constants import *
 import gui_helpers
+import font
 from model.requirements_model import RequirementsModel
 from delegate.lineedit_delegate import LineEditDelegate
 from ui.ui_reqwizwidget import Ui_ReqWizWidget
@@ -20,6 +21,10 @@ class ReqWizWidget(QWidget, Ui_ReqWizWidget):
         super().__init__(parent)
         self.setupUi(self)
         self.setup_connections()
+        font.set_font_title(self.title)
+        font.set_font_header(self.macro_view.horizontalHeader())
+        font.set_font_header(self.vit_view.horizontalHeader())
+        font.set_font_header(self.mineral_view.horizontalHeader())
         self.set_validators()
         self.set_defaults()
         self.init_req()
@@ -70,7 +75,7 @@ class ReqWizWidget(QWidget, Ui_ReqWizWidget):
         gui_helpers.hide_view_cols(view, [Req.attr_to_col['nut_id']])
         view.setColumnWidth(Req.attr_to_col['name'], 150)
         gui_helpers.vertical_resize_table_view_to_contents(view)
-        gui_helpers.set_header_font(view, FONT_SECONDARY_SIZE, QFont.DemiBold)
+        #gui_helpers.set_header_font(view, FONT_SECONDARY_SIZE, QFont.DemiBold)
 
     def fields_are_valid(self):
         if None in (self.bd_day, self.bd_mon, self.bd_year):

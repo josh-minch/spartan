@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_optimumdietwindow.ui',
 # licensing of 'ui/ui_optimumdietwindow.ui' applies.
 #
-# Created: Tue Oct 29 21:58:24 2019
+# Created: Wed Oct 30 19:30:44 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -34,9 +34,6 @@ class Ui_OptimumDietWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
         OptimumDietWindow.setPalette(palette)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        OptimumDietWindow.setFont(font)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/images/icon_trimmed.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         OptimumDietWindow.setWindowIcon(icon)
@@ -50,10 +47,6 @@ class Ui_OptimumDietWindow(object):
         self.verticalLayout.setSpacing(12)
         self.verticalLayout.setObjectName("verticalLayout")
         self.title_label = QtWidgets.QLabel(self.centralwidget)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(18)
-        self.title_label.setFont(font)
         self.title_label.setObjectName("title_label")
         self.verticalLayout.addWidget(self.title_label)
         self.diet_label = QtWidgets.QLabel(self.centralwidget)
@@ -62,10 +55,6 @@ class Ui_OptimumDietWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.diet_label.sizePolicy().hasHeightForWidth())
         self.diet_label.setSizePolicy(sizePolicy)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(11)
-        self.diet_label.setFont(font)
         self.diet_label.setWordWrap(True)
         self.diet_label.setObjectName("diet_label")
         self.verticalLayout.addWidget(self.diet_label)
@@ -102,9 +91,6 @@ class Ui_OptimumDietWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.AlternateBase, brush)
         self.diet_view.setPalette(palette)
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.diet_view.setFont(font)
         self.diet_view.setProperty("cursor", QtCore.Qt.PointingHandCursor)
         self.diet_view.setMouseTracking(True)
         self.diet_view.setStyleSheet("QHeaderView::section{\n"
@@ -133,9 +119,6 @@ class Ui_OptimumDietWindow(object):
         self.formLayout.setObjectName("formLayout")
         self.macro_view = QtWidgets.QTableView(self.centralwidget)
         self.macro_view.setMaximumSize(QtCore.QSize(350, 16777215))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.macro_view.setFont(font)
         self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.macro_view.setStyleSheet("QHeaderView::section{\n"
 "    border: 0px;\n"
@@ -158,9 +141,6 @@ class Ui_OptimumDietWindow(object):
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.macro_view)
         self.vit_view = QtWidgets.QTableView(self.centralwidget)
         self.vit_view.setMaximumSize(QtCore.QSize(350, 16777215))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.vit_view.setFont(font)
         self.vit_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.vit_view.setStyleSheet("QHeaderView::section{\n"
 "    border: 0px;\n"
@@ -183,9 +163,6 @@ class Ui_OptimumDietWindow(object):
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.vit_view)
         self.mineral_view = QtWidgets.QTableView(self.centralwidget)
         self.mineral_view.setMaximumSize(QtCore.QSize(350, 16777215))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.mineral_view.setFont(font)
         self.mineral_view.setFocusPolicy(QtCore.Qt.NoFocus)
         self.mineral_view.setStyleSheet("QHeaderView::section{\n"
 "    border: 0px;\n"

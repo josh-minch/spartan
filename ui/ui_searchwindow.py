@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_searchwindow.ui',
 # licensing of 'ui/ui_searchwindow.ui' applies.
 #
-# Created: Tue Oct 29 21:58:23 2019
+# Created: Wed Oct 30 19:30:44 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -46,19 +46,6 @@ class Ui_SearchWindow(object):
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.debug_btn = QtWidgets.QPushButton(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.debug_btn.sizePolicy().hasHeightForWidth())
-        self.debug_btn.setSizePolicy(sizePolicy)
-        self.debug_btn.setMaximumSize(QtCore.QSize(70, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(10)
-        self.debug_btn.setFont(font)
-        self.debug_btn.setObjectName("debug_btn")
-        self.horizontalLayout.addWidget(self.debug_btn)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.search_box = QtWidgets.QLineEdit(self.centralwidget)
@@ -69,20 +56,12 @@ class Ui_SearchWindow(object):
         self.search_box.setSizePolicy(sizePolicy)
         self.search_box.setMinimumSize(QtCore.QSize(170, 25))
         self.search_box.setMaximumSize(QtCore.QSize(300, 16777215))
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Symbol")
-        font.setPointSize(10)
-        self.search_box.setFont(font)
         self.search_box.setFrame(True)
         self.search_box.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.search_box.setObjectName("search_box")
         self.horizontalLayout.addWidget(self.search_box)
         self.add_to_fridge_btn = QtWidgets.QPushButton(self.centralwidget)
         self.add_to_fridge_btn.setEnabled(False)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI Semilight")
-        font.setPointSize(10)
-        self.add_to_fridge_btn.setFont(font)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("images/fridge.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.add_to_fridge_btn.setIcon(icon1)
@@ -112,10 +91,6 @@ class Ui_SearchWindow(object):
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.HighlightedText, brush)
         self.search_view.setPalette(palette)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        self.search_view.setFont(font)
         self.search_view.setStyleSheet("")
         self.search_view.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.search_view.setEditTriggers(QtWidgets.QAbstractItemView.DoubleClicked|QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
@@ -136,11 +111,9 @@ class Ui_SearchWindow(object):
         QtCore.QMetaObject.connectSlotsByName(SearchWindow)
         SearchWindow.setTabOrder(self.search_box, self.search_view)
         SearchWindow.setTabOrder(self.search_view, self.add_to_fridge_btn)
-        SearchWindow.setTabOrder(self.add_to_fridge_btn, self.debug_btn)
 
     def retranslateUi(self, SearchWindow):
         SearchWindow.setWindowTitle(QtWidgets.QApplication.translate("SearchWindow", "Spartan - Search", None, -1))
-        self.debug_btn.setText(QtWidgets.QApplication.translate("SearchWindow", "Debug", None, -1))
         self.search_box.setPlaceholderText(QtWidgets.QApplication.translate("SearchWindow", "🔍 Search for foods", None, -1))
         self.add_to_fridge_btn.setText(QtWidgets.QApplication.translate("SearchWindow", "Add to Fridge", None, -1))
 

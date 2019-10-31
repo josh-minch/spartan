@@ -94,31 +94,6 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QPushButton" name="debug_btn">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>70</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Debug</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer_4">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -151,12 +126,6 @@
             <height>16777215</height>
            </size>
           </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Symbol</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
           <property name="frame">
            <bool>true</bool>
           </property>
@@ -172,12 +141,6 @@
          <widget class="QPushButton" name="add_to_fridge_btn">
           <property name="enabled">
            <bool>false</bool>
-          </property>
-          <property name="font">
-           <font>
-            <family>Segoe UI Semilight</family>
-            <pointsize>10</pointsize>
-           </font>
           </property>
           <property name="text">
            <string>Add to Fridge</string>
@@ -269,12 +232,6 @@
           </disabled>
          </palette>
         </property>
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -319,7 +276,6 @@
   <tabstop>search_box</tabstop>
   <tabstop>search_view</tabstop>
   <tabstop>add_to_fridge_btn</tabstop>
-  <tabstop>debug_btn</tabstop>
  </tabstops>
  <resources/>
  <connections/>

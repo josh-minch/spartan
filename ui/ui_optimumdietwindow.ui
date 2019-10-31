@@ -74,11 +74,6 @@
     </disabled>
    </palette>
   </property>
-  <property name="font">
-   <font>
-    <family>Segoe UI</family>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Spartan - Generated Diet</string>
   </property>
@@ -101,12 +96,6 @@
       </property>
       <item>
        <widget class="QLabel" name="title_label">
-        <property name="font">
-         <font>
-          <family>Segoe UI Semilight</family>
-          <pointsize>18</pointsize>
-         </font>
-        </property>
         <property name="text">
          <string>Diet</string>
         </property>
@@ -119,12 +108,6 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="font">
-         <font>
-          <family>Segoe UI</family>
-          <pointsize>11</pointsize>
-         </font>
         </property>
         <property name="text">
          <string>Optimum diet</string>
@@ -242,11 +225,6 @@
         </disabled>
        </palette>
       </property>
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-       </font>
-      </property>
       <property name="cursor" stdset="0">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
@@ -305,11 +283,6 @@ QTableView {
           <height>16777215</height>
          </size>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
@@ -358,11 +331,6 @@ QTableView {
           <height>16777215</height>
          </size>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
@@ -410,11 +378,6 @@ QTableView {
           <width>350</width>
           <height>16777215</height>
          </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
         </property>
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>

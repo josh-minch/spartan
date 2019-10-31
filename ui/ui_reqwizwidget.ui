@@ -74,12 +74,6 @@
     </disabled>
    </palette>
   </property>
-  <property name="font">
-   <font>
-    <family>Segoe UI</family>
-    <pointsize>11</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Spartan - Preferences</string>
   </property>
@@ -112,9 +106,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>-189</y>
+        <y>0</y>
         <width>956</width>
-        <height>841</height>
+        <height>795</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,1">
@@ -137,12 +131,6 @@
         <layout class="QGridLayout" name="gridLayout">
          <item row="3" column="0">
           <widget class="ReqView" name="mineral_view">
-           <property name="font">
-            <font>
-             <family>Segoe UI</family>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
            <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
            </property>
@@ -182,12 +170,6 @@ QTableView {
          </item>
          <item row="0" column="0" rowspan="2">
           <widget class="ReqView" name="macro_view">
-           <property name="font">
-            <font>
-             <family>Segoe UI</family>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
            <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
            </property>
@@ -227,12 +209,6 @@ QTableView {
          </item>
          <item row="2" column="0">
           <widget class="ReqView" name="vit_view">
-           <property name="font">
-            <font>
-             <family>Segoe UI</family>
-             <pointsize>11</pointsize>
-            </font>
-           </property>
            <property name="focusPolicy">
             <enum>Qt::NoFocus</enum>
            </property>
@@ -311,11 +287,6 @@ QTableView {
              </item>
              <item>
               <widget class="QLabel" name="label_15">
-               <property name="font">
-                <font>
-                 <pointsize>11</pointsize>
-                </font>
-               </property>
                <property name="text">
                 <string>Let's set your nutritional requirements to get started</string>
                </property>
@@ -379,14 +350,6 @@ QTableView {
                  </disabled>
                 </palette>
                </property>
-               <property name="font">
-                <font>
-                 <family>Segoe UI</family>
-                 <pointsize>11</pointsize>
-                 <weight>50</weight>
-                 <bold>false</bold>
-                </font>
-               </property>
                <property name="text">
                 <string>Sex</string>
                </property>
@@ -408,12 +371,6 @@ QTableView {
                  <width>130</width>
                  <height>0</height>
                 </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Segoe UI</family>
-                 <pointsize>11</pointsize>
-                </font>
                </property>
                <property name="focusPolicy">
                 <enum>Qt::TabFocus</enum>
@@ -498,14 +455,6 @@ QListView::item {
                  </disabled>
                 </palette>
                </property>
-               <property name="font">
-                <font>
-                 <family>Segoe UI</family>
-                 <pointsize>11</pointsize>
-                 <weight>50</weight>
-                 <bold>false</bold>
-                </font>
-               </property>
                <property name="text">
                 <string>Date of birth</string>
                </property>
@@ -533,11 +482,6 @@ QListView::item {
                    <height>16777215</height>
                   </size>
                  </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
-                  </font>
-                 </property>
                  <property name="focusPolicy">
                   <enum>Qt::StrongFocus</enum>
                  </property>
@@ -563,11 +507,6 @@ QListView::item {
                    <height>16777215</height>
                   </size>
                  </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
-                  </font>
-                 </property>
                  <property name="focusPolicy">
                   <enum>Qt::StrongFocus</enum>
                  </property>
@@ -592,11 +531,6 @@ QListView::item {
                    <width>75</width>
                    <height>16777215</height>
                   </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <pointsize>11</pointsize>
-                  </font>
                  </property>
                  <property name="focusPolicy">
                   <enum>Qt::StrongFocus</enum>
@@ -646,11 +580,6 @@ QListView::item {
              </item>
              <item>
               <widget class="QLabel" name="label_17">
-               <property name="font">
-                <font>
-                 <pointsize>11</pointsize>
-                </font>
-               </property>
                <property name="text">
                 <string>You can select a recommendation as a guideline then customize it to your needs.</string>
                </property>
@@ -664,13 +593,7 @@ QListView::item {
           </layout>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label">
-           <property name="font">
-            <font>
-             <family>Segoe UI Semilight</family>
-             <pointsize>26</pointsize>
-            </font>
-           </property>
+          <widget class="QLabel" name="title">
            <property name="text">
             <string>Welcome to Spartan</string>
            </property>

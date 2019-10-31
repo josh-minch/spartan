@@ -69,11 +69,3 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
 
         add_shortcut = QShortcut(QKeySequence(Qt.Key_Return), self.search_view)
         add_shortcut.activated.connect(self.add_to_fridge)
-
-        self.debug_btn.clicked.connect(self.print_debug_info)
-        debug_shortcut = QShortcut(QKeySequence(Qt.Key_F1), self)
-        debug_shortcut.activated.connect(self.print_debug_info)
-
-    def print_debug_info(self):
-        print(self.person.type_res)
-        print(self.person.fd_res)

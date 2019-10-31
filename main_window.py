@@ -14,6 +14,7 @@ import database
 import storage
 from gui_constants import *
 from gui_helpers import *
+import font
 from window.search_window import SearchWindow
 from window.pref_window import PrefWindow
 from window.optimum_diet_window import OptimumDietWindow
@@ -28,6 +29,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
+        font.set_font_title(self.fridge_label)
+        font.set_font_title(self.nut_label)
+
         self.blockSignals(True)
         self.person = Person()
         self.blockSignals(False)
@@ -38,7 +43,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.setup_connections()
         self.setup_shortcuts()
-        self.setup_selection_modes()
         self.update_fridge_line_edit_placeholder()
 
         self.add_foods_btn.setFocus()
@@ -46,6 +50,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.resize(1500, 700)
         self.display_empty_nutrition()
         self.show()
+
 
     def setup_connections(self):
         self.fridge_model.dataChanged.connect(self.update_foods)
@@ -135,17 +140,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         hide_view_cols(self.constraints_view, C_COLS_TO_HIDE)
         hide_view_cols(self.nut_quant_view, N_COLS_TO_HIDE)
 
-        # Horizontal header
-        f_header = self.fridge_view.horizontalHeader()
-        p_header = self.prices_view.horizontalHeader()
-        c_header = self.constraints_view.horizontalHeader()
-        n_header = self.nut_quant_view.horizontalHeader()
-
         # Header must be explicitly set to visible even if set in Designer
-        f_header.setVisible(True)
-        p_header.setVisible(True)
-        c_header.setVisible(True)
-        n_header.setVisible(True)
+        self.fridge_view.horizontalHeader().setVisible(True)
+        self.prices_view.horizontalHeader().setVisible(True)
+        self.constraints_view.horizontalHeader().setVisible(True)
+        self.nut_quant_view.horizontalHeader().setVisible(True)
 
         # Set column width
         self.prices_view.setColumnWidth(PRICE_COL, VALUE_COL_WIDTH)
@@ -278,14 +277,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.remove_btn.setEnabled(False)
 
-    def setup_selection_modes(self):
-        # self.fridge_view.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        pass
-
     def print_debug_info(self):
-        print(self.fridge_view.horizontalHeader().font())
-        print(self.constraints_view.horizontalHeader().font())
-        print(self.macros_view.horizontalHeader().font())
+        pass
 
 def main():
     # Necessarry to get icon in Windows Taskbar
@@ -294,11 +287,6 @@ def main():
 
     storage.create_spartan_db()
     app = QApplication(sys.argv)
-    # app.setStyle(QtWidgets.QStyleFactory.create('fusion'))
-
-    #p = QPalette()
-    #p.setColor(QPalette.Highlight, Qt.darkRed)
-    # app.setPalette(p)
 
     window = MainWindow()
     sys.exit(app.exec_())
