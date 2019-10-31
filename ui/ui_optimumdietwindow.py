@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_optimumdietwindow.ui',
 # licensing of 'ui/ui_optimumdietwindow.ui' applies.
 #
-# Created: Wed Oct 30 22:38:10 2019
+# Created: Thu Oct 31 13:32:38 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -156,6 +156,9 @@ class Ui_OptimumDietWindow(object):
         self.macro_view.verticalHeader().setVisible(False)
         self.macro_view.verticalHeader().setDefaultSectionSize(28)
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.macro_view)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setSpacing(0)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.vit_view = QtWidgets.QTableView(self.centralwidget)
         self.vit_view.setMaximumSize(QtCore.QSize(350, 16777215))
         font = QtGui.QFont()
@@ -180,7 +183,7 @@ class Ui_OptimumDietWindow(object):
         self.vit_view.setObjectName("vit_view")
         self.vit_view.verticalHeader().setVisible(False)
         self.vit_view.verticalHeader().setDefaultSectionSize(28)
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.vit_view)
+        self.verticalLayout_2.addWidget(self.vit_view)
         self.mineral_view = QtWidgets.QTableView(self.centralwidget)
         self.mineral_view.setMaximumSize(QtCore.QSize(350, 16777215))
         font = QtGui.QFont()
@@ -205,7 +208,8 @@ class Ui_OptimumDietWindow(object):
         self.mineral_view.setObjectName("mineral_view")
         self.mineral_view.verticalHeader().setVisible(False)
         self.mineral_view.verticalHeader().setDefaultSectionSize(28)
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.mineral_view)
+        self.verticalLayout_2.addWidget(self.mineral_view)
+        self.formLayout.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.verticalLayout_2)
         self.gridLayout.addLayout(self.formLayout, 1, 1, 1, 1)
         OptimumDietWindow.setCentralWidget(self.centralwidget)
 
