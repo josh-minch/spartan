@@ -1,17 +1,17 @@
+import copy
 import operator
 import os.path
 import random
-import time
-import copy
 import sqlite3 as sql
-import numpy as np
+import time
 from datetime import date
 from timeit import default_timer as timer
 
+import numpy as np
 from pulp import *
 
-import req
 import database
+import req
 import storage
 from constants import *
 
@@ -505,6 +505,8 @@ def get_empty_nutrition(person):
 
 def get_nutrition(person, food_ids, food_amounts):
     # Sort input lists according to food ids in ascending order
+    if len(food_amounts) == 0:
+        return get_empty_nutrition(person)
     food_tups = sorted(zip(food_ids, food_amounts))
     food_ids, food_amounts = (list(food_tup) for food_tup in zip(*food_tups))
     sorted_nuts = sorted(person.nuts, key=lambda n: int(n.nut_id))

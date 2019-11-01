@@ -69,7 +69,7 @@ class PrefWindow(QMainWindow, Ui_PrefWindow):
         settings = QSettings("spartan", "spartan")
         settings.setValue("pref/geometry", self.saveGeometry())
         settings.setValue("pref/windowState", self.saveState())
-        super().closeEvent(self, event)
+        super().closeEvent(event)
 
     def read_settings(self):
         settings = QSettings("spartan", "spartan")

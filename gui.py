@@ -7,7 +7,6 @@ from PySide2 import QtWidgets, QtGui, QtCore
 import storage
 import main_window
 import welcome_window
-import font
 
 
 def config_taskbar_icon():

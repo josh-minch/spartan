@@ -1,27 +1,27 @@
-import sys
 import ctypes
+import sys
 from timeit import default_timer as timer
 
-from PySide2 import QtCore, QtWidgets, QtGui
-from PySide2.QtCore import Qt, QEvent, Slot, QModelIndex, QRegExp, QSortFilterProxyModel, QSettings
+from PySide2.QtCore import (QEvent, QModelIndex, QRegExp, QSettings,
+                            QSortFilterProxyModel, Qt, Slot)
 from PySide2.QtGui import QFont, QKeySequence, QPalette
-from PySide2.QtWidgets import (QApplication, QMainWindow, QDesktopWidget, QListWidget, QTableWidget,
-                               QListWidgetItem, QTableWidgetItem, QAbstractItemView,
-                               QHeaderView, QShortcut)
+from PySide2.QtWidgets import (
+    QAbstractItemView, QApplication, QDesktopWidget, QHeaderView, QListWidget,
+    QListWidgetItem, QMainWindow, QShortcut, QTableWidget, QTableWidgetItem)
 
 from spartan import *
 import database
 import storage
+from delegate.progress_bar_delegate import ProgressBarDelegate
 from gui_constants import *
 from gui_helpers import *
-from window.search_window import SearchWindow
-from window.pref_window import PrefWindow
-from window.optimum_diet_window import OptimumDietWindow
-from model.nutrition_model import NutritionTableModel
 from model.fridge_model import FridgeModel
-from view.combo_table_view import ComboTableView
-from delegate.progress_bar_delegate import ProgressBarDelegate
+from model.nutrition_model import NutritionTableModel
 from ui.ui_mainwindow import Ui_MainWindow
+from view.combo_table_view import ComboTableView
+from window.optimum_diet_window import OptimumDietWindow
+from window.pref_window import PrefWindow
+from window.search_window import SearchWindow
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -256,7 +256,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         settings = QSettings("spartan", "spartan")
         settings.setValue("geometry", self.saveGeometry())
         settings.setValue("windowState", self.saveState())
-        super().closeEvent(self, event)
+        super().closeEvent(event)
 
     def read_settings(self):
         settings = QSettings("spartan", "spartan")

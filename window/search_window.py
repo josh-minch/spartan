@@ -75,7 +75,7 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         settings = QSettings("spartan", "spartan")
         settings.setValue("search/geometry", self.saveGeometry())
         settings.setValue("search/windowState", self.saveState())
-        super().closeEvent(self, event)
+        super().closeEvent(event)
 
     def read_settings(self):
         settings = QSettings("spartan", "spartan")

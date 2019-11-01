@@ -6,7 +6,6 @@ from PySide2.QtGui import QFont
 
 import spartan
 import database
-import basic_foods
 from gui_constants import *
 import gui_helpers
 from model.diet_model import DietModel
@@ -123,7 +122,7 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         settings = QSettings("spartan", "spartan")
         settings.setValue("diet/geometry", self.saveGeometry())
         settings.setValue("diet/windowState", self.saveState())
-        super().closeEvent(self, event)
+        super().closeEvent(event)
 
     def read_settings(self):
         settings = QSettings("spartan", "spartan")
