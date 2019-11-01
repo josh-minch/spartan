@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwidget.ui',
 # licensing of 'ui/ui_reqwidget.ui' applies.
 #
-# Created: Thu Oct 31 16:10:29 2019
+# Created: Fri Nov  1 15:02:27 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -82,6 +82,8 @@ class Ui_ReqWidget(object):
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.mineral_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.mineral_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.mineral_view.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.mineral_view.setAlternatingRowColors(True)
         self.mineral_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.mineral_view.setShowGrid(False)
@@ -105,6 +107,8 @@ class Ui_ReqWidget(object):
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.macro_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.macro_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.macro_view.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.macro_view.setAlternatingRowColors(True)
         self.macro_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.macro_view.setShowGrid(False)
@@ -128,6 +132,8 @@ class Ui_ReqWidget(object):
 "    alternate-background-color: rgb(247, 247, 247);\n"
 "}")
         self.vit_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.vit_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.vit_view.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.vit_view.setAlternatingRowColors(True)
         self.vit_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
         self.vit_view.setShowGrid(False)

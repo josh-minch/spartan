@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwizwidget.ui',
 # licensing of 'ui/ui_reqwizwidget.ui' applies.
 #
-# Created: Thu Oct 31 16:10:31 2019
+# Created: Fri Nov  1 15:02:28 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -49,7 +49,7 @@ class Ui_ReqWizWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 961, 831))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, -179, 961, 831))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
