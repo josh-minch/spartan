@@ -7,19 +7,20 @@ Spartan is a python application that generates nutritionally-complete diets give
 * Customize food constraints to limit quantity of specific foods in generated diets
 
 # Run
-## From executable
-A prebuilt Windows executable called `spartan.exe` can be downloaded [here](). It can also be found under `dist`. This has only been tested on Windows 10 but may work on earlier releases.
+A prebuilt Windows executable called `spartan.exe` can be downloaded [here]().
+It can also be found under `dist` in this repository.
+This has only been tested on Windows 10 but may work on earlier releases.
 
 ## From source
 On Windows
-```
+```shell
 git clone https://github.com/josh-minch/frugal-nutrition.git
 virtualenv --no-site-packages VIRTUAL
 VIRTUAL\Scripts\activate
 pip -r requirements.txt
 ```
 On macOS / Linux
-```
+```shell
 git clone https://github.com/josh-minch/frugal-nutrition.git
 virtualenv --no-site-packages VIRTUAL
 source VIRTUAL/bin/activate
