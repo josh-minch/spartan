@@ -454,7 +454,7 @@ QTableView {
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="iconSize">
          <size>
@@ -623,7 +623,7 @@ QTableView {
              <bool>false</bool>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
-             <bool>false</bool>
+             <bool>true</bool>
             </attribute>
             <attribute name="verticalHeaderVisible">
              <bool>false</bool>
@@ -792,7 +792,7 @@ QTableView {
              <bool>false</bool>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
-             <bool>false</bool>
+             <bool>true</bool>
             </attribute>
             <attribute name="verticalHeaderVisible">
              <bool>false</bool>

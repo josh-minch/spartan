@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Fri Nov  1 15:02:25 2019
+# Created: Fri Nov  1 22:27:26 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -255,7 +255,7 @@ class Ui_MainWindow(object):
         self.nut_quant_view.setObjectName("nut_quant_view")
         self.nut_quant_view.horizontalHeader().setVisible(False)
         self.nut_quant_view.horizontalHeader().setHighlightSections(False)
-        self.nut_quant_view.horizontalHeader().setStretchLastSection(False)
+        self.nut_quant_view.horizontalHeader().setStretchLastSection(True)
         self.nut_quant_view.verticalHeader().setVisible(False)
         self.nut_quant_view.verticalHeader().setDefaultSectionSize(23)
         self.gridLayout_4.addWidget(self.nut_quant_view, 0, 0, 1, 1)
@@ -322,7 +322,7 @@ class Ui_MainWindow(object):
         self.prices_view.setObjectName("prices_view")
         self.prices_view.horizontalHeader().setVisible(False)
         self.prices_view.horizontalHeader().setHighlightSections(False)
-        self.prices_view.horizontalHeader().setStretchLastSection(False)
+        self.prices_view.horizontalHeader().setStretchLastSection(True)
         self.prices_view.verticalHeader().setVisible(False)
         self.prices_view.verticalHeader().setDefaultSectionSize(23)
         self.verticalLayout_5.addWidget(self.prices_view)
@@ -653,7 +653,7 @@ class Ui_MainWindow(object):
         self.actionaa.setObjectName("actionaa")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

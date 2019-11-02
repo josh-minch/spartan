@@ -16,8 +16,14 @@ def config_taskbar_icon():
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
 def run_welcome_check():
-    with open('run_wel_check.csv', 'r') as check_file:
-        return check_file.read()
+    try:
+        with open('run_wel_check.csv', 'r') as check_file:
+            return check_file.read()
+    except FileNotFoundError:
+        check_file = open('run_wel_check.csv', 'w+')
+        check_text = 'run'
+        check_file.write(check_text)
+        return check_text
 
 def run():
     config_taskbar_icon()

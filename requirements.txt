@@ -1,5 +1,5 @@
 numpy==1.17.3
-PuLP==1.6.10
+PuLP==1.6.8
 pyparsing==2.4.2
 PySide2==5.13.2
 shiboken2==5.13.2

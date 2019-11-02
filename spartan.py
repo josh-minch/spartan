@@ -1,3 +1,4 @@
+import os
 import copy
 import operator
 import os.path
@@ -176,7 +177,7 @@ class Food:
         con.commit()
         cur.close()
 
-        selectable_units = ['g']
+        selectable_units = ['g', 'lb (453.6 g)']
         for unit in units:
             if unit[0] == 1.0:
                 amount_display = ''
@@ -232,7 +233,11 @@ class Optimizer:
         self.add_food_constraints()
 
         self.lp_prob.writeLP("DietModel.lp")
-        self.lp_prob.solve()
+        cwd = os.getcwd()
+        solverdir = 'cbc.exe'
+        solverdir = os.path.join(cwd, solverdir)
+        solver = COIN_CMD(path=solverdir)
+        self.lp_prob.solve(solver)
 
         self.describe_solution()
 

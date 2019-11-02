@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_reqwizwidget.ui',
 # licensing of 'ui/ui_reqwizwidget.ui' applies.
 #
-# Created: Fri Nov  1 15:02:28 2019
+# Created: Fri Nov  1 22:27:29 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
