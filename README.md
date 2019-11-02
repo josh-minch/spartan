@@ -32,7 +32,8 @@ Then the application with `python main.py`
 # Built with
 * [Python 3.6](https://www.python.org/downloads/)
 * [Qt for Python's PySide2](https://www.qt.io/qt-for-python/) - GUI toolkit
-* [PuLP](http://coin-or.github.io/pulp/) - Linear programming backend
+* [PuLP](http://coin-or.github.io/pulp/) - Linear programming modeller
+* [CBC](https://github.com/coin-or/Cbc) -  Linear programming solver
 * [Numpy](https://numpy.org/)
 * [USDA's FoodData Central SR Legacy](https://fdc.nal.usda.gov/) - Food composition nutrient data
 * [QtComboBoxTableWidget](https://github.com/pierrebai/QtComboBoxTableWidget) - Very helpful reference for specific Qt functionality
@@ -42,4 +43,4 @@ Then the application with `python main.py`
 # License
 This software is licensed under
 
-This project includes open source software licensed under MIT license and BSD license. In compliance with these licenses, all copies and substantial portions of the licensed software retains the original copyright and license notices.
+This project includes open source software licensed under the MIT License, the BSD License, and the Eclipse Public License 1.0. In compliance with these licenses, all copies and substantial portions of the licensed software retains the original copyright and license notices.

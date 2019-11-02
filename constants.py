@@ -37,13 +37,6 @@ class RestrictionPresets:
     carnivore = plant
     home = {fd_grp['restaurant'], fd_grp['fast'], fd_grp['meal'], fd_grp['snack']}
 
-fd_grp_display_name = {100: 'dairy and eggs', 200: 'spices and herbs', 300: 'baby food', 400: 'fats and oils',
-                        500: 'poultry', 600: 'soups and sauces', 700: 'sausages and deli meats',
-                       800: 'breakfast cereals', 900: 'fruits and fruit juices', 1000: 'pork', 1100: 'vegetables', 1200: 'nuts and seeds',
-                       1300: 'beef', 1400: 'drinks', 1500: 'seafood', 1600: 'legumes', 1700: 'lamb, veal, game',
-                       1800: 'baked products',  1900: 'sweets', 2000: 'cereal grains and pasta', 2100: 'fast food', 2200: 'prepared meals',
-                       2500: 'snacks', 3500: 'Native American foods',  3600: 'restaurant food'}
-
 fd_grp_search_name = {100: 'Dairy and Eggs', 200: 'Spices and Herbs', 300: 'Baby food', 400: 'Fats and Oils',
                        500: 'Poultry', 600: 'Soups and Sauces', 700: 'Sausages and Deli Meats',
                        800: 'Breakfast Cereals', 900: 'Fruits and Fruit juices', 1000: 'Pork', 1100: 'Vegetables', 1200: 'Nuts and Seeds',
