@@ -2,13 +2,13 @@
 Spartan is a python application that generates nutritionally-complete diets given a selection of foods.
 * Generate diets optimized by nutritional density, minimizing total weight.
 * Enter price data to generate diets which minimize total cost.
-* Provides a nutrient composition database for over 7000 foods that can be easily inspected and compared.
+* Provides a nutrient composition database with over 7000 foods that can be easily inspected and compared.
 * Personal nutritional requirements based on US Food and Nutrition Board [recommendations](https://ods.od.nih.gov/Health_Information/Dietary_Reference_Intakes.aspx).
 * Choose dietary preferences to exclude certain food groups.
 * Customize food constraints to limit quantity of specific foods in generated diets.
 
 # Run
-A prebuilt Windows executable can be found under releases. Tested on Windows 10, but may work on earlier releases.
+A prebuilt Windows executable can be found under releases. Tested on Windows 10, but may work on earlier versions.
 
 ## From source
 On Windows
@@ -34,7 +34,7 @@ Then run the application with `python main.py`
 * [PuLP](http://coin-or.github.io/pulp/) - Linear programming modeller
 * [CBC](https://github.com/coin-or/Cbc) -  Linear programming solver
 * [Numpy](https://numpy.org/)
-* [USDA's FoodData Central SR Legacy](https://fdc.nal.usda.gov/) - Food composition nutrient data
+* [USDA's FoodData Central SR Legacy](https://fdc.nal.usda.gov/) - Food nutrient composition data
 * [QtComboBoxTableWidget](https://github.com/pierrebai/QtComboBoxTableWidget) - Very helpful reference for specific Qt functionality
 * [PyInstaller](https://www.pyinstaller.org/) - For the Windows executable
 * [Feather Icons](https://feathericons.com/)
