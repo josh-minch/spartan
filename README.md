@@ -40,7 +40,7 @@ Then the application with `python main.py`
 * [PyInstaller](https://www.pyinstaller.org/) - For the Windows executable
 * [Feather Icons](https://feathericons.com/)
 
-# License
-This software is licensed under
+# Legal
+This software does not currently have a license.
 
-This project includes open source software licensed under the MIT License, the BSD License, and the Eclipse Public License 1.0. In compliance with these licenses, all copies and substantial portions of the licensed software retains the original copyright and license notices.
+This project includes open source software licensed under the MIT License and the BSD License. In compliance with these licenses, all copies and substantial portions of the licensed software retains the original copyright and license notices.
