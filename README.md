@@ -1,15 +1,13 @@
 # Spartan
 Spartan is a python application that generates nutritionally-complete diets given a selection of foods.
-* Enter price data to generate diets which minimize total cost
+* Enter price data to generate diets which minimize total cost.
 * Provides a nutrient composition database for over 7000 foods that can be easily inspected and compared.
-* Personal nutritional requirements based on US Food and Nutrition Board [recommendations](https://ods.od.nih.gov/Health_Information/Dietary_Reference_Intakes.aspx)
-* Select dietary preferences to exclude food groups
-* Customize food constraints to limit quantity of specific foods in generated diets
+* Personal nutritional requirements based on US Food and Nutrition Board [recommendations](https://ods.od.nih.gov/Health_Information/Dietary_Reference_Intakes.aspx).
+* Choose ietary preferences to exclude certain food groups.
+* Customize food constraints to limit quantity of specific foods in generated diets.
 
 # Run
-A prebuilt Windows executable called `spartan.exe` can be downloaded [here]().
-It can also be found under `dist` in this repository.
-This has only been tested on Windows 10 but may work on earlier releases.
+A prebuilt Windows executable can be found under releases. Tested on Windows 10, but may work on earlier releases.
 
 ## From source
 On Windows
@@ -27,7 +25,7 @@ source VIRTUAL/bin/activate
 pip -r requirements.txt
 
 ```
-Then the application with `python main.py`
+Then run the application with `python main.py`
 
 # Built with
 * [Python 3.6](https://www.python.org/downloads/)
