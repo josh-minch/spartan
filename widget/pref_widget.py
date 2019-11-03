@@ -4,7 +4,7 @@ from PySide2.QtGui import QPixmap
 from PySide2.QtWidgets import QWidget
 
 import req
-from constants import type_grp, fd_grp, fd_grp_display_name
+from constants import type_grp, fd_grp
 from ui.ui_prefwidget import Ui_PrefWidget
 
 
