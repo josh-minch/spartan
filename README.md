@@ -1,9 +1,10 @@
 # Spartan
 Spartan is a python application that generates nutritionally-complete diets given a selection of foods.
+* Generate diets optimized by nutritional density, minimizing total weight.
 * Enter price data to generate diets which minimize total cost.
 * Provides a nutrient composition database for over 7000 foods that can be easily inspected and compared.
 * Personal nutritional requirements based on US Food and Nutrition Board [recommendations](https://ods.od.nih.gov/Health_Information/Dietary_Reference_Intakes.aspx).
-* Choose ietary preferences to exclude certain food groups.
+* Choose dietary preferences to exclude certain food groups.
 * Customize food constraints to limit quantity of specific foods in generated diets.
 
 # Run

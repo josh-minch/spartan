@@ -59,6 +59,10 @@ class DietModel(QAbstractTableModel):
             attr_str = o_col_to_attr[index.column()]
             return self.foods[index.row()][attr_str]
 
+        if role == Qt.ToolTipRole:
+            if index.column() == NAME_COL:
+                return self.foods[index.row()]['name']
+
         # A bug in PySide2 requires that we cast the bitwise
         # AlignmentFlag to an int before returning
         # https://bugreports.qt.io/browse/PYSIDE-20

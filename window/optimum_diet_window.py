@@ -60,11 +60,13 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         elif self.optimizer.optimization_type == 'p':
             col_widths = o_p_col_widths
 
-        gui_helpers.hide_view_cols(self.diet_view, cols_to_hide)
+        #self.diet_view.setColumnHidden(0, True)
         gui_helpers.set_header_font(self.diet_view, FONT_SECONDARY_SIZE, QFont.DemiBold)
         gui_helpers.set_column_widths(self.diet_view, col_to_set_width, col_widths)
         self.diet_label.setMaximumWidth(sum(col_widths))
-        self.diet_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        #self.diet_view.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
+        self.diet_view.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
+        gui_helpers.hide_view_cols(self.diet_view, cols_to_hide)
 
     def populate_nutrition_table(self):
         (food_ids, food_amounts) = self.optimizer.get_data_for_nutrition_lookup()

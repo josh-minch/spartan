@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_optimumdietwindow.ui',
 # licensing of 'ui/ui_optimumdietwindow.ui' applies.
 #
-# Created: Fri Nov  1 22:27:27 2019
+# Created: Sat Nov  2 19:15:28 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -125,34 +125,11 @@ class Ui_OptimumDietWindow(object):
         self.diet_view.verticalHeader().setHighlightSections(False)
         self.gridLayout.addWidget(self.diet_view, 1, 0, 1, 1)
         self.formLayout = QtWidgets.QFormLayout()
+        self.formLayout.setLabelAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.formLayout.setFormAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTop|QtCore.Qt.AlignTrailing)
         self.formLayout.setHorizontalSpacing(8)
         self.formLayout.setVerticalSpacing(0)
         self.formLayout.setObjectName("formLayout")
-        self.macro_view = QtWidgets.QTableView(self.centralwidget)
-        self.macro_view.setMaximumSize(QtCore.QSize(350, 16777215))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.macro_view.setFont(font)
-        self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.macro_view.setStyleSheet("QHeaderView::section{\n"
-"    border: 0px;\n"
-"    background-color: white;\n"
-"    padding-left: 3px;\n"
-"}\n"
-"\n"
-"QTableView {\n"
-"    alternate-background-color: rgb(247, 247, 247);\n"
-"}")
-        self.macro_view.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.macro_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.macro_view.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.macro_view.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.macro_view.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
-        self.macro_view.setShowGrid(False)
-        self.macro_view.setObjectName("macro_view")
-        self.macro_view.verticalHeader().setVisible(False)
-        self.macro_view.verticalHeader().setDefaultSectionSize(28)
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.macro_view)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
@@ -207,7 +184,33 @@ class Ui_OptimumDietWindow(object):
         self.mineral_view.verticalHeader().setDefaultSectionSize(28)
         self.verticalLayout_2.addWidget(self.mineral_view)
         self.formLayout.setLayout(0, QtWidgets.QFormLayout.FieldRole, self.verticalLayout_2)
+        self.macro_view = QtWidgets.QTableView(self.centralwidget)
+        self.macro_view.setMaximumSize(QtCore.QSize(350, 16777215))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.macro_view.setFont(font)
+        self.macro_view.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.macro_view.setStyleSheet("QHeaderView::section{\n"
+"    border: 0px;\n"
+"    background-color: white;\n"
+"    padding-left: 3px;\n"
+"}\n"
+"\n"
+"QTableView {\n"
+"    alternate-background-color: rgb(247, 247, 247);\n"
+"}")
+        self.macro_view.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.macro_view.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.macro_view.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.macro_view.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.macro_view.setSelectionMode(QtWidgets.QAbstractItemView.NoSelection)
+        self.macro_view.setShowGrid(False)
+        self.macro_view.setObjectName("macro_view")
+        self.macro_view.verticalHeader().setVisible(False)
+        self.macro_view.verticalHeader().setDefaultSectionSize(28)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.macro_view)
         self.gridLayout.addLayout(self.formLayout, 1, 1, 1, 1)
+        self.gridLayout.setColumnStretch(0, 1)
         OptimumDietWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(OptimumDietWindow)

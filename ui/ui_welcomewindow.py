@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_welcomewindow.ui',
 # licensing of 'ui/ui_welcomewindow.ui' applies.
 #
-# Created: Fri Nov  1 22:27:30 2019
+# Created: Sat Nov  2 19:15:31 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!

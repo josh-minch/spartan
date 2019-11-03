@@ -1,4 +1,4 @@
-from PySide2.QtCore import Qt, QModelIndex, Signal, QSettings
+from PySide2.QtCore import Qt, QModelIndex, Signal, QSettings, QItemSelectionModel
 from PySide2.QtGui import QKeySequence
 from PySide2.QtWidgets import (QApplication, QMainWindow, QHeaderView, QShortcut)
 
@@ -21,7 +21,6 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
 
         self.search_box.setFocus()
         self.search_food()
-        #self.resize(850, 500)
         self.read_settings()
         self.show()
 
@@ -64,9 +63,16 @@ class SearchWindow(QMainWindow, Ui_SearchWindow):
         else:
             self.add_to_fridge_btn.setEnabled(False)
 
+    def focus_changed(self, old, new):
+        if new is self.search_view:
+            current_row = self.search_view.selectionModel().currentIndex().row()
+            self.search_view.selectRow(current_row)
+
     def setup_connections(self):
         self.search_box.textChanged.connect(self.search_food)
         self.add_to_fridge_btn.clicked.connect(self.add_to_fridge)
+
+        QApplication.instance().focusChanged.connect(self.focus_changed)
 
         add_shortcut = QShortcut(QKeySequence(Qt.Key_Return), self.search_view)
         add_shortcut.activated.connect(self.add_to_fridge)
