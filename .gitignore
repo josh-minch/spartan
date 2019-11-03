@@ -108,3 +108,5 @@ spartan.db
 run_wel_check.csv
 fd_res.csv
 type_res.csv
+.vscode/launch.json
+dist.zip

@@ -54,6 +54,23 @@ def get_fd_grps(type_res, fd_res):
 
     return fd_grps, fd_grps_tuple
 
+def get_nutrition_units(nut_ids):
+    con = sql.connect('sr_legacy/sr_legacy.db')
+    cur = con.cursor()
+    sql_stmt = (
+        'SELECT units '
+        'FROM nutr_def '
+        'WHERE id = ?'
+    )
+    units = []
+    for nut_id in nut_ids:
+        cur.execute(sql_stmt, [nut_id])
+        units.append(cur.fetchall()[0])
+
+    cur.close()
+    con.commit()
+    return units
+
 def describe_food(food_id):
     con=sql.connect('sr_legacy/sr_legacy.db')
     cur=con.cursor()

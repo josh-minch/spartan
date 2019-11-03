@@ -32,10 +32,6 @@ class Person(object):
         self.nuts = nuts
         update_nuts_in_db(nuts)
 
-    def set_nut(self, nut, attr, value):
-        setattr(nut, attr, value)
-        update_nut_in_db(nut, attr, value)
-
     def populate_nuts_from_db(self):
         con = sql.connect('spartan.db')
         cur = con.cursor()
@@ -454,36 +450,7 @@ def convert_quantity(quantity, old_unit):
     gm_weight = float(old_unit[gm_weight_index_start:gm_weight_index_end])
     converted_quantity = quantity * gm_weight
     return converted_quantity
-'''
-def convert_quantity(food_id, quantity, old_unit, new_unit):
 
-    con = sql.connect('sr_legacy/sr_legacy.db')
-    cur = con.cursor()
-    sql_stmnt = (
-        'SELECT gm_weight '
-        'FROM weight '
-        'WHERE food_id = ? AND description = ? '
-    )
-
-    if old_unit == 'g':
-        cur.execute(sql_stmnt, [food_id, new_unit])
-        unit_scale_factors = cur.fetchall()
-        return quantity * (1 / unit_scale_factors[0][0])
-    elif new_unit == 'g':
-        cur.execute(sql_stmnt, [food_id, old_unit])
-        unit_scale_factors = cur.fetchall()
-        return quantity * unit_scale_factors[0][0]
-
-
-    #Bug: sql query always returns an ordering which may not correspond to the order
-    #passed to unit_scale_factors. explicitly return which gm_weight corresponds to which
-    #unit description
-    #else:
-    #    cur.execute(sql_stmnt, [self.food_id, old_unit, new_unit])
-    #    unit_scale_factors = cur.fetchall()
-    #    return quantity * (unit_scale_factors[0] / unit_scale_factors[1])
-
-'''
 def get_nut_groups(nuts):
     macro_end = vit_start = len(req.macro_names)
     vit_end = mineral_start = len(req.vit_names)+len(req.mineral_names)
@@ -498,7 +465,7 @@ def get_empty_nutrition(person):
     sorted_nuts = sorted(person.nuts, key=lambda n: int(n.nut_id))
     nut_ids = [nut.nut_id for nut in sorted_nuts]
     nut_names = [nut.name for nut in sorted_nuts]
-    units = get_nutrition_units(nut_ids)
+    units = database.get_nutrition_units(nut_ids)
 
     nutrition = []
 
@@ -517,7 +484,7 @@ def get_nutrition(person, food_ids, food_amounts):
     sorted_nuts = sorted(person.nuts, key=lambda n: int(n.nut_id))
     nut_ids = [nut.nut_id for nut in sorted_nuts]
     nut_names = [nut.name for nut in sorted_nuts]
-    units = get_nutrition_units(nut_ids)
+    units = database.get_nutrition_units(nut_ids)
 
     con = sql.connect('sr_legacy/sr_legacy.db')
     cur = con.cursor()
@@ -583,23 +550,6 @@ def calculate_dv(person, nut_name, nutrient_amount):
 
     return 100 * (nutrient_amount / min_value)
 
-def get_nutrition_units(nut_ids):
-    con = sql.connect('sr_legacy/sr_legacy.db')
-    cur = con.cursor()
-    sql_stmt = (
-        'SELECT units '
-        'FROM nutr_def '
-        'WHERE id = ?'
-    )
-    units = []
-    for nut_id in nut_ids:
-        cur.execute(sql_stmt, [nut_id])
-        units.append(cur.fetchall()[0])
-
-    cur.close()
-    con.commit()
-    return units
-
 def check_if_sparse_nutrient(nut_amounts):
     nut_has_data = []
     for nut in np.transpose(nut_amounts):
@@ -637,24 +587,6 @@ def update_nuts_in_db(nutrients):
         )
         parameters = [nutrient.min, nutrient.max, nutrient.target, nutrient.name]
         cur.execute(sql_stmt, parameters)
-
-    con.commit()
-    con.close()
-
-def update_nut_in_db(nut, attr, value):
-    con = sql.connect('spartan.db')
-    cur = con.cursor()
-
-    # attr comes from our dict, no need to sanitize.
-    # In addition, columns cannot be parameterized in SQLite3
-    sql_stmt = (
-        'UPDATE nuts '
-        'SET '+attr+' = '
-        '(?) '
-        'WHERE name = ?'
-    )
-    parameters = [value, nut.name]
-    cur.execute(sql_stmt, parameters)
 
     con.commit()
     con.close()
