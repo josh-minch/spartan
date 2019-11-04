@@ -1,10 +1,8 @@
 import os
 import copy
 import operator
-import os.path
 import random
 import sqlite3 as sql
-import time
 from datetime import date
 from timeit import default_timer as timer
 
@@ -33,7 +31,7 @@ class Person(object):
         update_nuts_in_db(nuts)
 
     def populate_nuts_from_db(self):
-        con = sql.connect('spartan.db')
+        con = sql.connect(database.resource_path('spartan.db'))
         cur = con.cursor()
         sql_stmt = (
             'SELECT * '
@@ -47,7 +45,7 @@ class Person(object):
         con.close()
 
     def populate_foods_from_db(self):
-        con = sql.connect('spartan.db')
+        con = sql.connect(database.resource_path('spartan.db'))
         cur = con.cursor()
 
         sql_stmt = (
@@ -67,7 +65,7 @@ class Person(object):
             self.foods.append(Food(name=food_name))
 
     def add_food_to_db(self, food):
-        con = sql.connect("spartan.db")
+        con = sql.connect(database.resource_path('spartan.db'))
         cur = con.cursor()
 
         # Store everything but selectable units, as this is a dynamic list
@@ -86,7 +84,7 @@ class Person(object):
         con.close()
 
     def remove_foods_from_db(self, food_ids):
-        con = sql.connect("spartan.db")
+        con = sql.connect(database.resource_path('spartan.db'))
         cur = con.cursor()
 
         foods_tuple = [(food_id,) for food_id in food_ids]
@@ -100,7 +98,7 @@ class Person(object):
         con.close()
 
     def update_food_in_user_db(self, food):
-        con = sql.connect("spartan.db")
+        con = sql.connect(database.resource_path('spartan.db'))
         cur = con.cursor()
 
         food_vars = list(vars(food).keys())
@@ -160,12 +158,13 @@ class Food:
         return str(self.__dict__)
 
     def get_selectable_units(self):
-        con = sql.connect('sr_legacy/sr_legacy.db')
+        con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
         cur = con.cursor()
         sql_stmnt = (
             'SELECT amount, description, gm_weight '
             'FROM weight '
             'WHERE food_id = ?'
+            'ORDER BY sequence_num'
         )
         cur.execute(sql_stmnt, [self.food_id])
         units = cur.fetchall()
@@ -173,7 +172,7 @@ class Food:
         con.commit()
         cur.close()
 
-        selectable_units = ['g', 'lb (453.6 g)']
+        selectable_units = ['g', 'oz (28.35 g)', 'lb (453.6 g)']
         for unit in units:
             if unit[0] == 1.0:
                 amount_display = ''
@@ -199,7 +198,7 @@ class Nutrient:
         return str(self.__dict__)
 
     def get_unit(self):
-        con = sql.connect("sr_legacy/sr_legacy.db")
+        con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
         cur = con.cursor()
         sql_stmt = (
             'SELECT units '
@@ -244,7 +243,7 @@ class Optimizer:
         for i in range(0, len(food_ids), SQL_VARIABLE_LIMIT):
             food_id_batches.append(food_ids[i:i + SQL_VARIABLE_LIMIT])
 
-        con = sql.connect('sr_legacy/sr_legacy.db')
+        con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
         cur = con.cursor()
 
         for batch in food_id_batches:
@@ -269,7 +268,7 @@ class Optimizer:
         q, final_batch_size = divmod(len(food_ids), food_batch_size)
         n_batches = q + bool(final_batch_size)
 
-        con = sql.connect('sr_legacy/sr_legacy.db')
+        con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
         cur = con.cursor()
         nut_data = []
 
@@ -486,7 +485,7 @@ def get_nutrition(person, food_ids, food_amounts):
     nut_names = [nut.name for nut in sorted_nuts]
     units = database.get_nutrition_units(nut_ids)
 
-    con = sql.connect('sr_legacy/sr_legacy.db')
+    con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
     cur = con.cursor()
     sql_stmt = (
         'SELECT amount '
@@ -561,7 +560,7 @@ def check_if_sparse_nutrient(nut_amounts):
     return nut_has_data
 
 def update_sex_bd_in_db(sex, year, mon, day):
-    con = sql.connect('spartan.db')
+    con = sql.connect(database.resource_path('spartan.db'))
     cur = con.cursor()
 
     sql_stmt = (
@@ -576,7 +575,7 @@ def update_sex_bd_in_db(sex, year, mon, day):
     con.close()
 
 def update_nuts_in_db(nutrients):
-    con = sql.connect('spartan.db')
+    con = sql.connect(database.resource_path('spartan.db'))
     cur = con.cursor()
     for nutrient in nutrients:
         sql_stmt = (
@@ -592,7 +591,7 @@ def update_nuts_in_db(nutrients):
     con.close()
 
 def get_sex_bd_from_db():
-    con = sql.connect('spartan.db')
+    con = sql.connect(database.resource_path('spartan.db'))
     cur = con.cursor()
     sql_stmt = (
         'SELECT * '
@@ -605,7 +604,7 @@ def get_sex_bd_from_db():
     return sex, bd_year, bd_mon, bd_day
 
 def get_nuts_from_db():
-    con = sql.connect('spartan.db')
+    con = sql.connect(database.resource_path('spartan.db'))
     cur = con.cursor()
     sql_stmt = (
         'SELECT * '
@@ -626,7 +625,7 @@ def get_nuts_from_db():
     return macro, vit, mineral
 
 def get_random_foods_ids(n_foods):
-    con = sql.connect('sr_legacy/sr_legacy.db')
+    con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
     cur = con.cursor()
     cur.execute("SELECT id FROM food_des")
     food_list = cur.fetchall()
@@ -637,7 +636,7 @@ def get_random_foods_ids(n_foods):
     return food_ids
 
 def get_food_ids(n_foods):
-    con = sql.connect('sr_legacy/sr_legacy.db')
+    con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
     cur = con.cursor()
     cur.execute("SELECT id FROM food_des")
     food_list = cur.fetchall()
@@ -648,7 +647,7 @@ def get_food_ids(n_foods):
     return food_ids
 
 def get_all_food_ids():
-    con = sql.connect('sr_legacy/sr_legacy.db')
+    con = sql.connect(database.resource_path('sr_legacy/sr_legacy.db'))
     cur = con.cursor()
     cur.execute("SELECT id FROM food_des")
     food_list = cur.fetchall()

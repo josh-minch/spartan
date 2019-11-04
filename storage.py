@@ -2,14 +2,14 @@ import os
 import sqlite3 as sql
 import csv
 
+import database
 import req
 
 def create_spartan_db():
-    if os.path.isfile('spartan.db'):
-        print("spartan.db already exists")
+    if os.path.isfile(database.resource_path('spartan.db')):
         return
 
-    con = sql.connect("spartan.db")
+    con = sql.connect(database.resource_path('spartan.db'))
     cur = con.cursor()
 
     person_stmt = (
@@ -54,7 +54,7 @@ def create_spartan_db():
     con.close()
 
 def insert_nuts():
-    con = sql.connect("spartan.db")
+    con = sql.connect(database.resource_path('spartan.db'))
     cur = con.cursor()
 
     sql_stmt = (
@@ -69,7 +69,7 @@ def insert_nuts():
     con.close()
 
 def insert_default_person():
-    con = sql.connect("spartan.db")
+    con = sql.connect(database.resource_path('spartan.db'))
     cur = con.cursor()
 
     sql_stmt = (

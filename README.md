@@ -13,20 +13,22 @@ A prebuilt Windows executable can be found under releases. Tested on Windows 10,
 ## From source
 On Windows
 ```shell
-git clone https://github.com/josh-minch/frugal-nutrition.git
+git clone https://github.com/josh-minch/spartan.git
+cd spartan
 virtualenv --no-site-packages VIRTUAL
 VIRTUAL\Scripts\activate
 pip -r requirements.txt
 ```
 On macOS / Linux
 ```shell
-git clone https://github.com/josh-minch/frugal-nutrition.git
+git clone https://github.com/josh-minch/spartan.git
+cd spartan
 virtualenv --no-site-packages VIRTUAL
 source VIRTUAL/bin/activate
 pip -r requirements.txt
 
 ```
-Then run the application with `python main.py`
+Then run with `python main.py`
 
 # Built with
 * [Python 3.6](https://www.python.org/downloads/)

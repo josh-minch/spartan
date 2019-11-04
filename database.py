@@ -1,12 +1,21 @@
 '''
 Functions related to querying food database sr_legacy.db
 '''
+import os
+import sys
 import sqlite3 as sql
 
 from constants import SEARCH_RESTRICT
 
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(
+        os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
 def search_food(food_name, type_res, fd_res):
-    con = sql.connect('sr_legacy/sr_legacy.db')
+    con = sql.connect(resource_path('sr_legacy/sr_legacy.db'))
     cur = con.cursor()
 
     # Split search term for multi-word searches eg, 'chocolate milk'
@@ -55,7 +64,7 @@ def get_fd_grps(type_res, fd_res):
     return fd_grps, fd_grps_tuple
 
 def get_nutrition_units(nut_ids):
-    con = sql.connect('sr_legacy/sr_legacy.db')
+    con = sql.connect(resource_path('sr_legacy/sr_legacy.db'))
     cur = con.cursor()
     sql_stmt = (
         'SELECT units '
@@ -72,7 +81,7 @@ def get_nutrition_units(nut_ids):
     return units
 
 def describe_food(food_id):
-    con=sql.connect('sr_legacy/sr_legacy.db')
+    con=sql.connect(resource_path('sr_legacy/sr_legacy.db'))
     cur=con.cursor()
     cur.execute("SELECT amount FROM nut_data where food_id = ?", [food_id])
     nut_values=cur.fetchall()
@@ -83,7 +92,7 @@ def describe_food(food_id):
     return nut_values
 
 def get_food_id(food_name):
-    con=sql.connect('sr_legacy/sr_legacy.db')
+    con=sql.connect(resource_path('sr_legacy/sr_legacy.db'))
     cur=con.cursor()
     cur.execute(
         "SELECT id FROM food_des where long_desc = ?", [food_name])
@@ -95,7 +104,7 @@ def get_food_id(food_name):
     return food_id
 
 def get_food_name(food_id):
-    con=sql.connect('sr_legacy/sr_legacy.db')
+    con=sql.connect(resource_path('sr_legacy/sr_legacy.db'))
     cur=con.cursor()
     cur.execute(
         "SELECT long_desc FROM food_des where id = ?", [food_id])
