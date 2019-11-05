@@ -12,7 +12,7 @@ A prebuilt Windows executable can be found under releases. Tested on Windows 10,
 
 ## From source
 ### Prerequisites
-* Python 3.7
+* Python 3.6
 * pip
 * venv
 ### Install dependencies
