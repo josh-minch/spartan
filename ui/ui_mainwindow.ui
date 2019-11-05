@@ -120,7 +120,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,1,0">
         <property name="spacing">
          <number>4</number>
         </property>
@@ -188,7 +188,7 @@
           </property>
          </widget>
         </item>
-        <item>
+        <item alignment="Qt::AlignLeft">
          <widget class="QPushButton" name="optimize_btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -222,9 +222,15 @@
         </item>
         <item>
          <widget class="QLineEdit" name="fridge_line_edit">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>75</width>
             <height>0</height>
            </size>
           </property>
@@ -244,7 +250,7 @@
            <string/>
           </property>
           <property name="placeholderText">
-           <string>🔍 Search my fridge</string>
+           <string>🔍 Search fridge (100 items)</string>
           </property>
          </widget>
         </item>
@@ -253,9 +259,12 @@
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>20</width>
+            <width>10</width>
             <height>20</height>
            </size>
           </property>

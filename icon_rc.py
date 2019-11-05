@@ -2,7 +2,7 @@
 
 # Resource object code
 #
-# Created: Sat Nov 2 19:15:31 2019
+# Created: Mon Nov 4 13:09:40 2019
 #      by: The Resource Compiler for PySide2 (Qt v5.13.0)
 #
 # WARNING! All changes made in this file will be lost!
@@ -10,6 +10,25 @@
 from PySide2 import QtCore
 
 qt_resource_data = b"\
+\x00\x00\x01\x0e\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 width=\x2224\
+\x22 height=\x2224\x22 vi\
+ewBox=\x220 0 24 24\
+\x22 fill=\x22none\x22 st\
+roke=\x22currentCol\
+or\x22 stroke-width\
+=\x222\x22 stroke-line\
+cap=\x22round\x22 stro\
+ke-linejoin=\x22rou\
+nd\x22 class=\x22feath\
+er feather-chevr\
+on-right\x22><polyl\
+ine points=\x229 18\
+ 15 12 9 6\x22></po\
+lyline></svg>\
 \x00\x00\x018\
 <\
 svg xmlns=\x22http:\
@@ -32,7 +51,7 @@ ne><polyline poi\
 nts=\x2212 19 5 12 \
 12 5\x22></polyline\
 ></svg>\
-\x00\x00\x01[\
+\x00\x00\x03\xf3\
 <\
 svg xmlns=\x22http:\
 //www.w3.org/200\
@@ -46,17 +65,59 @@ or\x22 stroke-width\
 cap=\x22round\x22 stro\
 ke-linejoin=\x22rou\
 nd\x22 class=\x22feath\
-er feather-info\x22\
-><circle cx=\x2212\x22\
- cy=\x2212\x22 r=\x2210\x22>\
-</circle><line x\
-1=\x2212\x22 y1=\x2216\x22 x\
-2=\x2212\x22 y2=\x2212\x22><\
-/line><line x1=\x22\
-12\x22 y1=\x228\x22 x2=\x221\
-2.01\x22 y2=\x228\x22></l\
-ine></svg>\
-\x00\x00\x010\
+er feather-setti\
+ngs\x22><circle cx=\
+\x2212\x22 cy=\x2212\x22 r=\x22\
+3\x22></circle><pat\
+h d=\x22M19.4 15a1.\
+65 1.65 0 0 0 .3\
+3 1.82l.06.06a2 \
+2 0 0 1 0 2.83 2\
+ 2 0 0 1-2.83 0l\
+-.06-.06a1.65 1.\
+65 0 0 0-1.82-.3\
+3 1.65 1.65 0 0 \
+0-1 1.51V21a2 2 \
+0 0 1-2 2 2 2 0 \
+0 1-2-2v-.09A1.6\
+5 1.65 0 0 0 9 1\
+9.4a1.65 1.65 0 \
+0 0-1.82.33l-.06\
+.06a2 2 0 0 1-2.\
+83 0 2 2 0 0 1 0\
+-2.83l.06-.06a1.\
+65 1.65 0 0 0 .3\
+3-1.82 1.65 1.65\
+ 0 0 0-1.51-1H3a\
+2 2 0 0 1-2-2 2 \
+2 0 0 1 2-2h.09A\
+1.65 1.65 0 0 0 \
+4.6 9a1.65 1.65 \
+0 0 0-.33-1.82l-\
+.06-.06a2 2 0 0 \
+1 0-2.83 2 2 0 0\
+ 1 2.83 0l.06.06\
+a1.65 1.65 0 0 0\
+ 1.82.33H9a1.65 \
+1.65 0 0 0 1-1.5\
+1V3a2 2 0 0 1 2-\
+2 2 2 0 0 1 2 2v\
+.09a1.65 1.65 0 \
+0 0 1 1.51 1.65 \
+1.65 0 0 0 1.82-\
+.33l.06-.06a2 2 \
+0 0 1 2.83 0 2 2\
+ 0 0 1 0 2.83l-.\
+06.06a1.65 1.65 \
+0 0 0-.33 1.82V9\
+a1.65 1.65 0 0 0\
+ 1.51 1H21a2 2 0\
+ 0 1 2 2 2 2 0 0\
+ 1-2 2h-.09a1.65\
+ 1.65 0 0 0-1.51\
+ 1z\x22></path></sv\
+g>\
+\x00\x00\x03\xf3\
 <\
 svg xmlns=\x22http:\
 //www.w3.org/200\
@@ -70,13 +131,58 @@ or\x22 stroke-width\
 cap=\x22round\x22 stro\
 ke-linejoin=\x22rou\
 nd\x22 class=\x22feath\
-er feather-plus\x22\
-><line x1=\x2212\x22 y\
-1=\x225\x22 x2=\x2212\x22 y2\
-=\x2219\x22></line><li\
-ne x1=\x225\x22 y1=\x2212\
-\x22 x2=\x2219\x22 y2=\x2212\
-\x22></line></svg>\
+er feather-setti\
+ngs\x22><circle cx=\
+\x2212\x22 cy=\x2212\x22 r=\x22\
+3\x22></circle><pat\
+h d=\x22M19.4 15a1.\
+65 1.65 0 0 0 .3\
+3 1.82l.06.06a2 \
+2 0 0 1 0 2.83 2\
+ 2 0 0 1-2.83 0l\
+-.06-.06a1.65 1.\
+65 0 0 0-1.82-.3\
+3 1.65 1.65 0 0 \
+0-1 1.51V21a2 2 \
+0 0 1-2 2 2 2 0 \
+0 1-2-2v-.09A1.6\
+5 1.65 0 0 0 9 1\
+9.4a1.65 1.65 0 \
+0 0-1.82.33l-.06\
+.06a2 2 0 0 1-2.\
+83 0 2 2 0 0 1 0\
+-2.83l.06-.06a1.\
+65 1.65 0 0 0 .3\
+3-1.82 1.65 1.65\
+ 0 0 0-1.51-1H3a\
+2 2 0 0 1-2-2 2 \
+2 0 0 1 2-2h.09A\
+1.65 1.65 0 0 0 \
+4.6 9a1.65 1.65 \
+0 0 0-.33-1.82l-\
+.06-.06a2 2 0 0 \
+1 0-2.83 2 2 0 0\
+ 1 2.83 0l.06.06\
+a1.65 1.65 0 0 0\
+ 1.82.33H9a1.65 \
+1.65 0 0 0 1-1.5\
+1V3a2 2 0 0 1 2-\
+2 2 2 0 0 1 2 2v\
+.09a1.65 1.65 0 \
+0 0 1 1.51 1.65 \
+1.65 0 0 0 1.82-\
+.33l.06-.06a2 2 \
+0 0 1 2.83 0 2 2\
+ 0 0 1 0 2.83l-.\
+06.06a1.65 1.65 \
+0 0 0-.33 1.82V9\
+a1.65 1.65 0 0 0\
+ 1.51 1H21a2 2 0\
+ 0 1 2 2 2 2 0 0\
+ 1-2 2h-.09a1.65\
+ 1.65 0 0 0-1.51\
+ 1z\x22></path></sv\
+g>\
 \x00\x00\x01+\
 <\
 svg xmlns=\x22http:\
@@ -98,7 +204,7 @@ ine x1=\x2218\x22 y1=\x22\
 1=\x226\x22 y1=\x226\x22 x2=\
 \x2218\x22 y2=\x2218\x22></l\
 ine></svg>\
-\x00\x00\x01\x06\
+\x00\x00\x01\x05\
 <\
 svg xmlns=\x22http:\
 //www.w3.org/200\
@@ -112,52 +218,11 @@ or\x22 stroke-width\
 cap=\x22round\x22 stro\
 ke-linejoin=\x22rou\
 nd\x22 class=\x22feath\
-er feather-check\
-\x22><polyline poin\
-ts=\x2220 6 9 17 4 \
-12\x22></polyline><\
-/svg>\
-\x00\x00\x01\x0e\
-<\
-svg xmlns=\x22http:\
-//www.w3.org/200\
-0/svg\x22 width=\x2224\
-\x22 height=\x2224\x22 vi\
-ewBox=\x220 0 24 24\
-\x22 fill=\x22none\x22 st\
-roke=\x22currentCol\
-or\x22 stroke-width\
-=\x222\x22 stroke-line\
-cap=\x22round\x22 stro\
-ke-linejoin=\x22rou\
-nd\x22 class=\x22feath\
-er feather-chevr\
-on-right\x22><polyl\
-ine points=\x229 18\
- 15 12 9 6\x22></po\
-lyline></svg>\
-\x00\x00\x019\
-<\
-svg xmlns=\x22http:\
-//www.w3.org/200\
-0/svg\x22 width=\x2224\
-\x22 height=\x2224\x22 vi\
-ewBox=\x220 0 24 24\
-\x22 fill=\x22none\x22 st\
-roke=\x22currentCol\
-or\x22 stroke-width\
-=\x222\x22 stroke-line\
-cap=\x22round\x22 stro\
-ke-linejoin=\x22rou\
-nd\x22 class=\x22feath\
-er feather-user\x22\
-><path d=\x22M20 21\
-v-2a4 4 0 0 0-4-\
-4H8a4 4 0 0 0-4 \
-4v2\x22></path><cir\
-cle cx=\x2212\x22 cy=\x22\
-7\x22 r=\x224\x22></circl\
-e></svg>\
+er feather-minus\
+\x22><line x1=\x225\x22 y\
+1=\x2212\x22 x2=\x2219\x22 y\
+2=\x2212\x22></line></\
+svg>\
 \x00\x00\xef\x1c\
 \x89\
 PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\
@@ -3986,6 +4051,47 @@ Y$\xdf\xaf\xbbT\xf7\x87LR\xca\xc8\x0e\x91{\xda\
 \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\
 \x00\x80^C\xf4\xff\x03\xd2\x1b\x88\xab\x93\xb0\x93O\x00\
 \x00\x00\x00IEND\xaeB`\x82\
+\x00\x00\x019\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 width=\x2224\
+\x22 height=\x2224\x22 vi\
+ewBox=\x220 0 24 24\
+\x22 fill=\x22none\x22 st\
+roke=\x22currentCol\
+or\x22 stroke-width\
+=\x222\x22 stroke-line\
+cap=\x22round\x22 stro\
+ke-linejoin=\x22rou\
+nd\x22 class=\x22feath\
+er feather-user\x22\
+><path d=\x22M20 21\
+v-2a4 4 0 0 0-4-\
+4H8a4 4 0 0 0-4 \
+4v2\x22></path><cir\
+cle cx=\x2212\x22 cy=\x22\
+7\x22 r=\x224\x22></circl\
+e></svg>\
+\x00\x00\x01\x06\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 width=\x2224\
+\x22 height=\x2224\x22 vi\
+ewBox=\x220 0 24 24\
+\x22 fill=\x22none\x22 st\
+roke=\x22currentCol\
+or\x22 stroke-width\
+=\x222\x22 stroke-line\
+cap=\x22round\x22 stro\
+ke-linejoin=\x22rou\
+nd\x22 class=\x22feath\
+er feather-check\
+\x22><polyline poin\
+ts=\x2220 6 9 17 4 \
+12\x22></polyline><\
+/svg>\
 \x00\x00\x0c\x98\
 <\
 ?xml version=\x221.\
@@ -4190,7 +4296,7 @@ g>\x0a<g>\x0a</g>\x0a<g>\x0a\
 </g>\x0a<g>\x0a</g>\x0a<g\
 >\x0a</g>\x0a<g>\x0a</g>\x0a\
 </svg>\x0a\
-\x00\x00\x03\xf3\
+\x00\x00\x010\
 <\
 svg xmlns=\x22http:\
 //www.w3.org/200\
@@ -4204,59 +4310,14 @@ or\x22 stroke-width\
 cap=\x22round\x22 stro\
 ke-linejoin=\x22rou\
 nd\x22 class=\x22feath\
-er feather-setti\
-ngs\x22><circle cx=\
-\x2212\x22 cy=\x2212\x22 r=\x22\
-3\x22></circle><pat\
-h d=\x22M19.4 15a1.\
-65 1.65 0 0 0 .3\
-3 1.82l.06.06a2 \
-2 0 0 1 0 2.83 2\
- 2 0 0 1-2.83 0l\
--.06-.06a1.65 1.\
-65 0 0 0-1.82-.3\
-3 1.65 1.65 0 0 \
-0-1 1.51V21a2 2 \
-0 0 1-2 2 2 2 0 \
-0 1-2-2v-.09A1.6\
-5 1.65 0 0 0 9 1\
-9.4a1.65 1.65 0 \
-0 0-1.82.33l-.06\
-.06a2 2 0 0 1-2.\
-83 0 2 2 0 0 1 0\
--2.83l.06-.06a1.\
-65 1.65 0 0 0 .3\
-3-1.82 1.65 1.65\
- 0 0 0-1.51-1H3a\
-2 2 0 0 1-2-2 2 \
-2 0 0 1 2-2h.09A\
-1.65 1.65 0 0 0 \
-4.6 9a1.65 1.65 \
-0 0 0-.33-1.82l-\
-.06-.06a2 2 0 0 \
-1 0-2.83 2 2 0 0\
- 1 2.83 0l.06.06\
-a1.65 1.65 0 0 0\
- 1.82.33H9a1.65 \
-1.65 0 0 0 1-1.5\
-1V3a2 2 0 0 1 2-\
-2 2 2 0 0 1 2 2v\
-.09a1.65 1.65 0 \
-0 0 1 1.51 1.65 \
-1.65 0 0 0 1.82-\
-.33l.06-.06a2 2 \
-0 0 1 2.83 0 2 2\
- 0 0 1 0 2.83l-.\
-06.06a1.65 1.65 \
-0 0 0-.33 1.82V9\
-a1.65 1.65 0 0 0\
- 1.51 1H21a2 2 0\
- 0 1 2 2 2 2 0 0\
- 1-2 2h-.09a1.65\
- 1.65 0 0 0-1.51\
- 1z\x22></path></sv\
-g>\
-\x00\x00\x03\xf3\
+er feather-plus\x22\
+><line x1=\x2212\x22 y\
+1=\x225\x22 x2=\x2212\x22 y2\
+=\x2219\x22></line><li\
+ne x1=\x225\x22 y1=\x2212\
+\x22 x2=\x2219\x22 y2=\x2212\
+\x22></line></svg>\
+\x00\x00\x01[\
 <\
 svg xmlns=\x22http:\
 //www.w3.org/200\
@@ -4270,77 +4331,16 @@ or\x22 stroke-width\
 cap=\x22round\x22 stro\
 ke-linejoin=\x22rou\
 nd\x22 class=\x22feath\
-er feather-setti\
-ngs\x22><circle cx=\
-\x2212\x22 cy=\x2212\x22 r=\x22\
-3\x22></circle><pat\
-h d=\x22M19.4 15a1.\
-65 1.65 0 0 0 .3\
-3 1.82l.06.06a2 \
-2 0 0 1 0 2.83 2\
- 2 0 0 1-2.83 0l\
--.06-.06a1.65 1.\
-65 0 0 0-1.82-.3\
-3 1.65 1.65 0 0 \
-0-1 1.51V21a2 2 \
-0 0 1-2 2 2 2 0 \
-0 1-2-2v-.09A1.6\
-5 1.65 0 0 0 9 1\
-9.4a1.65 1.65 0 \
-0 0-1.82.33l-.06\
-.06a2 2 0 0 1-2.\
-83 0 2 2 0 0 1 0\
--2.83l.06-.06a1.\
-65 1.65 0 0 0 .3\
-3-1.82 1.65 1.65\
- 0 0 0-1.51-1H3a\
-2 2 0 0 1-2-2 2 \
-2 0 0 1 2-2h.09A\
-1.65 1.65 0 0 0 \
-4.6 9a1.65 1.65 \
-0 0 0-.33-1.82l-\
-.06-.06a2 2 0 0 \
-1 0-2.83 2 2 0 0\
- 1 2.83 0l.06.06\
-a1.65 1.65 0 0 0\
- 1.82.33H9a1.65 \
-1.65 0 0 0 1-1.5\
-1V3a2 2 0 0 1 2-\
-2 2 2 0 0 1 2 2v\
-.09a1.65 1.65 0 \
-0 0 1 1.51 1.65 \
-1.65 0 0 0 1.82-\
-.33l.06-.06a2 2 \
-0 0 1 2.83 0 2 2\
- 0 0 1 0 2.83l-.\
-06.06a1.65 1.65 \
-0 0 0-.33 1.82V9\
-a1.65 1.65 0 0 0\
- 1.51 1H21a2 2 0\
- 0 1 2 2 2 2 0 0\
- 1-2 2h-.09a1.65\
- 1.65 0 0 0-1.51\
- 1z\x22></path></sv\
-g>\
-\x00\x00\x01\x05\
-<\
-svg xmlns=\x22http:\
-//www.w3.org/200\
-0/svg\x22 width=\x2224\
-\x22 height=\x2224\x22 vi\
-ewBox=\x220 0 24 24\
-\x22 fill=\x22none\x22 st\
-roke=\x22currentCol\
-or\x22 stroke-width\
-=\x222\x22 stroke-line\
-cap=\x22round\x22 stro\
-ke-linejoin=\x22rou\
-nd\x22 class=\x22feath\
-er feather-minus\
-\x22><line x1=\x225\x22 y\
-1=\x2212\x22 x2=\x2219\x22 y\
-2=\x2212\x22></line></\
-svg>\
+er feather-info\x22\
+><circle cx=\x2212\x22\
+ cy=\x2212\x22 r=\x2210\x22>\
+</circle><line x\
+1=\x2212\x22 y1=\x2216\x22 x\
+2=\x2212\x22 y2=\x2212\x22><\
+/line><line x1=\x22\
+12\x22 y1=\x228\x22 x2=\x221\
+2.01\x22 y2=\x228\x22></l\
+ine></svg>\
 "
 
 qt_resource_name = b"\
@@ -4348,68 +4348,68 @@ qt_resource_name = b"\
 \x00\x06\xfa^\
 \x00i\
 \x00c\x00o\x00n\
-\x00\x0e\
-\x08\xfa8\xa7\
-\x00a\
-\x00r\x00r\x00o\x00w\x00-\x00l\x00e\x00f\x00t\x00.\x00s\x00v\x00g\
-\x00\x08\
-\x04\xd2T\xc7\
-\x00i\
-\x00n\x00f\x00o\x00.\x00s\x00v\x00g\
-\x00\x08\
-\x03\xc6T'\
-\x00p\
-\x00l\x00u\x00s\x00.\x00s\x00v\x00g\
-\x00\x05\
-\x00{Z\xc7\
-\x00x\
-\x00.\x00s\x00v\x00g\
-\x00\x09\
-\x0b\x9e\x89\x07\
-\x00c\
-\x00h\x00e\x00c\x00k\x00.\x00s\x00v\x00g\
 \x00\x11\
 \x0e\x92xG\
 \x00c\
 \x00h\x00e\x00v\x00r\x00o\x00n\x00-\x00r\x00i\x00g\x00h\x00t\x00.\x00s\x00v\x00g\
 \
-\x00\x08\
-\x09\xc5UG\
-\x00u\
-\x00s\x00e\x00r\x00.\x00s\x00v\x00g\
-\x00\x10\
-\x0b{\xadG\
-\x00i\
-\x00c\x00o\x00n\x00_\x00t\x00r\x00i\x00m\x00m\x00e\x00d\x00.\x00p\x00n\x00g\
-\x00\x09\
-\x0a\xcb\xbaG\
-\x00i\
-\x00n\x00d\x00e\x00x\x00.\x00s\x00v\x00g\
+\x00\x0e\
+\x08\xfa8\xa7\
+\x00a\
+\x00r\x00r\x00o\x00w\x00-\x00l\x00e\x00f\x00t\x00.\x00s\x00v\x00g\
 \x00\x0c\
 \x0b\xdf,\xc7\
 \x00s\
 \x00e\x00t\x00t\x00i\x00n\x00g\x00s\x00.\x00s\x00v\x00g\
+\x00\x05\
+\x00{Z\xc7\
+\x00x\
+\x00.\x00s\x00v\x00g\
 \x00\x09\
 \x05\xc6\xb2\xc7\
 \x00m\
 \x00i\x00n\x00u\x00s\x00.\x00s\x00v\x00g\
+\x00\x10\
+\x0b{\xadG\
+\x00i\
+\x00c\x00o\x00n\x00_\x00t\x00r\x00i\x00m\x00m\x00e\x00d\x00.\x00p\x00n\x00g\
+\x00\x08\
+\x09\xc5UG\
+\x00u\
+\x00s\x00e\x00r\x00.\x00s\x00v\x00g\
+\x00\x09\
+\x0b\x9e\x89\x07\
+\x00c\
+\x00h\x00e\x00c\x00k\x00.\x00s\x00v\x00g\
+\x00\x09\
+\x0a\xcb\xbaG\
+\x00i\
+\x00n\x00d\x00e\x00x\x00.\x00s\x00v\x00g\
+\x00\x08\
+\x03\xc6T'\
+\x00p\
+\x00l\x00u\x00s\x00.\x00s\x00v\x00g\
+\x00\x08\
+\x04\xd2T\xc7\
+\x00i\
+\x00n\x00f\x00o\x00.\x00s\x00v\x00g\
 "
 
 qt_resource_struct = b"\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x01\
 \x00\x00\x00\x00\x00\x02\x00\x00\x00\x0c\x00\x00\x00\x02\
-\x00\x00\x00\x5c\x00\x00\x00\x00\x00\x01\x00\x00\x03\xcf\
-\x00\x00\x00F\x00\x00\x00\x00\x00\x01\x00\x00\x02\x9b\
-\x00\x00\x000\x00\x00\x00\x00\x00\x01\x00\x00\x01<\
-\x00\x00\x01\x1e\x00\x00\x00\x00\x00\x01\x00\x01\x0c\x01\
+\x00\x00\x00v\x00\x00\x00\x00\x00\x01\x00\x00\x0a<\
+\x00\x00\x01\x0a\x00\x00\x00\x00\x00\x01\x00\x01\x0aw\
+\x00\x00\x01 \x00\x00\x00\x00\x00\x01\x00\x01\x0b\xab\
+\x00\x00\x00\x86\x00\x00\x00\x00\x00\x01\x00\x00\x0bk\
+\x00\x00\x006\x00\x00\x00\x00\x00\x01\x00\x00\x01\x12\
+\x00\x00\x00\xc4\x00\x00\x00\x00\x00\x01\x00\x00\xfb\x94\
+\x00\x00\x00\xf2\x00\x00\x00\x00\x00\x01\x00\x00\xfd\xdb\
+\x00\x00\x00\x9e\x00\x00\x00\x00\x00\x01\x00\x00\x0ct\
+\x00\x00\x00\xda\x00\x00\x00\x00\x00\x01\x00\x00\xfc\xd1\
+\x00\x00\x00X\x00\x00\x00\x00\x00\x01\x00\x00\x02N\
+\x00\x00\x00X\x00\x00\x00\x00\x00\x01\x00\x00\x06E\
 \x00\x00\x00\x0e\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
-\x00\x00\x00\xac\x00\x00\x00\x00\x00\x01\x00\x00\x07\x1a\
-\x00\x00\x00\xe8\x00\x00\x00\x00\x00\x01\x00\x00\xf7w\
-\x00\x00\x00\xc2\x00\x00\x00\x00\x00\x01\x00\x00\x08W\
-\x00\x00\x00l\x00\x00\x00\x00\x00\x01\x00\x00\x04\xfe\
-\x00\x00\x01\x00\x00\x00\x00\x00\x00\x01\x00\x01\x04\x13\
-\x00\x00\x01\x00\x00\x00\x00\x00\x00\x01\x00\x01\x08\x0a\
-\x00\x00\x00\x84\x00\x00\x00\x00\x00\x01\x00\x00\x06\x08\
 "
 
 def qInitResources():

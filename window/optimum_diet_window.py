@@ -38,13 +38,17 @@ class OptimumDietWindow(QMainWindow, Ui_OptimumDietWindow):
         self.diet_label.setText(subtitle)
 
     def populate_diet_table(self):
-        foods = self.optimizer.get_diet_report()
+        foods, total_number, total_cost, total_mass = self.optimizer.get_diet_report()
 
         # Insert empty row to give space before totals
-        foods.append({'id':'', 'name':'', 'cost':'','quantity':'', 'unit':''})
+        foods.append({'id':'', 'name':'', 'cost':'', 'quantity':'', 'unit':''})
 
         num_value, cost_value, mass_value = self.optimizer.get_totals()
-        foods.append({'id':-1, 'name':str(num_value) + ' items of food', 'cost':cost_value, 'quantity':mass_value, 'unit':'g'})
+        totals = {'id':-1, 'name': str(total_number) + ' items of food',
+                           'cost': '{n:.{d}f}'.format(n=total_cost, d=2),
+                           'quantity': '{n:.{d}f}'.format(n=total_mass, d=2),
+                           'unit': 'g'}
+        foods.append(totals)
 
         self.diet_model = DietModel(foods=foods)
         self.diet_view.setModel(self.diet_model)

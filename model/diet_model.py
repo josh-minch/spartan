@@ -116,8 +116,8 @@ class DietModel(QAbstractTableModel):
 
         if index.isValid() and 0 <= index.row() < len(self.foods):
             food = self.foods[index.row()]
-            attr_str = O_COL_TO_ATTR[index.column()]
-            food[att_str] = value
+            attr_str = o_col_to_attr[index.column()]
+            food[attr_str] = value
 
             self.dataChanged.emit(index, index)
             return True

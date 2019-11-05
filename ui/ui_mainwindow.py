@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
 # licensing of 'ui/ui_mainwindow.ui' applies.
 #
-# Created: Sat Nov  2 19:15:28 2019
+# Created: Mon Nov  4 13:09:36 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -107,7 +107,12 @@ class Ui_MainWindow(object):
         self.optimize_btn.setObjectName("optimize_btn")
         self.horizontalLayout.addWidget(self.optimize_btn)
         self.fridge_line_edit = QtWidgets.QLineEdit(self.centralwidget)
-        self.fridge_line_edit.setMinimumSize(QtCore.QSize(100, 0))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.fridge_line_edit.sizePolicy().hasHeightForWidth())
+        self.fridge_line_edit.setSizePolicy(sizePolicy)
+        self.fridge_line_edit.setMinimumSize(QtCore.QSize(75, 0))
         self.fridge_line_edit.setMaximumSize(QtCore.QSize(400, 16777215))
         font = QtGui.QFont()
         font.setFamily("Segoe UI Symbol")
@@ -116,8 +121,9 @@ class Ui_MainWindow(object):
         self.fridge_line_edit.setText("")
         self.fridge_line_edit.setObjectName("fridge_line_edit")
         self.horizontalLayout.addWidget(self.fridge_line_edit)
-        spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
+        self.horizontalLayout.setStretch(3, 1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.fridge_view = QtWidgets.QTableView(self.centralwidget)
         palette = QtGui.QPalette()
@@ -668,7 +674,7 @@ class Ui_MainWindow(object):
         self.optimize_btn.setToolTip(QtWidgets.QApplication.translate("MainWindow", "<p style=\'white-space:pre\'>Generate optimum diet (F5)</p>", None, -1))
         self.optimize_btn.setText(QtWidgets.QApplication.translate("MainWindow", "Make diet", None, -1))
         self.optimize_btn.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F5", None, -1))
-        self.fridge_line_edit.setPlaceholderText(QtWidgets.QApplication.translate("MainWindow", "🔍 Search my fridge", None, -1))
+        self.fridge_line_edit.setPlaceholderText(QtWidgets.QApplication.translate("MainWindow", "🔍 Search fridge (100 items)", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QtWidgets.QApplication.translate("MainWindow", "Nutrition amounts", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtWidgets.QApplication.translate("MainWindow", "Prices", None, -1))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QtWidgets.QApplication.translate("MainWindow", "Constraints", None, -1))

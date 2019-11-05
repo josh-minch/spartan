@@ -1,5 +1,5 @@
 import os
-import copy
+import platform
 import operator
 import random
 import sqlite3 as sql
@@ -29,6 +29,10 @@ class Person(object):
     def set_nuts(self, nuts):
         self.nuts = nuts
         update_nuts_in_db(nuts)
+
+    def set_nut(self, nut, attr, value):
+        setattr(nut, attr, value)
+        update_nut_in_db(nut, attr, value)
 
     def populate_nuts_from_db(self):
         con = sql.connect(database.resource_path('spartan.db'))
@@ -174,14 +178,19 @@ class Food:
 
         selectable_units = ['g', 'oz (28.35 g)', 'lb (453.6 g)']
         for unit in units:
+            # Strip amount prefix if it's 1.0
             if unit[0] == 1.0:
                 amount_display = ''
             else:
                 amount_display = '{:f}'.format(unit[0]).rstrip('0').rstrip('.') + ' '
+            # Make unit text description with equivalent grams
             description = unit[1]
             gm_weight_display = '{:f}'.format(unit[2]).rstrip('0').rstrip('.')
             gm_weight_display = ' (' + gm_weight_display + ' g)'
-            selectable_units.append(amount_display + description + gm_weight_display)
+            unit = amount_display + description + gm_weight_display
+            # Add to selectable units if unique
+            if unit not in selectable_units:
+                selectable_units.append(amount_display + description + gm_weight_display)
 
         return selectable_units
 
@@ -228,13 +237,19 @@ class Optimizer:
         self.add_food_constraints()
 
         self.lp_prob.writeLP("DietModel.lp")
-        cwd = os.getcwd()
-        solverdir = 'cbc.exe'
-        solverdir = os.path.join(cwd, solverdir)
-        solver = COIN_CMD(path=solverdir)
-        self.lp_prob.solve(solver)
+        self.solve_lp()
 
         self.describe_solution()
+
+    def solve_lp(self):
+        if platform.system() == 'Windows':
+            cwd = os.getcwd()
+            solverdir = 'cbc.exe'
+            solverdir = os.path.join(cwd, solverdir)
+            solver = COIN_CMD(path=solverdir)
+            self.lp_prob.solve(solver)
+        else:
+            self.lp_prob.solve()
 
     def filter_foods(self, foods, fd_res):
         food_ids = [food.food_id for food in foods]
@@ -310,7 +325,7 @@ class Optimizer:
         self.nutrition_matrix = self.format_nutrition_matrix(nut_data)
 
     def format_nutrition_matrix(self, unformatted_data):
-        # Construct formatted matrix where each row is a food and each col is a nutrient
+        # Construct formatted matrix where each row is a nutrient and each col is a food
         unformatted_data = np.array(unformatted_data)
         unformatted_data[unformatted_data == None] = 0
         unformatted_data = unformatted_data.reshape(len(self.foods), len(self.nuts))
@@ -324,15 +339,32 @@ class Optimizer:
 
         # Optimize by price or weight depending on if user has prices for all their foods
         if None in prices:
-            prices = len(prices) * [1]
+            self.normalized_prices = len(prices) * [1]
             self.optimization_type = 'w'
         else:
+            self.normalized_prices = self.get_normalized_prices()
             self.optimization_type = 'p'
 
         self.food_quantity_vector = np.array(
             [LpVariable(str(food_id), 0, None, LpContinuous) for food_id in food_ids])
 
-        self.lp_prob += lpSum(prices * self.food_quantity_vector), "Total cost of foods"
+        self.lp_prob += lpSum(self.normalized_prices *
+                              self.food_quantity_vector), "Total cost of foods"
+
+    def get_normalized_prices(self):
+        normalized_prices = []
+        for food in self.foods:
+            normalized_prices.append(self.get_normalized_price(food))
+        return normalized_prices
+
+    def get_normalized_price(self, food):
+        if food.price_unit != 'g':
+            converted_quantity = convert_quantity(
+                food.price_quantity, food.price_unit)
+            normalized_price = food.price / converted_quantity
+        else:
+            normalized_price = food.price * (food.price_quantity / DB_SCALER)
+        return normalized_price
 
     def add_food_constraints(self):
         for i, food in enumerate(self.foods):
@@ -393,23 +425,30 @@ class Optimizer:
 
         for v in self.lp_prob.variables():
             if (v.varValue is not None and v.varValue > 0):
-                print(database.get_food_name(v.name), "=", 100 * v.varValue)
+                print(database.get_food_name(v.name),
+                      "=", DB_SCALER * v.varValue)
 
         print(100 * value(self.lp_prob.objective), "total grams of food")
 
     def get_diet_report(self):
-        prices = [food.price if food.price is not None else 1 for food in self.foods]
-
         foods = []
-        for i, var in enumerate(self.lp_prob.variables()):
+        total_number = total_cost = total_mass = 0
+        for var in self.lp_prob.variables():
             if (var.varValue is not None and var.varValue > 0):
-                food_name = database.get_food_name(var.name)
-                cost = round(float(prices[i]) * var.varValue, 2)
-                quantity = round(DB_SCALER * var.varValue, 2)
-                foods.append({'id': int(var.name), 'name': food_name,
-                              'cost': cost, 'quantity': quantity, 'unit': 'g'})
+                food = [food for food in self.foods if food.food_id == int(var.name)][0]
+                quantity = DB_SCALER * var.varValue
+                cost = self.get_normalized_price(food) * quantity
 
-        return foods
+                foods.append({'id': int(var.name), 'name': food.name,
+                              'cost': round(float(cost), 2),
+                              'quantity': round(float(quantity), 2),
+                              'unit': 'g'})
+
+                total_number += 1
+                total_cost += cost
+                total_mass += quantity
+
+        return foods, total_number, total_cost, total_mass
 
     def get_data_for_nutrition_lookup(self):
         food_ids = []
@@ -569,6 +608,24 @@ def update_sex_bd_in_db(sex, year, mon, day):
         '(?,?,?,?)'
     )
     parameters = [sex, year, mon, day]
+    cur.execute(sql_stmt, parameters)
+
+    con.commit()
+    con.close()
+
+def update_nut_in_db(nut, attr, value):
+    con = sql.connect('spartan.db')
+    cur = con.cursor()
+
+    # attr comes from our dict, no need to sanitize.
+    # In addition, columns cannot be parameterized in SQLite3
+    sql_stmt = (
+        'UPDATE nuts '
+        'SET '+attr+' = '
+        '(?) '
+        'WHERE name = ?'
+    )
+    parameters = [value, nut.name]
     cur.execute(sql_stmt, parameters)
 
     con.commit()
