@@ -11,13 +11,18 @@ Spartan is a Python application that generates nutritionally-complete diets give
 A prebuilt Windows executable can be found under releases. Tested on Windows 10, but may work on earlier versions.
 
 ## From source
+### Prerequisites
+* Python 3.7
+* pip
+* venv
+### Install dependencies
 On Windows
 ```shell
 git clone https://github.com/josh-minch/spartan.git
 cd spartan
 virtualenv --no-site-packages VIRTUAL
 VIRTUAL\Scripts\activate
-pip -r requirements.txt
+pip install -r requirements.txt
 ```
 On macOS / Linux
 ```shell
@@ -25,10 +30,13 @@ git clone https://github.com/josh-minch/spartan.git
 cd spartan
 virtualenv --no-site-packages VIRTUAL
 source VIRTUAL/bin/activate
-pip -r requirements.txt
+pip install -r requirements.txt
 
 ```
-Then run with `python main.py`
+Then run with
+```
+python main.py
+```
 
 # Built with
 * [Python 3.6](https://www.python.org/downloads/)
