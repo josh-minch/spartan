@@ -14,6 +14,7 @@ A prebuilt Windows executable can be found under releases. Tested on Windows 10,
 ### Prerequisites
 * Python 3.6
 * venv
+
 ### Install dependencies
 On Windows
 ```shell
