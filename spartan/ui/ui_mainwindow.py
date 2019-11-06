@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/ui_mainwindow.ui',
-# licensing of 'ui/ui_mainwindow.ui' applies.
+# Form implementation generated from reading ui file 'spartan/ui/ui_mainwindow.ui',
+# licensing of 'spartan/ui/ui_mainwindow.ui' applies.
 #
-# Created: Mon Nov  4 13:09:36 2019
+# Created: Tue Nov  5 19:32:00 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
@@ -659,7 +659,7 @@ class Ui_MainWindow(object):
         self.actionaa.setObjectName("actionaa")
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

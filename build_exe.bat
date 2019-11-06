@@ -1,9 +1,9 @@
 pyinstaller --clean --windowed --noconfirm --name spartan ^
-    --add-data="run_wel_check.csv;." ^
-    --add-data="fd_res.csv;." ^
-    --add-data="sr_legacy/sr_legacy.db;sr_legacy" ^
-    --add-data="type_res.csv;." ^
-    --add-data="spartan.db;." ^
-    --add-data="cbc.exe;." ^
-    --icon=icon/icon.ico ^
-    main.py
+    --add-data="spartan/run_wel_check.csv;." ^
+    --add-data="spartan/fd_res.csv;." ^
+    --add-data="spartan/type_res.csv;." ^
+    --add-data="spartan/sr_legacy/sr_legacy.db;sr_legacy" ^
+    --add-data="spartan/spartan.db;." ^
+    --add-data="spartan/cbc.exe;." ^
+    --icon=spartan/icon/icon.ico ^
+    spartan/main.py

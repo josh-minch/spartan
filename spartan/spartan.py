@@ -139,7 +139,7 @@ class Restriction:
         storage.write_csv(self.filename, self.res)
 
 class Food:
-    def __init__(self, food_id=None, name=None, price=None, price_quantity=None, price_unit = 'g', min=None, min_unit='g',
+    def __init__(self, food_id=None, name=None, price=None, price_quantity=1, price_unit = 'g', min=None, min_unit='g',
                 max=None, max_unit='g', target=None, target_unit='g', nut_quantity=100, nut_quantity_unit='g'):
 
         self.food_id: int = food_id if food_id is not None else database.get_food_id(name)
@@ -235,11 +235,8 @@ class Optimizer:
         self.construct_lp_problem()
         self.add_nutrient_constraints()
         self.add_food_constraints()
-
         self.lp_prob.writeLP("DietModel.lp")
         self.solve_lp()
-
-        self.describe_solution()
 
     def solve_lp(self):
         if platform.system() == 'Windows':
@@ -336,9 +333,10 @@ class Optimizer:
     def construct_lp_problem(self):
         food_ids = [food.food_id for food in self.foods]
         prices = [food.price for food in self.foods]
+        price_quantitiess = [food.price_quantity for food in self.foods]
 
         # Optimize by price or weight depending on if user has prices for all their foods
-        if None in prices:
+        if None in prices or None in price_quantitiess:
             self.normalized_prices = len(prices) * [1]
             self.optimization_type = 'w'
         else:

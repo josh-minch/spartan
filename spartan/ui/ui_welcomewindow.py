@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/ui_welcomewindow.ui',
-# licensing of 'ui/ui_welcomewindow.ui' applies.
+# Form implementation generated from reading ui file 'spartan/ui/ui_welcomewindow.ui',
+# licensing of 'spartan/ui/ui_welcomewindow.ui' applies.
 #
-# Created: Mon Nov  4 13:09:39 2019
+# Created: Tue Nov  5 19:32:04 2019
 #      by: pyside2-uic  running on PySide2 5.13.0a1.dev1556284177
 #
 # WARNING! All changes made in this file will be lost!
