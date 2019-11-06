@@ -48,6 +48,7 @@ python main.py
 * [QtComboBoxTableWidget](https://github.com/pierrebai/QtComboBoxTableWidget) - Very helpful reference for specific Qt functionality
 * [PyInstaller](https://www.pyinstaller.org/) - For the Windows executable
 * [Feather Icons](https://feathericons.com/)
+* Logo provided by a [lovely artist](https://janejorda.carbonmade.com/)
 
 # Legal
 This software does not currently have a license.
