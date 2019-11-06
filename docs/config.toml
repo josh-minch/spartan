@@ -1,0 +1,92 @@
+baseurl = "/"
+languageCode = "en"
+title = "Spartan"
+theme = "vex-hugo"
+
+[params]
+  description = ""
+
+  # Put your custom stylesheets and scripts
+  custom_stylesheets = []
+  custom_scripts = []
+
+  # Additional meta
+  [[params.meta]]
+    name = ""
+    description = ""
+
+  # Navigation bar informations
+  [params.navbar]
+    logo = "Spartan"
+    [[params.navbar.menu]]
+      link = "#"
+      text = "HOME"
+    [[params.navbar.menu]]
+      link = "#feature"
+      text = "Features"
+    [[params.navbar.menu]]
+      link = "#feature_list"
+      text = "Download"
+
+  # Header
+  [params.header]
+    title = "Tight Budget, Balanced Diet"
+    text = "Generate the cheapest nutritionally complete diet. Based on your nutritional needs, made of the foods you eat."
+    [params.header.image]
+      path = "images/promo.png"
+      alt = "Spartan application"
+    [params.header.button]
+      link = "#feature_list"
+      text = "Get it for free"
+
+  # Features
+  [params.features]
+    title = "Features"
+    [params.features.image]
+      path = "images/feature.png"
+      alt = "Nutritional requirements"
+    # Menu at the left of the image
+    [[params.features.left]]
+      icon = "tf-ion-ios-alarm-outline"
+      title = "Diet generation"
+      text = "Calculate the diet that meets your nutritional needs, minimizing total cost or weight."
+    [[params.features.left]]
+      icon = "tf-ion-ios-bell-outline"
+      title = "Personalized nutrient requirements"
+      text = "Based on [US recommendations](https://ods.od.nih.gov/Health_Information/Dietary_Reference_Intakes.aspx). Customizable to your needs."
+    [[params.features.left]]
+      icon = "tf-ion-ios-cart-outline"
+      title = "Nutritional analysis"
+      text = "Inspect the composition of over 7000 foods for up to 39 nutrients."
+    # Menu at the right of the image
+    [[params.features.right]]
+      icon = "tf-ion-ios-alarm-outline"
+      title = "Custom food constraints"
+      text = "Limit the quantity of specific foods in generated diets."
+    [[params.features.right]]
+      icon = "tf-ion-ios-bell-outline"
+      title = "Personal food preferences"
+      text = "Account for dietary restrictions and filter foods by category."
+    [[params.features.right]]
+      icon = "tf-ion-ios-cart-outline"
+      title = "Dietary analysis"
+      text = "See each food's nutritional contribution to your entire diet."
+
+  # Download
+  [params.feature_list]
+    title = "Download"
+    [[params.feature_list.items]]
+      image = "images/download.png"
+      title = "For Windows"
+      text = "On macOS or Linux? Check out the code or run from source [here](https://github.com/josh-minch/spartan)."
+      button_link = "spartan.zip"
+      button_text = "Download"
+
+    [[params.feature_list.items]]
+      image = ""
+      title = "A Little History in Frugal Nutrition"
+      text = "In 1939, economist George Stigler set out at solving the Diet Problem: What's the cheapest selection of foods that meets the nutritional needs of a moderately active man? His solution -- the Stigler diet -- consisted of flour, navy beans, cabbage, and evaporated milk. It accounted for nine nutrients. He considered 77 foods.<br><br>Spartan is like Stigler, but with 39 nutrients, 7,793 foods, and less evaporated milk."
+      button_link = "#features"
+      button_text = "Check Features"
+
+  # Footer uses navbar data
