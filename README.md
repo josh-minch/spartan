@@ -20,15 +20,15 @@ A prebuilt Windows executable can be found under releases. Tested on Windows 10,
 On Windows
 ```shell
 git clone https://github.com/josh-minch/spartan.git
-cd spartan
+cd spartan/spartan
 virtualenv --no-site-packages VIRTUAL
-VIRTUAL\Scripts\activate
+VIRTUAL/Scripts/activate
 pip install -r requirements.txt
 ```
 On macOS / Linux
 ```shell
 git clone https://github.com/josh-minch/spartan.git
-cd spartan
+cd spartan/spartan
 virtualenv --no-site-packages VIRTUAL
 source VIRTUAL/bin/activate
 pip install -r requirements.txt
