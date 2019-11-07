@@ -104,8 +104,3 @@ venv.bak/
 .mypy_cache/
 .vscode
 DietModel.lp
-spartan.db
-run_wel_check.csv
-fd_res.csv
-type_res.csv
-dist.zip

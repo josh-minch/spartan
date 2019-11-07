@@ -262,9 +262,3 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         settings = QSettings("spartan", "spartan")
         self.restoreGeometry(settings.value("geometry"))
         self.restoreState(settings.value("windowState"))
-
-def main():
-    pass
-
-if __name__ == "__main__":
-    main()
