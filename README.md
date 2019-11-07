@@ -16,14 +16,15 @@ A prebuilt Windows executable can be found under releases. Tested on Windows 10,
 * Python 3.6
 * venv
 
-### Clone and install dependencies
+### Clone ,install dependencies, and run
 On Windows
 ```shell
 git clone https://github.com/josh-minch/spartan.git
 cd spartan/spartan
 virtualenv --no-site-packages VIRTUAL
-VIRTUAL/Scripts/activate
+VIRTUAL\Scripts\activate
 pip install -r requirements.txt
+python main.py
 ```
 On macOS / Linux
 ```shell
@@ -32,13 +33,8 @@ cd spartan/spartan
 virtualenv --no-site-packages VIRTUAL
 source VIRTUAL/bin/activate
 pip install -r requirements.txt
-
-```
-Then run with
-```
 python main.py
 ```
-
 # Built with
 * [Python 3.6](https://www.python.org/downloads/)
 * [Qt for Python's PySide2](https://www.qt.io/qt-for-python/) - GUI toolkit
