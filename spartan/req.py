@@ -58,7 +58,7 @@ display_name_to_id = {
 macro_names = ['Energy', 'Carbohydrates', 'Sugar', 'Fiber', 'Protein', 'Fat', 'Saturated fat', 'Monounsaturated fat',
                'Polyunsaturated fat', 'Omega-3 fatty acids', 'Omega-6 fatty acids', 'Trans fat', 'Cholesterol', 'Water', 'Caffeine', 'Alcohol (Ethanol)']
 vit_names = ['A', 'B1 (Thiamin)', 'B2 (Riboflavin)', 'B3 (Niacin)', 'B5 (Pantothenic acid)', 'B6', 'B9 (Folate)', 'B12 (Cobalamin)', 'C (Ascorbic acid)', 'D', 'E (Alpha-tocopherol)', 'K (Phylloquinone)', 'Choline']
-mineral_names = ['Calcium (Ca)', 'Copper (Cu)', 'Iron (Fe)', 'Magnesium (Mg)', 'Manganese (Mn)', 'Phosphorus (P)', 'Potassium (K)', 'Selenium (Se)', 'Sodium (Na)', 'Zinc (Zn)', ]
+mineral_names = ['Calcium (Ca)', 'Copper (Cu)', 'Iron (Fe)', 'Magnesium (Mg)', 'Manganese (Mn)', 'Phosphorus (P)', 'Potassium (K)', 'Selenium (Se)', 'Sodium (Na)', 'Zinc (Zn)']
 
 nut_names = macro_names + vit_names + mineral_names
 

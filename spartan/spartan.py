@@ -492,7 +492,7 @@ def convert_quantity(quantity, old_unit):
 
 def get_nut_groups(nuts):
     macro_end = vit_start = len(req.macro_names)
-    vit_end = mineral_start = len(req.vit_names)+len(req.mineral_names)
+    vit_end = mineral_start = len(req.macro_names) + len(req.vit_names)
 
     macro = [nut for nut in nuts[0:macro_end]]
     vit = [nut for nut in nuts[vit_start:vit_end]]
