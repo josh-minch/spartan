@@ -1,8 +1,4 @@
-foreign_key_stmt = '''
-    PRAGMA foreign_keys=ON;
-'''
-
-create_food_des_stmt = '''
+create_food_des = '''
 DROP TABLE IF EXISTS 'food_des';
 CREATE TABLE 'food_des' (
   id int PRIMARY KEY NOT NULL,
@@ -24,7 +20,7 @@ CREATE INDEX food_short_desc_search_index ON food_des(short_desc);
 CREATE INDEX food_long_desc_search_index ON food_des(long_desc);
 '''
 
-create_fd_group_stmnt = '''
+create_fd_group = '''
 DROP TABLE IF EXISTS `fd_group`;
 CREATE TABLE `fd_group` (
   id int PRIMARY KEY NOT NULL,
@@ -32,7 +28,7 @@ CREATE TABLE `fd_group` (
 );
 '''
 
-create_nut_data_stmt = '''
+create_nut_data = '''
 DROP TABLE IF EXISTS 'nut_data';
 CREATE TABLE 'nut_data' (
     food_id int REFERENCES food_des(id) NOT NULL,
@@ -56,7 +52,7 @@ CREATE TABLE 'nut_data' (
     );
 '''
 
-create_nutr_def_stmnt = '''
+create_nutr_def = '''
 DROP TABLE IF EXISTS `nutr_def`;
 CREATE TABLE `nutr_def` (
   id int PRIMARY KEY NOT NULL,
@@ -69,7 +65,7 @@ CREATE TABLE `nutr_def` (
 CREATE INDEX nutr_def_name_search_index ON nutr_def(name);
 '''
 
-create_weight_stmnt = '''
+create_weight = '''
 DROP TABLE IF EXISTS `weight`;
 CREATE TABLE `weight` (
     food_id int REFERENCES food_des(id) NOT NULL,
@@ -83,26 +79,26 @@ CREATE TABLE `weight` (
 );
 '''
 
-insert_food_des_stmt = '''
+insert_food_des = '''
     INSERT INTO food_des VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 '''
-insert_fd_group_stmt = '''
+insert_fd_group = '''
     INSERT INTO fd_group VALUES (?, ?)
 '''
-insert_nut_data_stmt = '''
+insert_nut_data = '''
     INSERT INTO nut_data VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 '''
-insert_nutr_def_stmt = '''
+insert_nutr_def = '''
     INSERT INTO nutr_def VALUES (?, ?, ?, ?, ?, ?)
 '''
-insert_weight_stmt = '''
+insert_weight = '''
     INSERT INTO weight VALUES (?, ?, ?, ?, ?, ?, ?)
 '''
 
 file_name_to_insert = {
-    'FOOD_DES.txt': insert_food_des_stmt,
-    'FD_GROUP.txt': insert_fd_group_stmt,
-    'NUT_DATA.txt': insert_nut_data_stmt,
-    'NUTR_DEF.txt': insert_nutr_def_stmt,
-    'WEIGHT.txt': insert_weight_stmt
+    'FOOD_DES.txt': insert_food_des,
+    'FD_GROUP.txt': insert_fd_group,
+    'NUT_DATA.txt': insert_nut_data,
+    'NUTR_DEF.txt': insert_nutr_def,
+    'WEIGHT.txt': insert_weight
 }

@@ -1,7 +1,9 @@
+import os
 import csv
 import sqlite3 as sql
 
-from sql_stmts import *
+import sql_stmts
+
 
 def add_missing_nut_ids():
     con = sql.connect('sr_legacy.db')
@@ -48,17 +50,17 @@ def main():
     con = sql.connect('sr_legacy.db')
     cur = con.cursor()
 
-    cur.executescript(create_food_des_stmt)
-    cur.executescript(create_fd_group_stmnt)
-    cur.executescript(create_nut_data_stmt)
-    cur.executescript(create_nutr_def_stmnt)
-    cur.executescript(create_weight_stmnt)
+    cur.executescript(sql_stmts.create_food_des)
+    cur.executescript(sql_stmts.create_fd_group)
+    cur.executescript(sql_stmts.create_nut_data)
+    cur.executescript(sql_stmts.create_nutr_def)
+    cur.executescript(sql_stmts.create_weight)
 
-    for file_name in file_name_to_insert.keys():
-        with open('C:/Users/joshm/Misc/Projects/python/frugal-nutrition/sr_legacy/data/' + file_name) as csvfile:
+    for file_name in sql_stmts.file_name_to_insert.keys():
+        with open(os.getcwd() + '\\data\\' + file_name) as csvfile:
             file_reader = csv.reader(csvfile, delimiter='^', quotechar='~')
             for row in file_reader:
-                cur.execute(file_name_to_insert[file_name], row)
+                cur.execute(sql_stmts.file_name_to_insert[file_name], row)
 
     con.commit()
     con.close()
