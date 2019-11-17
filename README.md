@@ -21,8 +21,8 @@ On Windows
 ```shell
 git clone https://github.com/josh-minch/spartan.git
 cd spartan/spartan
-virtualenv --no-site-packages VIRTUAL
-VIRTUAL\Scripts\activate
+virtualenv --no-site-packages virtual
+virtual\Scripts\activate
 pip install -r requirements.txt
 python main.py
 ```
@@ -30,8 +30,8 @@ On macOS / Linux
 ```shell
 git clone https://github.com/josh-minch/spartan.git
 cd spartan/spartan
-virtualenv --no-site-packages VIRTUAL
-source VIRTUAL/bin/activate
+virtualenv --no-site-packages virtual
+source virtual/bin/activate
 pip install -r requirements.txt
 python main.py
 ```
