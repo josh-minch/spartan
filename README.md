@@ -16,7 +16,7 @@ A prebuilt Windows executable can be found under releases. Tested on Windows 10,
 * Python 3.6
 * venv
 
-### Clone ,install dependencies, and run
+### Clone, install dependencies, and run
 On Windows
 ```shell
 git clone https://github.com/josh-minch/spartan.git
